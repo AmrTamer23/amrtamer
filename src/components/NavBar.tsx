@@ -8,7 +8,7 @@ interface NavBarProps {
 type Sections = "home" | "projects" | "contact";
 
 const navItemStyle = "text-5xl cursor-pointer transition-opacity";
-const navBarStyle = "fixed top-0 z-10";
+const navBarStyle = "fixed top-0 z-10 px-48";
 
 const NavBar: React.FC<NavBarProps> = ({ path }) => {
   const [hoveredItem, setHoveredItem] = useState<Sections | Sections[]>([
@@ -27,7 +27,7 @@ const NavBar: React.FC<NavBarProps> = ({ path }) => {
 
   return (
     <nav
-      className={`${navBarStyle} w-full flex justify-evenly bg-rich_black/90 pt-10 pb-5`}
+      className={`${navBarStyle} w-full flex justify-between bg-rich_black/90 pt-10 pb-5`}
     >
       <a
         href="#"
