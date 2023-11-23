@@ -1,5 +1,6 @@
 import type { Project } from "./types";
 import QuizMaster from "../assets/QuizMaster.png";
+import Tasknote from "../assets/Tasknote.png";
 
 export const projects: Project[] = [
   {
@@ -13,8 +14,23 @@ export const projects: Project[] = [
       "Responsive Design.",
     ],
     image: QuizMaster.src,
-    technologies: "react,nextjs,tailwindcss,firebase",
+    technologies: "ts,react,nextjs,tailwindcss,firebase",
     link: "https://quizmasterr.vercel.app",
     sourceCode: "https://github.com/AmrTamer23/quizMaster",
+  },
+  {
+    name: "Tasknote",
+    description:
+      "a todo and note-taking app. It's designed to effortlessly merge tasks and notes within a single category, saving you valuable time and helping you stay on top of your goals.",
+    features: [
+      "Store tasks and notes in the local storage",
+      "Add, delete tasks and notes",
+      "Combine tasks and notes and put them in different tabs in a relevant category",
+      "Responsive Design",
+    ],
+    image: Tasknote.src,
+    technologies: "ts,react,tailwindcss",
+    link: "https://tasknote-ten.vercel.app",
+    sourceCode: "https://github.com/AmrTamer23/tasknote",
   },
 ];

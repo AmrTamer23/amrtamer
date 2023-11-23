@@ -7,8 +7,8 @@ interface NavBarProps {
 
 type Sections = "home" | "projects" | "contact";
 
-const navItemStyle = "text-5xl cursor-pointer transition-opacity";
-const navBarStyle = "fixed top-0 z-10 px-48";
+const navItemStyle = "text-3xl cursor-pointer transition-opacity ";
+const navBarStyle = "fixed top-0 z-10 px-48 shadow-sm shadow-black";
 
 const NavBar: React.FC<NavBarProps> = ({ path }) => {
   const [hoveredItem, setHoveredItem] = useState<Sections | Sections[]>([

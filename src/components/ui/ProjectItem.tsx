@@ -2,7 +2,7 @@ import type { Project } from "../../lib/types";
 
 export default function ProjectItem({ project }: { project: Project }) {
   return (
-    <div className="w-full flex h-fit bg-rich_black-600 rounded-lg hide">
+    <div className="w-full flex h-fit bg-rich_black-600 rounded-lg hide my-7 overflow-clip">
       <img
         src={project.image}
         alt="QuizMaster"

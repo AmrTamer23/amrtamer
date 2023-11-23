@@ -22,7 +22,9 @@ export default function Projects() {
     <section id="projects" className="h-screen mt-16 pt-32">
       <h1 className="text-7xl text-center">Featured Projects</h1>
       <section className="flex flex-col mt-10">
-        <ProjectItem project={projects[0]} />
+        {projects.map((project) => (
+          <ProjectItem project={project} />
+        ))}
       </section>
     </section>
   );
