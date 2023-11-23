@@ -2,7 +2,7 @@ interface NavBarProps {
   path: string;
 }
 
-const navItemStyle = "text-3xl cursor-pointer";
+const navItemStyle = "text-5xl cursor-pointer";
 
 const NavBar: React.FC<NavBarProps> = ({ path }) => {
   return (

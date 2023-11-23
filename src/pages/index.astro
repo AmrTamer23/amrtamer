@@ -1,5 +1,10 @@
 ---
+import Home from "../components/Home";
 import Layout from "../layouts/Layout.astro";
+import Projects from "./projects.astro";
 ---
 
-<Layout />
+<Layout>
+  <Home client:only />
+  <Projects />
+</Layout>
