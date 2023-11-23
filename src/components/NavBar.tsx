@@ -1,23 +1,74 @@
+import React, { useState } from "react";
+import clsx from "clsx";
+
 interface NavBarProps {
   path: string;
 }
 
-const navItemStyle = "text-5xl cursor-pointer";
+type Sections = "home" | "projects" | "contact";
+
+const navItemStyle = "text-5xl cursor-pointer transition-opacity";
+const navBarStyle = "fixed top-0 z-10";
 
 const NavBar: React.FC<NavBarProps> = ({ path }) => {
+  const [hoveredItem, setHoveredItem] = useState<Sections | Sections[]>([
+    "home",
+    "projects",
+    "contact",
+  ]);
+
+  const handleMouseEnter = (item: Sections) => {
+    setHoveredItem(item);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(["home", "projects", "contact"]);
+  };
+
   return (
-    <nav className="flex justify-between">
-      <span>
-        <h3 className={navItemStyle}>Home</h3>
-        {path === "/" && <div className="h-0.5 w-full bg-flame"></div>}
-      </span>
-      <span>
-        <h3 className={navItemStyle}>Projects</h3>
-        {path === "/projects" && <div className="h-0.5 w-full bg-flame"></div>}
-      </span>
-      <span>
-        <h3 className={navItemStyle}>About</h3>
-        {path === "/about" && <div className="h-0.5 w-full bg-flame"></div>}
+    <nav
+      className={`${navBarStyle} w-full flex justify-evenly bg-rich_black/90 pt-10 pb-5`}
+    >
+      <a
+        href="#"
+        onMouseEnter={() => handleMouseEnter("home")}
+        onMouseLeave={handleMouseLeave}
+      >
+        <h3
+          className={clsx(
+            navItemStyle,
+            hoveredItem.includes("home") ? "opacity-100" : "opacity-30"
+          )}
+        >
+          Home
+        </h3>
+      </a>
+      <a
+        href="#projects"
+        onMouseEnter={() => handleMouseEnter("projects")}
+        onMouseLeave={handleMouseLeave}
+      >
+        <h3
+          className={clsx(
+            navItemStyle,
+            hoveredItem.includes("projects") ? "opacity-100" : "opacity-30"
+          )}
+        >
+          Projects
+        </h3>
+      </a>
+      <span
+        onMouseEnter={() => handleMouseEnter("contact")}
+        onMouseLeave={handleMouseLeave}
+      >
+        <h3
+          className={clsx(
+            navItemStyle,
+            hoveredItem.includes("contact") ? "opacity-100" : "opacity-30"
+          )}
+        >
+          Contact
+        </h3>
       </span>
     </nav>
   );

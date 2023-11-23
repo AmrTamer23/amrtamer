@@ -1,6 +1,6 @@
 ---
 import NavBar from "../components/NavBar";
-const path = Astro.url.pathname;
+const path = Astro.url.toString();
 ---
 
 <!doctype html>
@@ -20,9 +20,11 @@ const path = Astro.url.pathname;
     <title>Amr Tamer</title>
   </head>
 
-  <body class="mx-48 mt-10 bg-rich_black text-white">
-    <NavBar path={path} />
-    <slot />
+  <body class="bg-rich_black text-white">
+    <NavBar path={path} client:load />
+    <main class="mx-48 mt-10">
+      <slot />
+    </main>
   </body>
 
   <style>
