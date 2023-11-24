@@ -1,5 +1,6 @@
 ---
 import NavBar from "../components/NavBar";
+import ContactSideBar from "../components/ui/ContactSideBar";
 import "./../global.css";
 ---
 
@@ -22,8 +23,11 @@ import "./../global.css";
 
   <body class="bg-rich_black text-white">
     <NavBar client:load />
-    <main class="mx-48 mt-10">
-      <slot />
+    <main class="flex">
+      <section class="mx-48 mt-10">
+        <slot class="w-11/12" />
+      </section>
+      <ContactSideBar />
     </main>
   </body>
 </html>

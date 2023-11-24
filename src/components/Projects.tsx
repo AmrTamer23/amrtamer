@@ -19,7 +19,7 @@ export default function Projects() {
     });
   }, []);
   return (
-    <section id="projects" className="h-screen mt-16 pt-32">
+    <section id="projects" className="h-fit mt-16 mb-32 pt-32">
       <h1 className="text-7xl text-center">Featured Projects</h1>
       <section className="flex flex-col mt-10">
         {projects.map((project) => (

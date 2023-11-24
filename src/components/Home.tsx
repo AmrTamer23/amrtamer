@@ -16,7 +16,7 @@ export default function Home() {
     });
   }, []);
   return (
-    <section className="flex flex-col my-56 gap-5">
+    <section className="flex flex-col mt-56 mb-32 gap-5">
       <h3 className="text-3xl">Hi, my name is</h3>
       <h1 className="text-8xl">Amr Tamer</h1>
       <h1 className="text-8xl text-white/70 hide">Software Engineer,</h1>

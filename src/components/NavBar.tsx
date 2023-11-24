@@ -52,7 +52,8 @@ const NavBar = () => {
           Projects
         </h3>
       </a>
-      <span
+      <a
+        href="#contact"
         onMouseEnter={() => handleMouseEnter("contact")}
         onMouseLeave={handleMouseLeave}
       >
@@ -64,7 +65,7 @@ const NavBar = () => {
         >
           Contact
         </h3>
-      </span>
+      </a>
     </nav>
   );
 };
