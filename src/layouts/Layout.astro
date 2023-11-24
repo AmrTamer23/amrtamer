@@ -1,6 +1,6 @@
 ---
 import NavBar from "../components/NavBar";
-const path = Astro.url.toString();
+import "./../global.css";
 ---
 
 <!doctype html>
@@ -21,15 +21,9 @@ const path = Astro.url.toString();
   </head>
 
   <body class="bg-rich_black text-white">
-    <NavBar path={path} client:load />
+    <NavBar client:load />
     <main class="mx-48 mt-10">
       <slot />
     </main>
   </body>
-
-  <style>
-    * {
-      font-family: "Josefin Sans", sans-serif;
-    }
-  </style>
 </html>

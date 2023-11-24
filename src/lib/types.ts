@@ -7,3 +7,5 @@ export interface Project {
   sourceCode: string;
   image: string;
 }
+
+export type Sections = "home" | "projects" | "contact";

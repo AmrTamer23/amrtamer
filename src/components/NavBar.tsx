@@ -1,16 +1,11 @@
 import React, { useState } from "react";
 import clsx from "clsx";
-
-interface NavBarProps {
-  path: string;
-}
-
-type Sections = "home" | "projects" | "contact";
+import type { Sections } from "../lib/types";
 
 const navItemStyle = "text-3xl cursor-pointer transition-opacity ";
 const navBarStyle = "fixed top-0 z-10 px-48 shadow-sm shadow-black";
 
-const NavBar: React.FC<NavBarProps> = ({ path }) => {
+const NavBar = () => {
   const [hoveredItem, setHoveredItem] = useState<Sections | Sections[]>([
     "home",
     "projects",

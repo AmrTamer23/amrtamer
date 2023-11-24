@@ -7,6 +7,7 @@ export default function ProjectItem({ project }: { project: Project }) {
         src={project.image}
         alt="QuizMaster"
         className="w-2/5 object-cover"
+        loading="lazy"
       />
 
       <span className="flex flex-col gap-5 m-5">
