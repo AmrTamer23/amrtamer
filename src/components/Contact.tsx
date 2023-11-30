@@ -1,33 +1,45 @@
 import emailjs from "@emailjs/browser";
 import { useFormik } from "formik";
-import { useEffect } from "react";
-
 import * as Yup from "yup";
+import { useEffect, useState } from "react";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { zoomies } from "ldrs";
 
 const fieldsetStyle = "w-full flex flex-col gap-3 items-center";
 const inputStyle =
   "w-1/2  text-xl p-2 rounded-lg  border-b-4 border-rich_black-800 border-solid bg-transparent focus:border-rich_black-900  focus:outline-none ";
 
+async function sendEmail(
+  name: string,
+  email: string,
+  message: string
+): Promise<boolean> {
+  return emailjs
+    .send("service_ha29zkv", "template_w6nohfb", {
+      from_name: name,
+      to_name: "Amr Tamer",
+      message: message,
+      reply_to: email,
+    })
+    .then(() => {
+      return true;
+    })
+    .catch(() => {
+      return false;
+    });
+}
+
 export default function Contact() {
   useEffect(() => {
+    zoomies.register();
     function initEmailJS() {
       emailjs.init("zVx7Mriub0Boa4slr");
     }
     initEmailJS();
   }, []);
 
-  function sendEmail(name: string, email: string, message: string) {
-    emailjs
-      .send("service_ha29zkv", "template_w6nohfb", {
-        from_name: name,
-        to_name: "Amr Tamer",
-        message: message,
-        reply_to: email,
-      })
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-      });
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -49,9 +61,20 @@ export default function Contact() {
         .required("Required"),
     }),
 
-    onSubmit: (values) => {
-      sendEmail(values.senderName, values.senderEmail, values.message);
-      formik.resetForm();
+    onSubmit: async (values) => {
+      setIsLoading(true);
+      sendEmail(values.senderName, values.senderEmail, values.message)
+        .then((result) => {
+          if (result) {
+            toast.success("Message sent successfully");
+            formik.resetForm();
+          } else {
+            toast.error("Message failed to send");
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     },
   });
   return (
@@ -106,9 +129,20 @@ export default function Contact() {
           type="submit"
           className="bg-blue-600 text-white rounded-lg p-2  w-1/2 -mt-9"
         >
-          Send
+          {isLoading ? (
+            <l-zoomies
+              size="80"
+              stroke="5"
+              bg-opacity="0.1"
+              speed="1.4"
+              color="white"
+            ></l-zoomies>
+          ) : (
+            "Send"
+          )}
         </button>
       </form>
+      <ToastContainer theme="dark" transition={Slide} />
     </section>
   );
 }
