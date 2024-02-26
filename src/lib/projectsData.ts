@@ -1,6 +1,5 @@
-import type { Project } from "./types";
-import QuizMaster from "../assets/QuizMaster.png";
-import Tasknote from "../assets/Tasknote.png";
+import QuizMaster from "../assets/imgs/QuizMaster.png";
+import Tasknote from "../assets/imgs/Tasknote.png";
 
 export const projects: Project[] = [
   {

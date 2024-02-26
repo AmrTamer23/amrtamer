@@ -12,19 +12,13 @@ import "./../global.css";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
     <title>Amr Tamer</title>
   </head>
 
-  <body class="bg-rich_black text-white">
+  <body class="bg-background text-textBase">
     <NavBar client:load />
     <main class="flex">
-      <section class="mx-48 mt-10">
+      <section class="mx-20 mt-10">
         <slot class="w-11/12" />
       </section>
       <ContactSideBar />

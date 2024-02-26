@@ -16,11 +16,13 @@ export default function Home() {
     });
   }, []);
   return (
-    <section className="flex flex-col mt-56 mb-32 gap-5">
-      <h3 className="text-3xl">Hi, my name is</h3>
+    <main className="flex flex-col mt-40 mb-32 gap-5 select-none">
+      <span className="text-3xl">Hi, my name is</span>
       <h1 className="text-8xl">Amr Tamer</h1>
-      <h1 className="text-8xl text-white/70 hide">Software Engineer,</h1>
-      <p className="text-4xl hide">
+      <h2 className="text-8xl text-textBase !opacity-60 hide">
+        Software Engineer,
+      </h2>
+      <p className="text-4xl hide leading-snug">
         Front-End Developer and Computer Science Student who is always eager to
         learn new things.
       </p>
@@ -52,6 +54,6 @@ export default function Home() {
           />
         </div>
       </section>
-    </section>
+    </main>
   );
 }

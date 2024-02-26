@@ -1,4 +1,4 @@
-export interface Project {
+type Project = {
   name: string;
   description: string;
   features: string[];
@@ -6,6 +6,6 @@ export interface Project {
   link: string;
   sourceCode: string;
   image: string;
-}
+};
 
-export type Sections = "home" | "projects" | "contact";
+type Sections = "home" | "projects" | "contact";
