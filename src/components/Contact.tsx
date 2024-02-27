@@ -13,7 +13,7 @@ const inputStyle =
 async function sendEmail(
   name: string,
   email: string,
-  message: string
+  message: string,
 ): Promise<boolean> {
   return emailjs
     .send("service_ha29zkv", "template_w6nohfb", {
@@ -78,11 +78,11 @@ export default function Contact() {
     },
   });
   return (
-    <section className="h-screen mt-16 pt-28" id="contact">
-      <h1 className="text-7xl text-center">Contact Me</h1>
+    <section className="mt-16 h-screen pt-28" id="contact">
+      <h1 className="text-center text-7xl">Contact Me</h1>
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col justify-center items-center w-full h-full"
+        className="flex h-full w-full flex-col items-center justify-center"
       >
         <fieldset className={`${fieldsetStyle}  mb-8`}>
           <input
@@ -112,14 +112,14 @@ export default function Contact() {
             <div className="text-red-600">{formik.errors.senderEmail}</div>
           ) : null}
         </fieldset>
-        <fieldset className={`${fieldsetStyle} h-1/2 mt-8`}>
+        <fieldset className={`${fieldsetStyle} mt-8 h-1/2`}>
           <textarea
             id="message"
             name="message"
             placeholder="Your Message"
             onChange={formik.handleChange}
             value={formik.values.message}
-            className="w-1/2 h-4/5 text-xl p-2 rounded-lg  border-4 border-rich_black-800 border-solid bg-transparent focus:border-rich_black-900 focus:outline-none "
+            className="border-rich_black-800 focus:border-rich_black-900 h-4/5 w-1/2 rounded-lg  border-4 border-solid bg-transparent p-2 text-xl focus:outline-none "
           />
           {formik.touched.message && formik.errors.message ? (
             <div className="text-red-600">{formik.errors.message}</div>
@@ -127,7 +127,7 @@ export default function Contact() {
         </fieldset>
         <button
           type="submit"
-          className="bg-blue-600 text-white rounded-lg p-2  w-1/2 -mt-9"
+          className="-mt-9 w-1/2 rounded-lg bg-blue-600  p-2 text-white"
         >
           {isLoading ? (
             <l-zoomies

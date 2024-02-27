@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import clsx from 'clsx';
 
 const navItemStyle = "text-2xl cursor-pointer transition-opacity ";
-const navBarStyle = "";
 
 const hoveredItem = ref<Sections | Sections[]>([
   "home",
@@ -20,8 +19,7 @@ const handleMouseLeave = () => {
 };
 </script>
 <template>
-  <nav
-    class="fixed top-0 z-10 px-20 shadow-sm shadow-black w-full flex justify-between bg-background/40 backdrop-blur-lg pt-10 pb-5">
+  <nav class="fixed top-0 z-10 px-20 w-full flex justify-between bg-background/40 backdrop-blur-lg pt-10 pb-5">
     <a href="#">
       <h1 class="text-3xl text-white font-bold">AT23</h1>
     </a>

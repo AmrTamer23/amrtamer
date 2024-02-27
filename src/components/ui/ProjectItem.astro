@@ -3,7 +3,7 @@ const { project } = Astro.props as { project: Project };
 ---
 
 <div
-  class="w-full flex h-fit bg-rich_black-600 rounded-lg hide my-7 overflow-clip"
+  class="bg-rich_black-600 hide my-7 flex h-fit w-full overflow-clip rounded-lg"
 >
   <img
     src={project.image}
@@ -12,16 +12,16 @@ const { project } = Astro.props as { project: Project };
     loading="lazy"
   />
 
-  <span class="flex flex-col gap-5 m-5">
+  <span class="m-5 flex flex-col gap-5">
     <h2 class="text-4xl">{project.name}</h2>
     <p class="text-2xl">{project.description}</p>
-    <span class="text-2xl flex flex-col gap-3">
+    <span class="flex flex-col gap-3 text-2xl">
       Key Features:
-      <ul class="list-disc list-inside">
+      <ul class="list-inside list-disc">
         {project.features.map((feature) => <li>{feature}</li>)}
       </ul>
     </span>
-    <span class="text-2xl flex gap-3">
+    <span class="flex gap-3 text-2xl">
       <p class="self-end">Built With</p>
       <img
         src={`https://skillicons.dev/icons?i=` + project.technologies}
@@ -32,14 +32,14 @@ const { project } = Astro.props as { project: Project };
       <a
         href={project.link}
         target="_blank"
-        class="text-2xl bg-rich_black-500 px-5 py-2 rounded-lg"
+        class="bg-rich_black-500 rounded-lg px-5 py-2 text-2xl"
       >
         Visit It
       </a>
       <a
         href={project.sourceCode}
         target="_blank"
-        class="text-2xl bg-rich_black-500 px-5 py-2 rounded-lg"
+        class="bg-rich_black-500 rounded-lg px-5 py-2 text-2xl"
       >
         Source Code
       </a>
