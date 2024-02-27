@@ -1,14 +1,30 @@
 ---
 import Contact from "../components/Contact";
-import Home from "../components/Home";
-import Projects from "../components/Projects";
+import Home from "../components/Home.astro";
+import Projects from "../components/Projects.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
   <main class="w-11/12">
-    <Home client:only />
-    <Projects client:only />
-    <Contact client:only />
+    <Home />
+    <Projects />
+    <Contact client:only="react" />
   </main>
 </Layout>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  });
+  const hiddenElements = document.querySelectorAll(".hide");
+  hiddenElements.forEach((element) => {
+    observer.observe(element);
+  });
+</script>

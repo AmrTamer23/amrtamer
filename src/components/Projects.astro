@@ -1,0 +1,11 @@
+---
+import ProjectItem from "./ui/ProjectItem.astro";
+import { projects } from "../lib/projectsData";
+---
+
+<section id="projects" class="h-fit mt-16 mb-32 pt-32">
+  <h1 class="text-7xl text-center">Featured Projects</h1>
+  <section class="flex flex-col mt-10">
+    {projects.map((project) => <ProjectItem project={project} />)}
+  </section>
+</section>
