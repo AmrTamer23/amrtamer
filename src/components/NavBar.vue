@@ -20,11 +20,11 @@ const handleMouseLeave = () => {
 </script>
 <template>
   <nav class="fixed top-0 z-10 px-20 w-full flex justify-between bg-background/40 backdrop-blur-lg pt-10 pb-5">
-    <a href="#">
+    <a href="/">
       <h1 class="text-3xl text-white font-bold">AT23</h1>
     </a>
     <div class="flex gap-6">
-      <a href="#" @mouseenter="handleMouseEnter('home')" @mouseleave="handleMouseLeave()">
+      <a href="#home" @mouseenter="handleMouseEnter('home')" @mouseleave="handleMouseLeave()">
         <h3 :class="clsx(
           navItemStyle, hoveredItem.includes('home') ? 'opacity-100' : 'opacity-30'
         )">

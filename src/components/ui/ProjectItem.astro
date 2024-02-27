@@ -1,4 +1,6 @@
 ---
+import Image from "astro/components/Image.astro";
+
 const { project } = Astro.props as { project: Project };
 ---
 
@@ -7,7 +9,7 @@ const { project } = Astro.props as { project: Project };
 >
   <img
     src={project.image}
-    alt="QuizMaster"
+    alt={project.name}
     class="w-2/5 object-cover"
     loading="lazy"
   />
@@ -23,9 +25,12 @@ const { project } = Astro.props as { project: Project };
     </span>
     <span class="flex gap-3 text-2xl">
       <p class="self-end">Built With</p>
-      <img
+      <Image
         src={`https://skillicons.dev/icons?i=` + project.technologies}
+        alt="Technologies Used"
         class="inline"
+        inferSize
+        loading="eager"
       />
     </span>
     <span class="flex gap-3">

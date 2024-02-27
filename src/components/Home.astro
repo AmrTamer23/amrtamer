@@ -1,8 +1,9 @@
 ---
+import { Image } from "astro:assets";
 import { FaLinkedin } from "react-icons/fa";
 ---
 
-<main class="mb-32 mt-36 flex select-none flex-col gap-5">
+<main id="home" class="mb-32 mt-36 flex select-none flex-col gap-5">
   <span class="text-3xl">Hi, my name is</span>
   <h1 class="text-8xl">Amr Tamer</h1>
   <h2 class="hide text-8xl text-textBase !opacity-60">Software Engineer,</h2>
@@ -42,7 +43,11 @@ import { FaLinkedin } from "react-icons/fa";
         <span> Download CV </span>
       </button>
     </a>
-    <a href="https://github.com/AmrTamer23" target="_blank">
+    <a
+      href="https://github.com/AmrTamer23"
+      target="_blank"
+      aria-label="Github Account"
+    >
       <button
         class="rounded-lg bg-slate-500 px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:bg-slate-400"
       >
@@ -81,7 +86,11 @@ import { FaLinkedin } from "react-icons/fa";
         </svg>
       </button>
     </a>
-    <a href="https://www.linkedin.com/in/amrtamer23/" target="_blank">
+    <a
+      href="https://www.linkedin.com/in/amrtamer23/"
+      target="_blank"
+      aria-label="LinkedIn Account"
+    >
       <button
         class="rounded-lg bg-slate-500 px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:bg-slate-400"
       >
@@ -94,17 +103,23 @@ import { FaLinkedin } from "react-icons/fa";
     <div class="flex flex-col justify-center gap-7">
       <h2 class="text-center text-5xl">Languages</h2>
 
-      <img
+      <Image
         src="https://skillicons.dev/icons?i=cpp,python,html,css,js,ts"
+        alt="Languages"
         class="w-2/5 self-center"
+        inferSize
+        loading="eager"
       />
     </div>
     <div class="flex flex-col justify-center gap-7">
       <h2 class="text-center text-5xl">Frameworks/Libs/Tools</h2>
 
-      <img
+      <Image
         src="https://skillicons.dev/icons?i=tailwindcss,react,nextjs,astro,firebase,figma"
+        alt="Frameworks/Libs/Tools"
         class="w-2/5 self-center"
+        inferSize
+        loading="eager"
       />
     </div>
   </section>
