@@ -5,12 +5,14 @@ import { FaLinkedin } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
 ---
 
-<main id="home" class="flex select-none flex-col pt-36">
-  <section class="flex h-[80vh] flex-col gap-14">
-    <span class="text-3xl">Hi, my name is</span>
-    <h1 class="text-8xl">Amr Tamer</h1>
-    <h2 class="hide text-8xl text-textBase !opacity-60">Software Engineer,</h2>
-    <p class="hide text-4xl leading-snug">
+<main id="home" class="flex select-none flex-col pt-32 2xl:pt-36">
+  <section class="flex min-h-[80vh] flex-col gap-10">
+    <span class="text-2xl 2xl:text-3xl">Hi, my name is</span>
+    <h1 class="text-7xl 2xl:text-8xl">Amr Tamer</h1>
+    <h2 class="hide text-7xl text-textBase !opacity-60 2xl:text-8xl">
+      Software Engineer,
+    </h2>
+    <p class="hide text-3xl leading-snug 2xl:text-4xl">
       Front-End Developer and Computer Science Student who is always eager to
       learn new things.
     </p>
@@ -18,32 +20,29 @@ import { FiDownload } from "react-icons/fi";
       <a
         href="https://drive.google.com/file/d/10RrYjeea-F6ZpEsufV9v3FTMnaosrYiV/view?usp=sharing"
         target="_blank"
+        class="group/downloadCV btn flex items-center gap-2"
       >
-        <button class="group/downloadCV flex items-center gap-2">
-          <FiDownload
-            size={25}
-            className="group-hover/downloadCV:animate-bounce"
-          />
-          <span> Download CV </span>
-        </button>
+        <FiDownload
+          size={25}
+          className="group-hover/downloadCV:animate-bounce"
+        />
+        <span> Download CV </span>
       </a>
       <a
         href="https://github.com/AmrTamer23"
         target="_blank"
         aria-label="Github Account"
+        class="btn"
       >
-        <button>
-          <AiFillGithub size={28} />
-        </button>
+        <AiFillGithub size={28} />
       </a>
       <a
         href="https://www.linkedin.com/in/amrtamer23/"
         target="_blank"
         aria-label="LinkedIn Account"
+        class="btn"
       >
-        <button>
-          <FaLinkedin size={28} />
-        </button>
+        <FaLinkedin size={28} />
       </a>
     </div>
   </section>
@@ -63,7 +62,7 @@ import { FiDownload } from "react-icons/fi";
       <h2 class="text-center text-5xl">Frameworks/Libs/Tools</h2>
 
       <Image
-        src="https://skillicons.dev/icons?i=tailwindcss,react,nextjs,astro,firebase,figma"
+        src="https://skillicons.dev/icons?i=tailwindcss,nodejs,vue,react,nextjs,astro,firebase,figma&perline=6"
         alt="Frameworks/Libs/Tools"
         class="w-2/5 self-center"
         inferSize

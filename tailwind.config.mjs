@@ -1,3 +1,4 @@
+import typography from "@tailwindcss/typography";
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
@@ -8,7 +9,10 @@ export default {
         textBase: "var(--text-color)",
         btnBase: "var(--btn-color)",
       },
+      screens: {
+        "2xl": "1600px",
+      },
     },
   },
-  plugins: [],
+  plugins: [typography()],
 };
