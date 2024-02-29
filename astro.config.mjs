@@ -7,16 +7,15 @@ import NudgeerSafe from "@onboardbase/nudgeer-safe";
 import vercel from "@astrojs/vercel/serverless";
 const headers = new NudgeerSafe().astro();
 
-
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), tailwind(), vue()],
-  headers,
+
   vite: {
     ssr: {
-      noExternal: ["react-icons"]
-    }
+      noExternal: ["react-icons"],
+    },
   },
   adapter: vercel(),
-  output: "server"
+  output: "server",
 });
