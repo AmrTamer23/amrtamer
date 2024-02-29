@@ -4,8 +4,9 @@ import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
 import vue from "@astrojs/vue";
 import NudgeerSafe from "@onboardbase/nudgeer-safe";
-
+import vercel from "@astrojs/vercel/serverless";
 const headers = new NudgeerSafe().astro();
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,11 +14,9 @@ export default defineConfig({
   headers,
   vite: {
     ssr: {
-      noExternal: ["react-icons"],
-    },
+      noExternal: ["react-icons"]
+    }
   },
-  adapter: node({
-    mode: "standalone",
-  }),
-  output: "server",
+  adapter: vercel(),
+  output: "server"
 });
