@@ -7,13 +7,20 @@ html {
   scroll-behavior: smooth;
 }
 
-* {
-  font-family: "Young Serif", serif;
-}
+@layer base {
+  * {
+    font-family: "Young Serif", serif;
+  }
 
-:root {
-  --background-color: #0c0c0c;
-  --text-color: #ffefd5;
+  :root {
+    --background-color: #0c0c0c;
+    --text-color: #ffefd5;
+    --btn-color: #f2cd5d;
+  }
+
+  button {
+    @apply bg-btnBase rounded-lg px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
+  }
 }
 
 .hide {

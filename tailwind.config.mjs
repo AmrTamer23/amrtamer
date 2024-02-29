@@ -6,6 +6,7 @@ export default {
       colors: {
         background: "var(--background-color)",
         textBase: "var(--text-color)",
+        btnBase: "var(--btn-color)",
       },
     },
   },
