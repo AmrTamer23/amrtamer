@@ -25,25 +25,25 @@ const handleMouseLeave = () => {
     </a>
     <div class="flex gap-6">
       <a href="#home" @mouseenter="handleMouseEnter('home')" @mouseleave="handleMouseLeave()">
-        <h3 :class="clsx(
+        <span :class="clsx(
           navItemStyle, hoveredItem.includes('home') ? 'opacity-100' : 'opacity-30'
         )">
           Home
-        </h3>
+        </span>
       </a>
       <a href="#projects" @mouseenter="handleMouseEnter('projects')" @mouseleave="handleMouseLeave()">
-        <h3 :class="clsx(
+        <span :class="clsx(
           navItemStyle, hoveredItem.includes('projects') ? 'opacity-100' : 'opacity-30'
         )">
           Projects
-        </h3>
+        </span>
       </a>
       <a href="#contact" @mouseenter="handleMouseEnter('contact')" @mouseleave="handleMouseLeave()">
-        <h3 :class="clsx(
+        <span :class="clsx(
           navItemStyle, hoveredItem.includes('contact') ? 'opacity-100' : 'opacity-30'
         )">
           Contact
-        </h3>
+        </span>
       </a>
     </div>
   </nav>

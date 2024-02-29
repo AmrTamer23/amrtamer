@@ -85,6 +85,9 @@ export default function Contact() {
         className="flex h-full w-full flex-col items-center justify-center"
       >
         <fieldset className={`${fieldsetStyle}  mb-8`}>
+          <label className="sr-only" htmlFor="senderName">
+            Name
+          </label>
           <input
             id="senderName"
             name="senderName"
@@ -99,6 +102,9 @@ export default function Contact() {
           ) : null}
         </fieldset>
         <fieldset className={`${fieldsetStyle}  my-8`}>
+          <label className="sr-only" htmlFor="senderEmail">
+            Email
+          </label>
           <input
             id="senderEmail"
             name="senderEmail"
@@ -113,6 +119,9 @@ export default function Contact() {
           ) : null}
         </fieldset>
         <fieldset className={`${fieldsetStyle} mt-8 h-1/2`}>
+          <label className="sr-only" htmlFor="message">
+            Message
+          </label>
           <textarea
             id="message"
             name="message"
