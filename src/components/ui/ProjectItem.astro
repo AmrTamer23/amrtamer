@@ -3,7 +3,11 @@ import Image from "astro/components/Image.astro";
 import { FiGithub } from "react-icons/fi";
 import { FaExternalLinkAlt as GoTo } from "react-icons/fa";
 
-const { project } = Astro.props as { project: Project };
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
 ---
 
 <div
