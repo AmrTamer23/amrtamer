@@ -46,14 +46,14 @@ import { FiDownload } from "react-icons/fi";
       </a>
     </div>
   </section>
-  <section class="hide flex flex-col gap-28">
+  <section class="hide flex flex-col gap-28 pb-20">
     <div class="flex flex-col justify-center gap-7">
       <h2 class="text-center text-5xl">Languages</h2>
 
       <Image
         src="https://skillicons.dev/icons?i=cpp,python,html,css,js,ts"
         alt="Languages"
-        class="w-2/5 self-center"
+        class="w-4/12 self-center"
         inferSize
         loading="eager"
       />
@@ -64,10 +64,26 @@ import { FiDownload } from "react-icons/fi";
       <Image
         src="https://skillicons.dev/icons?i=tailwindcss,nodejs,vue,react,nextjs,astro,firebase,figma&perline=6"
         alt="Frameworks/Libs/Tools"
-        class="w-2/5 self-center"
+        class="w-4/12 self-center"
         inferSize
         loading="eager"
       />
     </div>
   </section>
 </main>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      } else {
+        entry.target.classList.remove("show");
+      }
+    });
+  });
+  const hiddenElements = document.querySelectorAll(".hide");
+  hiddenElements.forEach((element) => {
+    observer.observe(element);
+  });
+</script>

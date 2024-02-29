@@ -12,19 +12,3 @@ import Layout from "../layouts/Layout.astro";
     <Contact client:only="react" />
   </main>
 </Layout>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      } else {
-        entry.target.classList.remove("show");
-      }
-    });
-  });
-  const hiddenElements = document.querySelectorAll(".hide");
-  hiddenElements.forEach((element) => {
-    observer.observe(element);
-  });
-</script>

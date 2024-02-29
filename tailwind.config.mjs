@@ -12,6 +12,10 @@ export default {
       screens: {
         "2xl": "1600px",
       },
+      fontFamily: {
+        default: ["Young Serif", "serif"],
+        pt: ["PT Mono", "monospace"],
+      },
     },
   },
   plugins: [typography()],

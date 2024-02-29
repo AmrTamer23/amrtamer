@@ -1,21 +1,24 @@
 ---
 import Image from "astro/components/Image.astro";
+import { FiGithub } from "react-icons/fi";
+import { FaExternalLinkAlt as GoTo } from "react-icons/fa";
 
 const { project } = Astro.props as { project: Project };
 ---
 
 <div
-  class="my-7 flex h-fit w-full overflow-clip rounded-lg bg-amber-800 text-black shadow-md shadow-amber-100"
+  class="font-pt my-7 flex w-full overflow-clip rounded-lg bg-[#040F0F] text-gray-200 shadow-md shadow-amber-100"
 >
-  <img
+  <Image
     src={project.image}
     alt={project.name}
-    class="w-2/5 object-cover"
+    class="aspect-square w-2/6 object-cover"
     loading="lazy"
+    inferSize
   />
 
-  <span class="m-5 flex flex-col gap-5">
-    <h2 class="text-4xl">{project.name}</h2>
+  <div class="m-4 flex flex-col justify-center gap-5 py-4">
+    <h2 class="text-4xl font-semibold">{project.name}</h2>
     <p class="text-2xl">{project.description}</p>
     <span class="flex flex-col gap-3 text-2xl">
       Key Features:
@@ -30,24 +33,30 @@ const { project } = Astro.props as { project: Project };
         alt="Technologies Used"
         class="inline"
         inferSize
-        loading="eager"
+        loading="lazy"
       />
     </span>
     <span class="flex gap-3">
+      {
+        project.sourceCode && (
+          <a
+            href={project.sourceCode}
+            target="_blank"
+            class=" btn font-default flex items-center gap-2"
+          >
+            <FiGithub size={28} />
+            <span>Source Code</span>
+          </a>
+        )
+      }
       <a
         href={project.link}
         target="_blank"
-        class="bg-rich_black-500 rounded-lg px-5 py-2 text-2xl"
+        class="btn font-default flex items-center gap-2"
       >
-        Visit It
-      </a>
-      <a
-        href={project.sourceCode}
-        target="_blank"
-        class="bg-rich_black-500 rounded-lg px-5 py-2 text-2xl"
-      >
-        Source Code
+        <GoTo size={28} />
+        <span> Visit It </span>
       </a>
     </span>
-  </span>
+  </div>
 </div>
