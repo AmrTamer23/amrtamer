@@ -8,7 +8,7 @@ import { zoomies } from "ldrs";
 
 const fieldsetStyle = "w-full flex flex-col gap-3 items-center";
 const inputStyle =
-  "w-1/2  text-xl p-2 rounded-lg  border-b-4 border-rich_black-800 border-solid bg-transparent focus:border-rich_black-900  focus:outline-none ";
+  "w-1/2  text-xl p-2 rounded-lg  border-b-4 border-textBase border-solid bg-transparent focus:border-btnBase  focus:outline-none ";
 
 async function sendEmail(
   name: string,
@@ -128,16 +128,13 @@ export default function Contact() {
             placeholder="Your Message"
             onChange={formik.handleChange}
             value={formik.values.message}
-            className="border-rich_black-800 focus:border-rich_black-900 h-4/5 w-1/2 rounded-lg  border-4 border-solid bg-transparent p-2 text-xl focus:outline-none "
+            className="focus:border-btnBase h-4/5 w-1/2 rounded-lg border-4  border-solid border-textBase bg-transparent p-2 text-xl focus:outline-none "
           />
           {formik.touched.message && formik.errors.message ? (
             <div className="text-red-600">{formik.errors.message}</div>
           ) : null}
         </fieldset>
-        <button
-          type="submit"
-          className="-mt-9 w-1/2 rounded-lg bg-blue-600  p-2 text-white"
-        >
+        <button type="submit" className="btn -mt-9 w-1/2">
           {isLoading ? (
             <l-zoomies
               size="80"
