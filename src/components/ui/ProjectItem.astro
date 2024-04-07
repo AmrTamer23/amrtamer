@@ -1,4 +1,5 @@
 ---
+import type { Project } from "../../lib/types";
 import Image from "astro/components/Image.astro";
 import { FiGithub } from "react-icons/fi";
 import { FaExternalLinkAlt as GoTo } from "react-icons/fa";
@@ -11,7 +12,7 @@ const { project } = Astro.props;
 ---
 
 <div
-  class="font-pt my-7 flex w-full overflow-clip rounded-lg bg-[#040F0F] text-gray-200 shadow-md shadow-amber-100"
+  class="my-7 flex w-full overflow-clip rounded-lg bg-[#040F0F] font-pt text-gray-200 shadow-md shadow-amber-100"
 >
   <Image
     src={project.image}
@@ -46,7 +47,7 @@ const { project } = Astro.props;
           <a
             href={project.sourceCode}
             target="_blank"
-            class=" btn font-default flex items-center gap-2"
+            class=" btn flex items-center gap-2 font-default"
           >
             <FiGithub size={28} />
             <span>Source Code</span>
@@ -56,7 +57,7 @@ const { project } = Astro.props;
       <a
         href={project.link}
         target="_blank"
-        class="btn font-default flex items-center gap-2"
+        class="btn flex items-center gap-2 font-default"
       >
         <GoTo size={28} />
         <span> Visit It </span>
