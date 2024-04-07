@@ -17,6 +17,7 @@
     "@astrojs/vercel": "^7.3.4",
     "@astrojs/vue": "^4.0.8",
     "@emailjs/browser": "^3.11.0",
+    "@million/lint": "^0.0.73",
     "@onboardbase/nudgeer-safe": "^0.2.1",
     "@types/react": "^18.2.38",
     "@types/react-dom": "^18.2.17",
