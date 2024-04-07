@@ -1,5 +1,5 @@
 ---
-import Contact from "../components/Contact";
+import Contact from "../components/Contact.svelte";
 import Home from "../components/Home.astro";
 import Projects from "../components/Projects.astro";
 import Layout from "../layouts/Layout.astro";
@@ -9,6 +9,6 @@ import Layout from "../layouts/Layout.astro";
   <main>
     <Home />
     <Projects />
-    <Contact client:only="react" />
+    <Contact client:only="svelte" />
   </main>
 </Layout>
