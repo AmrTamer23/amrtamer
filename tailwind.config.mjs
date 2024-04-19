@@ -13,8 +13,7 @@ export default {
         "2xl": "1600px",
       },
       fontFamily: {
-        default: ["Young Serif", "serif"],
-        pt: ["PT Mono", "monospace"],
+        cas: ["Cas", "monospace"],
       },
     },
   },

@@ -1,22 +1,35 @@
-@import url("https://fonts.googleapis.com/css2?family=Young+Serif&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=PT+Mono&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html {
   scroll-behavior: smooth;
+  font-family: "Cas", monospace;
+}
+
+@font-face {
+  font-family: "Cas";
+  src: url("./assets/fonts/CaskaydiaMonoNerdFont.ttf") format("ttf");
+  font-weight: normal;
+  font-style: monospace;
+}
+
+@font-face {
+  font-family: "Cas";
+  src: url("./assets/fonts/CaskaydiaMonoNerdFont-Bold.ttf") format("ttf");
+  font-weight: bold;
+  font-style: monospace;
 }
 
 @layer base {
   :root {
-    --background-color: #0c0c0c;
+    --background-color: #000814;
     --text-color: #ffefd5;
-    --btn-color: #f2cd5d;
+    --btn-color: #ffc300;
   }
 
   .btn {
-    @apply bg-btnBase rounded-lg px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
+    @apply rounded-lg bg-btnBase px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
   }
 }
 

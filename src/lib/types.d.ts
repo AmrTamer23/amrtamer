@@ -8,4 +8,4 @@ export type Project = {
   image: string;
 };
 
-export type Section = "home" | "projects" | "contact";
+export type Section = "home" | "projects" | "blog";

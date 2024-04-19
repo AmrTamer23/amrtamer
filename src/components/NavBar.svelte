@@ -2,9 +2,9 @@
   import type { Section } from "../lib/types";
   import clsx from "clsx";
 
-  const navItemStyle = "text-2xl cursor-pointer transition-opacity ";
+  const navItemStyle = "text-xl cursor-pointer transition-opacity ";
 
-  let hoveredItem: Section | Section[] = ["home", "projects", "contact"];
+  let hoveredItem: Section | Section[] = ["home", "projects", "blog"];
 
   let isOnNav = false;
 
@@ -14,15 +14,15 @@
 
   const handleMouseLeave = () => {
     if (!isOnNav && typeof hoveredItem === "string")
-      hoveredItem = ["home", "projects", "contact"];
+      hoveredItem = ["home", "projects", "blog"];
   };
 </script>
 
 <nav
-  class="fixed top-0 z-10 px-20 w-full flex justify-between bg-background opacity-90 pt-10 pb-5"
+  class="fixed top-0 z-10 px-10 w-full flex justify-between bg-background opacity-90 pt-10 pb-5"
 >
   <a href="/">
-    <h1 class="text-3xl text-white font-bold font-pt">AT23</h1>
+    <span class="text-3xl text-white font-bold">AT23</span>
   </a>
   <div
     class="flex gap-6"
@@ -34,7 +34,7 @@
     role="navigation"
   >
     <a
-      href="#home"
+      href="/"
       on:mouseenter={() => handleMouseEnter("home")}
       on:mouseleave={() => handleMouseLeave()}
     >
@@ -48,7 +48,7 @@
       </span>
     </a>
     <a
-      href="#projects"
+      href="/projects"
       on:mouseenter={() => handleMouseEnter("projects")}
       on:mouseleave={() => handleMouseLeave()}
     >
@@ -62,17 +62,17 @@
       </span>
     </a>
     <a
-      href="#contact"
-      on:mouseenter={() => handleMouseEnter("contact")}
+      href="/blog"
+      on:mouseenter={() => handleMouseEnter("blog")}
       on:mouseleave={() => handleMouseLeave()}
     >
       <span
         class={clsx(
           navItemStyle,
-          hoveredItem.includes("contact") ? "opacity-100" : "opacity-30",
+          hoveredItem.includes("blog") ? "opacity-100" : "opacity-30",
         )}
       >
-        Contact
+        Blog
       </span>
     </a>
   </div>
