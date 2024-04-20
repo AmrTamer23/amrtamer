@@ -16,6 +16,8 @@
     if (!isOnNav && typeof hoveredItem === "string")
       hoveredItem = ["home", "projects", "blog"];
   };
+
+  let currentPath = window.location.pathname;
 </script>
 
 <nav
@@ -37,43 +39,55 @@
       href="/"
       on:mouseenter={() => handleMouseEnter("home")}
       on:mouseleave={() => handleMouseLeave()}
+      class="flex flex-col gap-2 items-center w-full"
     >
-      <span
+      <div
         class={clsx(
           navItemStyle,
           hoveredItem.includes("home") ? "opacity-100" : "opacity-30",
         )}
       >
         Home
-      </span>
+      </div>
+      {#if currentPath === "/"}
+        <div class="w-full h-0.5 bg-textBase rounded-full"></div>
+      {/if}
     </a>
     <a
       href="/projects"
       on:mouseenter={() => handleMouseEnter("projects")}
       on:mouseleave={() => handleMouseLeave()}
+      class="flex flex-col gap-2 items-center w-full"
     >
-      <span
+      <div
         class={clsx(
           navItemStyle,
           hoveredItem.includes("projects") ? "opacity-100" : "opacity-30",
         )}
       >
         Projects
-      </span>
+      </div>
+      {#if currentPath === "/projects"}
+        <div class="w-full h-0.5 bg-textBase rounded-full"></div>
+      {/if}
     </a>
     <a
       href="/blog"
       on:mouseenter={() => handleMouseEnter("blog")}
       on:mouseleave={() => handleMouseLeave()}
+      class="flex flex-col gap-2 items-center w-full"
     >
-      <span
+      <div
         class={clsx(
           navItemStyle,
           hoveredItem.includes("blog") ? "opacity-100" : "opacity-30",
         )}
       >
         Blog
-      </span>
+      </div>
+      {#if currentPath === "/blog"}
+        <div class="w-full h-0.5 bg-textBase rounded-full"></div>
+      {/if}
     </a>
   </div>
 </nav>
