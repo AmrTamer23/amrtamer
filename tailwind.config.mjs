@@ -13,7 +13,7 @@ export default {
         "2xl": "1600px",
       },
       fontFamily: {
-        cas: ["Cas", "monospace"],
+        fira: ["Fira Code", "monospace"],
       },
     },
   },

@@ -4,21 +4,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: "Cas", monospace;
-}
-
-@font-face {
-  font-family: "Cas";
-  src: url("./assets/fonts/CaskaydiaMonoNerdFont.ttf") format("ttf");
-  font-weight: normal;
-  font-style: monospace;
-}
-
-@font-face {
-  font-family: "Cas";
-  src: url("./assets/fonts/CaskaydiaMonoNerdFont-Bold.ttf") format("ttf");
-  font-weight: bold;
-  font-style: monospace;
+  @apply font-fira;
 }
 
 @layer base {
