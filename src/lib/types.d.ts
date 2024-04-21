@@ -1,4 +1,4 @@
-export type Project = {
+type Project = {
   name: string;
   description: string;
   features: string[];
@@ -8,4 +8,4 @@ export type Project = {
   image: string;
 };
 
-export type Section = "home" | "projects" | "blog";
+type Section = "home" | "projects" | "blog";

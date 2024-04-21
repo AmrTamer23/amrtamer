@@ -5,6 +5,7 @@
 html {
   scroll-behavior: smooth;
   @apply font-fira;
+  min-height: 100dvh;
 }
 
 @layer base {

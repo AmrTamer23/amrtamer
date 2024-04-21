@@ -1,5 +1,5 @@
 ---
-import NavBar from "../components/NavBar.svelte";
+import NavBar from "../components/NavBar.vue";
 import "./../global.css";
 ---
 
@@ -21,11 +21,11 @@ import "./../global.css";
   </head>
 
   <body class="font-default bg-background text-textBase">
-    <NavBar client:only />
-    <main class="flex w-full">
-      <section class="mx-20 mt-10 h-full w-full">
-        <slot />
-      </section>
+    <nav class="mb-32">
+      <NavBar client:only />
+    </nav>
+    <main class="h-fit pt-10">
+      <slot />
     </main>
   </body>
 </html>
