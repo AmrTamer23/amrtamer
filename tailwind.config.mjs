@@ -10,7 +10,12 @@ export default {
         btnBase: "var(--btn-color)",
       },
       screens: {
-        "2xl": "1600px",
+        xs: "480px",
+        sm: "48em",
+        md: "768px",
+        lg: "85.375em",
+        xl: "120em",
+        "2xl": "160em",
       },
       fontFamily: {
         fira: ["Fira Code", "monospace"],
