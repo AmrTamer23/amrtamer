@@ -21,7 +21,7 @@ const currentPath = ref<string>(window.location.pathname);
 </script>
 <template>
   <nav
-    class="fixed top-0 z-10 flex h-[12dvh] w-full justify-between bg-background px-20 pb-5 pt-10 opacity-90"
+    class="bg-background fixed top-0 z-10 flex h-[12dvh] w-full justify-between px-20 pb-5 pt-10 opacity-90"
   >
     <a href="/">
       <span class="text-3xl font-bold text-white">AT23</span>
@@ -59,7 +59,7 @@ const currentPath = ref<string>(window.location.pathname);
         >
           Home
         </span>
-        <div v-if="currentPath === '/'" class="h-0.5 w-full bg-textBase"></div>
+        <div v-if="currentPath === '/'" class="bg-textBase h-0.5 w-full"></div>
       </a>
       <a
         href="/projects"
@@ -79,7 +79,7 @@ const currentPath = ref<string>(window.location.pathname);
         </span>
         <div
           v-if="currentPath === '/projects'"
-          class="h-0.5 w-full bg-textBase"
+          class="bg-textBase h-0.5 w-full"
         ></div>
       </a>
       <a
@@ -100,9 +100,15 @@ const currentPath = ref<string>(window.location.pathname);
         </span>
         <div
           v-if="currentPath === '/blog'"
-          class="h-0.5 w-full bg-textBase"
+          class="bg-textBase h-0.5 w-full"
         ></div>
       </a>
     </div>
   </nav>
 </template>
+
+<style scoped>
+* {
+  color: var(--text-color);
+}
+</style>

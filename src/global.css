@@ -6,6 +6,7 @@ html {
   scroll-behavior: smooth;
   @apply font-fira;
   min-height: 100dvh;
+  color: var(--text-color);
 }
 
 @layer base {
@@ -16,7 +17,7 @@ html {
   }
 
   .btn {
-    @apply rounded-lg bg-btnBase px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
+    @apply bg-btnBase rounded-lg px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
   }
 }
 

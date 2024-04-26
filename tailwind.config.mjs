@@ -5,10 +5,10 @@ import typography from "@tailwindcss/typography";
 export default {
   darkMode: ["class"],
   content: [
-    "./pages/**/*.{ts,tsx,vue}",
-    "./components/**/*.{ts,tsx,vue}",
-    "./app/**/*.{ts,tsx,vue}",
-    "./src/**/*.{ts,tsx,vue}",
+    "./pages/**/*.{ts,tsx,vue,astro}",
+    "./components/**/*.{ts,tsx,vue,astro}",
+    "./app/**/*.{ts,tsx,vue,astro}",
+    "./src/**/*.{ts,tsx,vue,astro}",
   ],
   prefix: "",
   theme: {
