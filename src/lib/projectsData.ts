@@ -1,6 +1,7 @@
 export const projects: Project[] = [
   {
     name: "Salamy",
+    domain: ".space",
     description:
       "A website for mental health and wellness, where you can find articles and get mental health help.",
     features: [
@@ -17,6 +18,7 @@ export const projects: Project[] = [
   },
   {
     name: "Quiz Master",
+    domain: ".vercel.app",
     description:
       "A quiz platform, Explore quizzes in various genres such as Geography, Computer Science, History, and Sports.",
     features: [

@@ -7,6 +7,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { projects } from "@/lib/projectsData";
+import { Button } from "@/components/ui/button";
 import Image from "astro/components/Image.astro";
 </script>
 
@@ -18,30 +19,107 @@ import Image from "astro/components/Image.astro";
       }"
     >
       <CarouselContent>
-        <CarouselItem class="h-[70dvh]" v-for="project in projects">
-          <div class="border-textBase flex h-full w-full rounded-xl border-2">
-            <div class="flex w-1/4 flex-col">
+        <CarouselItem class="h-[50dvh]" v-for="project in projects">
+          <div class="flex h-full w-full rounded-xl border-2 border-textBase">
+            <div class="flex w-1/4 flex-col justify-between">
               <img
                 :src="project.image"
                 :alt="project.name"
-                class="h-1/2 rounded-ee-xl rounded-ss-lg"
+                class="h-full rounded-es-lg rounded-ss-lg object-cover"
               />
-              <div class="flex h-full flex-col justify-between gap-4 p-4">
+            </div>
+            <div
+              class="flex h-full w-3/4 flex-col justify-between gap-6 px-4 pb-4 pt-8"
+            >
+              <div class="flex h-full w-3/4 flex-col gap-6">
                 <div class="flex flex-col gap-2">
-                  <h2 class="text-center text-xl font-bold">
-                    {{ project.name }}
-                  </h2>
-                  <p>{{ project.description }}</p>
+                  <a
+                    class="flex items-end hover:underline"
+                    :name="project.name"
+                    :href="project.link"
+                    target="_blank"
+                  >
+                    <h2 class="text-4xl font-bold">
+                      {{ project.name }}
+                    </h2>
+                    <span class="text-lg">
+                      {{ project.domain }}
+                    </span>
+                  </a>
+                  <p class="text-lg">{{ project.description }}</p>
                 </div>
-                <div class="flex flex-col items-center gap-2">
-                  <span class="w-full text-center"> Built With </span>
+                <div class="flex flex-col gap-2">
+                  <span class="text-2xl"> Features: </span>
+                  <ul class="list-inside list-disc pl-2">
+                    <li
+                      v-for="feature in project.features"
+                      :key="feature"
+                      class="text-lg"
+                    >
+                      {{ feature }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="flex items-end justify-between">
+                <div class="flex w-1/2 items-end gap-2">
+                  <span class="text-center"> Built With </span>
                   <img
                     :src="
                       `https://skillicons.dev/icons?i=` + project.technologies
                     "
                     alt="Technologies Used"
-                    class="inline w-3/4"
+                    class="inline w-1/2"
                   />
+                </div>
+                <div class="flex items-center gap-4">
+                  <a
+                    v-if="project.sourceCode"
+                    :href="project.sourceCode"
+                    target="_blank"
+                    name="GitHub"
+                  >
+                    <Button class="gap-1 text-lg">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-github"
+                      >
+                        <path
+                          d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
+                        />
+                        <path d="M9 18c-4.51 2-5-2-7-2" />
+                      </svg>
+                      <span> Source Code </span>
+                    </Button>
+                  </a>
+                  <a :href="project.link" :name="project.name" target="_blank">
+                    <Button class="gap-1 text-lg">
+                      <span> Visit It </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-up-right"
+                      >
+                        <path d="M7 7h10v10" />
+                        <path d="M7 17 17 7" />
+                      </svg>
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -49,10 +127,10 @@ import Image from "astro/components/Image.astro";
         </CarouselItem>
       </CarouselContent>
       <CarouselPrevious
-        class="border-textBase text-textBase hover:bg-btnBase bg-transparent"
+        class="border-textBase bg-transparent text-textBase hover:bg-btnBase"
       />
       <CarouselNext
-        class="border-textBase text-textBase hover:bg-btnBase bg-transparent"
+        class="border-textBase bg-transparent text-textBase hover:bg-btnBase"
       />
     </Carousel>
   </main>

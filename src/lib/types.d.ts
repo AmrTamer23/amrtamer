@@ -1,5 +1,6 @@
 type Project = {
   name: string;
+  domain: string;
   description: string;
   features: string[];
   technologies: string;
