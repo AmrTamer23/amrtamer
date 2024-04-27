@@ -17,11 +17,15 @@ const handleMouseLeave = () => {
     hoveredItem.value = ["home", "projects", "blog"];
 };
 
-const currentPath = ref<string>(window.location.pathname);
+const currentPath = ref<string>("");
+
+if (typeof window !== "undefined") {
+  currentPath.value = window.location.pathname;
+}
 </script>
 <template>
   <nav
-    class="bg-background fixed top-0 z-10 flex h-[12dvh] w-full justify-between px-20 pb-5 pt-10 opacity-90"
+    class="fixed top-0 z-10 flex h-[12dvh] w-full justify-between bg-background px-20 pb-5 pt-10 opacity-90"
   >
     <a href="/">
       <span class="text-3xl font-bold text-white">AT23</span>
@@ -59,7 +63,7 @@ const currentPath = ref<string>(window.location.pathname);
         >
           Home
         </span>
-        <div v-if="currentPath === '/'" class="bg-textBase h-0.5 w-full"></div>
+        <div v-if="currentPath === '/'" class="h-0.5 w-full bg-textBase"></div>
       </a>
       <a
         href="/projects"
@@ -79,7 +83,7 @@ const currentPath = ref<string>(window.location.pathname);
         </span>
         <div
           v-if="currentPath === '/projects'"
-          class="bg-textBase h-0.5 w-full"
+          class="h-0.5 w-full bg-textBase"
         ></div>
       </a>
       <a
@@ -100,7 +104,7 @@ const currentPath = ref<string>(window.location.pathname);
         </span>
         <div
           v-if="currentPath === '/blog'"
-          class="bg-textBase h-0.5 w-full"
+          class="h-0.5 w-full bg-textBase"
         ></div>
       </a>
     </div>

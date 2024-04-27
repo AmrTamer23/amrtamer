@@ -70,6 +70,7 @@ import Image from "astro/components/Image.astro";
                     "
                     alt="Technologies Used"
                     class="inline w-1/2"
+                    loading="eager"
                   />
                 </div>
                 <div class="flex items-center gap-4">
