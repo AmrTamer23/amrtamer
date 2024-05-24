@@ -1,5 +1,6 @@
 import animate from "tailwindcss-animate";
 import typography from "@tailwindcss/typography";
+const { addDynamicIconSelectors } = require("@iconify/tailwind");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -58,5 +59,5 @@ export default {
       },
     },
   },
-  plugins: [animate, typography()],
+  plugins: [animate, typography(), addDynamicIconSelectors()],
 };

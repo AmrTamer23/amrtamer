@@ -1,6 +1,17 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import clsx from "clsx";
+import { useMediaQuery } from "@vueuse/core";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+const isLargeScreen = useMediaQuery("(min-width: 1024px)");
 
 const navItemStyle = "text-md cursor-pointer transition-opacity font-medium ";
 
@@ -30,12 +41,13 @@ if (typeof window !== "undefined") {
 </script>
 <template>
   <nav
-    class="fixed top-0 z-10 flex h-fit w-full justify-between bg-background px-20 pb-5 pt-10 opacity-90"
+    class="fixed top-0 z-10 flex h-fit w-full items-end justify-between bg-background px-8 pb-5 pt-10 opacity-90 lg:px-20"
   >
     <a href="/">
       <span class="text-lg font-extrabold text-white">AT23</span>
     </a>
     <div
+      v-if="isLargeScreen"
       class="flex [&_a]:px-4"
       @mouseenter="
         {
@@ -134,6 +146,31 @@ if (typeof window !== "undefined") {
         ></div>
       </a>
     </div>
+    <DropdownMenu v-else>
+      <DropdownMenuTrigger>
+        <span
+          class="icon-[streamline--interface-setting-menu-2-button-parallel-horizontal-lines-menu-navigation-staggered-three-hamburger] h-6 w-6"
+          role="img"
+          aria-hidden="true"
+        ></span>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent
+        class="mr-4 border-btnBase bg-background shadow-2xl *:text-base"
+      >
+        <DropdownMenuItem>
+          <a href="/"> Home </a>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <a href="/projects"> Projects </a>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <a href="/work"> Work </a>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <a href="/blog"> Blog </a>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   </nav>
 </template>
 
