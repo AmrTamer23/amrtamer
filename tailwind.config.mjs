@@ -16,6 +16,15 @@ export default {
       center: true,
       padding: "2rem",
     },
+    fontSize: {
+      sm: "var(--fs-sm)",
+      base: "var(--fs-base)",
+      md: "var(--fs-md)",
+      lg: "var(--fs-lg)",
+      xl: "var(--fs-xl)",
+      "2xl": "var(--fs-2xl)",
+      "3xl": "var(--fs-3xl)",
+    },
     extend: {
       colors: {
         background: "var(--background-color)",

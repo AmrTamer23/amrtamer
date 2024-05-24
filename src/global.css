@@ -11,13 +11,20 @@ html {
 
 @layer base {
   :root {
-    --background-color: #000814;
+    --background-color: #0b0500;
     --text-color: #ffefd5;
     --btn-color: #ffc300;
+    --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
+    --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
+    --fs-md: clamp(1.25rem, 0.61vi + 1.1rem, 1.58rem);
+    --fs-lg: clamp(1.56rem, 1vi + 1.31rem, 2.11rem);
+    --fs-xl: clamp(1.95rem, 1.56vi + 1.56rem, 2.81rem);
+    --fs-2xl: clamp(2.44rem, 2.38vi + 1.85rem, 3.75rem);
+    --fs-3xl: clamp(3.05rem, 3.54vi + 2.17rem, 5rem);
   }
 
   .btn {
-    @apply bg-btnBase rounded-lg px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
+    @apply rounded-lg bg-btnBase px-4 py-2 text-xl text-black transition duration-200 ease-in-out hover:scale-105;
   }
 }
 
