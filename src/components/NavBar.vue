@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import clsx from "clsx";
 
-const navItemStyle = "text-xl cursor-pointer transition-opacity ";
+const navItemStyle = "text-md cursor-pointer transition-opacity ";
 
 const hoveredItem = ref<Section | Section[]>(["home", "projects", "blog"]);
 
@@ -25,10 +25,10 @@ if (typeof window !== "undefined") {
 </script>
 <template>
   <nav
-    class="fixed top-0 z-10 flex h-[12dvh] w-full justify-between bg-background px-20 pb-5 pt-10 opacity-90"
+    class="fixed top-0 z-10 flex h-fit w-full justify-between bg-background px-20 pb-5 pt-10 opacity-90"
   >
     <a href="/">
-      <span class="text-3xl font-bold text-white">AT23</span>
+      <span class="text-lg font-bold text-white">AT23</span>
     </a>
     <div
       class="flex [&_a]:px-4"
