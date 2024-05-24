@@ -9,4 +9,4 @@ type Project = {
   image: string;
 };
 
-type Section = "home" | "projects" | "blog";
+type Section = "home" | "projects" | "work" | "blog";

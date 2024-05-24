@@ -2,9 +2,14 @@
 import { ref } from "vue";
 import clsx from "clsx";
 
-const navItemStyle = "text-md cursor-pointer transition-opacity ";
+const navItemStyle = "text-md cursor-pointer transition-opacity font-medium ";
 
-const hoveredItem = ref<Section | Section[]>(["home", "projects", "blog"]);
+const hoveredItem = ref<Section | Section[]>([
+  "home",
+  "projects",
+  "work",
+  "blog",
+]);
 
 const isOnNav = ref<boolean>(false);
 
@@ -14,7 +19,7 @@ const handleMouseEnter = (item: Section) => {
 
 const handleMouseLeave = () => {
   if (isOnNav.value === false && typeof hoveredItem.value === "string")
-    hoveredItem.value = ["home", "projects", "blog"];
+    hoveredItem.value = ["home", "projects", "work", "blog"];
 };
 
 const currentPath = ref<string>("");
@@ -28,7 +33,7 @@ if (typeof window !== "undefined") {
     class="fixed top-0 z-10 flex h-fit w-full justify-between bg-background px-20 pb-5 pt-10 opacity-90"
   >
     <a href="/">
-      <span class="text-lg font-bold text-white">AT23</span>
+      <span class="text-lg font-extrabold text-white">AT23</span>
     </a>
     <div
       class="flex [&_a]:px-4"
@@ -83,6 +88,27 @@ if (typeof window !== "undefined") {
         </span>
         <div
           v-if="currentPath === '/projects'"
+          class="h-0.5 w-full bg-textBase"
+        ></div>
+      </a>
+      <a
+        href="/work"
+        @mouseenter="handleMouseEnter('work')"
+        @mouseleave="handleMouseLeave()"
+        class="flex flex-col gap-2"
+      >
+        <span
+          :class="
+            clsx(
+              navItemStyle,
+              hoveredItem.includes('work') ? 'opacity-100' : 'opacity-30',
+            )
+          "
+        >
+          Work
+        </span>
+        <div
+          v-if="currentPath === '/work'"
           class="h-0.5 w-full bg-textBase"
         ></div>
       </a>
