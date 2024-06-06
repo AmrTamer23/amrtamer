@@ -1,6 +1,7 @@
 ---
 import NavBar from "../components/NavBar.vue";
 import "./../global.css";
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <!doctype html>
@@ -17,6 +18,8 @@ import "./../global.css";
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content="Amr Tamer" />
+    <ViewTransitions />
     <title>Amr Tamer</title>
   </head>
 
