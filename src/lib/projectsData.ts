@@ -4,6 +4,8 @@ export const projects: Project[] = [
     domain: ".space",
     description:
       "A website for mental health and wellness, where you can find articles and get mental health help.",
+    fullDescription:
+      "Started and maintained Salamy's Frontend, Dealt with Strapi's query builder mechanism, Kept Enhancing the website's performance, UI/UX and SEO.",
     features: [
       "Articles about mental health and wellness.",
       "Look for nearest mental health centers.",

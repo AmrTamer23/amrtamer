@@ -8,20 +8,19 @@ import {
 } from "@/components/ui/carousel";
 import { projects } from "@/lib/projectsData";
 import { Button } from "@/components/ui/button";
-import Image from "astro/components/Image.astro";
 </script>
 
 <template>
-  <main class="mx-auto h-[70dvh] w-[70dvw]">
+  <main class="mx-auto h-[70dvh] w-[75dvw]">
     <Carousel
       :opts="{
         loop: true,
       }"
     >
       <CarouselContent>
-        <CarouselItem class="h-[50dvh]" v-for="project in projects">
+        <CarouselItem class="h-[70dvh] w-full" v-for="project in projects">
           <div class="flex h-full w-full rounded-xl border-2 border-textBase">
-            <div class="flex w-1/4 flex-col justify-between">
+            <div class="flex w-2/6 flex-col justify-between">
               <img
                 :src="project.image"
                 :alt="project.name"
@@ -29,7 +28,7 @@ import Image from "astro/components/Image.astro";
               />
             </div>
             <div
-              class="flex h-full w-3/4 flex-col justify-between gap-6 px-4 pb-4 pt-8"
+              class="flex h-full w-4/6 flex-col justify-between gap-6 px-4 pb-4 pt-8"
             >
               <div class="flex h-full w-3/4 flex-col gap-6">
                 <div class="flex flex-col gap-2">
@@ -39,22 +38,23 @@ import Image from "astro/components/Image.astro";
                     :href="project.link"
                     target="_blank"
                   >
-                    <h2 class="text-4xl font-bold">
+                    <h2 class="text-xl font-bold">
                       {{ project.name }}
                     </h2>
                     <span class="text-lg">
                       {{ project.domain }}
                     </span>
                   </a>
-                  <p class="text-lg">{{ project.description }}</p>
+                  <p class="text-base">{{ project.description }}</p>
+                  <p class="text-base">{{ project.fullDescription }}</p>
                 </div>
                 <div class="flex flex-col gap-2">
-                  <span class="text-2xl"> Features: </span>
+                  <span class="text-lg"> Features: </span>
                   <ul class="list-inside list-disc pl-2">
                     <li
                       v-for="feature in project.features"
                       :key="feature"
-                      class="text-lg"
+                      class="text-base"
                     >
                       {{ feature }}
                     </li>
@@ -80,18 +80,16 @@ import Image from "astro/components/Image.astro";
                     target="_blank"
                     name="GitHub"
                   >
-                    <Button class="gap-1 text-lg">
+                    <Button class="gap-1 text-base">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        class="lucide lucide-github"
+                        class="lucide lucide-github h-6 w-6"
                       >
                         <path
                           d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
@@ -102,19 +100,17 @@ import Image from "astro/components/Image.astro";
                     </Button>
                   </a>
                   <a :href="project.link" :name="project.name" target="_blank">
-                    <Button class="gap-1 text-lg">
+                    <Button class="gap-1 text-base">
                       <span> Visit It </span>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         stroke-width="2"
                         stroke-linecap="round"
                         stroke-linejoin="round"
-                        class="lucide lucide-arrow-up-right"
+                        class="lucide lucide-arrow-up-right h-6 w-6"
                       >
                         <path d="M7 7h10v10" />
                         <path d="M7 17 17 7" />
@@ -128,10 +124,10 @@ import Image from "astro/components/Image.astro";
         </CarouselItem>
       </CarouselContent>
       <CarouselPrevious
-        class="border-textBase bg-transparent text-textBase hover:bg-btnBase"
+        class="border-textBase bg-transparent text-textBase hover:bg-primary"
       />
       <CarouselNext
-        class="border-textBase bg-transparent text-textBase hover:bg-btnBase"
+        class="border-textBase bg-transparent text-textBase hover:bg-primary"
       />
     </Carousel>
   </main>
