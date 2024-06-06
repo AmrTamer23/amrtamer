@@ -24,6 +24,8 @@ const { orientation, canScrollPrev, scrollPrev } = useCarousel();
     "
     variant="outline"
     @click="scrollPrev"
+    name="Previous"
+    aria-label="Previous"
   >
     <slot>
       <ArrowLeft class="h-8 w-8 text-current" />

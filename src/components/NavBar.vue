@@ -44,7 +44,7 @@ if (typeof window !== "undefined") {
     class="fixed top-0 z-10 flex h-fit w-full items-end justify-between bg-background px-8 pb-5 pt-10 opacity-90 lg:px-20"
   >
     <a href="/">
-      <span class="text-primary text-lg font-extrabold" id="logo">AT23</span>
+      <span class="text-lg font-extrabold text-primary" id="logo">AT23</span>
     </a>
     <div
       v-if="isLargeScreen"
@@ -87,6 +87,7 @@ if (typeof window !== "undefined") {
         @mouseenter="handleMouseEnter('projects')"
         @mouseleave="handleMouseLeave()"
         class="flex flex-col gap-2"
+        data-astro-prefetch="hover"
       >
         <span
           :class="
@@ -108,6 +109,7 @@ if (typeof window !== "undefined") {
         @mouseenter="handleMouseEnter('work')"
         @mouseleave="handleMouseLeave()"
         class="flex flex-col gap-2"
+        data-astro-prefetch="hover"
       >
         <span
           :class="
@@ -129,6 +131,7 @@ if (typeof window !== "undefined") {
         @mouseenter="handleMouseEnter('blog')"
         @mouseleave="handleMouseLeave()"
         class="flex flex-col gap-2"
+        data-astro-prefetch="tap"
       >
         <span
           :class="
