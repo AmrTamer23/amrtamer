@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 </script>
 
 <template>
-  <main class="mx-auto h-[70dvh] w-[75dvw]">
+  <main class="mx-auto h-5/6 w-10/12">
     <Carousel
       :opts="{
         loop: true,
