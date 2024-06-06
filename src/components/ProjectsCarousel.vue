@@ -11,26 +11,28 @@ import { Button } from "@/components/ui/button";
 </script>
 
 <template>
-  <main class="mx-auto h-5/6 w-10/12">
+  <main class="ml-14 mr-14 w-full lg:mx-auto lg:h-5/6 lg:w-10/12">
     <Carousel
       :opts="{
         loop: true,
       }"
     >
       <CarouselContent>
-        <CarouselItem class="h-[70dvh] w-full" v-for="project in projects">
-          <div class="flex h-full w-full rounded-xl border-2 border-textBase">
-            <div class="flex w-2/6 flex-col justify-between">
+        <CarouselItem class="w-full lg:h-[70dvh]" v-for="project in projects">
+          <div
+            class="flex h-full w-full flex-col rounded-xl border-2 border-textBase lg:flex-row"
+          >
+            <div class="flex flex-col justify-between lg:w-2/6">
               <img
                 :src="project.image"
                 :alt="project.name"
-                class="h-full rounded-es-lg rounded-ss-lg object-cover"
+                class="h-full rounded-se-lg rounded-ss-lg object-cover lg:rounded-es-lg lg:rounded-se-none"
               />
             </div>
             <div
-              class="flex h-full w-4/6 flex-col justify-between gap-6 px-4 pb-4 pt-8"
+              class="flex h-full flex-col justify-between gap-6 px-4 pb-4 pt-4 lg:w-4/6 lg:pt-8"
             >
-              <div class="flex h-full w-3/4 flex-col gap-6">
+              <div class="flex h-full flex-col gap-6 lg:w-3/4">
                 <div class="flex flex-col gap-2">
                   <a
                     class="flex items-end hover:underline"
@@ -61,9 +63,11 @@ import { Button } from "@/components/ui/button";
                   </ul>
                 </div>
               </div>
-              <div class="flex items-end justify-between">
-                <div class="flex w-1/2 items-end gap-2">
-                  <span class="text-center"> Built With </span>
+              <div
+                class="flex flex-col items-end justify-between gap-4 lg:flex-row lg:gap-0"
+              >
+                <div class="flex items-end gap-2 lg:w-1/2">
+                  <span class="lg:text-center"> Built With </span>
                   <img
                     :src="
                       `https://skillicons.dev/icons?i=` + project.technologies
@@ -127,7 +131,7 @@ import { Button } from "@/components/ui/button";
         class="border-textBase bg-transparent text-textBase hover:bg-primary"
       />
       <CarouselNext
-        class="border-textBase bg-transparent text-textBase hover:bg-primary"
+        class="ml-4 border-textBase bg-transparent text-textBase hover:bg-primary"
       />
     </Carousel>
   </main>
