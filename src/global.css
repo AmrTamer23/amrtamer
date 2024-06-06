@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,8 +12,8 @@ html {
 
 @layer base {
   :root {
-    --background-color: #0b0500;
-    --text-color: #ffefd5;
+    --background-color: #0a0908;
+    --text-color: #eae0d5;
     --btn-color: #ffc300;
     --fs-sm: clamp(0.8rem, 0.17vi + 0.76rem, 0.89rem);
     --fs-base: clamp(1rem, 0.34vi + 0.91rem, 1.19rem);
