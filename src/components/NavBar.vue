@@ -158,7 +158,7 @@ if (typeof window !== "undefined") {
         ></span>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        class="mr-4 border-btnBase bg-background shadow-2xl *:text-base"
+        class="mr-4 border-primary bg-background shadow-2xl *:text-base"
       >
         <DropdownMenuItem>
           <a href="/"> Home </a>
