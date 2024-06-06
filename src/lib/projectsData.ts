@@ -1,10 +1,11 @@
-import type { Project } from "./types";
-
 export const projects: Project[] = [
   {
     name: "Salamy",
+    domain: ".space",
     description:
       "A website for mental health and wellness, where you can find articles and get mental health help.",
+    fullDescription:
+      "Started and maintained Salamy's Frontend, Dealt with Strapi's query builder mechanism, Kept Enhancing the website's performance, UI/UX and SEO.",
     features: [
       "Articles about mental health and wellness.",
       "Look for nearest mental health centers.",
@@ -19,6 +20,7 @@ export const projects: Project[] = [
   },
   {
     name: "Quiz Master",
+    domain: ".vercel.app",
     description:
       "A quiz platform, Explore quizzes in various genres such as Geography, Computer Science, History, and Sports.",
     features: [

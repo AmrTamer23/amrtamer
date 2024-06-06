@@ -1,89 +1,92 @@
 ---
 import { Image } from "astro:assets";
-import { AiFillGithub } from "react-icons/ai";
-import { FaLinkedin } from "react-icons/fa";
-import { FiDownload } from "react-icons/fi";
 ---
 
-<main id="home" class="flex select-none flex-col pt-32 2xl:pt-36">
-  <section class="flex min-h-[80vh] flex-col gap-10">
-    <span class="text-2xl 2xl:text-3xl">Hi, my name is</span>
-    <h1 class="text-7xl 2xl:text-8xl">Amr Tamer</h1>
-    <h2 class="hide text-7xl text-textBase !opacity-60 2xl:text-8xl">
-      Software Engineer,
-    </h2>
-    <p class="hide text-3xl leading-snug 2xl:text-4xl">
-      Front-End Developer and Computer Science Student who is always eager to
-      learn new things.
-    </p>
-    <div class="hide flex items-center gap-4">
-      <a
-        href="https://drive.google.com/file/d/10RrYjeea-F6ZpEsufV9v3FTMnaosrYiV/view?usp=sharing"
-        target="_blank"
-        class="group/downloadCV btn flex items-center gap-2"
-      >
-        <FiDownload
-          size={25}
-          className="group-hover/downloadCV:animate-bounce"
-        />
-        <span> Download CV </span>
-      </a>
-      <a
-        href="https://github.com/AmrTamer23"
-        target="_blank"
-        aria-label="Github Account"
-        class="btn"
-      >
-        <AiFillGithub size={28} />
-      </a>
-      <a
-        href="https://www.linkedin.com/in/amrtamer23/"
-        target="_blank"
-        aria-label="LinkedIn Account"
-        class="btn"
-      >
-        <FaLinkedin size={28} />
-      </a>
-    </div>
-  </section>
-  <section class="flex flex-col gap-28 pb-20">
-    <div class="flex flex-col justify-center gap-7">
-      <h2 class="text-center text-5xl">Languages</h2>
+<main class="flex select-none flex-col *:mx-auto">
+  <section class="container flex flex-col gap-4">
+    <div class="flex flex-col-reverse items-center justify-between gap-4">
+      <div class="flex flex-col items-center">
+        <h1 class="text-lg font-bold">Amr Tamer</h1>
+        <span class="text-md opacity-80"> Software Engineer</span>
+      </div>
 
       <Image
-        src="https://skillicons.dev/icons?i=cpp,python,html,css,js,ts"
-        alt="Languages"
-        class="w-4/12 self-center"
-        inferSize
-        loading="lazy"
+        class="h-32 w-32 rounded-full object-cover p-1 ring-2 ring-[#C6AC8F] lg:h-48 lg:w-48"
+        src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=2043&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Bordered avatar"
+        loading="eager"
+        width={200}
+        height={200}
       />
     </div>
-    <div class="flex flex-col justify-center gap-7">
-      <h2 class="text-center text-5xl">Frameworks/Libs/Tools</h2>
-
-      <Image
-        src="https://skillicons.dev/icons?i=tailwindcss,nodejs,vue,react,nextjs,astro,firebase,figma&perline=6"
-        alt="Frameworks/Libs/Tools"
-        class="w-4/12 self-center"
-        inferSize
-        loading="lazy"
-      />
+    <div class="space-y-4 *:text-base [&_span]:block">
+      <p>
+        I'm a software engineer focused on Frontend and a computer science
+        student who is always eager to learn and explore, I've worked with C++,
+        JavaScript, TypeScript, React, Nextjs, Vue, Nuxtjs, Astro and Docker.
+      </p>
+      <div class="leading-loose">
+        You can <button
+          class="text-[#C6AC8F] underline underline-offset-8 transition-all duration-75 ease-in-out hover:text-textBase"
+        >
+          <a
+            href="https://drive.google.com/file/d/10RrYjeea-F6ZpEsufV9v3FTMnaosrYiV/view?usp=sharing"
+            target="_blank"
+          >
+            Download My Resume
+          </a>
+        </button>, reach me on <a
+          href="https://x.com/AmrT_23"
+          target="_blank"
+          aria-label="X Twitter"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="35"
+            height="35"
+            viewBox="0 0 256 256"
+            class="inline h-7 w-7 lg:h-10 lg:w-10"
+            ><path
+              fill="currentColor"
+              d="m218.12 209.56l-61-95.8l59.72-65.69a12 12 0 0 0-17.76-16.14l-55.27 60.84l-37.69-59.21A12 12 0 0 0 96 28H48a12 12 0 0 0-10.12 18.44l61 95.8l-59.76 65.69a12 12 0 1 0 17.76 16.14l55.31-60.84l37.69 59.21A12 12 0 0 0 160 228h48a12 12 0 0 0 10.12-18.44M166.59 204L69.86 52h19.55l96.73 152Z"
+            ></path></svg
+          >
+        </a>
+        Or <a
+          href="https://www.linkedin.com/in/amrtamer23/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Linkedin"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            viewBox="0 0 256 256"
+            class="inline h-7 w-7 lg:h-10 lg:w-10"
+            ><path
+              fill="currentColor"
+              d="M216 24H40a16 16 0 0 0-16 16v176a16 16 0 0 0 16 16h176a16 16 0 0 0 16-16V40a16 16 0 0 0-16-16M96 176a8 8 0 0 1-16 0v-64a8 8 0 0 1 16 0Zm-8-80a12 12 0 1 1 12-12a12 12 0 0 1-12 12m96 80a8 8 0 0 1-16 0v-36a20 20 0 0 0-40 0v36a8 8 0 0 1-16 0v-64a8 8 0 0 1 15.79-1.78A36 36 0 0 1 184 140Z"
+            ></path></svg
+          ></a
+        > and Follow me on <a
+          href="https://github.com/AmrTamer23"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Github"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="128"
+            height="128"
+            viewBox="0 0 16 16"
+            class="inline h-7 w-7 lg:h-9 lg:w-9"
+            ><path
+              fill="currentColor"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59c.4.07.55-.17.55-.38c0-.19-.01-.82-.01-1.49c-2.01.37-2.53-.49-2.69-.94c-.09-.23-.48-.94-.82-1.13c-.28-.15-.68-.52-.01-.53c.63-.01 1.08.58 1.23.82c.72 1.21 1.87.87 2.33.66c.07-.52.28-.87.51-1.07c-1.78-.2-3.64-.89-3.64-3.95c0-.87.31-1.59.82-2.15c-.08-.2-.36-1.02.08-2.12c0 0 .67-.21 2.2.82c.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82c.44 1.1.16 1.92.08 2.12c.51.56.82 1.27.82 2.15c0 3.07-1.87 3.75-3.65 3.95c.29.25.54.73.54 1.48c0 1.07-.01 1.93-.01 2.2c0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+            ></path></svg
+          >
+        </a>.
+      </div>
     </div>
   </section>
 </main>
-
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("show");
-      } else {
-        entry.target.classList.remove("show");
-      }
-    });
-  });
-  const hiddenElements = document.querySelectorAll(".hide");
-  hiddenElements.forEach((element) => {
-    observer.observe(element);
-  });
-</script>

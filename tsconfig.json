@@ -3,6 +3,10 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "react",
-    "importsNotUsedAsValues": "remove"
+    "importsNotUsedAsValues": "remove",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
   }
 }

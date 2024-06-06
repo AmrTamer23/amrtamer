@@ -1,6 +1,8 @@
-export type Project = {
+type Project = {
   name: string;
+  domain: string;
   description: string;
+  fullDescription?: string;
   features: string[];
   technologies: string;
   link: string;
@@ -8,4 +10,4 @@ export type Project = {
   image: string;
 };
 
-export type Section = "home" | "projects" | "contact";
+type Section = "home" | "projects" | "work" | "blog";

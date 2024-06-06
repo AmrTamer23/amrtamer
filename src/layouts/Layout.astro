@@ -1,11 +1,17 @@
 ---
-import NavBar from "../components/NavBar.svelte";
+import NavBar from "../components/NavBar.vue";
 import "./../global.css";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
     <meta charset="UTF-8" />
     <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
@@ -14,12 +20,12 @@ import "./../global.css";
     <title>Amr Tamer</title>
   </head>
 
-  <body class="bg-background font-default text-textBase">
-    <NavBar client:load />
-    <main class="flex">
-      <section class="mx-20 mt-10">
-        <slot />
-      </section>
+  <body class="font-default bg-background text-textBase">
+    <nav class="mb-32">
+      <NavBar client:load />
+    </nav>
+    <main class="h-fit pt-4">
+      <slot />
     </main>
   </body>
 </html>
