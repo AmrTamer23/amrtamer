@@ -44,7 +44,7 @@ if (typeof window !== "undefined") {
     class="fixed top-0 z-10 flex h-fit w-full items-end justify-between bg-background px-8 pb-5 pt-10 opacity-90 lg:px-20"
   >
     <a href="/">
-      <span class="text-lg font-extrabold text-white">AT23</span>
+      <span class="text-primary text-lg font-extrabold" id="logo">AT23</span>
     </a>
     <div
       v-if="isLargeScreen"
@@ -177,5 +177,8 @@ if (typeof window !== "undefined") {
 <style scoped>
 * {
   color: var(--text-color);
+}
+#logo {
+  text-shadow: 2px 4px 5px rgba(198, 172, 143, 0.3);
 }
 </style>

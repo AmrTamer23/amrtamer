@@ -31,6 +31,7 @@ export default {
         background: "var(--background-color)",
         textBase: "var(--text-color)",
         btnBase: "var(--btn-color)",
+        primary: "var(--primary-color)",
       },
       screens: {
         xs: "480px",
