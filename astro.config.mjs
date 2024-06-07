@@ -8,7 +8,7 @@ export default defineConfig({
   integrations: [tailwind(), vue()],
   output: "static",
   prefetch: {
-    prefetchAll: true
+    prefetchAll: true,
   },
-  adapter: vercel()
+  adapter: vercel(),
 });
