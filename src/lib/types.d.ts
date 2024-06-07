@@ -11,3 +11,13 @@ type Project = {
 };
 
 type Section = "home" | "projects" | "work" | "blog";
+
+type Work = {
+  location: string;
+  role: string;
+  date: string;
+  company: string;
+  companyLink: string;
+  description: string;
+  skills: string;
+};
