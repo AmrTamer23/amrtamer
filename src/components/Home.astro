@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import Avatar from "../assets/imgs/avatar.jpeg";
 ---
 
 <main class="flex select-none flex-col *:mx-auto">
@@ -12,7 +13,7 @@ import { Image } from "astro:assets";
 
       <Image
         class="h-32 w-32 rounded-full object-cover p-1 ring-2 ring-[#C6AC8F] lg:h-48 lg:w-48"
-        src="https://avatars.githubusercontent.com/u/122938074?v=4"
+        src={Avatar}
         alt="Bordered avatar"
         loading="eager"
         width={200}
