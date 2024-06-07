@@ -150,7 +150,7 @@ if (typeof window !== "undefined") {
       </a>
     </div>
     <DropdownMenu v-else>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger aria-label="Navigation Menu">
         <span
           class="icon-[streamline--interface-setting-menu-2-button-parallel-horizontal-lines-menu-navigation-staggered-three-hamburger] h-6 w-6"
           role="img"

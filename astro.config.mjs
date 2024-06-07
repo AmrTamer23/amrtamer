@@ -7,9 +7,8 @@ import netlify from "@astrojs/netlify";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), vue()],
-  output: "hybrid",
+  output: "static",
   prefetch: {
-    prefetchAll: true
+    prefetchAll: true,
   },
-  adapter: netlify()
 });
