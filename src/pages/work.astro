@@ -1,7 +1,20 @@
 ---
+import WorkItem from "@/components/ui/WorkItem.astro";
 import Layout from "../layouts/Layout.astro";
+import { workHistory } from "../lib/workData";
 ---
 
 <Layout>
-  <h1 class="text-center text-xl">Coming Soon!</h1>
+  <main class="container flex flex-col gap-4 divide-y-2 divide-primary">
+    <section class="flex flex-col gap-4">
+      <h1 class="text-md">Employment History</h1>
+      <p class="text-base">
+        I have been working proffesionally for almost a year now. I have worked
+        with many clients and had direct contact with them.
+      </p>
+    </section>
+    <section>
+      {workHistory.reverse().map((work, index) => <WorkItem work={work} />)}
+    </section>
+  </main>
 </Layout>

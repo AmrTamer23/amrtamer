@@ -1,0 +1,40 @@
+---
+interface Props {
+  work: Work;
+}
+
+const { work } = Astro.props;
+---
+
+<div
+  class="container mt-4 flex flex-col gap-2 rounded-lg bg-[#382e22] px-4 py-6"
+>
+  <div class="flex justify-between text-sm text-neutral-200">
+    <span>
+      {work.location}
+    </span>
+    <span>
+      {work.date}
+    </span>
+  </div>
+  <div class="text-base font-medium">
+    {work.role} at <a
+      class="transition-all duration-75 ease-in-out hover:text-primary"
+      href={work.companyLink}
+      rel="noopener noreferrer"
+      target="_blank"
+      aria-label={work.company}
+    >
+      {work.company}
+    </a>
+  </div>
+  <div>
+    {work.description}
+  </div>
+  <div class="flex gap-2">
+    <span> Skills: </span>
+    <span>
+      {work.skills}
+    </span>
+  </div>
+</div>
