@@ -41,7 +41,7 @@ if (typeof window !== "undefined") {
 </script>
 <template>
   <nav
-    class="fixed top-0 z-10 flex h-fit w-full items-end justify-between bg-background px-8 pb-5 pt-10 opacity-90 lg:px-20"
+    class="fixed top-0 z-10 flex h-fit w-full items-center justify-between bg-background px-8 pb-5 pt-10 opacity-90 lg:px-20"
   >
     <a href="/">
       <span class="text-lg font-extrabold text-primary" id="logo">AT23</span>
