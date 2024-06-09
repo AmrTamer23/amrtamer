@@ -2,16 +2,14 @@
 import NavBar from "../components/NavBar.vue";
 import "./../global.css";
 import { ViewTransitions } from "astro:transitions";
+import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
-      rel="stylesheet"
+    <GoogleFontsOptimizer
+      url="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
     />
     <meta charset="UTF-8" />
     <meta
@@ -23,6 +21,7 @@ import { ViewTransitions } from "astro:transitions";
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Amr Tamer" />
     <ViewTransitions />
+
     <title>Amr Tamer</title>
   </head>
 
