@@ -26,10 +26,11 @@ import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
   </head>
 
   <body class="font-default bg-background text-textBase">
-    <nav class="mb-32">
+    <nav class="mb-24">
       <NavBar client:load />
     </nav>
-    <main class="h-fit pt-4">
+    <div class="bg-grid-zinc-200/5 absolute z-0 h-[85%] w-full"></div>
+    <main class="z-10 h-fit pt-14">
       <slot />
     </main>
   </body>
