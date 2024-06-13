@@ -3,11 +3,43 @@ import NavBar from "../components/NavBar.vue";
 import "./../global.css";
 import { ViewTransitions } from "astro:transitions";
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
+import { SEO } from "astro-seo";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <SEO
+      title="Amr Tamer"
+      description="I'm Amr Tamer a Frontend Software Engineer and a Computer Science Student with a sense of adventure and exploring"
+      openGraph={{
+        basic: {
+          title: "Amr Tamer",
+          type: "A type.",
+          image: "/OG.png",
+        },
+      }}
+      twitter={{
+        creator: "@amrt_23",
+      }}
+      extend={{
+        // extending the default link tags
+        link: [{ rel: "icon", href: "/favicon.ico" }],
+        // extending the default meta tags
+        meta: [
+          {
+            name: "twitter:image",
+            content: "/OG.png",
+          },
+          { name: "twitter:title", content: "Amr Tamer" },
+          {
+            name: "twitter:description",
+            content:
+              "I'm Amr Tamer a Frontend Software Engineer and a Computer Science Student with a sense of adventure and exploring",
+          },
+        ],
+      }}
+    />
     <GoogleFontsOptimizer
       url="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap"
     />
@@ -17,11 +49,10 @@ import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
       content="Hi, I'm Amr Tamer, A Software Engineer with 1 year exprience."
     />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content="Amr Tamer" />
     <ViewTransitions />
-
     <title>Amr Tamer</title>
   </head>
 
@@ -29,7 +60,7 @@ import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
     <nav class="mb-24">
       <NavBar client:load />
     </nav>
-    <div class="bg-grid-zinc-200/5 absolute z-0 h-[85%] w-full"></div>
+    <div class="absolute z-0 h-[85%] w-full bg-grid-zinc-200/5"></div>
     <main class="z-10 h-fit pt-14">
       <slot />
     </main>
