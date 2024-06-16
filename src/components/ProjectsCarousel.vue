@@ -11,14 +11,14 @@ import { Button } from "@/components/ui/button";
 </script>
 
 <template>
-  <main class="ml-14 mr-14 w-full lg:mx-auto lg:h-5/6 lg:w-10/12">
+  <main class="ml-14 mr-14 w-full lg:mx-auto lg:w-10/12">
     <Carousel
       :opts="{
         loop: true,
       }"
     >
       <CarouselContent>
-        <CarouselItem class="w-full lg:h-[70dvh]" v-for="project in projects">
+        <CarouselItem class="w-full" v-for="project in projects">
           <div
             class="flex h-full w-full flex-col rounded-xl border-2 border-textBase lg:flex-row"
           >
