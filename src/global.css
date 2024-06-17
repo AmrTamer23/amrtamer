@@ -52,11 +52,11 @@ html {
 
 /* For Web-Kit */
 ::-webkit-scrollbar {
-  width: 0.5rem;
+  width: 0.25rem;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--btn-color);
+  background-color: var(--primary-color);
   border-radius: 0.2rem;
 }
 
@@ -66,11 +66,11 @@ html {
 
 /* For Firefox */
 scrollbar {
-  width: 0.5rem;
+  width: 0.25rem;
 }
 
 scrollbar-thumb {
-  background-color: var(--btn-color);
+  background-color: var(--primary-color);
   border-radius: 0.2rem;
 }
 
