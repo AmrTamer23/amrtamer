@@ -1,9 +1,46 @@
 ---
 import { Image } from "astro:assets";
+import { Client } from "@notionhq/client";
+import { sequence } from "astro:middleware";
+
+const notion = new Client({
+  auth: import.meta.env.NOTION_API_KEY,
+});
+
+let title: string = `
+I'm a Software Engineer focused on Frontend, AWS Certified Cloud Practitioner and a Computer Science student who is always eager to learn and explore, I've worked with C++, JavaScript, TypeScript, React, Nextjs, Vue, Nuxtjs, Astro, Docker, Node.js, Express.js, Prisma and PostgreSQL.
+`;
+
+try {
+  const response = await fetch(
+    "https://api.notion.com/v1/pages/0d32acfc4b91411b8b7976be5a9c78a1",
+    {
+      headers: {
+        Authorization: `Bearer ${import.meta.env.NOTION_API_KEY}`,
+        "Notion-Version": "2022-06-28",
+      },
+    }
+  );
+  const data = await response.json();
+
+  if (
+    data.properties &&
+    data.properties.title &&
+    data.properties.title.title &&
+    data.properties.title.title[0] &&
+    data.properties.title.title[0].text
+  ) {
+    title = data.properties.title.title[0].text.content;
+  } else {
+    console.error("Unexpected data structure:", data);
+  }
+} catch (error) {
+  console.error("Error fetching Notion data:", error);
+}
 ---
 
 <main class="flex select-none flex-col *:mx-auto">
-  <section class="container flex flex-col gap-4">
+  <section class="container flex flex-col gap-4 lg:!max-w-5xl">
     <div class="flex flex-col-reverse items-center justify-between gap-4">
       <div class="flex flex-col items-center">
         <h1 class="text-lg font-bold">Amr Tamer</h1>
@@ -19,11 +56,9 @@ import { Image } from "astro:assets";
         height={200}
       />
     </div>
-    <div class="space-y-4 *:text-base [&_span]:block">
-      <p>
-        I'm a software engineer focused on Frontend and a computer science
-        student who is always eager to learn and explore, I've worked with C++,
-        JavaScript, TypeScript, React, Nextjs, Vue, Nuxtjs, Astro and Docker.
+    <div class="w-full space-y-4 *:text-base [&_span]:block">
+      <p id="bio">
+        {title}
       </p>
       <div class="leading-[3rem]">
         You can <a
