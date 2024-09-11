@@ -26,9 +26,9 @@ export const projects: Project[] = [
     fullDescription:
       "Designed to make habit-building easy and engaging. Users can effortlessly create custom habits, track their consistency, and gain insights through visual data representations. ",
     features: [
-      "User authentication and management",
-      "Habit creation and tracking",
-      "Progress visualization",
+      "User authentication and management.",
+      "Habit creation and tracking.",
+      "Progress visualization.",
       "Responsive Design.",
     ],
     image: "https://i.ibb.co/sgSdh9W/Streakify.png",
