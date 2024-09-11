@@ -66,16 +66,16 @@ import { Button } from "@/components/ui/button";
               <div
                 class="flex flex-col items-end justify-between gap-4 lg:flex-row lg:gap-0"
               >
-                <div class="flex items-end gap-2 lg:w-1/2">
-                  <span class="lg:text-center"> Built With </span>
-                  <img
-                    :src="
-                      `https://skillicons.dev/icons?i=` + project.technologies
-                    "
-                    alt="Technologies Used"
-                    class="inline w-1/2"
-                    loading="eager"
-                  />
+                <div class="flex flex-col gap-2 lg:w-full">
+                  <span> Built With </span>
+                  <div class="flex flex-wrap gap-2">
+                    <img
+                      v-for="tech in project.technologies"
+                      :src="`https://skillicons.dev/icons?i=${tech}`"
+                      :alt="tech"
+                      class="h-10 w-10"
+                    />
+                  </div>
                 </div>
                 <div class="flex items-center gap-4">
                   <a

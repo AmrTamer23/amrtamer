@@ -4,7 +4,7 @@ type Project = {
   description: string;
   fullDescription?: string;
   features: string[];
-  technologies: string;
+  technologies: string[];
   link: string;
   sourceCode: string | null;
   image: string;
