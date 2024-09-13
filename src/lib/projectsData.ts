@@ -44,6 +44,23 @@ export const projects: Project[] = [
     sourceCode: "https://github.com/AmrTamer23/streakify",
   },
   {
+    name: "resetmycss",
+    domain: "",
+    description:
+      "Ever find yourself manually copying CSS reset snippets into each new project? Save time and skip the repetitive setup with resetmycss!",
+    fullDescription:
+      "No more missed snippets, no more manual copy-pasting. Focus on building, and let resetmycss handle the rest. ⚡",
+    features: [
+      "Easily install and use.",
+      "Efficient CSS reset.",
+      "Cross-platform support (Windows, macOS, Linux).",
+    ],
+    image: "https://i.ibb.co/pKVScPR/resetmycss.png",
+    technologies: ["js", "nodejs", "go"],
+    link: "https://www.npmjs.com/package/resetmycss",
+    sourceCode: "https://github.com/AmrTamer23/resetmycss",
+  },
+  {
     name: "Quiz Master",
     domain: ".vercel.app",
     description:

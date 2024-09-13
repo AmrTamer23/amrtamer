@@ -73,7 +73,7 @@ import { Button } from "@/components/ui/button";
                       v-for="tech in project.technologies"
                       :src="`https://skillicons.dev/icons?i=${tech}`"
                       :alt="tech"
-                      class="h-10 w-10"
+                      class="h-14 w-14"
                     />
                   </div>
                 </div>
