@@ -44,6 +44,31 @@ export const projects: Project[] = [
     sourceCode: "https://github.com/AmrTamer23/streakify",
   },
   {
+    name: "dbrandria",
+    domain: ".com",
+    description:
+      "During my time at Brandria, I was tasked with creating a new website for the company and migrating from their old WordPress site. I was responsible for implementing the requested design in the most optimized way possible and utilizing WordPress as a headless CMS, Also I was responsible for deploying the website on the server.",
+    features: [
+      "Dark/Light Mode.",
+      "Internationalization.",
+      "Responsive Design.",
+      "Animations using Framer Motion.",
+    ],
+    technologies: [
+      "ts",
+      "tailwindcss",
+      "react",
+      "nextjs",
+      "wordpress",
+      "bash",
+      "docker",
+      "nginx",
+    ],
+    link: "https://dbrandria.com",
+    sourceCode: null,
+    image: "https://i.ibb.co/zxjFMBc/Brandria.jpg",
+  },
+  {
     name: "resetmycss",
     domain: "",
     description:
