@@ -49,6 +49,7 @@ export const projects: Project[] = [
     description:
       "During my time at Brandria, I was tasked with creating a new website for the company and migrating from their old WordPress site. I was responsible for implementing the requested design in the most optimized way possible and utilizing WordPress as a headless CMS, Also I was responsible for deploying the website on the server.",
     features: [
+      "CI/CD using Github Actions.",
       "Dark/Light Mode.",
       "Internationalization.",
       "Responsive Design.",
@@ -63,6 +64,7 @@ export const projects: Project[] = [
       "bash",
       "docker",
       "nginx",
+      "github",
     ],
     link: "https://dbrandria.com",
     sourceCode: null,
