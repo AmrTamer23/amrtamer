@@ -41,7 +41,7 @@ if (typeof window !== "undefined") {
 </script>
 <template>
   <nav
-    class="fixed top-0 z-30 flex h-fit w-full items-center justify-between bg-black/90 px-8 pb-5 pt-10 opacity-90 lg:px-20"
+    class="fixed top-0 z-30 flex h-fit w-full items-center justify-between bg-black/75 px-8 pb-5 pt-10 opacity-90 backdrop-blur-lg lg:px-20"
   >
     <a href="/">
       <span class="z-50 text-lg font-extrabold text-primary" id="logo"
