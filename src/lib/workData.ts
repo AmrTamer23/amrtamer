@@ -1,7 +1,7 @@
 export const workHistory: Work[] = [
   {
     location: "Cairo, Egypt",
-    date: "Apr2024 - Now",
+    date: "Apr2024 - Sep2024",
     role: "Frontend Software Engineer",
     company: "Brandria",
     companyLink: "https://dbrandria.com",
