@@ -10,7 +10,7 @@ export const workHistory: Work[] = [
     skills: "JavaScript, TypeScript, TailwindCSS, React, Next.js, WordPress.",
   },
   {
-    location: "North America, Remote ",
+    location: "Canada, Remote ",
     date: " Jul2023 - Sep2023",
     role: "Frontend Intern",
     company: "Cloudypedia",

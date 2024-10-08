@@ -76,7 +76,7 @@ export const projects: Project[] = [
     description:
       "Ever find yourself manually copying CSS reset snippets into each new project? Save time and skip the repetitive setup with resetmycss!",
     fullDescription:
-      "No more missed snippets, no more manual copy-pasting. Focus on building, and let resetmycss handle the rest. ⚡",
+      "No more missed snippets, no more manual copy-pasting. Focus on building, and let resetmycss handle the rest.",
     features: [
       "Easily install and use.",
       "Efficient CSS reset.",
@@ -87,21 +87,21 @@ export const projects: Project[] = [
     link: "https://www.npmjs.com/package/resetmycss",
     sourceCode: "https://github.com/AmrTamer23/resetmycss",
   },
-  {
-    name: "Quiz Master",
-    domain: ".vercel.app",
-    description:
-      "A quiz platform, Explore quizzes in various genres such as Geography, Computer Science, History, and Sports.",
-    features: [
-      "Authentication.",
-      "Dark/Light Mode.",
-      "Difficulty Decision based on points in each genre.",
-      "Responsive Design.",
-    ],
-    image:
-      "https://res.cloudinary.com/dbiacrzqd/image/upload/f_auto,q_auto/c8wrcoa2pvy8idrcafwv",
-    technologies: ["ts", "tailwindcss", "react", "nextjs", "firebase"],
-    link: "https://quizmasterr.vercel.app",
-    sourceCode: "https://github.com/AmrTamer23/quizMaster",
-  },
+  // {
+  //   name: "Quiz Master",
+  //   domain: ".vercel.app",
+  //   description:
+  //     "A quiz platform, Explore quizzes in various genres such as Geography, Computer Science, History, and Sports.",
+  //   features: [
+  //     "Authentication.",
+  //     "Dark/Light Mode.",
+  //     "Difficulty Decision based on points in each genre.",
+  //     "Responsive Design.",
+  //   ],
+  //   image:
+  //     "https://res.cloudinary.com/dbiacrzqd/image/upload/f_auto,q_auto/c8wrcoa2pvy8idrcafwv",
+  //   technologies: ["ts", "tailwindcss", "react", "nextjs", "firebase"],
+  //   link: "https://quizmasterr.vercel.app",
+  //   sourceCode: "https://github.com/AmrTamer23/quizMaster",
+  // },
 ];

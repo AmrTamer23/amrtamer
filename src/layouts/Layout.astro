@@ -57,11 +57,11 @@ import { SEO } from "astro-seo";
   </head>
 
   <body class="font-default bg-background text-textBase">
-    <nav class="mb-24">
+    <nav class="relative z-50 mb-24 bg-black">
       <NavBar client:load />
     </nav>
-    <div class="absolute z-0 h-[85%] w-full bg-grid-zinc-200/5"></div>
-    <main class="relative z-50 pt-14">
+    <div class="absolute z-0 h-[85dvh] w-full bg-grid-zinc-200/5"></div>
+    <main class="relative z-20 pt-14">
       <slot />
     </main>
   </body>

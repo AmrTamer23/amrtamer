@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 </script>
 
 <template>
-  <main class="ml-14 mr-14 w-full lg:mx-auto lg:w-10/12">
+  <main class="-mt-10 ml-14 mr-14 w-[90dvw] lg:mx-auto">
     <Carousel
       :opts="{
         loop: true,
@@ -22,11 +22,11 @@ import { Button } from "@/components/ui/button";
           <div
             class="flex h-full w-full flex-col rounded-xl border-2 border-textBase lg:flex-row"
           >
-            <div class="flex flex-col justify-between lg:w-2/6">
+            <div class="h-[40dvh] w-full lg:h-full lg:w-2/6">
               <img
                 :src="project.image"
                 :alt="project.name"
-                class="h-full rounded-se-lg rounded-ss-lg object-cover lg:rounded-es-lg lg:rounded-se-none"
+                class="h-full w-full rounded-se-lg rounded-ss-lg object-cover lg:rounded-es-lg lg:rounded-se-none"
               />
             </div>
             <div
