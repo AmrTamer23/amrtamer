@@ -163,16 +163,16 @@ if (typeof window !== "undefined") {
         class="mr-4 border-primary bg-background shadow-2xl *:text-base"
       >
         <DropdownMenuItem>
-          <a href="/"> Home </a>
+          <a class="w-full" href="/"> Home </a>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href="/projects"> Projects </a>
+          <a class="w-full" href="/projects"> Projects </a>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href="/work"> Work </a>
+          <a class="w-full" href="/work"> Work </a>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href="/blog"> Blog </a>
+          <a class="w-full" href="/blog"> Blog </a>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
