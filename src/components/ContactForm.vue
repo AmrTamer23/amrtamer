@@ -74,7 +74,7 @@ const onSubmit = handleSubmit(async (values) => {
 
 <template>
   <div
-    class="container flex w-full flex-col gap-2 rounded-lg bg-[#382e22] px-4 py-6"
+    class="motion-blur-in-lg container flex w-full flex-col gap-2 rounded-lg bg-[#382e22] px-4 py-6"
   >
     <div class="text-lg font-semibold italic">Want to hire me?</div>
     <form class="flex flex-col gap-4" @submit="onSubmit">

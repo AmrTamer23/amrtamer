@@ -41,13 +41,13 @@ try {
 <main class="flex select-none flex-col *:mx-auto">
   <section class="container flex flex-col gap-4 lg:!max-w-5xl">
     <div class="flex flex-col-reverse items-center justify-between gap-4">
-      <div class="flex flex-col items-center">
+      <div class="motion-preset-slide-left flex flex-col items-center">
         <h1 class="text-lg font-bold">Amr Tamer</h1>
         <span class="text-md opacity-80"> Software Engineer</span>
       </div>
 
       <Image
-        class="h-32 w-32 rounded-full object-cover p-1 ring-2 ring-[#C6AC8F] lg:h-48 lg:w-48"
+        class="motion-preset-focus-lg h-32 w-32 rounded-full object-cover p-1 ring-2 ring-[#C6AC8F] lg:h-48 lg:w-48"
         src="https://avatars.githubusercontent.com/u/122938074?s=400&u=b01bc15c3db50c0d6ed99a28439f711a4e42ea12&v=4"
         alt="Bordered avatar"
         loading="eager"
@@ -55,7 +55,9 @@ try {
         height={200}
       />
     </div>
-    <div class="w-full space-y-4 *:text-base [&_span]:block">
+    <div
+      class="motion-preset-slide-right w-full space-y-4 *:text-base [&_span]:block"
+    >
       <p id="bio">
         {title}
       </p>

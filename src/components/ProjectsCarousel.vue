@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
       <CarouselContent>
         <CarouselItem class="w-full" v-for="project in projects">
           <div
-            class="flex h-full w-full flex-col rounded-xl border-2 border-textBase lg:flex-row"
+            class="motion-preset-focus-lg flex h-full w-full flex-col rounded-xl border-2 border-textBase lg:flex-row"
           >
             <div class="h-[40dvh] w-full lg:h-full lg:w-2/6">
               <img
