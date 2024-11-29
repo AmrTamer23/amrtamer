@@ -42,7 +42,7 @@ export default {
         "2xl": "160em",
       },
       fontFamily: {
-        fira: ["Fira Code", "monospace"],
+        fira: ["Fira Code Variable", "monospace"],
       },
       keyframes: {
         "accordion-down": {

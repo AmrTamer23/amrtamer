@@ -26,6 +26,9 @@ importers:
       '@emailjs/browser':
         specifier: ^3.12.1
         version: 3.12.1
+      '@fontsource-variable/fira-code':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@iconify/json':
         specifier: ^2.2.277
         version: 2.2.277
@@ -535,6 +538,9 @@ packages:
 
   '@floating-ui/vue@1.1.5':
     resolution: {integrity: sha512-ynL1p5Z+woPVSwgMGqeDrx6HrJfGIDzFyESFkyqJKilGW1+h/8yVY29Khn0LaU6wHBRwZ13ntG6reiHWK6jyzw==}
+
+  '@fontsource-variable/fira-code@5.1.0':
+    resolution: {integrity: sha512-fwJbJLvyZ2BhgBSPYCNsrQ6IFQTpRu9GWXY8N20wHTpbhV0Ro5QJihiZV060Ay3kVR6IVH/oSVe/cr7Ube28gg==}
 
   '@iconify/json@2.2.277':
     resolution: {integrity: sha512-hNBnGD2djNgsdB4Yq5dBhP2CI0PLt+4EamozKSAD+hsbFAzVUN6sMj5FUiBFu8BKUOBIYcrX8ri7C7Qe3K10ew==}
@@ -3613,6 +3619,8 @@ snapshots:
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
+
+  '@fontsource-variable/fira-code@5.1.0': {}
 
   '@iconify/json@2.2.277':
     dependencies:
