@@ -53,12 +53,12 @@ import { SEO } from "astro-seo";
     <title>Amr Tamer</title>
   </head>
 
-  <body class="font-default bg-background text-textBase">
+  <body class="font-default text-textBase">
     <nav class="relative z-50 mb-24">
       <NavBar client:load />
     </nav>
-    <div class="absolute z-0 h-[85dvh] w-full bg-grid-zinc-200/5"></div>
-    <main class="relative z-20 pt-14">
+    <!-- <div class="absolute z-0 h-[85dvh] w-full bg-grid-zinc-200/5"></div> -->
+    <main class="pt-14">
       <slot />
     </main>
   </body>
