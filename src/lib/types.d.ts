@@ -8,6 +8,7 @@ type Project = {
   link: string;
   sourceCode: string | null;
   image: string;
+  galleryImages: string[];
 };
 
 type Section = "home" | "projects" | "work" | "blog";
