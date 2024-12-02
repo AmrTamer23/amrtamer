@@ -8,6 +8,19 @@ import {
 } from "@/components/ui/carousel";
 import { projects } from "@/lib/projectsData";
 import { Button } from "@/components/ui/button";
+import { ref } from "vue";
+import { ImageIcon } from "lucide-vue-next";
+import ProjectGalleryModal from "./ProjectGalleryModal.vue";
+
+const isGalleryOpen = ref(false);
+
+const openGallery = () => {
+  isGalleryOpen.value = true;
+};
+
+const closeGallery = () => {
+  isGalleryOpen.value = false;
+};
 </script>
 
 <template>
@@ -78,6 +91,10 @@ import { Button } from "@/components/ui/button";
                   </div>
                 </div>
                 <div class="flex items-center gap-4">
+                  <Button @click="openGallery" class="gap-1 text-base">
+                    <ImageIcon class="h-6 w-6" />
+                    <span>View Gallery</span>
+                  </Button>
                   <a
                     v-if="project.sourceCode"
                     :href="project.sourceCode"
@@ -125,6 +142,12 @@ import { Button } from "@/components/ui/button";
               </div>
             </div>
           </div>
+          <ProjectGalleryModal
+            v-if="project.galleryImages.length > 0"
+            :is-open="isGalleryOpen"
+            :images="project.galleryImages"
+            @close="closeGallery"
+          />
         </CarouselItem>
       </CarouselContent>
       <CarouselPrevious

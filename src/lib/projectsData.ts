@@ -25,6 +25,7 @@ export const projects: Project[] = [
     link: "https://dbrandria.com",
     sourceCode: null,
     image: "https://i.ibb.co/zxjFMBc/Brandria.jpg",
+    galleryImages: ["https://i.ibb.co/zxjFMBc/Brandria.jpg"],
   },
 
   {
@@ -51,6 +52,7 @@ export const projects: Project[] = [
     ],
     link: "https://streakify23.netlify.app/",
     sourceCode: "https://github.com/AmrTamer23/streakify",
+    galleryImages: ["https://i.ibb.co/zxjFMBc/Brandria.jpg"],
   },
 
   {
@@ -69,6 +71,7 @@ export const projects: Project[] = [
     technologies: ["js", "nodejs", "go"],
     link: "https://www.npmjs.com/package/resetmycss",
     sourceCode: "https://github.com/AmrTamer23/resetmycss",
+    galleryImages: ["https://i.ibb.co/zxjFMBc/Brandria.jpg"],
   },
   {
     name: "Salamy",
@@ -88,6 +91,7 @@ export const projects: Project[] = [
     technologies: ["ts", "tailwindcss", "react", "nextjs"],
     link: "https://salamy.space",
     sourceCode: null,
+    galleryImages: ["https://i.ibb.co/zxjFMBc/Brandria.jpg"],
   },
   // {
   //   name: "Quiz Master",
