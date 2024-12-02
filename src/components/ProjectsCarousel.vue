@@ -91,7 +91,11 @@ const closeGallery = () => {
                   </div>
                 </div>
                 <div class="flex items-center gap-4">
-                  <Button @click="openGallery" class="gap-1 text-base">
+                  <Button
+                    @click="openGallery"
+                    class="gap-1 text-base"
+                    v-if="project.galleryImages.length !== 0"
+                  >
                     <ImageIcon class="h-6 w-6" />
                     <span>View Gallery</span>
                   </Button>
@@ -143,7 +147,7 @@ const closeGallery = () => {
             </div>
           </div>
           <ProjectGalleryModal
-            v-if="project.galleryImages.length > 0"
+            v-if="project.galleryImages.length !== 0"
             :is-open="isGalleryOpen"
             :images="project.galleryImages"
             @close="closeGallery"
