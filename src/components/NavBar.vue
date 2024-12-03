@@ -89,7 +89,7 @@ if (typeof window !== "undefined") {
         @mouseenter="handleMouseEnter('projects')"
         @mouseleave="handleMouseLeave()"
         class="flex flex-col gap-2"
-        data-astro-prefetch="hover"
+        data-astro-prefetch="load"
       >
         <span
           :class="
