@@ -23,6 +23,9 @@ importers:
       '@astrojs/vue':
         specifier: 5.0.1
         version: 5.0.1(@types/node@22.10.1)(astro@5.0.1(@types/node@22.10.1)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))(jiti@1.21.6)(rollup@4.28.0)(vue@3.5.13(typescript@5.7.2))(yaml@2.6.1)
+      '@digi4care/astro-google-tagmanager':
+        specifier: ^1.4.0
+        version: 1.4.0(astro@5.0.1(@types/node@22.10.1)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@emailjs/browser':
         specifier: ^3.12.1
         version: 3.12.1
@@ -357,6 +360,11 @@ packages:
   '@babel/types@7.26.0':
     resolution: {integrity: sha512-Z/yiTPj+lDVnF7lWeKCIJzaIkI0vYO87dMpZ4bg4TDrFe4XXLFWL1TbXU27gBP3QccxV9mZICCrnjnYlJjXHOA==}
     engines: {node: '>=6.9.0'}
+
+  '@digi4care/astro-google-tagmanager@1.4.0':
+    resolution: {integrity: sha512-z+G54j9CHf33xh1E1zNYMUlcajMy4C0HS7QrZloXN/cfEwFJayQEnoRmji+u3KfxlaHLPXvv6z6v7yfLXcCPXQ==}
+    peerDependencies:
+      astro: ^1.2.1 || ^2.0.0 || ^3.0.0-beta.0 || ^3.0.0 || ^4.0.0
 
   '@emailjs/browser@3.12.1':
     resolution: {integrity: sha512-C5nK07CgSCFx3onsuRt/ZaaMvIi0T3SHHanM7fKozjSvbZu+OjHHP9W608fYpic0OavF7yIlfy4+lRDO33JdbA==}
@@ -3624,6 +3632,10 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
+
+  '@digi4care/astro-google-tagmanager@1.4.0(astro@5.0.1(@types/node@22.10.1)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+    dependencies:
+      astro: 5.0.1(@types/node@22.10.1)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
 
   '@emailjs/browser@3.12.1': {}
 

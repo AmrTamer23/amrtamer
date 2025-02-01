@@ -4,11 +4,16 @@ import "./../global.css";
 import { ViewTransitions } from "astro:transitions";
 import "@fontsource-variable/fira-code";
 import { SEO } from "astro-seo";
+import {
+  GoogleTagmanager,
+  GoogleTagmanagerNoscript,
+} from "@digi4care/astro-google-tagmanager";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
+    <GoogleTagmanager id="GTM-5MW56RQZ" />
     <SEO
       title="Amr Tamer"
       description="I'm Amr Tamer a Frontend Software Engineer and a Computer Science Student with a sense of adventure and exploring"
@@ -54,6 +59,7 @@ import { SEO } from "astro-seo";
   </head>
 
   <body class="font-default text-textBase">
+    <GoogleTagmanagerNoscript id="GTM-5MW56RQZ" />
     <nav class="relative z-50 mb-24">
       <NavBar client:load />
     </nav>
