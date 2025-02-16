@@ -24,7 +24,7 @@ const closeGallery = () => {
 </script>
 
 <template>
-  <main class="-mt-10 ml-14 mr-14 w-[90dvw] lg:mx-auto">
+  <main class="-mt-10 mr-14 ml-14 w-[90dvw] lg:mx-auto">
     <Carousel
       :opts="{
         loop: true,
@@ -33,17 +33,17 @@ const closeGallery = () => {
       <CarouselContent>
         <CarouselItem class="w-full" v-for="project in projects">
           <div
-            class="motion-preset-focus-lg flex h-full w-full flex-col rounded-xl border-2 border-textBase lg:flex-row"
+            class="motion-preset-focus-lg border-textBase flex h-full w-full flex-col rounded-xl border-2 lg:flex-row"
           >
             <div class="h-[40dvh] w-full lg:h-full lg:w-2/6">
               <img
                 :src="project.image"
                 :alt="project.name"
-                class="h-full w-full rounded-se-lg rounded-ss-lg object-cover lg:rounded-es-lg lg:rounded-se-none"
+                class="h-full w-full rounded-ss-lg rounded-se-lg object-cover lg:rounded-se-none lg:rounded-es-lg"
               />
             </div>
             <div
-              class="flex h-full flex-col justify-between gap-6 px-4 pb-4 pt-4 lg:w-4/6 lg:pt-8"
+              class="flex h-full flex-col justify-between gap-6 px-4 pt-4 pb-4 lg:w-4/6 lg:pt-8"
             >
               <div class="flex h-full flex-col gap-6 lg:w-3/4">
                 <div class="flex flex-col gap-2">
@@ -53,17 +53,21 @@ const closeGallery = () => {
                     :href="project.link"
                     target="_blank"
                   >
-                    <h2 class="text-xl font-bold">
+                    <h2 class="text-foreground text-xl font-bold">
                       {{ project.name }}
                     </h2>
-                    <span class="text-lg">
+                    <span class="text-foreground/90 text-lg">
                       {{ project.domain }}
                     </span>
                   </a>
-                  <p class="text-base">{{ project.description }}</p>
-                  <p class="text-base">{{ project.fullDescription }}</p>
+                  <p class="text-foreground text-base">
+                    {{ project.description }}
+                  </p>
+                  <p class="text-foreground text-base">
+                    {{ project.fullDescription }}
+                  </p>
                 </div>
-                <div class="flex flex-col gap-2">
+                <div class="text-foreground flex flex-col gap-2">
                   <span class="text-lg"> Features: </span>
                   <ul class="list-inside list-disc pl-2">
                     <li
@@ -79,7 +83,7 @@ const closeGallery = () => {
               <div
                 class="flex flex-col items-end justify-between gap-4 lg:flex-row lg:gap-0"
               >
-                <div class="flex flex-col gap-2 lg:w-full">
+                <div class="text-foreground flex flex-col gap-2 lg:w-full">
                   <span> Built With </span>
                   <div class="flex flex-wrap gap-2">
                     <img
@@ -155,10 +159,10 @@ const closeGallery = () => {
         </CarouselItem>
       </CarouselContent>
       <CarouselPrevious
-        class="border-textBase bg-transparent text-textBase hover:bg-primary"
+        class="border-foreground text-foreground hover:bg-primary bg-transparent"
       />
       <CarouselNext
-        class="ml-4 border-textBase bg-transparent text-textBase hover:bg-primary"
+        class="border-foreground text-foreground hover:bg-primary ml-4 bg-transparent"
       />
     </Carousel>
   </main>

@@ -41,16 +41,16 @@ if (typeof window !== "undefined") {
 </script>
 <template>
   <nav
-    class="fixed top-0 z-30 flex h-fit w-full items-center justify-between px-8 pb-5 pt-10 lg:px-20"
+    class="fixed top-0 z-30 flex h-fit w-full items-center justify-between px-8 pt-10 pb-5 lg:px-20"
   >
     <a href="/">
-      <span class="z-50 text-lg font-extrabold text-primary" id="logo"
+      <span class="text-primary z-50 text-lg font-extrabold" id="logo"
         >AT23</span
       >
     </a>
     <div
       v-if="isLargeScreen"
-      class="flex [&_a]:px-4"
+      class="*:text-primary/70 flex [&_a]:px-4"
       @mouseenter="
         {
           () => (isOnNav = true);
@@ -82,7 +82,7 @@ if (typeof window !== "undefined") {
         >
           Home
         </span>
-        <div v-if="currentPath === '/'" class="h-0.5 w-full bg-textBase"></div>
+        <div v-if="currentPath === '/'" class="bg-secondary h-0.5 w-full"></div>
       </a>
       <a
         href="/projects"
@@ -103,7 +103,7 @@ if (typeof window !== "undefined") {
         </span>
         <div
           v-if="currentPath === '/projects'"
-          class="h-0.5 w-full bg-textBase"
+          class="bg-secondary h-0.5 w-full"
         ></div>
       </a>
       <a
@@ -125,7 +125,7 @@ if (typeof window !== "undefined") {
         </span>
         <div
           v-if="currentPath === '/work'"
-          class="h-0.5 w-full bg-textBase"
+          class="bg-secondary h-0.5 w-full"
         ></div>
       </a>
       <a
@@ -147,7 +147,7 @@ if (typeof window !== "undefined") {
         </span>
         <div
           v-if="currentPath === '/blog'"
-          class="h-0.5 w-full bg-textBase"
+          class="bg-secondary h-0.5 w-full"
         ></div>
       </a>
     </div>
@@ -160,7 +160,7 @@ if (typeof window !== "undefined") {
         ></span>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        class="mr-4 border-primary bg-background shadow-2xl *:text-base"
+        class="border-primary bg-background mr-4 shadow-2xl *:text-base"
       >
         <DropdownMenuItem>
           <a class="w-full" href="/"> Home </a>
@@ -180,9 +180,6 @@ if (typeof window !== "undefined") {
 </template>
 
 <style scoped>
-* {
-  color: var(--text-color);
-}
 #logo {
   text-shadow: 2px 4px 5px rgba(198, 172, 143, 0.3);
 }

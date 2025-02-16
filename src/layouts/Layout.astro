@@ -1,9 +1,7 @@
 ---
 import NavBar from "../components/NavBar.vue";
-import "./../global.css";
-import { ViewTransitions } from "astro:transitions";
+import "../global.css";
 import "@fontsource-variable/fira-code";
-import { SEO } from "astro-seo";
 import {
   GoogleTagmanager,
   GoogleTagmanagerNoscript,
@@ -14,7 +12,7 @@ import {
 <html lang="en">
   <head>
     <GoogleTagmanager id="GTM-5MW56RQZ" />
-    <SEO
+    <!-- <SEO
       title="Amr Tamer"
       description="I'm Amr Tamer a Frontend Software Engineer and a Computer Science Student with a sense of adventure and exploring"
       openGraph={{
@@ -44,7 +42,7 @@ import {
           },
         ],
       }}
-    />
+    /> -->
     <meta charset="UTF-8" />
     <meta
       name="description"
@@ -52,13 +50,12 @@ import {
     />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
+    <!-- <meta name="generator" content={Astro.generator} /> -->
     <meta name="author" content="Amr Tamer" />
-    <ViewTransitions />
     <title>Amr Tamer</title>
   </head>
 
-  <body class="font-default text-textBase">
+  <body class="!dark">
     <GoogleTagmanagerNoscript id="GTM-5MW56RQZ" />
     <nav class="relative z-50 mb-24">
       <NavBar client:load />
