@@ -17,9 +17,9 @@ const { work } = Astro.props;
       {work.date}
     </span>
   </div>
-  <div class="text-base font-medium">
+  <div class="text-primary text-base font-medium">
     {work.role} at <a
-      class="transition-all duration-75 ease-in-out hover:text-primary"
+      class="hover:text-primary transition-all duration-75 ease-in-out"
       href={work.companyLink}
       rel="noopener noreferrer"
       target="_blank"
@@ -28,10 +28,10 @@ const { work } = Astro.props;
       {work.company}
     </a>
   </div>
-  <div>
+  <div class="text-foreground">
     {work.description}
   </div>
-  <div class="flex gap-2">
+  <div class="text-accent-foreground flex gap-2">
     <span> Skills: </span>
     <span>
       {work.skills}

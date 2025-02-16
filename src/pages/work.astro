@@ -2,22 +2,24 @@
 import WorkItem from "@/components/ui/WorkItem.astro";
 import Layout from "../layouts/Layout.astro";
 import { workHistory } from "../lib/workData";
-// import ContactForm from "@/components/ContactForm.vue";
+import ContactForm from "@/components/contact-form";
 ---
 
 <Layout>
-  <!-- <main class="container -mt-8 flex flex-col gap-4">
+  <main class="container mx-auto -mt-8 flex w-[70%] flex-col gap-4">
     <section class="flex flex-col gap-4">
-      <h1 class="text-md">Employment History</h1>
-      <p class="text-base">
+      <h1 class="text-foreground text-xl">Employment History</h1>
+      <p class="text-accent-foreground text-base">
         I have been working proffesionally for almost a year now. I have worked
         with many clients and had direct contact with them.
       </p>
     </section>
-    <div class="h-0.5 w-full bg-primary"></div>
-    <section class="flex h-[60dvh] flex-col overflow-y-scroll px-2 pb-4">
+    <div class="bg-primary h-0.5 w-full"></div>
+    <section
+      class="mx-auto flex h-[70dvh] flex-col overflow-y-scroll px-2 pb-4"
+    >
       <ContactForm client:load />
       {workHistory.map((work, index) => <WorkItem work={work} />)}
     </section>
-  </main> -->
+  </main>
 </Layout>
