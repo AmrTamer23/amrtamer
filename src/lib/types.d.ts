@@ -8,6 +8,7 @@ type Project = {
   link: string;
   sourceCode: string | null;
   image: string;
+  thumbnail: string;
   galleryImages: string[];
 };
 

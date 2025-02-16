@@ -12,14 +12,14 @@ export default function ProjectsCarousel() {
   const OPTIONS = { loop: false };
   return (
     <>
-      <div className=' 2xl:w-[90%]  sm:w-[80%] w-[90%] mx-auto '>
+      <div className=' lg:w-[95%]  sm:w-[80%] w-[90%] mx-auto '>
         <Carousel options={OPTIONS} className=' relative' >
           <SliderContainer className='gap-2'>
             {
               projects.map((project) => (
                 <Slider
                   className='xl:h-[40rem] sm:h-[350px] h-[300px] w-full bg-card/80 rounded-xl  flex items-center '
-                  thumnailSrc={project.image}
+                  thumnailSrc={project.thumbnail}
                   key={project.name}
                 >
                   <img
@@ -31,7 +31,7 @@ export default function ProjectsCarousel() {
                   />
                   <div className='flex mx-4 w-[70%] flex-col justify-between h-full py-4'>
                     <div className='flex flex-col gap-4'>
-                      <h1 className='text-3xl font-bold text-card-foreground'>
+                      <h1 className='text-2xl font-bold text-card-foreground'>
                         {project.name}
                         <span className='text-2xl'>
                           {project.domain}
