@@ -165,3 +165,7 @@ scrollbar-thumb {
 scrollbar-track {
   background-color: transparent;
 }
+
+#logo {
+  text-shadow: 2px 4px 5px rgba(198, 172, 143, 0.3);
+}
