@@ -1,4 +1,3 @@
-// import { type EmblaOptionsType } from 'embla-carousel';
 import Carousel, {
   Slider,
   SliderContainer,
