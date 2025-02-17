@@ -4,11 +4,14 @@ import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react()],
-  output: "static",
+  output: "server",
   prefetch: true,
+  site: "https://amrtamer.dev",
 
   vite: {
     plugins: [
@@ -17,4 +20,8 @@ export default defineConfig({
       }),
     ],
   },
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });
