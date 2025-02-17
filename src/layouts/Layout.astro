@@ -2,16 +2,11 @@
 import NavBar from "../components/NavBar";
 import "../global.css";
 import "@fontsource-variable/fira-code";
-import {
-  GoogleTagmanager,
-  GoogleTagmanagerNoscript,
-} from "@digi4care/astro-google-tagmanager";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <GoogleTagmanager id="GTM-5MW56RQZ" />
     <!-- <SEO
       title="Amr Tamer"
       description="I'm Amr Tamer a Frontend Software Engineer and a Computer Science Student with a sense of adventure and exploring"
@@ -56,7 +51,6 @@ import {
   </head>
 
   <body class="!dark">
-    <GoogleTagmanagerNoscript id="GTM-5MW56RQZ" />
     <nav class="relative z-50 mb-24">
       <NavBar client:load />
     </nav>

@@ -12,6 +12,9 @@ export default defineConfig({
   output: "server",
   prefetch: true,
   site: "https://amrtamer.dev",
+  server: {
+    host: true,
+  },
 
   vite: {
     plugins: [
