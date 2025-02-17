@@ -3,8 +3,10 @@ WORKDIR /app
 
 COPY . .
 
-RUN npm install
-RUN npm run build
+RUN npm i -g pnpm
+
+RUN pnpm install
+RUN pnpm run build
 
 ENV HOST=0.0.0.0
 ENV PORT=4321
