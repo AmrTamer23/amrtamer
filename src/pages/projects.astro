@@ -1,11 +1,8 @@
 ---
-import PostHogLayout from "@/layouts/PostHogLayout.astro";
 import Layout from "../layouts/Layout.astro";
 import ProjectsCarousel from "@/components/projects-carousel";
 ---
 
 <Layout>
-  <PostHogLayout>
-    <ProjectsCarousel client:load />
-  </PostHogLayout>
+  <ProjectsCarousel client:load />
 </Layout>

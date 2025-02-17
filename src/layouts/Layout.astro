@@ -1,5 +1,4 @@
 ---
-import Posthog from "@/components/posthog.astro";
 import NavBar from "../components/NavBar";
 import "../global.css";
 import "@fontsource-variable/fira-code";
@@ -50,6 +49,15 @@ import "@fontsource-variable/fira-code";
     <meta name="author" content="Amr Tamer" />
     <title>Amr Tamer</title>
   </head>
+
+  <script>
+    import posthog from "posthog-js";
+
+    posthog.init("phc_SSnD5HnekdLEy0F1vt8A2DBeqP70kTV4bydu0GaJu8Q", {
+      api_host: "https://us.i.posthog.com",
+      person_profiles: "always", // or 'always' to create profiles for anonymous users as well
+    });
+  </script>
 
   <body class="!dark">
     <nav class="relative z-50 mb-24">

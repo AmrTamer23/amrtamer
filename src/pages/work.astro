@@ -3,26 +3,23 @@ import WorkItem from "@/components/ui/WorkItem.astro";
 import Layout from "../layouts/Layout.astro";
 import { workHistory } from "../lib/workData";
 import ContactForm from "@/components/contact-form";
-import PostHogLayout from "@/layouts/PostHogLayout.astro";
 ---
 
 <Layout>
-  <PostHogLayout>
-    <main class="container mx-auto -mt-8 flex w-[70%] flex-col gap-4">
-      <section class="flex flex-col gap-4">
-        <h1 class="text-foreground text-xl">Employment History</h1>
-        <p class="text-accent-foreground text-base">
-          I have been working proffesionally for almost a year now. I have
-          worked with many clients and had direct contact with them.
-        </p>
-      </section>
-      <div class="bg-primary h-0.5 w-full"></div>
-      <section
-        class="mx-auto flex h-[70dvh] flex-col overflow-y-scroll px-2 pb-4"
-      >
-        <ContactForm client:load />
-        {workHistory.map((work, index) => <WorkItem work={work} />)}
-      </section>
-    </main>
-  </PostHogLayout>
+  <main class="container mx-auto -mt-8 flex w-[70%] flex-col gap-4">
+    <section class="flex flex-col gap-4">
+      <h1 class="text-foreground text-xl">Employment History</h1>
+      <p class="text-accent-foreground text-base">
+        I have been working proffesionally for almost a year now. I have worked
+        with many clients and had direct contact with them.
+      </p>
+    </section>
+    <div class="bg-primary h-0.5 w-full"></div>
+    <section
+      class="mx-auto flex h-[70dvh] flex-col overflow-y-scroll px-2 pb-4"
+    >
+      <ContactForm client:load />
+      {workHistory.map((work, index) => <WorkItem work={work} />)}
+    </section>
+  </main>
 </Layout>
