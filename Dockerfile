@@ -1,26 +1,12 @@
-# Use the official Node.js 22 image as a base image
-FROM node:22-alpine
-
-# Set the working directory
+FROM node:lts-alpine AS runtime
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm
-
-# Copy package.json and pnpm-lock.yaml
-COPY package.json pnpm-lock.yaml ./
-
-# Install dependencies using pnpm
-RUN pnpm install
-
-# Copy the rest of the application code
 COPY . .
 
-# Build the project
-RUN pnpm run build
+RUN npm install
+RUN npm run build
 
-# Expose the port that the app runs on
+ENV HOST=0.0.0.0
+ENV PORT=4321
 EXPOSE 4321
-
-# Command to run the application
-CMD ["pnpm", "start"]
+CMD node ./dist/server/entry.mjs
