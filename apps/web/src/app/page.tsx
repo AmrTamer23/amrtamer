@@ -1,11 +1,7 @@
 "use client";
 import { GlowingEffect } from "@/components/ui/card-glowing-effect";
 import { LinkedinIcon, MailIcon, XIcon } from "@/lib/icons";
-import { orpc } from "@/utils/orpc";
-import { useQuery } from "@tanstack/react-query";
 export default function Home() {
-  const healthCheck = useQuery(orpc.healthCheck.queryOptions());
-
   return (
     <main className=" mx-auto flex items-center justify-center px-4 py-2 w-full h-svh">
       <div className="flex gap-4  max-w-2xl relative rounded-2xl border p-6 md:rounded-3xl cursor-default">
