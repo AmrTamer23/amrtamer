@@ -6,6 +6,7 @@
 @theme {
 	--font-sans: "nebula", "Geist", ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-palaise: "palaise", sans-serif;
 }
 
 html,
@@ -52,6 +53,7 @@ body {
 	--sidebar-ring: oklch(0 0 0);
 	--destructive-foreground: oklch(1 0 0);
 	--font-sans: "nebula", sans-serif;
+	--font-palaise: "palaise", sans-serif;
 	--font-serif: Georgia, serif;
 	--font-mono: Geist Mono, monospace;
 	--shadow-color: hsl(0 0% 0%);

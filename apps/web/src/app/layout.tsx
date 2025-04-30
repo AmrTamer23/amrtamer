@@ -4,19 +4,18 @@ import "../index.css";
 import Header from "@/components/header";
 import Providers from "@/components/providers";
 import localFont from "next/font/local";
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const nebula = localFont({
   src: "../lib/fonts/NebulaSans-Book.woff2",
-  variable: "--nebula",
+  variable: "--sans",
+  display: "swap",
+  weight: "400",
+});
+
+const palaise = localFont({
+  src: "../lib/fonts/STFWaicena-Sans.otf",
+  variable: "--palaise",
+  display: "swap",
   weight: "400",
 });
 
@@ -32,14 +31,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${nebula.variable} antialiased`}
-      >
+      <body className={`${nebula.variable} ${palaise.variable} antialiased`}>
         <Providers>
-          <div className="grid h-svh grid-rows-[auto_1fr] bg-background">
-            {/* <Header /> */}
-            {children}
-          </div>
+          <main className="  flex items-center  px-4 py-2 w-full h-svh flex-col bg-background ">
+            <Header />
+            <div className="flex-1 flex items-center justify-center mx-auto">
+              {children}
+            </div>
+          </main>
         </Providers>
       </body>
     </html>
