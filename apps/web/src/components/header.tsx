@@ -67,7 +67,7 @@ export default function Header() {
 
   return (
     <div className="w-full ">
-      <div className="flex flex-row items-baseline justify-between px-2 py-2 w-full">
+      <div className="flex flex-row items-baseline justify-between px-4 py-2 w-full">
         <div className="flex items-center gap-2 w-1/3">
           <ModeToggle />
         </div>

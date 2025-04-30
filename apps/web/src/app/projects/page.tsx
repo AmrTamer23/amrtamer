@@ -10,6 +10,7 @@ import img2 from "@/lib/assets/img2.jpg";
 import img3 from "@/lib/assets/img3.jpg";
 import img4 from "@/lib/assets/img4.jpg";
 import img5 from "@/lib/assets/img5.jpg";
+import Header from "@/components/header";
 
 const cardData = [
   { title: "Dalla", image: dalla },
@@ -94,9 +95,12 @@ export default function Page() {
   );
 
   return (
-    <>
-      <div className="w-full" ref={container}>
-        <section className="sticky-container relative w-screen h-screen p-8 flex justify-center items-center bg-[#0f0f0f] text-white overflow-hidden">
+    <div className="relative">
+      <div className="fixed top-0 left-0 w-full z-50">
+        <Header />
+      </div>
+      <div className="w-full pt-16" ref={container}>
+        <section className="sticky-container relative w-screen h-screen p-8 flex justify-center items-center  text-white overflow-hidden">
           <div className="relative w-1/2 h-4/5 rounded-lg overflow-hidden md:w-[95%] lg:w-4/5">
             {cardData.map((card, index) => (
               <div
@@ -118,6 +122,6 @@ export default function Page() {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }

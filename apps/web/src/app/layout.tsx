@@ -33,12 +33,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${nebula.variable} ${palaise.variable} antialiased`}>
         <Providers>
-          <main className="  flex items-center  px-4 py-2 w-full h-svh flex-col bg-background ">
-            <Header />
-            <div className="flex-1 flex items-center justify-center mx-auto">
-              {children}
-            </div>
-          </main>
+          <div className="grid h-svh grid-rows-[auto_1fr] bg-background">
+            {children}
+          </div>
         </Providers>
       </body>
     </html>
