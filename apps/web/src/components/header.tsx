@@ -1,9 +1,64 @@
 "use client";
 import Link from "next/link";
-
 import { ModeToggle } from "./mode-toggle";
+import { useState } from "react";
+import { useTransitionRouter } from "next-view-transitions";
 
 export default function Header() {
+  const router = useTransitionRouter();
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  function slideInOut() {
+    document.documentElement.animate(
+      [
+        {
+          opacity: 1,
+          transform: "translateY(0)",
+        },
+        {
+          opacity: 0.2,
+          transform: "translateY(-35%)",
+        },
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-old(root)",
+      }
+    );
+
+    document.documentElement.animate(
+      [
+        {
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+        },
+        {
+          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+        },
+      ],
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+        fill: "forwards",
+        pseudoElement: "::view-transition-new(root)",
+      }
+    );
+  }
+
+  const navigateTo = (path: string) => {
+    if (isAnimating) return;
+
+    setIsAnimating(true);
+
+    router.push(path, {
+      onTransitionReady: slideInOut,
+    });
+
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1500);
+  };
   const links = [
     { to: "/", label: "Home" },
     { to: "/projects", label: "Projects" },
@@ -22,7 +77,15 @@ export default function Header() {
         <nav className="flex gap-4 text-lg w-1/3  items-center justify-end">
           {links.map(({ to, label }) => {
             return (
-              <Link key={to} href={to}>
+              <Link
+                key={to}
+                href={to}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigateTo(to);
+                }}
+                prefetch={true}
+              >
                 {label}
               </Link>
             );

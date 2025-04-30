@@ -5,64 +5,9 @@ import { useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import CustomEase from "gsap/CustomEase";
-import { useTransitionRouter } from "next-view-transitions";
+import { Link, useTransitionRouter } from "next-view-transitions";
 
 export default function Home() {
-  const router = useTransitionRouter();
-  const [isAnimating, setIsAnimating] = useState(false);
-
-  function slideInOut() {
-    document.documentElement.animate(
-      [
-        {
-          opacity: 1,
-          transform: "translateY(0)",
-        },
-        {
-          opacity: 0.2,
-          transform: "translateY(-35%)",
-        },
-      ],
-      {
-        duration: 1200,
-        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
-        fill: "forwards",
-        pseudoElement: "::view-transition-old(root)",
-      }
-    );
-
-    document.documentElement.animate(
-      [
-        {
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-        },
-        {
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-        },
-      ],
-      {
-        duration: 1200,
-        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
-        fill: "forwards",
-        pseudoElement: "::view-transition-new(root)",
-      }
-    );
-  }
-
-  const navigateTo = (path: string) => {
-    if (isAnimating) return;
-
-    setIsAnimating(true);
-
-    router.push(path, {
-      onTransitionReady: slideInOut,
-    });
-
-    setTimeout(() => {
-      setIsAnimating(false);
-    }, 1500);
-  };
-
   return (
     <div className="flex gap-4  max-w-2xl relative border p-6 rounded-xl cursor-default">
       <GlowingEffect
@@ -97,10 +42,11 @@ export default function Home() {
           Always eager to learn and explore new technologies to build impactful,
           scalable solutions.
         </p>
-        <div className="flex w-full justify-end font-mono text-sm underline underline-offset-4 [&_li]:cursor-pointer [&_li]:hover:text-primary [&_li]:after:content-['->']">
+        <div className="flex w-full justify-end  text-sm underline underline-offset-8 [&_li]:cursor-pointer [&_li]:hover:text-primary ]">
           <ul className="flex gap-4">
-            <li onClick={() => navigateTo("/work")}>Work History</li>
-            <li onClick={() => navigateTo("/projects")}>Projects</li>
+            <Link href="#" as={"li"}>
+              Want to take a look at my resume?
+            </Link>
           </ul>
         </div>
       </div>
