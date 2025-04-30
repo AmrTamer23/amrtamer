@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dalla from "@/lib/assets/dalla.jpeg";
-import img1 from "@/lib/assets/img1.jpg";
 import img2 from "@/lib/assets/img2.jpg";
 import img3 from "@/lib/assets/img3.jpg";
 import img4 from "@/lib/assets/img4.jpg";
@@ -95,12 +94,13 @@ export default function Page() {
   );
 
   return (
-    <div className="relative">
-      <div className="fixed top-0 left-0 w-full z-50">
+    <div className="relative h-screen">
+      <div className="absolute top-0 left-0 w-full z-50">
         <Header />
       </div>
-      <div className="w-full pt-16" ref={container}>
-        <section className="sticky-container relative w-screen h-screen p-8 flex justify-center items-center  text-white overflow-hidden">
+
+      <div className="w-full h-full" ref={container}>
+        <section className="sticky-container relative w-screen h-screen flex justify-center items-center text-white">
           <div className="relative w-1/2 h-4/5 rounded-lg overflow-hidden md:w-[95%] lg:w-4/5">
             {cardData.map((card, index) => (
               <div
@@ -113,7 +113,7 @@ export default function Page() {
                   </p>
                 </div>
                 <img
-                  src={card.image.src}
+                  src={card.image.src || "/placeholder.svg"}
                   alt={card.title}
                   className="relative w-full h-full object-cover"
                 />
