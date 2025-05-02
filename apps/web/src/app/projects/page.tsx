@@ -9,6 +9,7 @@ import crcl from "@/lib/assets/crcl.jpeg";
 import shelley from "@/lib/assets/shelley.jpeg";
 import Header from "@/components/header";
 import type { StaticImageData } from "next/image";
+import ReactLenis, { useLenis } from "lenis/react";
 
 const cardData: { title: string; image: StaticImageData; color: string }[] = [
   { title: "Dalla Solutions", image: dalla, color: "#234D65" },
@@ -18,6 +19,7 @@ const cardData: { title: string; image: StaticImageData; color: string }[] = [
 
 export default function Page() {
   const container = useRef(null);
+  const lenis = useLenis(({ scroll }) => {});
 
   useGSAP(
     () => {
@@ -91,37 +93,39 @@ export default function Page() {
   );
 
   return (
-    <div className="relative h-screen">
-      <div className="absolute top-0 left-0 w-full z-50 px-4">
-        <Header />
-      </div>
+    <ReactLenis root>
+      <div className="relative h-screen">
+        <div className="absolute top-0 left-0 w-full z-50 px-4">
+          <Header />
+        </div>
 
-      <div className="w-full h-full" ref={container}>
-        <section className="sticky-container relative w-screen h-screen flex justify-center items-center text-white">
-          <div className="relative w-1/2 h-4/5 rounded-lg overflow-hidden md:w-[95%] lg:w-4/5">
-            {cardData.map((card, index) => (
-              <div
-                key={index}
-                className="card absolute w-full h-full rounded-lg overflow-hidden"
-              >
+        <div className="w-full h-full" ref={container}>
+          <section className="sticky-container relative w-screen h-screen flex justify-center items-center text-white">
+            <div className="relative w-1/2 h-4/5 rounded-lg overflow-hidden md:w-[95%] lg:w-4/5">
+              {cardData.map((card, index) => (
                 <div
-                  className="absolute top-4 left-4 p-2 rounded z-10 border border-white"
-                  style={{ backgroundColor: card.color }}
+                  key={index}
+                  className="card absolute w-full h-full rounded-lg overflow-hidden"
                 >
-                  <p className="capitalize tracking-wider backdrop-blur-3xl font-sans text-sm font-semibold leading-none antialiased">
-                    {card.title}
-                  </p>
+                  <div
+                    className="absolute top-4 left-4 p-2 rounded z-10 border border-white"
+                    style={{ backgroundColor: card.color }}
+                  >
+                    <p className="capitalize tracking-wider backdrop-blur-3xl font-sans text-sm font-semibold leading-none antialiased">
+                      {card.title}
+                    </p>
+                  </div>
+                  <img
+                    src={card.image.src || "/placeholder.svg"}
+                    alt={card.title}
+                    className="relative w-full h-full object-cover"
+                  />
                 </div>
-                <img
-                  src={card.image.src || "/placeholder.svg"}
-                  alt={card.title}
-                  className="relative w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </section>
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </ReactLenis>
   );
 }
