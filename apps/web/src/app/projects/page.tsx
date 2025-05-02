@@ -11,12 +11,14 @@ import brandria from "@/lib/assets/brandria.jpeg";
 import Header from "@/components/header";
 import type { StaticImageData } from "next/image";
 import ReactLenis, { useLenis } from "lenis/react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, EyeIcon } from "lucide-react";
 
 const cardData: { title: string; image: StaticImageData; color: string }[] = [
   { title: "Dalla Solutions", image: dalla, color: "#234D65" },
   { title: "CRCL Admin", image: crcl, color: "#F08541" },
   { title: "Shelley and Blaine Photography", image: shelley, color: "#929495" },
-  { title: "Brandria", image: brandria, color: "#F000002" },
+  { title: "Brandria", image: brandria, color: "#900011" },
 ];
 
 export default function Page() {
@@ -120,7 +122,17 @@ export default function Page() {
                       {card.title}
                     </p>
                   </div>
-
+                  <div className="absolute top-4 right-4  rounded z-10 ">
+                    <Button
+                      className="capitalize tracking-wider font-sans text-sm font-semibold leading-none text-white"
+                      style={{
+                        backgroundColor: card.color + "!important",
+                      }}
+                    >
+                      <EyeIcon className="!w-6 !h-6" />
+                      <span>View Project</span>
+                    </Button>
+                  </div>
                   <img
                     src={card.image.src || "/placeholder.svg"}
                     alt={card.title}
