@@ -7,17 +7,19 @@ const projects: Project[] = [
     id: 0,
     slug: "dalla-solutions",
     title: "Dalla Solutions",
-    description: "A virtual diving experience through digital oceans.",
+    brief:
+      "A MENA based solution the connects the region's leading companies with the best talent.",
+    description:
+      "My role was Frontend Software Engineer on Dalla's platform and admin dashboard, The goal was to build a platform that serves the needs of the region's leading companies with a focus on the user experience and performance.",
     color: "#234D65",
     images: [
-      "/project-1-1.jpg",
+      dalla.src,
       "/project-1-2.jpg",
       "/project-1-3.jpg",
       "/project-1-4.jpg",
       "/project-1-5.jpg",
     ],
     mainImage: dalla,
-    brief: "",
   },
   {
     id: 1,

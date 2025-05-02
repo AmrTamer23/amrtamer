@@ -173,7 +173,7 @@ export default function ProjectClient({
         <div className="flex flex-col gap-10 max-w-4xl mx-auto">
           {project.images &&
             project.images.map((image, index) => (
-              <div className="w-full h-fit " key={index}>
+              <div className="w-full h-full" key={index}>
                 <img src={image} alt="" />
               </div>
             ))}
