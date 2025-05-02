@@ -4,26 +4,22 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import dalla from "@/lib/assets/dalla.jpeg";
-import crcl from "@/lib/assets/crcl.jpeg";
-import shelley from "@/lib/assets/shelley.jpeg";
-import brandria from "@/lib/assets/brandria.jpeg";
 import Header from "@/components/header";
-import type { StaticImageData } from "next/image";
 import ReactLenis, { useLenis } from "lenis/react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, EyeIcon } from "lucide-react";
+import { EyeIcon, Link } from "lucide-react";
+import projects from "@/lib/projects";
+import { useTransitionRouter } from "next-view-transitions";
 
-const cardData: { title: string; image: StaticImageData; color: string }[] = [
-  { title: "Dalla Solutions", image: dalla, color: "#234D65" },
-  { title: "CRCL Admin", image: crcl, color: "#F08541" },
-  { title: "Shelley and Blaine Photography", image: shelley, color: "#929495" },
-  { title: "Brandria", image: brandria, color: "#900011" },
-];
+const cardData: Project[] = projects.map((project) => ({
+  ...project,
+  image: project.mainImage,
+}));
 
 export default function Page() {
   const container = useRef(null);
   const lenis = useLenis(({ scroll }) => {});
+  const router = useTransitionRouter();
 
   useGSAP(
     () => {
@@ -98,10 +94,8 @@ export default function Page() {
 
   return (
     <ReactLenis root>
-      <div className="relative h-screen">
-        <div className="absolute top-0 left-0 w-full z-50 px-4">
-          <Header />
-        </div>
+      <div className="relative h-screen w-full *:mx-auto">
+        <Header className="absolute top-0 left-[50%] translate-x-[-50%] w-full z-50 " />
 
         <div className="w-full h-full" ref={container}>
           <section className="sticky-container relative w-screen h-screen flex justify-center items-center text-white">
@@ -128,13 +122,17 @@ export default function Page() {
                       style={{
                         backgroundColor: card.color + "!important",
                       }}
+                      onClick={() => {
+                        router.push(`/projects/${card.slug}`);
+                      }}
                     >
                       <EyeIcon className="!w-6 !h-6" />
-                      <span>View Project</span>
+
+                      <span className="text-white">View Project</span>
                     </Button>
                   </div>
                   <img
-                    src={card.image.src || "/placeholder.svg"}
+                    src={card.mainImage.src || "/placeholder.svg"}
                     alt={card.title}
                     className="relative w-full h-full object-cover"
                   />

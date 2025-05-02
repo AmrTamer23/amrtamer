@@ -3,8 +3,9 @@ import Link from "next/link";
 import { ModeToggle } from "./mode-toggle";
 import { useState } from "react";
 import { useTransitionRouter } from "next-view-transitions";
+import { cn } from "@/lib/utils";
 
-export default function Header() {
+export default function Header({ className }: { className?: string }) {
   const router = useTransitionRouter();
   const [isAnimating, setIsAnimating] = useState(false);
 
@@ -66,7 +67,7 @@ export default function Header() {
   ];
 
   return (
-    <div className="w-full ">
+    <header className={cn("w-full max-w-4xl mx-auto", className)}>
       <div className="flex flex-row items-baseline justify-between px-4 py-2 w-full">
         <div className="flex items-center gap-2 w-1/3">
           <ModeToggle />
@@ -92,6 +93,6 @@ export default function Header() {
           })}
         </nav>
       </div>
-    </div>
+    </header>
   );
 }
