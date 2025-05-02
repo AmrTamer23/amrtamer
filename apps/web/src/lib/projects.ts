@@ -1,7 +1,7 @@
-import dalla from "@/lib/assets/dalla.jpeg";
-import crcl from "@/lib/assets/crcl.jpeg";
-import shelley from "@/lib/assets/shelley.jpeg";
-import brandria from "@/lib/assets/brandria.jpeg";
+import dalla from "@/lib/assets/dalla.webp";
+import crcl from "@/lib/assets/crcl.webp";
+import brandria from "@/lib/assets/brandria.webp";
+import shelley from "@/lib/assets/shelley.webp";
 const projects: Project[] = [
   {
     id: 0,
@@ -28,7 +28,7 @@ const projects: Project[] = [
     brief: "",
     description: "Interactive visualization of astronomical data.",
     images: [
-      "/project-2-1.jpg",
+      crcl.src,
       "/project-2-2.jpg",
       "/project-2-3.jpg",
       "/project-2-4.jpg",
@@ -61,7 +61,7 @@ const projects: Project[] = [
     title: "Brandria",
     description: "Centralized system for managing smart home devices.",
     color: "#900011",
-    images: [],
+    images: [brandria.src],
     mainImage: brandria,
     brief: "",
   },

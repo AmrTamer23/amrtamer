@@ -120,7 +120,7 @@ export default function Page() {
                     <Button
                       className="capitalize tracking-wider font-sans text-sm font-semibold leading-none text-white"
                       style={{
-                        backgroundColor: card.color + "!important",
+                        backgroundColor: card.color,
                       }}
                       onClick={() => {
                         router.push(`/projects/${card.slug}`);
