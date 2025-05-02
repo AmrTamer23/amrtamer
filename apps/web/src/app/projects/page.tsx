@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import dalla from "@/lib/assets/dalla.jpeg";
 import crcl from "@/lib/assets/crcl.jpeg";
 import shelley from "@/lib/assets/shelley.jpeg";
+import brandria from "@/lib/assets/brandria.jpeg";
 import Header from "@/components/header";
 import type { StaticImageData } from "next/image";
 import ReactLenis, { useLenis } from "lenis/react";
@@ -15,6 +16,7 @@ const cardData: { title: string; image: StaticImageData; color: string }[] = [
   { title: "Dalla Solutions", image: dalla, color: "#234D65" },
   { title: "CRCL Admin", image: crcl, color: "#F08541" },
   { title: "Shelley and Blaine Photography", image: shelley, color: "#929495" },
+  { title: "Brandria", image: brandria, color: "#F000002" },
 ];
 
 export default function Page() {
@@ -109,12 +111,16 @@ export default function Page() {
                 >
                   <div
                     className="absolute top-4 left-4 p-2 rounded z-10 border border-white"
-                    style={{ backgroundColor: card.color }}
+                    style={{
+                      backgroundColor: card.color + "5",
+                      backdropFilter: "blur(10px)",
+                    }}
                   >
-                    <p className="capitalize tracking-wider backdrop-blur-3xl font-sans text-sm font-semibold leading-none antialiased">
+                    <p className="capitalize tracking-wider font-sans text-sm font-semibold leading-none antialiased">
                       {card.title}
                     </p>
                   </div>
+
                   <img
                     src={card.image.src || "/placeholder.svg"}
                     alt={card.title}
