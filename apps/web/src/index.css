@@ -373,15 +373,6 @@ body::-webkit-scrollbar {
   z-index: -1;
 }
 
-.project-hero,
-.project-footer {
-  position: relative;
-  width: 100vw;
-  height: 100svh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 #project-description {
   position: absolute;

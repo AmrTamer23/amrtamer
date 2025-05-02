@@ -1,13 +1,13 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ReactLenis from "lenis/react";
 import Header from "@/components/header";
-
+import { Button } from "@/components/ui/button";
+import { ArrowLeftIcon } from "lucide-react";
+import { useTransitionRouter } from "next-view-transitions";
 interface ProjectPageData {
   project: Project;
   nextProject: Project;
@@ -129,53 +129,60 @@ export default function ProjectClient({
     };
   }, [nextProject.slug, isTransitioning, shouldUpdateProgress]);
 
+  const router = useTransitionRouter();
+
   return (
     <ReactLenis root>
-      <div className="project-page">
+      <main
+        className="w-full max-w-4x mx-auto bg-background h-full"
+        style={{
+          backgroundColor: project.color,
+        }}
+      >
         <div className="fixed top-0 left-0 w-full z-10">
           <Header />
         </div>
-        <div className="project-nav" ref={projectNavRef}>
-          <div className="link">
-            <span>&#8592;&nbsp;</span>
-            <Link href={`/projects/${prevProject.slug}`}>Previous</Link>
-          </div>
-
-          <div className="project-page-scroll-progress">
-            <p>{project.title}</p>
-
-            <div
-              className="project-page-scroll-progress-bar !bg-red-900"
-              ref={progressBarRef}
-            ></div>
-          </div>
-
-          <div className="link">
-            <Link href={`/projects/${nextProject.slug}`}>Next</Link>
-            <span>&#8594;&nbsp;</span>
-          </div>
-        </div>
-
-        <div className="project-hero">
+        <div className="relative  h-svh flex justify-center items-center flex-col">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="absolute top-1/5 left-1/2 -translate-x-1/2 w-fit flex items-center gap-2 px-4 py-3"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <ArrowLeftIcon className="!w-8 !h-8" />
+            <span className="text-base">Back</span>
+          </Button>
           <h1 className="text-[7.5vw] text-center font-palaise">
             {project.title}
           </h1>
 
-          <p id="project-description" ref={projectDescriptionRef}>
-            {project.description}
+          <p
+            className="absolute bottom-[10%] left-1/2 -translate-x-1/2 text-center opacity-0"
+            ref={projectDescriptionRef}
+          >
+            {project.brief}
           </p>
         </div>
 
-        <div className="project-images">
+        <p className="  text-foreground text-lg max-w-4xl mx-auto text-left text-balance pb-14 leading-relaxed w-full">
+          {project.description}
+        </p>
+
+        <div className="flex flex-col gap-10 max-w-4xl mx-auto">
           {project.images &&
             project.images.map((image, index) => (
-              <div className="project-img" key={index}>
+              <div className="w-full h-fit " key={index}>
                 <img src={image} alt="" />
               </div>
             ))}
         </div>
 
-        <div className="project-footer" ref={footerRef}>
+        <div
+          className="project-footer relative w-full h-svh flex items-center justify-center"
+          ref={footerRef}
+        >
           <h1 className="text-[7.5vw] text-center font-palaise">
             {nextProject.title}
           </h1>
@@ -194,7 +201,7 @@ export default function ProjectClient({
             ></div>
           </div>
         </div>
-      </div>
+      </main>
     </ReactLenis>
   );
 }
