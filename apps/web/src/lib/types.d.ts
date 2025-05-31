@@ -3,7 +3,8 @@ type Project = {
   slug: string;
   title: string;
   brief: string;
-  description: string;
+  descriptionBefore: string;
+  descriptionAfter: string;
   color: string;
   images: string[];
   mainImage: StaticImageData;

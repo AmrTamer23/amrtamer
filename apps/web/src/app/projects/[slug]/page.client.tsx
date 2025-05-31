@@ -166,8 +166,8 @@ export default function ProjectClient({
           </p>
         </div>
 
-        <p className="  text-foreground text-lg max-w-4xl mx-auto text-left text-balance pb-14 leading-relaxed w-full">
-          {project.description}
+        <p className="text-foreground text-lg max-w-4xl mx-auto text-left text-balance pb-14 leading-relaxed w-full">
+          {project.descriptionBefore}
         </p>
 
         <div className="flex flex-col gap-10 max-w-4xl mx-auto">
@@ -178,6 +178,12 @@ export default function ProjectClient({
               </div>
             ))}
         </div>
+
+        {project.descriptionAfter && (
+          <p className="text-foreground text-lg max-w-4xl mx-auto text-left text-balance py-14 leading-relaxed w-full">
+            {project.descriptionAfter}
+          </p>
+        )}
 
         <div
           className="project-footer relative w-full h-svh flex items-center justify-center"
