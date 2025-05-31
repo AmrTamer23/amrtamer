@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import projects from "@/lib/projects";
 import ProjectsClient from "./projects-client";
 import Header from "@/components/header";
+import styles from "./loading-skeleton.module.css";
 
 function getProjectsData() {
   const processedProjects = projects.map((project) => ({
@@ -39,11 +40,10 @@ function ProjectsLoading() {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-600">
                   <div
-                    className="absolute inset-0 opacity-50"
+                    className={`absolute inset-0 opacity-50 ${styles.shimmer}`}
                     style={{
                       background:
                         "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)",
-                      animation: "shimmer 2s infinite",
                       transform: "translateX(-100%)",
                     }}
                   />
@@ -70,17 +70,6 @@ function ProjectsLoading() {
           </div>
         </section>
       </div>
-
-      <style jsx global>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-      `}</style>
     </div>
   );
 }
