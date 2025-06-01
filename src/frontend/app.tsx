@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import NotFound from "@/app/not-found";
 import Home from "@/frontend/pages/home";
-import Layout from "./layout.tsx";
-import Projects from "./pages/projects/index.tsx";
+import Layout from "./layout";
+import Projects from "./pages/projects/index";
 
 export default function App() {
   return (

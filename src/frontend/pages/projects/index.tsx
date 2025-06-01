@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import projects from "@/lib/projects";
-import ProjectsClient from "./index.client.tsx";
+import ProjectsClient from "./index.client";
 import Header from "@/components/layout/header";
 import styles from "./loading-skeleton.module.css";
 
