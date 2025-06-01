@@ -1,74 +1,96 @@
-# my-better-t-app
+# NexFaster
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, Next.js, Hono, tRPC, and more.
+A minimal template showcasing React Router integration within Next.js for client-side routing
 
-## Features
+![nexfaster](./public/og.png)
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **shadcn/ui** - Reusable UI components
-- **Hono** - Lightweight, performant server framework
-- **tRPC** - End-to-end type-safe APIs
-- **Bun** - Runtime environment
-- **Drizzle** - TypeScript-first ORM
-- **SQLite/Turso** - Database engine
-- **Biome** - Linting and formatting
-
-## Getting Started
-
-First, install the dependencies:
+## 🚀 Quick Start
 
 ```bash
+git clone https://github.com/rudrodip/nexfaster
+cd nexfaster
 bun install
-```
-
-## Database Setup
-
-This project uses SQLite with Drizzle ORM.
-
-1. Start the local SQLite database:
-```bash
-cd apps/server && bun db:local
-```
-
-2. Update your `.env` file in the `apps/server` directory with the appropriate connection details if needed.
-
-3. Apply the schema to your database:
-```bash
-bun db:push
-```
-
-
-Then, run the development server:
-
-```bash
 bun dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the web application.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-The API is running at [http://localhost:3000](http://localhost:3000).
+## 🏗️ Architecture
 
+NexFaster combines Next.js with React Router for pure client-side routing:
 
+1. **Route Redirection**: All routes redirect to `/shell` via `next.config.ts`
+2. **Shell Loading**: Shell page loads React Router app with `ssr: false`
+3. **Client Routing**: React Router handles all navigation client-side
 
-## Project Structure
+## 📁 Key Files
 
+- `next.config.ts` - Route redirection configuration
+- `src/app/shell/page.tsx` - Loads React Router app
+- `src/frontend/app.tsx` - Main React Router application
+- `src/config/site.config.ts` - Site configuration
+- `src/components/boilerplate.tsx` - Layout and page components
+
+## 🔧 Adding Routes
+
+Add new routes in `src/frontend/app.tsx`:
+
+```tsx
+<Route path="/your-page" element={<YourPage />} />
 ```
-my-better-t-app/
-├── apps/
-│   ├── web/         # Frontend application (Next.js)
-│   └── server/      # Backend API (Hono, tRPC)
+
+## 🎨 Features
+
+- ⚡ Lightning fast client-side routing
+- 🎯 Zero-config React Router integration
+- 🎨 Modern UI with Tailwind CSS
+- 🌙 Dark mode support
+- 📱 Responsive design
+- 🔧 TypeScript support
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15
+- **Routing**: React Router 7
+- **Styling**: Tailwind CSS
+- **UI Components**: shadcn/ui
+- **Icons**: Lucide React
+- **Language**: TypeScript
+
+## 📖 Usage Examples
+
+### Multi-page App
+```tsx
+<Route path="/products" element={<ProductList />} />
+<Route path="/products/:id" element={<ProductDetail />} />
+<Route path="/cart" element={<ShoppingCart />} />
 ```
 
-## Available Scripts
+### Protected Routes
+```tsx
+<Route path="/dashboard" element={
+  <ProtectedRoute>
+    <Dashboard />
+  </ProtectedRoute>
+} />
+```
 
-- `bun dev`: Start all applications in development mode
-- `bun build`: Build all applications
-- `bun dev:web`: Start only the web application
-- `bun dev:server`: Start only the server
-- `bun check-types`: Check TypeScript types across all apps
-- `bun db:push`: Push schema changes to database
-- `bun db:studio`: Open database studio UI
-- `cd apps/server && bun db:local`: Start the local SQLite database
-- `bun check`: Run Biome formatting and linting
+### Nested Layouts
+```tsx
+<Route path="/admin" element={<AdminLayout />}>
+  <Route path="users" element={<UserManagement />} />
+  <Route path="settings" element={<Settings />} />
+</Route>
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details.
+
+## 👤 Author
+
+Created by [rds_agi](https://rdsx.dev) • [GitHub](https://github.com/rudrodip/nexfaster) • [Twitter](https://x.com/rds_agi)
