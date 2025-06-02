@@ -8,4 +8,5 @@ type Project = {
   color: string;
   images: string[];
   mainImage: StaticImageData;
+  favicon: string;
 };
