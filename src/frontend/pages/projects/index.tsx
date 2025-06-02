@@ -21,9 +21,7 @@ function ProjectsLoading() {
   const skeletonCards = Array(4).fill(0);
 
   return (
-    <div className="relative h-screen w-full *:mx-auto">
-      <Header className="absolute top-0 left-[50%] translate-x-[-50%] w-full z-50 " />
-
+    <main className="  flex items-center  px-4 py-2 w-full h-svh flex-col bg-background ">
       <div className="w-full h-full">
         <section className="sticky-container relative w-screen h-screen flex justify-center items-center text-white">
           <div className="relative w-1/2 h-4/5 rounded-lg overflow-hidden md:w-[95%] lg:w-4/5">
@@ -70,7 +68,7 @@ function ProjectsLoading() {
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 }
 
