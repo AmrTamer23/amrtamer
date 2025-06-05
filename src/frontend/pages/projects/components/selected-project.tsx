@@ -13,7 +13,7 @@ export function SelectedProject({
   isAnimating: boolean;
 }) {
   return (
-    <div className="lg:col-span-2 relative w-full" ref={featuredContainer}>
+    <div className="flex-1 w-8/12  " ref={featuredContainer}>
       {featuredProject && (
         <div
           className="group relative w-full h-full rounded-3xl overflow-hidden border border-white/20 transition-all duration-500"

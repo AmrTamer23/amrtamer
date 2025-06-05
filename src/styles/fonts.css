@@ -1,12 +1,4 @@
 @font-face {
-  font-family: 'Nebula Sans';
-  src: url('../lib/fonts/NebulaSans-Book.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: 'Palaise';
   src: url('../lib/fonts/STFWaicena-Sans.otf') format('opentype');
   font-weight: 400;
@@ -16,7 +8,7 @@
 
 /* CSS Custom Properties for easy usage */
 :root {
-  --font-nebula: 'Nebula Sans', sans-serif;
+  --font-nebula: 'IBM Plex Sans', sans-serif;
   --font-palaise: 'Palaise', sans-serif;
 }
 

@@ -10,7 +10,7 @@ export function RightPanel({
   isAnimating: boolean;
 }) {
   return (
-    <div className="lg:col-span-1 w-full">
+    <div className="w-3/12  ">
       <div className="h-fit bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 w-full">
         <div className="space-y-3 max-h-[calc(100%-5rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full">
           {projects.map((project, index) => (

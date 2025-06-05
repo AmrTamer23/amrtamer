@@ -193,8 +193,8 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
       {/* Main Content - Featured Project + Selection Panel */}
       <div className="flex-1 w-full px-6 flex items-center justify-center">
-        <div className="w-full max-w-7xl mx-auto h-full">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full min-h-[60vh] w-[80svw]">
+        <div className="w-full h-full ">
+          <div className="flex gap-8 h-full min-h-[65vh] w-full min-w-[90svw] mx-auto">
             <SelectedProject
               featuredProject={featuredProject}
               featuredContainer={featuredContainer}

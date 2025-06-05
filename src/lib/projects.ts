@@ -1,7 +1,9 @@
 import dallafavicon from "@/lib/assets/dalla/favicon.png";
 import dalla from "@/lib/assets/dalla/dalla.webp";
 import dalla1 from "@/lib/assets/dalla/dalla1.webp";
-import crcl from "@/lib/assets/crcl.webp";
+// import crcl from "@/lib/assets/crcl.webp";
+import betterreadsFavicon from "@/lib/assets/better-reads/favicon.png";
+import betterreadsMain from "@/lib/assets/better-reads/betterreads-main.avif";
 import brandria from "@/lib/assets/brandria.webp";
 import shelley from "@/lib/assets/shelley.webp";
 
@@ -26,6 +28,21 @@ const projects: Project[] = [
     ],
     mainImage: dalla,
     favicon: dallafavicon.src,
+  },
+  {
+    id: 1,
+    slug: "better-reads",
+    title: "BetterReads",
+    brief:
+      "A personal book tracking system, covering all what you mess in goodreads.",
+    descriptionBefore:
+      "A book tracking system built with TypeScript, Tanstack Start, tRPC, Hono. This project is a work in progress and is not yet complete. It is a personal project and is not yet complete.",
+    descriptionAfter:
+      "A book tracking system built with TypeScript, Tanstack Start, tRPC, Hono. This project is a work in progress and is not yet complete. It is a personal project and is not yet complete.",
+    color: "#111111",
+    images: [betterreadsMain.src, "/project-2-2.jpg", "/project-2-3.jpg"],
+    mainImage: betterreadsMain,
+    favicon: betterreadsFavicon.src,
   },
   // {
   //   id: 1,
