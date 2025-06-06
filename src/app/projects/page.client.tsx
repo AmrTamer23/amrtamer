@@ -162,58 +162,21 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   };
 
   return (
-    <div className=" flex flex-col gap-8 -mt-12">
-      {/* Hero Section */}
-      <div className="w-full px-6 pt-8 flex items-center justify-center">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="relative inline-block mb-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-              <Sparkles className="w-4 h-4 text-zinc-300" />
-              <span className="text-sm font-medium text-white/90">
-                Featured Projects
-              </span>
-            </div>
-            <GlowingEffect
-              disabled={false}
-              blur={1}
-              proximity={9999}
-              spread={100}
-              variant="default"
-              glow={true}
-              movementDuration={1.5}
-              borderWidth={2}
-              className="rounded-full"
-            />
-          </div>
-          <AppViewTransition name="projects-title">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
-              Crafted with Purpose
-            </h1>
-          </AppViewTransition>
-          <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-            Explore a collection of thoughtfully designed digital experiences
-            that blend innovation with functionality.
-          </p>
-        </div>
-      </div>
+    <div className="flex-1 w-full px-6 flex items-center justify-center">
+      <div className="w-full h-full ">
+        <div className="flex gap-8 h-full min-h-[65vh] w-full min-w-[90svw] mx-auto">
+          <SelectedProject
+            featuredProject={featuredProject}
+            featuredContainer={featuredContainer}
+            isAnimating={isAnimating}
+          />
 
-      {/* Main Content - Featured Project + Selection Panel */}
-      <div className="flex-1 w-full px-6 flex items-center justify-center">
-        <div className="w-full h-full ">
-          <div className="flex gap-8 h-full min-h-[65vh] w-full min-w-[90svw] mx-auto">
-            <SelectedProject
-              featuredProject={featuredProject}
-              featuredContainer={featuredContainer}
-              isAnimating={isAnimating}
-            />
-
-            <RightPanel
-              projects={projects}
-              featuredProject={featuredProject}
-              handleProjectSelect={handleProjectSelect}
-              isAnimating={isAnimating}
-            />
-          </div>
+          <RightPanel
+            projects={projects}
+            featuredProject={featuredProject}
+            handleProjectSelect={handleProjectSelect}
+            isAnimating={isAnimating}
+          />
         </div>
       </div>
     </div>

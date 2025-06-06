@@ -8,11 +8,14 @@ export default function Home() {
       <div className="flex-1 flex items-center justify-center ">
         <div className="flex gap-4 max-w-2xl relative border border-white/10 p-6 rounded-xl cursor-default backdrop-blur-sm bg-white/5">
           <GlowingEffect
-            spread={40}
-            glow={true}
             disabled={false}
-            proximity={64}
-            inactiveZone={0.01}
+            blur={1}
+            proximity={9999}
+            spread={100}
+            variant="default"
+            glow={true}
+            movementDuration={1.5}
+            borderWidth={2}
           />
           <div className="flex-col flex gap-6 items-center justify-center h-full relative z-20">
             <AppViewTransition name="profile-image">
