@@ -1,41 +1,8 @@
-import styles from "../loading-skeleton.module.css";
+import styles from "./loading-skeleton.module.css";
 
 export function ProjectsLoading() {
   return (
     <div className="flex flex-col gap-8 -mt-12 min-h-screen">
-      <div className="w-full px-6 pt-8 flex items-center justify-center">
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="relative inline-block mb-4">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-              <div
-                className={`w-4 h-4 bg-white/20 rounded ${styles.skeletonPulse}`}
-              />
-              <div
-                className={`h-4 w-32 bg-white/20 rounded ${styles.skeletonPulse}`}
-              />
-            </div>
-          </div>
-
-          <div className="space-y-2 mb-4">
-            <div
-              className={`h-8 md:h-12 lg:h-16 w-4/5 mx-auto bg-gradient-to-r from-white/20 via-white/10 to-white/20 rounded-lg ${styles.skeletonPulse}`}
-            />
-            <div
-              className={`h-8 md:h-12 lg:h-16 w-3/5 mx-auto bg-gradient-to-r from-white/15 via-white/8 to-white/15 rounded-lg ${styles.skeletonPulse}`}
-            />
-          </div>
-
-          <div className="space-y-2 max-w-2xl mx-auto">
-            <div
-              className={`h-4 w-full bg-white/10 rounded ${styles.skeletonPulse}`}
-            />
-            <div
-              className={`h-4 w-4/5 mx-auto bg-white/10 rounded ${styles.skeletonPulse}`}
-            />
-          </div>
-        </div>
-      </div>
-
       <div className="flex-1 w-full px-6 flex items-center justify-center">
         <div className="w-full h-full">
           <div className="flex gap-8 h-full min-h-[65vh] w-full min-w-[90svw] mx-auto">
