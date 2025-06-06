@@ -118,7 +118,7 @@ export default function WorkHistoryComponent() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="bg-background/10 dark:bg-background/50 pointer-events-none absolute inset-0 z-10 bg-blend-luminosity backdrop-blur-xl"
+            className="bg-background/10 dark:bg-background/50 pointer-events-none fixed inset-0 z-10 bg-blend-luminosity backdrop-blur-xl"
           />
         ) : null}
       </AnimatePresence>
@@ -126,15 +126,15 @@ export default function WorkHistoryComponent() {
       <AnimatePresence>
         {activeItem ? (
           <>
-            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-auto">
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
               <motion.div
-                className="bg-card dark:bg-card border border-border flex h-fit w-[90%] max-w-2xl cursor-pointer flex-col items-start gap-4 overflow-hidden p-6 shadow-lg rounded-xl"
+                className="bg-card dark:bg-card border border-border flex h-fit w-[90%] max-w-2xl cursor-pointer flex-col items-start gap-4 overflow-hidden p-6 shadow-lg"
                 ref={ref}
                 layoutId={`workItem-${activeItem.company}`}
                 style={{ borderRadius: 12 }}
               >
                 <div className="flex items-center gap-4 w-full">
-                  <div className="text-2xl text-primary">{activeItem.logo}</div>
+                  {activeItem.logo}
 
                   <div className="flex flex-col gap-1 flex-1">
                     <motion.div
@@ -161,34 +161,41 @@ export default function WorkHistoryComponent() {
                   </div>
                 </div>
 
-                <motion.div
+                <motion.p
                   layout
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2, delay: 0.05 }}
-                  className="text-foreground text-base leading-relaxed space-y-4 w-full"
+                  className="text-foreground text-base leading-relaxed w-full"
                 >
-                  <p>{activeItem.description}</p>
+                  {activeItem.description}
+                </motion.p>
 
-                  {activeItem.technologies.length > 0 && (
-                    <div>
-                      <h4 className="font-semibold text-foreground mb-2 text-lg">
-                        Technologies & Tools:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {activeItem.technologies.map((tech, index) => (
-                          <span
-                            key={index}
-                            className="px-2 py-1 bg-accent/50 text-accent-foreground text-sm rounded-md"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                {activeItem.technologies.length > 0 && (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2, delay: 0.1 }}
+                    className="w-full"
+                  >
+                    <h4 className="font-semibold text-foreground mb-2 text-lg">
+                      Technologies & Tools:
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {activeItem.technologies.map((tech, index) => (
+                        <span
+                          key={index}
+                          className="px-2 py-1 bg-accent/50 text-accent-foreground text-sm rounded-md"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
-                  )}
-                </motion.div>
+                  </motion.div>
+                )}
               </motion.div>
             </div>
           </>
@@ -228,32 +235,34 @@ export default function WorkHistoryComponent() {
               {/* Work item card */}
               <motion.div
                 layoutId={`workItem-${role.company}`}
-                className="group border-border bg-card dark:bg-card hover:bg-accent/50 flex w-full cursor-pointer flex-row items-center gap-4 border p-4 shadow-sm transition-colors rounded-lg flex-1"
+                className="group border-border bg-card dark:bg-card hover:bg-accent/50 flex w-full cursor-pointer flex-col items-start gap-4 border p-4 shadow-sm transition-colors flex-1"
                 onClick={() => setActiveItem(role)}
-                style={{ borderRadius: 8 }}
+                style={{ borderRadius: 12 }}
               >
-                <div className="text-xl text-primary">{role.logo}</div>
+                <div className="flex items-center gap-4 w-full">
+                  {role.logo}
 
-                <div className="flex flex-col gap-1 flex-1">
-                  <motion.div
-                    className="text-foreground font-semibold text-lg"
-                    layoutId={`workItemCompany-${role.company}`}
-                  >
-                    {role.company}
-                  </motion.div>
-                  <motion.div
-                    className="text-muted-foreground text-base"
-                    layoutId={`workItemTitle-${role.company}`}
-                  >
-                    {role.title}
-                  </motion.div>
+                  <div className="flex flex-col gap-1 flex-1">
+                    <motion.div
+                      className="text-foreground font-semibold text-lg"
+                      layoutId={`workItemCompany-${role.company}`}
+                    >
+                      {role.company}
+                    </motion.div>
+                    <motion.div
+                      className="text-muted-foreground text-base"
+                      layoutId={`workItemTitle-${role.company}`}
+                    >
+                      {role.title}
+                    </motion.div>
 
-                  <motion.div
-                    className="text-muted-foreground flex flex-row gap-2 text-sm"
-                    layoutId={`workItemExtras-${role.company}`}
-                  >
-                    📍 {role.location} | {role.duration} | {role.type}
-                  </motion.div>
+                    <motion.div
+                      className="text-muted-foreground flex flex-row gap-2 text-sm"
+                      layoutId={`workItemExtras-${role.company}`}
+                    >
+                      📍 {role.location} | {role.duration} | {role.type}
+                    </motion.div>
+                  </div>
                 </div>
               </motion.div>
             </div>
