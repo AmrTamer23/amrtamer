@@ -1,12 +1,6 @@
-"use client";
 import { GlowingEffect } from "@/components/ui/card-glowing-effect";
-import { LinkedinIcon, MailIcon, XIcon } from "@/lib/icons";
-import { useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import CustomEase from "gsap/CustomEase";
-import Header from "@/components/layout/header";
-import { NavLink } from "react-router";
+import Link from "next/link";
+import { AppViewTransition } from "@/components/view-transition";
 
 export default function Home() {
   return (
@@ -21,21 +15,25 @@ export default function Home() {
             inactiveZone={0.01}
           />
           <div className="flex-col flex gap-6 items-center justify-center h-full relative z-20">
-            <img
-              src="https://avatars.githubusercontent.com/u/122938074?v=4"
-              alt="logo"
-              width={500}
-              height={500}
-              className="rounded-full max-w-24 max-h-24"
-            />
+            <AppViewTransition name="profile-image">
+              <img
+                src="https://avatars.githubusercontent.com/u/122938074?v=4"
+                alt="logo"
+                width={500}
+                height={500}
+                className="rounded-full max-w-24 max-h-24"
+              />
+            </AppViewTransition>
           </div>
           <div className="flex flex-col gap-4 relative z-20">
-            <div className="h-fit flex flex-col gap-1 items-start justify-center">
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                Amr Tamer
-              </h1>
-              <p className="text-base text-white/70">Software Engineer</p>
-            </div>
+            <AppViewTransition name="profile-info">
+              <div className="h-fit flex flex-col gap-1 items-start justify-center">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+                  Amr Tamer
+                </h1>
+                <p className="text-base text-white/70">Software Engineer</p>
+              </div>
+            </AppViewTransition>
             <p className="text-base text-white/60 text-balance">
               T-shaped Software Engineer with a focus on Frontend Engineering,
               an AWS Certified Cloud Practitioner, and a Computer Science
@@ -44,13 +42,13 @@ export default function Home() {
             </p>
             <div className="flex w-full justify-end text-sm underline underline-offset-8 [&_li]:cursor-pointer [&_li]:hover:text-white">
               <ul className="flex gap-4">
-                <NavLink
-                  to="https://drive.google.com/file/d/1IIVzaZ6hIsrurBNjK8KZ5aayITDQClPp/view?usp=sharing"
+                <Link
+                  href="https://drive.google.com/file/d/1IIVzaZ6hIsrurBNjK8KZ5aayITDQClPp/view?usp=sharing"
                   target="_blank"
                   className="text-white/80 hover:text-white transition-colors font-bold underline-offset-4"
                 >
                   See My Resume!
-                </NavLink>
+                </Link>
               </ul>
             </div>
           </div>

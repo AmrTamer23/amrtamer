@@ -9,6 +9,10 @@ import { EyeIcon, ArrowUpRight, Sparkles } from "lucide-react";
 import { GlowingEffect } from "@/components/ui/card-glowing-effect";
 import { RightPanel } from "./components/right-panel";
 import { SelectedProject } from "./components/selected-project";
+import {
+  AppViewTransition,
+  ListItemTransition,
+} from "@/components/view-transition";
 
 // Types for the processed project data
 interface ProcessedProject {
@@ -181,9 +185,11 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
               className="rounded-full"
             />
           </div>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
-            Crafted with Purpose
-          </h1>
+          <AppViewTransition name="projects-title">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
+              Crafted with Purpose
+            </h1>
+          </AppViewTransition>
           <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
             Explore a collection of thoughtfully designed digital experiences
             that blend innovation with functionality.

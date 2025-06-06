@@ -1,7 +1,8 @@
 import { ArrowUpRight } from "lucide-react";
-
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
+import { AppViewTransition } from "@/components/view-transition";
 
 export function SelectedProject({
   featuredProject,
@@ -22,13 +23,19 @@ export function SelectedProject({
           }}
         >
           {/* Background Image */}
-          <img
-            src={featuredProject.image.src || "/placeholder.svg"}
-            alt={featuredProject.title}
-            className="featured-image absolute inset-0 w-full h-full object-cover transition-transform duration-700 "
-            width={featuredProject.image.width}
-            height={featuredProject.image.height}
-          />
+          <AppViewTransition name={`project-image-${featuredProject.id}`}>
+            <Image
+              src={featuredProject.image.src || "/placeholder.svg"}
+              alt={featuredProject.title}
+              className="featured-image absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+              width={featuredProject.image.width}
+              height={featuredProject.image.height}
+              priority={featuredProject.isPriority}
+              placeholder={featuredProject.image.blurDataURL ? "blur" : "empty"}
+              blurDataURL={featuredProject.image.blurDataURL}
+              sizes="(max-width: 768px) 95vw, 60vw"
+            />
+          </AppViewTransition>
 
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -50,13 +57,19 @@ export function SelectedProject({
           {/* Project Details */}
           <div className="featured-content absolute bottom-0 left-0 right-0 p-8">
             <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                {featuredProject.title}
-              </h2>
+              <AppViewTransition name={`project-title-${featuredProject.id}`}>
+                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                  {featuredProject.title}
+                </h2>
+              </AppViewTransition>
 
-              <p className="text-white/80 text-lg leading-relaxed mb-6 line-clamp-3">
-                {featuredProject.brief}
-              </p>
+              <AppViewTransition
+                name={`project-description-${featuredProject.id}`}
+              >
+                <p className="text-white/80 text-lg leading-relaxed mb-6 line-clamp-3">
+                  {featuredProject.brief}
+                </p>
+              </AppViewTransition>
             </div>
           </div>
 

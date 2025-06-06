@@ -98,4 +98,28 @@ const projects: Project[] = [
   // },
 ];
 
+// Cache the processed projects for faster subsequent loads
+let processedProjectsCache: OptimizedProject[] | null = null;
+
+export function getOptimizedProjects(): OptimizedProject[] {
+  if (processedProjectsCache) {
+    return processedProjectsCache;
+  }
+
+  processedProjectsCache = projects.map((project) => ({
+    ...project,
+    // Pre-compute essential image properties
+    optimizedMainImage: {
+      src: project.mainImage.src,
+      width: project.mainImage.width,
+      height: project.mainImage.height,
+      blurDataURL: project.mainImage.blurDataURL,
+    },
+    // Preload priority for first project
+    isPriority: project.id === 0,
+  }));
+
+  return processedProjectsCache;
+}
+
 export default projects;

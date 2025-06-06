@@ -1,50 +1,57 @@
 "use client";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 
 import { cn } from "@/lib/utils";
-import { NavLink } from "react-router";
 import { MailIcon, LinkedinIcon, XIcon } from "@/lib/icons";
+import Link from "next/link";
+import {
+  BrandTransition,
+  NavItemTransition,
+} from "@/components/view-transition";
+import { useRouter } from "next/navigation";
 
 export default function Header({ className }: { className?: string }) {
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
-  function slideInOut() {
-    document.documentElement.animate(
-      [
-        {
-          opacity: 1,
-          transform: "translateY(0)",
-        },
-        {
-          opacity: 0.2,
-          transform: "translateY(-35%)",
-        },
-      ],
-      {
-        duration: 1200,
-        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
-        fill: "forwards",
-        pseudoElement: "::view-transition-old(root)",
-      }
-    );
+  // function slideInOut() {
+  //   document.documentElement.animate(
+  //     [
+  //       {
+  //         opacity: 1,
+  //         transform: "translateY(0)",
+  //       },
+  //       {
+  //         opacity: 0.2,
+  //         transform: "translateY(-35%)",
+  //       },
+  //     ],
+  //     {
+  //       duration: 1200,
+  //       easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+  //       fill: "forwards",
+  //       pseudoElement: "::view-transition-old(root)",
+  //     }
+  //   );
 
-    document.documentElement.animate(
-      [
-        {
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
-        },
-        {
-          clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-        },
-      ],
-      {
-        duration: 1200,
-        easing: "cubic-bezier(0.87, 0, 0.13, 1)",
-        fill: "forwards",
-        pseudoElement: "::view-transition-new(root)",
-      }
-    );
-  }
+  //   document.documentElement.animate(
+  //     [
+  //       {
+  //         clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+  //       },
+  //       {
+  //         clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+  //       },
+  //     ],
+  //     {
+  //       duration: 1200,
+  //       easing: "cubic-bezier(0.87, 0, 0.13, 1)",
+  //       fill: "forwards",
+  //       pseudoElement: "::view-transition-new(root)",
+  //     }
+  //   );
+  // }
 
   // const navigateTo = (path: string) => {
   //   if (isAnimating) return;
@@ -65,6 +72,12 @@ export default function Header({ className }: { className?: string }) {
     { to: "/work", label: "Work" },
   ];
 
+  const handleNavigation = (href: string) => {
+    startTransition(() => {
+      router.push(href);
+    });
+  };
+
   return (
     <header
       className={cn("w-full max-w-7xl mx-auto mix-blend-luminosity", className)}
@@ -76,15 +89,23 @@ export default function Header({ className }: { className?: string }) {
           <XIcon className="w-6 h-6 text-white/80  transition-colors" />
         </div>
 
-        <div className="text-5xl font-bold font-palaise tracking-wider w-1/3 text-center ">
-          AT23
-        </div>
+        <BrandTransition>
+          <div className="text-5xl font-bold font-palaise tracking-wider w-1/3 text-center select-none">
+            AT23
+          </div>
+        </BrandTransition>
         <nav className="flex gap-4 text-lg w-1/3  items-center justify-end">
           {links.map(({ to, label }) => {
             return (
-              <NavLink key={to} to={to} prefetch="viewport">
-                {label}
-              </NavLink>
+              <NavItemTransition key={to} href={to}>
+                <button
+                  onClick={() => handleNavigation(to)}
+                  className="hover:opacity-70 transition-opacity select-none cursor-pointer"
+                  disabled={isPending}
+                >
+                  {label}
+                </button>
+              </NavItemTransition>
             );
           })}
         </nav>

@@ -10,3 +10,13 @@ type Project = {
   mainImage: StaticImageData;
   favicon: string;
 };
+
+type OptimizedProject = Project & {
+  optimizedMainImage: {
+    src: string;
+    width: number;
+    height: number;
+    blurDataURL?: string;
+  };
+  isPriority: boolean;
+};
