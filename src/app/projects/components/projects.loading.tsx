@@ -1,4 +1,4 @@
-import styles from "./loading-skeleton.module.css";
+import styles from "../loading-skeleton.module.css";
 
 export function ProjectsLoading() {
   return (
