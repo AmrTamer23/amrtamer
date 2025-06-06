@@ -197,7 +197,7 @@ export default function WorkHistoryComponent() {
 
       <div className="flex w-full max-w-2xl flex-col gap-4 p-4">
         <div className="mb-8 text-center">
-          <h1 className="text-5xl font-bold text-foreground mb-2">
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
             Work Experience
           </h1>
           <p className="text-muted-foreground text-lg">
