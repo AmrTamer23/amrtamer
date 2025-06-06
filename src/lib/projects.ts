@@ -20,13 +20,7 @@ const projects: Project[] = [
     descriptionAfter:
       "The goal was to build a platform that serves the needs of the region's leading companies with a focus on the user experience and performance. Built with Turbo(for Monorepo Build) and Next.js, TypeScript, TailwindCSS.",
     color: "#234D65",
-    images: [
-      dalla.src,
-      dalla1.src,
-      "/project-1-3.jpg",
-      "/project-1-4.jpg",
-      "/project-1-5.jpg",
-    ],
+    images: [dalla1.src],
     mainImage: dalla,
     favicon: dallafavicon.src,
   },
@@ -41,7 +35,7 @@ const projects: Project[] = [
     descriptionAfter:
       "A book tracking system built with TypeScript, Tanstack Start, tRPC, Hono. This project is a work in progress and is not yet complete. It is a personal project and is not yet complete.",
     color: "#111111",
-    images: [betterreadsMain.src, "/project-2-2.jpg", "/project-2-3.jpg"],
+    images: [],
     mainImage: betterreadsMain,
     favicon: betterreadsFavicon.src,
   },
@@ -54,13 +48,7 @@ const projects: Project[] = [
     descriptionBefore: "A dashboard for managing CRCL's operations",
     descriptionAfter:
       "Ticketing System, Adding users with rules(ex: booth and opreation users) and multiple views based on the role of the user. Built with TypeScript, Next.js, TailwindCSS, Shadcn UI.",
-    images: [
-      crcl.src,
-      "/project-2-2.jpg",
-      "/project-2-3.jpg",
-      "/project-2-4.jpg",
-      "/project-2-5.jpg",
-    ],
+    images: [crcl.src],
     color: "#F08541",
     mainImage: crcl,
     favicon: crclFavicon.src,

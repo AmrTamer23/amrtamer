@@ -4,26 +4,53 @@ import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import { AppViewTransition } from "@/components/view-transition";
 
+interface ProcessedProject {
+  id: number;
+  slug: string;
+  title: string;
+  brief: string;
+  descriptionBefore: string;
+  descriptionAfter: string;
+  color: string;
+  images: string[];
+  image: {
+    src: string;
+    width: number;
+    height: number;
+    blurDataURL?: string;
+  };
+  isPriority?: boolean;
+}
+
 export function SelectedProject({
   featuredProject,
   featuredContainer,
   isAnimating,
+  onViewProject,
 }: {
-  featuredProject: any;
+  featuredProject: ProcessedProject | null;
   featuredContainer: any;
   isAnimating: boolean;
+  onViewProject?: (project: ProcessedProject) => void;
 }) {
+  const handleViewProject = () => {
+    if (featuredProject && onViewProject) {
+      onViewProject(featuredProject);
+    }
+  };
+
   return (
     <div className="flex-1 w-8/12  " ref={featuredContainer}>
       {featuredProject && (
         <div
-          className="group relative w-full h-full rounded-3xl overflow-hidden border border-white/20 transition-all duration-500"
+          className="group relative w-full h-full rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 cursor-pointer"
           style={{
             background: `linear-gradient(135deg, ${featuredProject.color}15, ${featuredProject.color}05)`,
           }}
+          onClick={handleViewProject}
         >
           {/* Background Image */}
-          <AppViewTransition name={`project-image-${featuredProject.id}`}>
+          <AppViewTransition name={`main-project-image-${featuredProject.id}`}>
             <Image
               src={featuredProject.image.src || "/placeholder.svg"}
               alt={featuredProject.title}
@@ -47,6 +74,10 @@ export function SelectedProject({
               style={{
                 background: `linear-gradient(135deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
               }}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering the parent click
+                handleViewProject();
+              }}
             >
               <EyeIcon className="w-5 h-5 transition-transform " />
               <span className="text-sm font-medium">View Project</span>
@@ -57,14 +88,16 @@ export function SelectedProject({
           {/* Project Details */}
           <div className="featured-content absolute bottom-0 left-0 right-0 p-8">
             <div className="max-w-2xl">
-              <AppViewTransition name={`project-title-${featuredProject.id}`}>
+              <AppViewTransition
+                name={`main-project-title-${featuredProject.id}`}
+              >
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                   {featuredProject.title}
                 </h2>
               </AppViewTransition>
 
               <AppViewTransition
-                name={`project-description-${featuredProject.id}`}
+                name={`main-project-description-${featuredProject.id}`}
               >
                 <p className="text-white/80 text-lg leading-relaxed mb-6 line-clamp-3">
                   {featuredProject.brief}
