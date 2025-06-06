@@ -13,7 +13,11 @@
 
 html,
 body {
-	@apply bg-gradient-to-br from-black via-zinc-900 to-zinc-950;
+	background-image: url('/bg.avif');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
 
 	@media (prefers-color-scheme: dark) {
 		color-scheme: dark;
