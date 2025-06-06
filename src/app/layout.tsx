@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config/site.config";
 import { cn } from "@/lib/utils";
-import RootProviders from "@/components/providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.origin),
@@ -74,7 +73,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-        <RootProviders>{children}</RootProviders>
+        {children}
       </body>
     </html>
   );

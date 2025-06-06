@@ -1,6 +1,4 @@
 "use client";
-import Link from "next/link.js";
-import ThemeToggler from "@/components/theme/toggler";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
