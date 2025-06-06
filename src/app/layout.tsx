@@ -4,6 +4,13 @@ import { siteConfig } from "@/config/site.config";
 import { cn } from "@/lib/utils";
 import Header from "@/components/layout/header";
 import { PageTransition } from "@/components/view-transition";
+import { IBM_Plex_Sans } from "next/font/google";
+
+const IBMPlexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.origin),
@@ -74,7 +81,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("min-h-screen bg-background font-sans antialiased")}>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          IBMPlexSans.variable
+        )}
+      >
         <div className="flex flex-col items-center justify-center min-h-screen  w-screen pt-2">
           <header className="w-full px-6 flex items-center justify-center">
             <Header />
