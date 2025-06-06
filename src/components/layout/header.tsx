@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { NavLink } from "react-router";
+import { MailIcon, LinkedinIcon, XIcon } from "@/lib/icons";
 
 export default function Header({ className }: { className?: string }) {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -68,12 +69,15 @@ export default function Header({ className }: { className?: string }) {
 
   return (
     <header
-      className={cn("w-full max-w-4xl mx-auto mix-blend-luminosity", className)}
+      className={cn("w-full max-w-7xl mx-auto mix-blend-luminosity", className)}
     >
-      <div className="flex flex-row items-baseline justify-between py-2 w-full">
-        <div className="flex items-center gap-2 w-1/3">
-          <ThemeToggler />
+      <div className="flex flex-row items-center justify-between py-4 w-full">
+        <div className="flex items-center gap-6 w-1/3 justify-center">
+          <MailIcon className="w-6 h-6 text-white/80  transition-colors" />
+          <LinkedinIcon className="w-6 h-6 text-white/80  transition-colors" />
+          <XIcon className="w-6 h-6 text-white/80  transition-colors" />
         </div>
+
         <div className="text-5xl font-bold font-palaise tracking-wider w-1/3 text-center ">
           AT23
         </div>

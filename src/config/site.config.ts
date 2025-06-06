@@ -1,25 +1,20 @@
 import { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-  name: "NexFaster",
-  title: "Next.js + React Router",
-  description: "A minimal template showcasing React Router integration within Next.js for client-side routing with clean documentation-style pages",
-  origin: "https://nexfaster.rdsx.dev",
-  keywords: [
-    "React Router",
-    "Next.js",
-    "Client-side routing",
-    "React",
-    "TypeScript",
-    "Template"
-  ],
-  og: "https://nexfaster.rdsx.dev/og.png",
+  name: "Amr Tamer",
+  title: "Amr Tamer",
+  description:
+    "A software engineer with a focus on frontend engineering, an AWS Certified Cloud Practitioner, and a Computer Science student.",
+  origin: "https://amrtamer.dev",
+  keywords: ["Amr Tamer", "Software Engineer", "Frontend Engineer"],
+  og: "/og.png",
   creator: {
-    name: "rds_agi",
-    url: "https://rdsx.dev",
+    name: "Amr Tamer",
+    url: "https://amrtamer.dev",
   },
   socials: {
-    github: "https://github.com/rudrodip/nexfaster",
-    x: "https://x.com/rds_agi",
-  }
-}
+    github: "https://github.com/amrtamer23",
+    x: "https://x.com/AmrT_23",
+    linkedin: "https://www.linkedin.com/in/amrtamer23/",
+  },
+};

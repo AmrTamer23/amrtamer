@@ -1,17 +1,18 @@
 import dallafavicon from "@/lib/assets/dalla/favicon.png";
 import dalla from "@/lib/assets/dalla/dalla.webp";
 import dalla1 from "@/lib/assets/dalla/dalla1.webp";
-// import crcl from "@/lib/assets/crcl.webp";
+import crcl from "@/lib/assets/crcl.webp";
 import betterreadsFavicon from "@/lib/assets/better-reads/favicon.png";
 import betterreadsMain from "@/lib/assets/better-reads/betterreads-main.avif";
 import brandria from "@/lib/assets/brandria.webp";
 import shelley from "@/lib/assets/shelley.webp";
+import crclFavicon from "@/lib/assets/crcl/crcl-favicon.png";
 
 const projects: Project[] = [
   {
     id: 0,
-    slug: "dalla-solutions",
-    title: "Dalla Solutions",
+    slug: "dalla",
+    title: "Dalla",
     brief:
       "A MENA based solution the connects the region's leading companies with the best talent.",
     descriptionBefore:
@@ -44,24 +45,26 @@ const projects: Project[] = [
     mainImage: betterreadsMain,
     favicon: betterreadsFavicon.src,
   },
-  // {
-  //   id: 1,
-  //   slug: "crcl-admin",
-  //   title: "CRCL Admin",
-  //   brief: "",
-  //   descriptionBefore: "A dashboard for managing CRCL's operations",
-  //   descriptionAfter:
-  //     "Ticketing System, Adding users with rules(ex: booth and opreation users) and multiple views based on the role of the user. Built with TypeScript, Next.js, TailwindCSS, Shadcn UI.",
-  //   images: [
-  //     crcl.src,
-  //     "/project-2-2.jpg",
-  //     "/project-2-3.jpg",
-  //     "/project-2-4.jpg",
-  //     "/project-2-5.jpg",
-  //   ],
-  //   color: "#F08541",
-  //   mainImage: crcl,
-  // },
+  {
+    id: 2,
+    slug: "crcl-admin",
+    title: "CRCL Admin",
+    brief:
+      "A comprehensive admin dashboard for CRCL operations with role-based access control and ticketing system.",
+    descriptionBefore: "A dashboard for managing CRCL's operations",
+    descriptionAfter:
+      "Ticketing System, Adding users with rules(ex: booth and opreation users) and multiple views based on the role of the user. Built with TypeScript, Next.js, TailwindCSS, Shadcn UI.",
+    images: [
+      crcl.src,
+      "/project-2-2.jpg",
+      "/project-2-3.jpg",
+      "/project-2-4.jpg",
+      "/project-2-5.jpg",
+    ],
+    color: "#F08541",
+    mainImage: crcl,
+    favicon: crclFavicon.src,
+  },
   // {
   //   id: 2,
   //   slug: "shelley-and-blaine-photography",

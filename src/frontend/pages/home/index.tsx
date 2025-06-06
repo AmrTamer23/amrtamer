@@ -10,8 +10,8 @@ import { NavLink } from "react-router";
 
 export default function Home() {
   return (
-    <main className="flex items-center px-4 py-2 w-full flex-col h-full">
-      <div className="flex-1 flex items-center justify-center mx-auto">
+    <main className="flex items-center px-4 py-2 w-full flex-col h-full  max-w-7xl mx-auto">
+      <div className="flex-1 flex items-center justify-center ">
         <div className="flex gap-4 max-w-2xl relative border border-white/10 p-6 rounded-xl cursor-default backdrop-blur-sm bg-white/5">
           <GlowingEffect
             spread={40}
@@ -28,14 +28,9 @@ export default function Home() {
               height={500}
               className="rounded-full max-w-24 max-h-24"
             />
-            <div className="flex flex-col gap-4">
-              <MailIcon className="w-6 h-6 text-white/80 hover:text-white transition-colors" />
-              <LinkedinIcon className="w-6 h-6 text-white/80 hover:text-white transition-colors" />
-              <XIcon className="w-6 h-6 text-white/80 hover:text-white transition-colors" />
-            </div>
           </div>
           <div className="flex flex-col gap-4 relative z-20">
-            <div className="h-24 flex flex-col gap-1 items-start justify-center">
+            <div className="h-fit flex flex-col gap-1 items-start justify-center">
               <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
                 Amr Tamer
               </h1>
@@ -50,10 +45,11 @@ export default function Home() {
             <div className="flex w-full justify-end text-sm underline underline-offset-8 [&_li]:cursor-pointer [&_li]:hover:text-white">
               <ul className="flex gap-4">
                 <NavLink
-                  to="/resume"
-                  className="text-white/80 hover:text-white transition-colors"
+                  to="https://drive.google.com/file/d/1IIVzaZ6hIsrurBNjK8KZ5aayITDQClPp/view?usp=sharing"
+                  target="_blank"
+                  className="text-white/80 hover:text-white transition-colors font-bold underline-offset-4"
                 >
-                  Want to take a look at my resume?
+                  See My Resume!
                 </NavLink>
               </ul>
             </div>
