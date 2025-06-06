@@ -24,7 +24,7 @@ export const workExperience: {
       />
     ),
     description:
-      "Led the frontend development team in building scalable web applications using React and Next.js. Collaborated with designers and backend developers to create seamless user experiences. Implemented responsive designs and optimized performance for high-traffic applications. Mentored junior developers and established coding standards for the team.",
+      "Developing the frontend of Dalla, a MENA-based freelance platform for professionals and companies.",
     duration: "Dec 2024 - Present",
     location: "Remote, Saudi Arabia",
     type: "Contract",
