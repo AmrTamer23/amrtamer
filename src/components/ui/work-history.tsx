@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type JSX } from "react";
 import type { SVGProps } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
+import { workExperience } from "@/lib/work-history.data";
 
 export const Freelance = (props: SVGProps<SVGSVGElement>) => (
   <svg
@@ -125,7 +126,7 @@ export default function WorkHistoryComponent() {
       <AnimatePresence>
         {activeItem ? (
           <>
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-auto">
+            <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 pointer-events-auto">
               <motion.div
                 className="bg-card dark:bg-card border border-border flex h-fit w-[90%] max-w-2xl cursor-pointer flex-col items-start gap-4 overflow-hidden p-6 shadow-lg rounded-xl"
                 ref={ref}
@@ -137,7 +138,7 @@ export default function WorkHistoryComponent() {
 
                   <div className="flex flex-col gap-1 flex-1">
                     <motion.div
-                      className="text-muted-foreground text-sm font-medium"
+                      className="text-muted-foreground text-base font-medium"
                       layoutId={`workItemCompany-${activeItem.company}`}
                     >
                       {activeItem.company}
@@ -151,7 +152,7 @@ export default function WorkHistoryComponent() {
                     </motion.p>
 
                     <motion.div
-                      className="text-muted-foreground flex flex-row gap-2 text-sm"
+                      className="text-muted-foreground flex flex-row gap-2 text-base"
                       layoutId={`workItemExtras-${activeItem.company}`}
                     >
                       📍 {activeItem.location} | {activeItem.duration} |{" "}
@@ -166,20 +167,20 @@ export default function WorkHistoryComponent() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.2, delay: 0.05 }}
-                  className="text-foreground text-sm leading-relaxed space-y-4 w-full"
+                  className="text-foreground text-base leading-relaxed space-y-4 w-full"
                 >
                   <p>{activeItem.description}</p>
 
                   {activeItem.technologies.length > 0 && (
                     <div>
-                      <h4 className="font-semibold text-foreground mb-2">
+                      <h4 className="font-semibold text-foreground mb-2 text-lg">
                         Technologies & Tools:
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {activeItem.technologies.map((tech, index) => (
                           <span
                             key={index}
-                            className="px-2 py-1 bg-accent/50 text-accent-foreground text-xs rounded-md"
+                            className="px-2 py-1 bg-accent/50 text-accent-foreground text-sm rounded-md"
                           >
                             {tech}
                           </span>
@@ -194,7 +195,7 @@ export default function WorkHistoryComponent() {
         ) : null}
       </AnimatePresence>
 
-      <div className="flex w-full max-w-xl flex-col gap-4 p-4">
+      <div className="flex w-full max-w-2xl flex-col gap-4 p-4">
         <div className="mb-8 text-center">
           <h1 className="text-5xl font-bold text-foreground mb-2">
             Work Experience
@@ -204,106 +205,61 @@ export default function WorkHistoryComponent() {
           </p>
         </div>
 
-        {workExperience.map((role) => (
-          <motion.div
-            layoutId={`workItem-${role.company}`}
-            key={role.company}
-            className="group border-border bg-card dark:bg-card hover:bg-accent/50 flex w-full cursor-pointer flex-row items-center gap-4 border p-4 shadow-sm transition-colors rounded-lg"
-            onClick={() => setActiveItem(role)}
-            style={{ borderRadius: 8 }}
-          >
-            <div className="text-xl text-primary">{role.logo}</div>
+        <div className="relative">
+          {/* Timeline line */}
+          <div className="absolute left-10 top-8 bottom-8 w-0.5 bg-border"></div>
 
-            <div className="flex flex-col gap-1 flex-1">
-              <motion.div
-                className="text-foreground font-semibold"
-                layoutId={`workItemCompany-${role.company}`}
-              >
-                {role.company}
-              </motion.div>
-              <motion.div
-                className="text-muted-foreground text-sm"
-                layoutId={`workItemTitle-${role.company}`}
-              >
-                {role.title}
-              </motion.div>
+          {workExperience.map((role, index) => (
+            <div
+              key={role.company}
+              className="relative flex items-start gap-6 mb-6 last:mb-0"
+            >
+              {/* Timeline node with date */}
+              <div className="relative  flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-card border-2 border-border flex items-center justify-center shadow-sm">
+                  <div className="text-xs font-semibold text-foreground text-center leading-tight">
+                    {role.duration.split(" - ")[0]}
+                  </div>
+                </div>
+                {/* Timeline dot */}
+                <div className="absolute inset-0 w-20 h-20 rounded-full bg-primary/10 "></div>
+              </div>
 
+              {/* Work item card */}
               <motion.div
-                className="text-muted-foreground flex flex-row gap-2 text-xs"
-                layoutId={`workItemExtras-${role.company}`}
+                layoutId={`workItem-${role.company}`}
+                className="group border-border bg-card dark:bg-card hover:bg-accent/50 flex w-full cursor-pointer flex-row items-center gap-4 border p-4 shadow-sm transition-colors rounded-lg flex-1"
+                onClick={() => setActiveItem(role)}
+                style={{ borderRadius: 8 }}
               >
-                📍 {role.location} | {role.duration} | {role.type}
+                <div className="text-xl text-primary">{role.logo}</div>
+
+                <div className="flex flex-col gap-1 flex-1">
+                  <motion.div
+                    className="text-foreground font-semibold text-lg"
+                    layoutId={`workItemCompany-${role.company}`}
+                  >
+                    {role.company}
+                  </motion.div>
+                  <motion.div
+                    className="text-muted-foreground text-base"
+                    layoutId={`workItemTitle-${role.company}`}
+                  >
+                    {role.title}
+                  </motion.div>
+
+                  <motion.div
+                    className="text-muted-foreground flex flex-row gap-2 text-sm"
+                    layoutId={`workItemExtras-${role.company}`}
+                  >
+                    📍 {role.location} | {role.duration} | {role.type}
+                  </motion.div>
+                </div>
               </motion.div>
             </div>
-          </motion.div>
-        ))}
+          ))}
+        </div>
       </div>
     </>
   );
 }
-
-const workExperience: {
-  company: string;
-  title: string;
-  logo: JSX.Element;
-  description: string;
-  duration: string;
-  location: string;
-  type: string;
-  technologies: string[];
-}[] = [
-  {
-    company: "Tech Solutions Inc.",
-    title: "Senior Frontend Developer",
-    logo: <TechCompany />,
-    description:
-      "Led the frontend development team in building scalable web applications using React and Next.js. Collaborated with designers and backend developers to create seamless user experiences. Implemented responsive designs and optimized performance for high-traffic applications. Mentored junior developers and established coding standards for the team.",
-    duration: "2022 - Present",
-    location: "San Francisco, CA",
-    type: "Full-time",
-    technologies: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "GraphQL",
-      "Framer Motion",
-    ],
-  },
-  {
-    company: "Digital Creative Studio",
-    title: "Full Stack Developer",
-    logo: <Startup />,
-    description:
-      "Developed end-to-end web solutions for various clients including e-commerce platforms, portfolio websites, and web applications. Worked closely with clients to understand requirements and deliver custom solutions. Built responsive interfaces and robust backend systems using modern technologies.",
-    duration: "2020 - 2022",
-    location: "Remote",
-    type: "Contract",
-    technologies: [
-      "React",
-      "Node.js",
-      "MongoDB",
-      "Express",
-      "SCSS",
-      "JavaScript",
-    ],
-  },
-  {
-    company: "Freelance",
-    title: "Web Developer & Designer",
-    logo: <Freelance />,
-    description:
-      "Provided web development and design services to small businesses and startups. Created modern, responsive websites and web applications tailored to client needs. Managed projects from concept to deployment, including client communication, design, development, and maintenance.",
-    duration: "2018 - 2020",
-    location: "Various",
-    type: "Freelance",
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "WordPress",
-      "PHP",
-      "Adobe Creative Suite",
-    ],
-  },
-];
