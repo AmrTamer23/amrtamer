@@ -16,6 +16,7 @@ import {
 import { AnimatePresence, motion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
+import { ImagePrefetch } from "./components/image-prefetch";
 
 // Types for the processed project data
 interface ProcessedProject {
@@ -52,19 +53,40 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   const featuredContainer = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Preload images for better performance
+  // Enhanced preload images for better performance
   useEffect(() => {
-    projects.forEach((project) => {
-      // Preload main images
+    // Prioritize preloading images for the first few projects
+    const priorityProjects = projects.slice(0, 3);
+    const otherProjects = projects.slice(3);
+
+    // Preload priority projects immediately
+    priorityProjects.forEach((project) => {
+      // Preload main image with high priority
       const mainImg = new window.Image();
       mainImg.src = project.image.src;
 
-      // Preload gallery images
-      project.images.forEach((imageSrc) => {
-        const img = new window.Image();
-        img.src = imageSrc;
-      });
+      // Preload first gallery image
+      if (project.images.length > 0) {
+        const firstGalleryImg = new window.Image();
+        firstGalleryImg.src = project.images[0];
+      }
     });
+
+    // Preload other projects with a small delay
+    const preloadTimer = setTimeout(() => {
+      otherProjects.forEach((project) => {
+        const mainImg = new window.Image();
+        mainImg.src = project.image.src;
+
+        // Preload gallery images
+        project.images.forEach((imageSrc) => {
+          const img = new window.Image();
+          img.src = imageSrc;
+        });
+      });
+    }, 500);
+
+    return () => clearTimeout(preloadTimer);
   }, [projects]);
 
   // Close modal when clicking outside
@@ -215,6 +237,9 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
   return (
     <>
+      {/* Image Prefetch Component */}
+      <ImagePrefetch projects={projects} />
+
       {/* Modal Background Overlay */}
       <AnimatePresence>
         {activeProject ? (
