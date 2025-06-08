@@ -7,7 +7,7 @@ export const siteConfig: SiteConfig = {
     "A software engineer with a focus on frontend engineering, an AWS Certified Cloud Practitioner, and a Computer Science student.",
   origin: "https://amrtamer.dev",
   keywords: ["Amr Tamer", "Software Engineer", "Frontend Engineer"],
-  og: "/og.png",
+  og: "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYaOCSHyrgOH7JGCBaPVNo3WzerSADRqMUtIEY",
   creator: {
     name: "Amr Tamer",
     url: "https://amrtamer.dev",
