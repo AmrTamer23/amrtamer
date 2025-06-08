@@ -1,5 +1,6 @@
 "use client";
 import { useState, useTransition } from "react";
+import Image from "next/image";
 
 import { cn } from "@/lib/utils";
 import { MailIcon, LinkedinIcon, XIcon } from "@/lib/icons";
@@ -34,7 +35,7 @@ export default function Header({ className }: { className?: string }) {
     >
       <div className="flex flex-row items-center justify-between py-4 w-full">
         <motion.div
-          className="flex items-center gap-6 w-1/3 justify-center"
+          className="flex items-center gap-6 w-1/3 justify-center -mt-5"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -100,11 +101,18 @@ export default function Header({ className }: { className?: string }) {
         </motion.div>
 
         <BrandTransition>
-          <div className="text-5xl font-bold font-palaise tracking-wider w-1/3 text-center select-none">
-            AT23
+          <div className="w-1/3 text-center select-none flex justify-center items-center">
+            <Image
+              src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhdFEO5WgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
+              alt="AT23 Logo"
+              width={125}
+              height={125}
+              className="object-contain -mt-10"
+              priority
+            />
           </div>
         </BrandTransition>
-        <nav className="flex gap-4 text-lg w-1/3  items-center justify-end">
+        <nav className="flex gap-4 text-lg w-1/3  items-center justify-end -mt-5">
           {links.map(({ to, label }) => {
             return (
               <NavItemTransition key={to} href={to}>
