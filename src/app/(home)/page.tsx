@@ -1,6 +1,7 @@
 import { GlowingEffect } from "@/components/ui/card-glowing-effect";
 import Link from "next/link";
 import { AppViewTransition } from "@/components/view-transition";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -19,12 +20,12 @@ export default function Home() {
           />
           <div className="flex-col flex gap-6 items-center justify-center h-full relative z-20">
             <AppViewTransition name="profile-image">
-              <img
-                src="https://avatars.githubusercontent.com/u/122938074?v=4"
+              <Image
+                src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhhXudoWgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
                 alt="logo"
-                width={500}
-                height={500}
-                className="rounded-full max-w-24 max-h-24"
+                width={100}
+                height={100}
+                className="rounded-full max-w-24 max-h-24 object-cover object-start"
               />
             </AppViewTransition>
           </div>
