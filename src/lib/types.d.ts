@@ -3,12 +3,16 @@ type Project = {
   slug: string;
   title: string;
   brief: string;
-  descriptionBefore: string;
-  descriptionAfter: string;
+  overview: string;
+  problems: string;
+  myRole: string;
+  techStack: string[];
+  status: "completed" | "in-progress" | "planning";
   color: string;
   images: string[];
-  mainImage: StaticImageData;
+  mainImage: string;
   favicon: string;
+  link?: string;
 };
 
 type OptimizedProject = Project & {

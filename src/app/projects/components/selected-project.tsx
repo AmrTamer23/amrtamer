@@ -9,8 +9,11 @@ interface ProcessedProject {
   slug: string;
   title: string;
   brief: string;
-  descriptionBefore: string;
-  descriptionAfter: string;
+  overview: string;
+  problems: string;
+  myRole: string;
+  techStack: string[];
+  status: "completed" | "in-progress" | "planning";
   color: string;
   images: string[];
   image: {
@@ -25,16 +28,18 @@ interface ProcessedProject {
 export function SelectedProject({
   featuredProject,
   featuredContainer,
-  isAnimating,
   onViewProject,
 }: {
   featuredProject: ProcessedProject | null;
   featuredContainer: any;
-  isAnimating: boolean;
   onViewProject?: (project: ProcessedProject) => void;
 }) {
   const handleViewProject = () => {
-    if (featuredProject && onViewProject) {
+    if (
+      featuredProject &&
+      onViewProject &&
+      featuredProject.status === "completed"
+    ) {
       onViewProject(featuredProject);
     }
   };
@@ -43,7 +48,11 @@ export function SelectedProject({
     <div className="flex-1 w-8/12  " ref={featuredContainer}>
       {featuredProject && (
         <div
-          className="group relative w-full h-full rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 cursor-pointer"
+          className={`group relative w-full h-full rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 ${
+            featuredProject.status === "completed"
+              ? "cursor-pointer"
+              : "cursor-default"
+          }`}
           style={{
             background: `linear-gradient(135deg, ${featuredProject.color}15, ${featuredProject.color}05)`,
           }}
@@ -59,7 +68,10 @@ export function SelectedProject({
               height={featuredProject.image.height}
               priority={featuredProject.isPriority}
               placeholder={featuredProject.image.blurDataURL ? "blur" : "empty"}
-              blurDataURL={featuredProject.image.blurDataURL}
+              blurDataURL={
+                featuredProject.image.blurDataURL ||
+                "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+              }
               sizes="(max-width: 768px) 95vw, 60vw"
             />
           </AppViewTransition>
@@ -67,23 +79,41 @@ export function SelectedProject({
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-          {/* View Project Button */}
-          <div className="featured-button absolute top-6 right-6">
-            <Button
-              className="group inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white border-0 shadow-xl transition-all duration-300 "
-              style={{
-                background: `linear-gradient(135deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
-              }}
-              onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering the parent click
-                handleViewProject();
-              }}
-            >
-              <EyeIcon className="w-5 h-5 transition-transform " />
-              <span className="text-sm font-medium">View Project</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </Button>
-          </div>
+          {/* View Project Button - Only show for completed projects */}
+          {featuredProject.status === "completed" && (
+            <div className="featured-button absolute top-6 right-6">
+              <Button
+                className="group inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white border-0 shadow-xl transition-all duration-300 "
+                style={{
+                  background: `linear-gradient(135deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
+                }}
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering the parent click
+                  handleViewProject();
+                }}
+              >
+                <EyeIcon className="w-5 h-5 transition-transform " />
+                <span className="text-sm font-medium">View Project</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Button>
+            </div>
+          )}
+
+          {/* Status Badge */}
+          {featuredProject.status !== "completed" && (
+            <div className="absolute top-6 left-6">
+              {featuredProject.status === "in-progress" && (
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 backdrop-blur-sm">
+                  🚧 Work in Progress
+                </span>
+              )}
+              {featuredProject.status === "planning" && (
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 backdrop-blur-sm">
+                  📋 Planning
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Project Details */}
           <div className="featured-content absolute bottom-0 left-0 right-0 p-8">
@@ -119,13 +149,6 @@ export function SelectedProject({
               background: `radial-gradient(circle, ${featuredProject.color}40, transparent)`,
             }}
           />
-
-          {/* Loading Overlay */}
-          {isAnimating && (
-            <div className="absolute inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-center justify-center">
-              <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-            </div>
-          )}
         </div>
       )}
     </div>

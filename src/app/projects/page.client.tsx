@@ -23,8 +23,11 @@ interface ProcessedProject {
   slug: string;
   title: string;
   brief: string;
-  descriptionBefore: string;
-  descriptionAfter: string;
+  overview: string;
+  problems: string;
+  myRole: string;
+  techStack: string[];
+  status: "completed" | "in-progress" | "planning";
   color: string;
   images: string[];
   image: {
@@ -32,6 +35,7 @@ interface ProcessedProject {
     width: number;
     height: number;
   };
+  isPriority?: boolean;
 }
 
 interface ProjectsClientProps {
@@ -47,6 +51,21 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const featuredContainer = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+
+  // Preload images for better performance
+  useEffect(() => {
+    projects.forEach((project) => {
+      // Preload main images
+      const mainImg = new window.Image();
+      mainImg.src = project.image.src;
+
+      // Preload gallery images
+      project.images.forEach((imageSrc) => {
+        const img = new window.Image();
+        img.src = imageSrc;
+      });
+    });
+  }, [projects]);
 
   // Close modal when clicking outside
   useOnClickOutside(modalRef as React.RefObject<HTMLElement>, () =>
@@ -129,9 +148,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         "-=0.3"
       )
       // Animate in new content
-      .call(() => {
-        setFeaturedProject(newProject);
-      })
       .fromTo(
         ".featured-image",
         {
@@ -235,6 +251,16 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                   <h2 className="text-2xl font-bold text-foreground">
                     {activeProject.title}
                   </h2>
+                  {activeProject.status === "in-progress" && (
+                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                      🚧 Work in Progress
+                    </span>
+                  )}
+                  {activeProject.status === "planning" && (
+                    <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
+                      📋 Planning
+                    </span>
+                  )}
                 </div>
                 <Button
                   variant="ghost"
@@ -261,9 +287,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                         src={
                           activeProject.images &&
                           activeProject.images.length > 0
-                            ? activeProject.images.filter(
-                                (image) => image !== activeProject.image.src
-                              )[selectedImageIndex - 1] ||
+                            ? activeProject.images[selectedImageIndex - 1] ||
                               activeProject.image.src
                             : activeProject.image.src
                         }
@@ -271,45 +295,45 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                         fill
                         className="object-cover transition-opacity duration-300"
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        priority={true}
+                        placeholder="blur"
+                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                       />
                     </div>
 
-                    {/* Image Thumbnails - Only Additional Images */}
                     {activeProject.images &&
                       activeProject.images.length > 0 && (
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                          {activeProject.images
-                            .filter(
-                              (image) => image !== activeProject.image.src
-                            )
-                            .slice(0, 6)
-                            .map((image, index) => (
-                              <div
-                                key={index}
-                                className={`relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
+                          {activeProject.images.map((image, index) => (
+                            <div
+                              key={index}
+                              className={`relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
+                                selectedImageIndex === index + 1
+                                  ? "scale-95 border-opacity-100"
+                                  : "hover:scale-105 opacity-70 hover:opacity-100 border-transparent"
+                              }`}
+                              style={{
+                                borderColor:
                                   selectedImageIndex === index + 1
-                                    ? "scale-95 border-opacity-100"
-                                    : "hover:scale-105 opacity-70 hover:opacity-100 border-transparent"
+                                    ? activeProject.color
+                                    : "transparent",
+                              }}
+                              onClick={() => setSelectedImageIndex(index + 1)}
+                            >
+                              <Image
+                                src={image}
+                                alt={`${activeProject.title} - Image ${
+                                  index + 1
                                 }`}
-                                style={{
-                                  borderColor:
-                                    selectedImageIndex === index + 1
-                                      ? activeProject.color
-                                      : "transparent",
-                                }}
-                                onClick={() => setSelectedImageIndex(index + 1)}
-                              >
-                                <Image
-                                  src={image}
-                                  alt={`${activeProject.title} - Image ${
-                                    index + 1
-                                  }`}
-                                  fill
-                                  className="object-cover"
-                                  sizes="(max-width: 768px) 25vw, 12vw"
-                                />
-                              </div>
-                            ))}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 768px) 25vw, 12vw"
+                                loading="lazy"
+                                placeholder="blur"
+                                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                              />
+                            </div>
+                          ))}
                         </div>
                       )}
                   </div>
@@ -321,31 +345,56 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                         Overview
                       </h3>
                       <p className="text-muted-foreground leading-relaxed">
-                        {activeProject.brief}
+                        {activeProject.overview}
                       </p>
                     </div>
 
-                    {activeProject.descriptionBefore && (
+                    {activeProject.problems && (
                       <div>
                         <h3 className="text-lg font-semibold text-foreground mb-3">
                           The Challenge
                         </h3>
                         <p className="text-muted-foreground leading-relaxed">
-                          {activeProject.descriptionBefore}
+                          {activeProject.problems}
                         </p>
                       </div>
                     )}
 
-                    {activeProject.descriptionAfter && (
+                    {activeProject.myRole && (
                       <div>
                         <h3 className="text-lg font-semibold text-foreground mb-3">
-                          The Solution
+                          My Role
                         </h3>
                         <p className="text-muted-foreground leading-relaxed">
-                          {activeProject.descriptionAfter}
+                          {activeProject.myRole}
                         </p>
                       </div>
                     )}
+
+                    {/* Tech Stack */}
+                    {activeProject.techStack &&
+                      activeProject.techStack.length > 0 && (
+                        <div>
+                          <h3 className="text-lg font-semibold text-foreground mb-3">
+                            Tech Stack
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
+                            {activeProject.techStack.map((tech, index) => (
+                              <span
+                                key={index}
+                                className="px-3 py-1 text-sm rounded-full border"
+                                style={{
+                                  backgroundColor: `${activeProject.color}20`,
+                                  borderColor: `${activeProject.color}40`,
+                                  color: activeProject.color,
+                                }}
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
                     {/* Project Link */}
                     <div className="pt-4">
@@ -374,7 +423,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
             <SelectedProject
               featuredProject={featuredProject}
               featuredContainer={featuredContainer}
-              isAnimating={isAnimating}
               onViewProject={handleViewProject}
             />
 

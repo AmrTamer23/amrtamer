@@ -1,28 +1,26 @@
-import dallafavicon from "@/lib/assets/dalla/favicon.png";
-import dalla from "@/lib/assets/dalla/dalla.webp";
-import dalla1 from "@/lib/assets/dalla/dalla1.webp";
-import crcl from "@/lib/assets/crcl.webp";
-import betterreadsFavicon from "@/lib/assets/better-reads/favicon.png";
-import betterreadsMain from "@/lib/assets/better-reads/betterreads-main.avif";
-import brandria from "@/lib/assets/brandria.webp";
-import shelley from "@/lib/assets/shelley.webp";
-import crclFavicon from "@/lib/assets/crcl/crcl-favicon.png";
-
-const projects: Project[] = [
+export const projects: Project[] = [
   {
     id: 0,
     slug: "dalla",
     title: "Dalla",
     brief:
       "A MENA based solution the connects the region's leading companies with the best talent.",
-    descriptionBefore:
+    overview:
       "My role was Frontend Software Engineer on Dalla's platform and admin dashboard",
-    descriptionAfter:
-      "The goal was to build a platform that serves the needs of the region's leading companies with a focus on the user experience and performance. Built with Turbo(for Monorepo Build) and Next.js, TypeScript, TailwindCSS.",
-    color: "#234D65",
-    images: [dalla1.src],
-    mainImage: dalla,
-    favicon: dallafavicon.src,
+    problems:
+      "The challenge was to build a platform that serves the needs of the region's leading companies with a focus on the user experience and performance.",
+    myRole:
+      "Built with Turbo(for Monorepo Build) and Next.js, TypeScript, TailwindCSS to create a scalable and performant platform.",
+    techStack: ["Next.js", "TypeScript", "TailwindCSS", "Turbo"],
+    status: "in-progress",
+    color: "#224C62",
+    images: [
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CY7SqilXUhPnC5HDOGUikAXTphWmy82j604qIY",
+    ],
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYnGofQgVPojVgkchNrZB3awQpIe2Ymlbi0u6G",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYtjwUYpHYrQbNO8L5ITue9PWGldnAkzjF6JVi",
   },
   {
     id: 1,
@@ -30,14 +28,22 @@ const projects: Project[] = [
     title: "BetterReads",
     brief:
       "A personal book tracking system, covering all what you mess in goodreads.",
-    descriptionBefore:
+    overview:
       "A book tracking system built with TypeScript, Tanstack Start, tRPC, Hono. This project is a work in progress and is not yet complete. It is a personal project and is not yet complete.",
-    descriptionAfter:
-      "A book tracking system built with TypeScript, Tanstack Start, tRPC, Hono. This project is a work in progress and is not yet complete. It is a personal project and is not yet complete.",
-    color: "#111111",
-    images: [],
-    mainImage: betterreadsMain,
-    favicon: betterreadsFavicon.src,
+    problems:
+      "Existing book tracking platforms lack comprehensive features for personal book management.",
+    myRole:
+      "Built with modern technologies to provide a comprehensive book tracking experience.",
+    techStack: ["TypeScript", "Tanstack Start", "tRPC", "Hono"],
+    status: "in-progress",
+    color: "#FFE1C2",
+    images: [
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYFztqA5gSazVLWF1Xon4yZKAPmY6eGItlbR9x",
+    ],
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYmclZlRXCJWl5wck0ymEFt7eYGpuO4oqB8dbz",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYSbrfhLx16oYcMjZEDFKO3pzHd4LiTqhW7Pub",
   },
   {
     id: 2,
@@ -45,13 +51,22 @@ const projects: Project[] = [
     title: "CRCL Admin",
     brief:
       "A comprehensive admin dashboard for CRCL operations with role-based access control and ticketing system.",
-    descriptionBefore: "A dashboard for managing CRCL's operations",
-    descriptionAfter:
-      "Ticketing System, Adding users with rules(ex: booth and opreation users) and multiple views based on the role of the user. Built with TypeScript, Next.js, TailwindCSS, Shadcn UI.",
-    images: [crcl.src],
+    overview: "A dashboard for managing CRCL's operations",
+    problems:
+      "Ticketing System, Adding users with rules(ex: booth and opreation users) and multiple views based on the role of the user.",
+    myRole:
+      "I worked on the dashboard's frontend, delieverd a business critical features and analytics to the client.",
+    images: [
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYqpaFXmvFch3MuIiJbUPayYQCq7kdtZn5WSz1",
+    ],
+    techStack: ["TypeScript", "Next.js", "TailwindCSS"],
+    status: "completed",
     color: "#F08541",
-    mainImage: crcl,
-    favicon: crclFavicon.src,
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYqpaFXmvFch3MuIiJbUPayYQCq7kdtZn5WSz1",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYNr8FdjziwjVB4xk8o3vzMc2AfDuePhElgmC1",
+    link: "https://dash.crclevents.com",
   },
   // {
   //   id: 2,
@@ -73,41 +88,29 @@ const projects: Project[] = [
   //   color: "#989C9D",
   //   mainImage: shelley,
   // },
-  // {
-  //   id: 3,
-  //   slug: "brandria",
-  //   title: "Brandria",
-  //   descriptionBefore: "Centralized system for managing smart home devices.",
-  //   descriptionAfter: "",
-  //   color: "#900011",
-  //   images: [brandria.src],
-  //   mainImage: brandria,
-  //   brief: "",
-  // },
+  {
+    id: 3,
+    slug: "salamy",
+    title: "Salamy Space",
+    brief: "A website for mental health and wellness based in MENA.",
+    overview: "A website for mental health and wellness based in MENA.",
+    problems:
+      "Mental health resources in the MENA region were limited and not easily accessible online.",
+    myRole:
+      "My role was to build and maintain the frontend of the website, and integrate with the Strapi to manage the content, worked with SEO specialist to improve the website's visibility, and maintained the backend for a while.",
+    techStack: ["TypeScript", "Next.js", "TailwindCSS", "Strapi"],
+    status: "completed",
+    color: "#9782F2",
+    images: [
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYTaJJMIrOhlSRJ05fu9B1wVzF7avqAUTpYEyn",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhryNi9WgzJQeLF6kocmEDwHZG9qd2uRI1Sif",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYWtnWDFjSfET1ygwpt69SCKcjlZRuHF4DrYOA",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CY3QnYUElOS7CJP1xNVa5YMlKdrBhE0Qeqi2Wg",
+    ],
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYTaJJMIrOhlSRJ05fu9B1wVzF7avqAUTpYEyn",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYgE7nS1tufaDxk6hmNnG529pwPIcrZdKAVXUY",
+    link: "https://salamy.space",
+  },
 ];
-
-// Cache the processed projects for faster subsequent loads
-let processedProjectsCache: OptimizedProject[] | null = null;
-
-export function getOptimizedProjects(): OptimizedProject[] {
-  if (processedProjectsCache) {
-    return processedProjectsCache;
-  }
-
-  processedProjectsCache = projects.map((project) => ({
-    ...project,
-    // Pre-compute essential image properties
-    optimizedMainImage: {
-      src: project.mainImage.src,
-      width: project.mainImage.width,
-      height: project.mainImage.height,
-      blurDataURL: project.mainImage.blurDataURL,
-    },
-    // Preload priority for first project
-    isPriority: project.id === 0,
-  }));
-
-  return processedProjectsCache;
-}
-
-export default projects;

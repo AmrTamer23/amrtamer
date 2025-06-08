@@ -1,11 +1,9 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { getOptimizedProjects } from "@/lib/projects";
+import { projects } from "@/lib/projects";
 import ProjectsClient from "./page.client";
 import { ProjectsLoading } from "./components/projects.loading";
 import { AppViewTransition } from "@/components/view-transition";
-import { GlowingEffect } from "@/components/ui/card-glowing-effect";
-import { Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Projects - Crafted with Purpose",
@@ -33,16 +31,14 @@ export const metadata: Metadata = {
 };
 
 function getProjectsData() {
-  const optimizedProjects = getOptimizedProjects();
-
-  const processedProjects = optimizedProjects.map((project) => ({
+  const processedProjects = projects.map((project, index) => ({
     ...project,
     image: {
-      src: project.optimizedMainImage.src,
-      width: project.optimizedMainImage.width,
-      height: project.optimizedMainImage.height,
-      blurDataURL: project.optimizedMainImage.blurDataURL,
+      src: project.mainImage,
+      width: 1200,
+      height: 800,
     },
+    isPriority: index === 0, // First project gets priority loading
   }));
 
   return processedProjects;
