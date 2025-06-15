@@ -26,6 +26,8 @@ export default function Home() {
                 width={100}
                 height={100}
                 className="rounded-full max-w-24 max-h-24 object-cover object-start"
+                priority
+                fetchPriority="high"
               />
             </AppViewTransition>
           </div>
