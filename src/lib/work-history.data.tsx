@@ -20,7 +20,7 @@ export const workExperience: {
       <img
         src={DallaSolutionsLogo.src}
         alt="Dalla Solutions Logo"
-        className="w-20 aspect-square rounded-xl"
+        className="w-16 sm:w-20 aspect-square rounded-xl"
       />
     ),
     description:
@@ -43,7 +43,7 @@ export const workExperience: {
       <img
         src={DigitalBrandriaLogo.src}
         alt="Digital Brandria Logo"
-        className="w-20 aspect-square rounded-xl"
+        className="w-16 sm:w-20 aspect-square rounded-xl"
       />
     ),
     description:
@@ -68,7 +68,7 @@ export const workExperience: {
       <img
         src={CloudypediaLogo.src}
         alt="Cloudypedia Logo"
-        className="w-20 aspect-video rounded-xl"
+        className="w-16 sm:w-20 aspect-video rounded-xl"
       />
     ),
     description:
