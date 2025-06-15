@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config/site.config";
 import { cn } from "@/lib/utils";
@@ -74,6 +74,14 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: "#000000",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -87,11 +95,11 @@ export default function RootLayout({
           IBMPlexSans.variable
         )}
       >
-        <div className="flex flex-col items-center justify-center min-h-screen  w-screen pt-2">
-          <header className="w-full px-6 flex items-center justify-center">
+        <div className="flex flex-col items-center justify-center min-h-screen w-screen pt-2 sm:pt-4">
+          <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
             <Header />
           </header>
-          <main className="flex-1 h-full w-full flex justify-center items-center">
+          <main className="flex-1 h-full w-full flex justify-center items-center px-2 sm:px-0">
             <PageTransition>{children}</PageTransition>
           </main>
         </div>

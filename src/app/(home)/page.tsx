@@ -5,9 +5,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex items-center px-4 py-2 w-full flex-col h-full  max-w-7xl mx-auto">
-      <div className="flex-1 flex items-center justify-center ">
-        <div className="flex gap-4 max-w-2xl relative border border-white/10 p-6 rounded-xl cursor-default backdrop-blur-sm bg-white/5">
+    <main className="flex items-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6 w-full flex-col h-full max-w-7xl mx-auto">
+      <div className="flex-1 flex items-center justify-center w-full">
+        <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-2xl relative border border-white/10 p-4 sm:p-6 lg:p-8 rounded-xl cursor-default backdrop-blur-sm bg-white/5">
           <GlowingEffect
             disabled={false}
             blur={1}
@@ -18,35 +18,43 @@ export default function Home() {
             movementDuration={1.5}
             borderWidth={2}
           />
-          <div className="flex-col flex gap-6 items-center justify-center h-full relative z-20">
+
+          <div className="flex-col flex gap-4 sm:gap-6 items-center justify-center h-full relative z-20 sm:flex-shrink-0">
             <AppViewTransition name="profile-image">
               <Image
                 src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhhXudoWgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
-                alt="logo"
-                width={100}
-                height={100}
-                className="rounded-full max-w-24 max-h-24 object-cover object-start"
+                alt="Amr Tamer - Software Engineer"
+                width={120}
+                height={120}
+                className="rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover object-start"
                 priority
                 fetchPriority="high"
               />
             </AppViewTransition>
           </div>
-          <div className="flex flex-col gap-4 relative z-20">
+
+          <div className="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start">
             <AppViewTransition name="profile-info">
-              <div className="h-fit flex flex-col gap-1 items-start justify-center">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-                  Amr Tamer
-                </h1>
-                <p className="text-base text-white/70">Software Engineer</p>
+              <div className="h-fit flex flex-col gap-1 sm:gap-2 items-center sm:items-start justify-center text-center sm:text-left">
+                <div className="w-full">
+                  <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent text-center self-center">
+                    Amr Tamer
+                  </h1>
+                </div>
+                <p className="text-sm sm:text-base lg:text-lg text-white/70 font-medium text-center sm:text-left">
+                  Software Engineer
+                </p>
               </div>
             </AppViewTransition>
-            <p className="text-base text-white/60 text-balance">
+
+            <p className="text-sm sm:text-base lg:text-lg text-white/60 text-pretty leading-relaxed max-w-prose text-center sm:text-left">
               T-shaped Software Engineer with a focus on Frontend Engineering,
               an AWS Certified Cloud Practitioner, and a Computer Science
               student. Always eager to learn and explore new technologies to
               build impactful, scalable solutions.
             </p>
-            <div className="flex w-full justify-end text-sm underline underline-offset-8 [&_li]:cursor-pointer [&_li]:hover:text-white">
+
+            <div className="flex w-full justify-center sm:justify-end text-sm underline underline-offset-8 [&_li]:cursor-pointer [&_li]:hover:text-white">
               <ul className="flex gap-4">
                 <Link
                   href="https://drive.google.com/file/d/1IIVzaZ6hIsrurBNjK8KZ5aayITDQClPp/view?usp=sharing"

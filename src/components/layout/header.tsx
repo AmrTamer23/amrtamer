@@ -36,9 +36,10 @@ export default function Header({ className }: { className?: string }) {
     <header
       className={cn("w-full max-w-7xl mx-auto mix-blend-luminosity", className)}
     >
-      <div className="flex flex-row items-center justify-between py-4 w-full">
+      <div className="flex flex-col sm:flex-row items-center justify-between py-4 w-full gap-4 sm:gap-0">
+        {/* Mobile-first responsive social links */}
         <motion.div
-          className="flex items-center gap-6 w-1/3 justify-center -mt-5"
+          className="flex items-center gap-4 sm:gap-6 justify-center sm:justify-center sm:w-1/3 sm:-mt-5 order-2 sm:order-1"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{
@@ -61,7 +62,7 @@ export default function Header({ className }: { className?: string }) {
             whileTap={{ scale: 0.95 }}
           >
             <Link href="mailto:amrtamer2324@gmail.com" target="_blank">
-              <MailIcon className="w-6 h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
+              <MailIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
             </Link>
           </motion.div>
           <motion.div
@@ -81,7 +82,7 @@ export default function Header({ className }: { className?: string }) {
               href="https://www.linkedin.com/in/amrtamer23/"
               target="_blank"
             >
-              <LinkedinIcon className="w-6 h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
+              <LinkedinIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
             </Link>
           </motion.div>
           <motion.div
@@ -98,30 +99,33 @@ export default function Header({ className }: { className?: string }) {
             whileTap={{ scale: 0.95 }}
           >
             <Link href="https://x.com/AmrT_23" target="_blank">
-              <XIcon className="w-6 h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
+              <XIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
             </Link>
           </motion.div>
         </motion.div>
 
+        {/* Logo - centered on mobile, responsive sizing */}
         <BrandTransition>
-          <div className="w-1/3 text-center select-none flex justify-center items-center">
+          <div className="flex justify-center items-center order-1 sm:order-2 sm:w-1/3">
             <Image
               src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhdFEO5WgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
               alt="AT23 Logo"
-              width={125}
-              height={125}
-              className="object-contain -mt-10"
+              width={100}
+              height={100}
+              className="object-contain -mt-2 sm:-mt-10 w-20 h-20 sm:w-[125px] sm:h-[125px]"
               priority
             />
           </div>
         </BrandTransition>
-        <nav className="flex gap-4 text-lg w-1/3  items-center justify-end -mt-5">
+
+        {/* Navigation - responsive text size and spacing */}
+        <nav className="flex gap-3 sm:gap-4 text-base sm:text-lg items-center justify-center sm:justify-end sm:w-1/3 sm:-mt-5 order-3">
           {links.map(({ to, label }) => {
             return (
               <NavItemTransition key={to} href={to}>
                 <button
                   onClick={() => handleNavigation(to)}
-                  className="hover:opacity-70 transition-opacity select-none cursor-pointer"
+                  className="hover:opacity-70 transition-opacity select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 active:bg-white/20 transition-all duration-200"
                   disabled={isPending}
                 >
                   {label}

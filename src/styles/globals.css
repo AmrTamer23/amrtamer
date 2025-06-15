@@ -8,14 +8,58 @@
   --font-palaise: 'Palaise', sans-serif;
 }
 
-/* Utility classes */
+/* Mobile-first responsive utilities */
 .font-nebula {
   font-family: var(--font-nebula);
 }
 
 .font-palaise {
   font-family: var(--font-palaise);
-} 
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 640px) {
+  /* Improve touch targets on mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Better text legibility on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  /* Optimize scrolling on mobile */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  /* Better spacing for mobile cards */
+  .mobile-card-spacing {
+    padding: 1rem;
+    margin: 0.5rem;
+  }
+  
+  /* Enhanced text rendering for mobile */
+  h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Prevent text zoom on orientation change */
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+}
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -30,11 +74,17 @@ body {
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-attachment: fixed;
+	/* Use scroll instead of fixed on mobile for better performance */
+	background-attachment: scroll;
 
 	@media (prefers-color-scheme: dark) {
 		color-scheme: dark;
 	}
+
+  /* Better mobile background handling */
+  @media (min-width: 768px) {
+    background-attachment: fixed;
+  }
 }
 
 :root {
@@ -245,7 +295,6 @@ body {
 @media (max-width: 1000px) {
   h1 {
     font-size: 7vw;
-    text-indent: 2em;
   }
 
   .cards-container {
