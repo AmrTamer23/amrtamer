@@ -4,35 +4,14 @@ import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import { AppViewTransition } from "@/components/view-transition";
 
-interface ProcessedProject {
-  id: number;
-  slug: string;
-  title: string;
-  brief: string;
-  overview: string;
-  problems: string;
-  myRole: string;
-  techStack: string[];
-  status: "completed" | "in-progress" | "planning";
-  color: string;
-  images: string[];
-  image: {
-    src: string;
-    width: number;
-    height: number;
-    blurDataURL?: string;
-  };
-  isPriority?: boolean;
-}
-
 export function SelectedProject({
   featuredProject,
   featuredContainer,
   onViewProject,
 }: {
-  featuredProject: ProcessedProject | null;
+  featuredProject: Project | null;
   featuredContainer: any;
-  onViewProject?: (project: ProcessedProject) => void;
+  onViewProject?: (project: Project) => void;
 }) {
   const handleViewProject = () => {
     if (
@@ -58,29 +37,22 @@ export function SelectedProject({
           }}
           onClick={handleViewProject}
         >
-          {/* Background Image */}
-          <AppViewTransition name={`main-project-image-${featuredProject.id}`}>
+          <AppViewTransition
+            name={`main-project-image-${featuredProject.slug}`}
+          >
             <Image
-              src={featuredProject.image.src || "/placeholder.svg"}
+              src={featuredProject.mainImage || "/placeholder.svg"}
               alt={featuredProject.title}
               className="featured-image absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-              width={featuredProject.image.width}
-              height={featuredProject.image.height}
-              priority={featuredProject.isPriority}
-              placeholder={featuredProject.image.blurDataURL ? "blur" : "empty"}
-              blurDataURL={
-                featuredProject.image.blurDataURL ||
-                "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-              }
+              width={1000}
+              height={1000}
               sizes="(max-width: 768px) 95vw, 60vw"
-              loading={featuredProject.isPriority ? "eager" : "lazy"}
+              loading="eager"
             />
           </AppViewTransition>
 
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-          {/* View Project Button - Only show for completed projects */}
           {featuredProject.status === "completed" && (
             <div className="featured-button absolute top-6 right-6">
               <Button
@@ -89,7 +61,7 @@ export function SelectedProject({
                   background: `linear-gradient(135deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
                 }}
                 onClick={(e) => {
-                  e.stopPropagation(); // Prevent triggering the parent click
+                  e.stopPropagation();
                   handleViewProject();
                 }}
               >
@@ -100,7 +72,6 @@ export function SelectedProject({
             </div>
           )}
 
-          {/* Status Badge */}
           {featuredProject.status !== "completed" && (
             <div className="absolute top-6 left-6">
               {featuredProject.status === "in-progress" && (
@@ -116,7 +87,6 @@ export function SelectedProject({
             </div>
           )}
 
-          {/* Project Details */}
           <div className="featured-content absolute bottom-0 left-0 right-0 p-8">
             <div className="max-w-2xl">
               <AppViewTransition
@@ -137,7 +107,6 @@ export function SelectedProject({
             </div>
           </div>
 
-          {/* Decorative Elements */}
           <div
             className="absolute top-0 right-0 w-40 h-40 opacity-20 rounded-full blur-2xl"
             style={{

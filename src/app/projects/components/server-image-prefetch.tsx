@@ -1,4 +1,3 @@
-// Server Component for image prefetching
 interface ServerImagePrefetchProps {
   projects: Project[];
 }
@@ -29,7 +28,6 @@ export function ServerImagePrefetch({ projects }: ServerImagePrefetchProps) {
         </div>
       ))}
 
-      {/* Lower priority preloads */}
       {secondaryProjects.map((project, index) => (
         <link
           key={`secondary-${project.id}`}
