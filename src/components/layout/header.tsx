@@ -1,7 +1,6 @@
 "use client";
-import { useState, useTransition } from "react";
+import { useTransition, useEffect } from "react";
 import Image from "next/image";
-
 import { cn } from "@/lib/utils";
 import { MailIcon, LinkedinIcon, XIcon } from "@/lib/icons";
 import {
@@ -13,7 +12,6 @@ import { motion } from "motion/react";
 import Link from "next/link";
 
 export default function Header({ className }: { className?: string }) {
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -28,6 +26,11 @@ export default function Header({ className }: { className?: string }) {
       router.push(href);
     });
   };
+
+  useEffect(() => {
+    router.prefetch("/projects");
+    router.prefetch("/work");
+  }, [router]);
 
   return (
     <header

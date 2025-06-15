@@ -4,6 +4,7 @@ import { projects } from "@/lib/projects";
 import ProjectsClient from "./page.client";
 import { ProjectsLoading } from "./components/projects.loading";
 import { AppViewTransition } from "@/components/view-transition";
+import { ImagePrefetch } from "./components/image-prefetch";
 
 export const metadata: Metadata = {
   title: "Projects - Crafted with Purpose",
@@ -48,25 +49,28 @@ export default function ProjectsPage() {
   const projectsData = getProjectsData();
 
   return (
-    <Suspense fallback={<ProjectsLoading />}>
-      <div className=" flex flex-col gap-8 -mt-12">
-        {/* Hero Section */}
-        <div className="w-full px-6 pt-8 flex items-center justify-center">
-          <div className="max-w-6xl mx-auto text-center">
-            <AppViewTransition name="projects-title">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
-                Crafted with Purpose
-              </h1>
-            </AppViewTransition>
-            <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-              Explore a collection of thoughtfully designed digital experiences
-              that blend innovation with functionality.
-            </p>
+    <>
+      <Suspense fallback={<ProjectsLoading />}>
+        <div className=" flex flex-col gap-8 -mt-12">
+          {/* Hero Section */}
+          <div className="w-full px-6 pt-8 flex items-center justify-center">
+            <div className="max-w-6xl mx-auto text-center">
+              <AppViewTransition name="projects-title">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
+                  Crafted with Purpose
+                </h1>
+              </AppViewTransition>
+              <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
+                Explore a collection of thoughtfully designed digital
+                experiences that blend innovation with functionality.
+              </p>
+            </div>
           </div>
-        </div>
 
-        <ProjectsClient projects={projectsData} />
-      </div>
-    </Suspense>
+          <ProjectsClient projects={projectsData} />
+        </div>
+      </Suspense>
+      <ImagePrefetch projects={projectsData} />
+    </>
   );
 }

@@ -237,9 +237,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
   return (
     <>
-      {/* Image Prefetch Component */}
-      <ImagePrefetch projects={projects} />
-
       {/* Modal Background Overlay */}
       <AnimatePresence>
         {activeProject ? (
