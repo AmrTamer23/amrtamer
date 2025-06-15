@@ -2,6 +2,7 @@ import { GlowingEffect } from "@/components/ui/card-glowing-effect";
 import Link from "next/link";
 import { AppViewTransition } from "@/components/view-transition";
 import Image from "next/image";
+import { SocialMedia } from "./components/social-media";
 
 export default function Home() {
   return (
@@ -19,21 +20,24 @@ export default function Home() {
             borderWidth={2}
           />
 
-          <div className="flex-col flex gap-4 sm:gap-6 items-center justify-center h-full relative z-20 sm:flex-shrink-0">
-            <AppViewTransition name="profile-image">
-              <Image
-                src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhhXudoWgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
-                alt="Amr Tamer - Software Engineer"
-                width={120}
-                height={120}
-                className="rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover object-start"
-                priority
-                fetchPriority="high"
-              />
-            </AppViewTransition>
+          <div className="flex flex-col gap-4 sm:gap-6 items-center justify-center h-full relative z-20 sm:flex-shrink-0">
+            <div className="flex-col flex gap-4 sm:gap-6 items-center justify-center h-full relative z-20 sm:flex-shrink-0">
+              <AppViewTransition name="profile-image">
+                <Image
+                  src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhhXudoWgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
+                  alt="Amr Tamer - Software Engineer"
+                  width={120}
+                  height={120}
+                  className="rounded-full w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-cover object-start"
+                  priority
+                  fetchPriority="high"
+                />
+              </AppViewTransition>
+            </div>
+            <SocialMedia className="hidden sm:flex" />
           </div>
 
-          <div className="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start">
+          <div className="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start w-full">
             <AppViewTransition name="profile-info">
               <div className="h-fit flex flex-col gap-1 sm:gap-2 items-center sm:items-start justify-center text-center sm:text-left">
                 <div className="w-full">
@@ -54,16 +58,17 @@ export default function Home() {
               build impactful, scalable solutions.
             </p>
 
-            <div className="flex w-full justify-center sm:justify-end text-sm underline underline-offset-8 [&_li]:cursor-pointer [&_li]:hover:text-white">
-              <ul className="flex gap-4">
-                <Link
-                  href="https://drive.google.com/file/d/1IIVzaZ6hIsrurBNjK8KZ5aayITDQClPp/view?usp=sharing"
-                  target="_blank"
-                  className="text-white/80 hover:text-white transition-colors font-bold underline-offset-4"
-                >
-                  See My Resume!
-                </Link>
-              </ul>
+            <div className="flex w-full justify-between sm:justify-end items-center mt-4">
+              <div className="flex sm:hidden flex-row">
+                <SocialMedia className="flex sm:hidden flex-row gap-6" />
+              </div>
+              <Link
+                href="https://drive.google.com/file/d/1IIVzaZ6hIsrurBNjK8KZ5aayITDQClPp/view?usp=sharing"
+                target="_blank"
+                className="text-white/80 hover:text-white transition-colors font-bold underline-offset-8 text-sm sm:text-base lg:text-lg underline   m-0 p-0 h-fit"
+              >
+                See My Resume!
+              </Link>
             </div>
           </div>
         </div>

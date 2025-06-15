@@ -34,79 +34,11 @@ export default function Header({ className }: { className?: string }) {
 
   return (
     <header
-      className={cn("w-full max-w-7xl mx-auto mix-blend-luminosity", className)}
+      className={cn("w-full max-w-2xl mx-auto mix-blend-luminosity", className)}
     >
-      <div className="flex flex-col sm:flex-row items-center justify-between py-4 w-full gap-4 sm:gap-0">
-        {/* Mobile-first responsive social links */}
-        <motion.div
-          className="flex items-center gap-4 sm:gap-6 justify-center sm:justify-center sm:w-1/3 sm:-mt-5 order-2 sm:order-1"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.8,
-            delay: 0.2,
-            ease: [0.25, 0.46, 0.45, 0.94],
-          }}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.4,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            whileHover={{
-              transition: { duration: 0.2 },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="mailto:amrtamer2324@gmail.com" target="_blank">
-              <MailIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
-            </Link>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.6,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            whileHover={{
-              transition: { duration: 0.2 },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link
-              href="https://www.linkedin.com/in/amrtamer23/"
-              target="_blank"
-            >
-              <LinkedinIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
-            </Link>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{
-              duration: 0.6,
-              delay: 0.8,
-              ease: [0.25, 0.46, 0.45, 0.94],
-            }}
-            whileHover={{
-              transition: { duration: 0.2 },
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link href="https://x.com/AmrT_23" target="_blank">
-              <XIcon className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors cursor-pointer" />
-            </Link>
-          </motion.div>
-        </motion.div>
-
-        {/* Logo - centered on mobile, responsive sizing */}
+      <div className="flex flex-col sm:flex-row items-center justify-between py-4 w-full ">
         <BrandTransition>
-          <div className="flex justify-center items-center order-1 sm:order-2 sm:w-1/3">
+          <div className="flex justify-center items-center order-1 sm:order-2 ">
             <Image
               src="https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhdFEO5WgzJQeLF6kocmEDwHZG9qd2uRI1Sif"
               alt="AT23 Logo"
@@ -117,15 +49,13 @@ export default function Header({ className }: { className?: string }) {
             />
           </div>
         </BrandTransition>
-
-        {/* Navigation - responsive text size and spacing */}
-        <nav className="flex gap-3 sm:gap-4 text-base sm:text-lg items-center justify-center sm:justify-end sm:w-1/3 sm:-mt-5 order-3">
+        <nav className="flex gap-3 sm:gap-4 text-base sm:text-lg items-center justify-center sm:justify-end sm:w-1/3 sm:-mt-5 order-3 ">
           {links.map(({ to, label }) => {
             return (
               <NavItemTransition key={to} href={to}>
                 <button
                   onClick={() => handleNavigation(to)}
-                  className="hover:opacity-70 transition-opacity select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 active:bg-white/20 transition-all duration-200"
+                  className="hover:opacity-70 select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 active:bg-white/20 transition-all duration-200"
                   disabled={isPending}
                 >
                   {label}

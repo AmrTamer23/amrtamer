@@ -31,7 +31,7 @@ export function WorkModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 -right-2 md:top-6 md:right-5  rounded-full  transition-colors z-10 cursor-pointer"
+          className="absolute top-4 right-4 md:top-6 md:right-5  rounded-full  transition-colors z-10 cursor-pointer"
           aria-label="Close modal"
         >
           <X className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
