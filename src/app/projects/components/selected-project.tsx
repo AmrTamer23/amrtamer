@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import { AppViewTransition } from "@/components/view-transition";
+import { useId } from "react";
 
 export function SelectedProject({
   featuredProject,
@@ -37,9 +38,7 @@ export function SelectedProject({
           }}
           onClick={handleViewProject}
         >
-          <AppViewTransition
-            name={`main-project-image-${featuredProject.slug}`}
-          >
+          <AppViewTransition name={`main-project-image-${useId()}`}>
             <Image
               src={featuredProject.mainImage || "/placeholder.svg"}
               alt={featuredProject.title}

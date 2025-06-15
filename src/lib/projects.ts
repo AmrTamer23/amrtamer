@@ -1,27 +1,27 @@
 export const projects: Project[] = [
-  {
-    id: 0,
-    slug: "dalla",
-    title: "Dalla",
-    brief:
-      "A MENA based solution the connects the region's leading companies with the best talent.",
-    overview:
-      "My role was Frontend Software Engineer on Dalla's platform and admin dashboard",
-    problems:
-      "The challenge was to build a platform that serves the needs of the region's leading companies with a focus on the user experience and performance.",
-    myRole:
-      "Built with Turbo(for Monorepo Build) and Next.js, TypeScript, TailwindCSS to create a scalable and performant platform.",
-    techStack: ["Next.js", "TypeScript", "TailwindCSS", "Turbo"],
-    status: "in-progress",
-    color: "#224C62",
-    images: [
-      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CY7SqilXUhPnC5HDOGUikAXTphWmy82j604qIY",
-    ],
-    mainImage:
-      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYnGofQgVPojVgkchNrZB3awQpIe2Ymlbi0u6G",
-    favicon:
-      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYtjwUYpHYrQbNO8L5ITue9PWGldnAkzjF6JVi",
-  },
+  // {
+  //   id: 0,
+  //   slug: "dalla",
+  //   title: "Dalla",
+  //   brief:
+  //     "A MENA based solution the connects the region's leading companies with the best talent.",
+  //   overview:
+  //     "My role was Frontend Software Engineer on Dalla's platform and admin dashboard",
+  //   problems:
+  //     "The challenge was to build a platform that serves the needs of the region's leading companies with a focus on the user experience and performance.",
+  //   myRole:
+  //     "Built with Turbo(for Monorepo Build) and Next.js, TypeScript, TailwindCSS to create a scalable and performant platform.",
+  //   techStack: ["Next.js", "TypeScript", "TailwindCSS", "Turbo"],
+  //   status: "in-progress",
+  //   color: "#224C62",
+  //   images: [
+  //     "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CY7SqilXUhPnC5HDOGUikAXTphWmy82j604qIY",
+  //   ],
+  //   mainImage:
+  //     "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYnGofQgVPojVgkchNrZB3awQpIe2Ymlbi0u6G",
+  //   favicon:
+  //     "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYtjwUYpHYrQbNO8L5ITue9PWGldnAkzjF6JVi",
+  // },
   {
     id: 1,
     slug: "better-reads",

@@ -14,7 +14,7 @@ interface ProjectsClientProps {
 }
 
 export default function ProjectsClient({ projects }: ProjectsClientProps) {
-  const [featuredProject, setFeaturedProject] = useState(projects[0] || null);
+  const [featuredProject, setFeaturedProject] = useState(projects[0]);
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -53,11 +53,11 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
     const timeline = gsap.timeline({
       onComplete: () => {
-        setFeaturedProject(newProject);
         setIsAnimating(false);
       },
     });
 
+    // Phase 1: Fade out old content
     timeline
       .to(".featured-image", {
         scale: 1.1,
@@ -95,6 +95,11 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         },
         "-=0.3"
       )
+      // ✅ Update state at the perfect moment - when old content is invisible
+      .call(() => {
+        setFeaturedProject(newProject);
+      })
+      // Phase 2: Fade in new content (now with correct project data)
       .fromTo(
         ".featured-image",
         {
