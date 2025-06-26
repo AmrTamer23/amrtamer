@@ -95,7 +95,7 @@ export default function RootLayout({
           IBMPlexSans.variable
         )}
       >
-        <div className="flex flex-col items-center justify-center min-h-screen w-screen pt-2 sm:pt-4">
+        <div className="flex flex-col items-center justify-center min-h-screen w-screen pt-2 sm:pt-0">
           <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
             <Header />
           </header>
