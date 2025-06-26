@@ -201,7 +201,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
       <div className="flex-1 w-full px-6 flex items-center justify-center">
         <div className="w-full h-full ">
-          <div className="flex gap-8 h-full min-h-[65vh] w-full min-w-[90svw] mx-auto">
+          <div className="flex gap-8 h-full min-h-[65vh] w-full min-w-[90svw] mx-auto max-sm:flex-col max-sm:min-h-[80vh] max-sm:gap-4">
             <SelectedProject
               featuredProject={featuredProject}
               featuredContainer={featuredContainer}

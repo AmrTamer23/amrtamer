@@ -6,6 +6,7 @@ import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { X, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 interface ProjectModalProps {
   activeProject: Project | null;
@@ -222,18 +223,22 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                       )}
 
                     {/* Project Link */}
-                    <div className="pt-4">
-                      <Button
-                        className="group inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold"
-                        style={{
-                          background: `linear-gradient(135deg, ${activeProject.color}, ${activeProject.color}dd)`,
-                          color: "white",
-                        }}
-                      >
-                        <span>View Live Project</span>
-                        <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      </Button>
-                    </div>
+                    {activeProject.link && (
+                      <div className="pt-4">
+                        <Link href={activeProject.link} target="_blank">
+                          <Button
+                            className="group inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold"
+                            style={{
+                              background: `linear-gradient(135deg, ${activeProject.color}, ${activeProject.color}dd)`,
+                              color: "white",
+                            }}
+                          >
+                            <span>View Live Project</span>
+                            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
