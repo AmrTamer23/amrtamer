@@ -8,13 +8,25 @@ import { SelectedProject } from "./components/selected-project";
 import { AnimatePresence, motion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
 import { ProjectModal } from "./components/project-modal";
+import { useQueryState } from "nuqs";
 
 interface ProjectsClientProps {
   projects: Project[];
 }
 
 export default function ProjectsClient({ projects }: ProjectsClientProps) {
-  const [featuredProject, setFeaturedProject] = useState(projects[0]);
+  const [selectedProjectSlug, setSelectedProjectSlug] = useQueryState(
+    "project",
+    {
+      defaultValue: projects[0]?.slug || "",
+      parse: (value) => value || projects[0]?.slug || "",
+      serialize: (value) => value,
+      clearOnDefault: true,
+    }
+  );
+
+  const featuredProject =
+    projects.find((p) => p.slug === selectedProjectSlug) || projects[0];
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -97,7 +109,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       )
       // ✅ Update state at the perfect moment - when old content is invisible
       .call(() => {
-        setFeaturedProject(newProject);
+        setSelectedProjectSlug(newProject.slug);
       })
       // Phase 2: Fade in new content (now with correct project data)
       .fromTo(

@@ -23,6 +23,7 @@
     "motion": "^12.15.0",
     "next": "15.3.1",
     "next-themes": "^0.4.6",
+    "nuqs": "^2.4.3",
     "react": "experimental",
     "react-dom": "experimental",
     "sonner": "^2.0.4",

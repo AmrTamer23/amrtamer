@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Header from "@/components/layout/header";
 import { PageTransition } from "@/components/view-transition";
 import { IBM_Plex_Sans } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const IBMPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -95,14 +96,16 @@ export default function RootLayout({
           IBMPlexSans.variable
         )}
       >
-        <div className="flex flex-col items-center justify-center min-h-screen w-screen pt-2 sm:pt-0">
-          <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-            <Header />
-          </header>
-          <main className="flex-1 h-full w-full flex justify-center items-center px-2 sm:px-0">
-            <PageTransition>{children}</PageTransition>
-          </main>
-        </div>
+        <NuqsAdapter>
+          <div className="flex flex-col items-center justify-center min-h-screen w-screen pt-2 sm:pt-0">
+            <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+              <Header />
+            </header>
+            <main className="flex-1 h-full w-full flex justify-center items-center px-2 sm:px-0">
+              <PageTransition>{children}</PageTransition>
+            </main>
+          </div>
+        </NuqsAdapter>
       </body>
     </html>
   );
