@@ -62,9 +62,6 @@ export function WorkHistory() {
           <h1 className="text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-3 md:mb-4 leading-tight">
             Work Experience
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg px-4 md:px-0">
-            My professional journey and career highlights
-          </p>
         </div>
 
         <div className="relative">

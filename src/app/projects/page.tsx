@@ -21,7 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 
   return {
-    title: "Projects - Crafted with Purpose",
+    title: "Featured Projects",
     description:
       "Explore a collection of thoughtfully designed digital experiences that blend innovation with functionality.",
     keywords: [
@@ -32,14 +32,14 @@ export async function generateMetadata(): Promise<Metadata> {
       "digital experiences",
     ],
     openGraph: {
-      title: "Projects - Crafted with Purpose",
+      title: "Featured Projects",
       description:
         "Explore a collection of thoughtfully designed digital experiences that blend innovation with functionality.",
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "Projects - Crafted with Purpose",
+      title: "Featured Projects",
       description:
         "Explore a collection of thoughtfully designed digital experiences that blend innovation with functionality.",
     },
@@ -51,20 +51,14 @@ export default function ProjectsPage() {
   return (
     <>
       <Suspense fallback={<ProjectsLoading />}>
-        <div className=" flex flex-col gap-8 -mt-12">
+        <div className=" flex flex-col gap-8 ">
           {/* Hero Section */}
           <div className="w-full px-6 pt-8 flex items-center justify-center">
-            <div className="max-w-6xl mx-auto text-center">
-              <AppViewTransition name="projects-title">
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
-                  Crafted with Purpose
-                </h1>
-              </AppViewTransition>
-              <p className="text-base md:text-lg text-white/70 max-w-2xl mx-auto leading-relaxed">
-                Explore a collection of thoughtfully designed digital
-                experiences that blend innovation with functionality.
-              </p>
-            </div>
+            <AppViewTransition name="projects-title">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
+                Featured Projects
+              </h1>
+            </AppViewTransition>
           </div>
 
           <ProjectsClient projects={projects} />
