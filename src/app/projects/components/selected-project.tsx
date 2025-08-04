@@ -2,7 +2,6 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
-import { AppViewTransition } from "@/components/view-transition";
 import { useId } from "react";
 
 export function SelectedProject({
@@ -41,17 +40,15 @@ export function SelectedProject({
           }}
           onClick={handleViewProject}
         >
-          <AppViewTransition name={`main-project-image-${useId()}`}>
-            <Image
-              src={featuredProject.mainImage || "/placeholder.svg"}
-              alt={featuredProject.title}
-              className="featured-image absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-              width={1000}
-              height={1000}
-              sizes="(max-width: 768px) 95vw, 60vw"
-              loading="eager"
-            />
-          </AppViewTransition>
+          <Image
+            src={featuredProject.mainImage || "/placeholder.svg"}
+            alt={featuredProject.title}
+            className="featured-image absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+            width={1000}
+            height={1000}
+            sizes="(max-width: 768px) 95vw, 60vw"
+            loading="eager"
+          />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
@@ -93,21 +90,13 @@ export function SelectedProject({
 
           <div className="featured-content absolute bottom-0 left-0 right-0 p-8 max-sm:p-4">
             <div className="max-w-2xl">
-              <AppViewTransition
-                name={`main-project-title-${featuredProject.id}`}
-              >
-                <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight max-sm:text-2xl max-sm:mb-2">
-                  {featuredProject.title}
-                </h2>
-              </AppViewTransition>
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight max-sm:text-2xl max-sm:mb-2">
+                {featuredProject.title}
+              </h2>
 
-              <AppViewTransition
-                name={`main-project-description-${featuredProject.id}`}
-              >
-                <p className="text-white/80 text-lg leading-relaxed mb-6 line-clamp-3 max-sm:text-base max-sm:mb-4 max-sm:line-clamp-2">
-                  {featuredProject.brief}
-                </p>
-              </AppViewTransition>
+              <p className="text-white/80 text-lg leading-relaxed mb-6 line-clamp-3 max-sm:text-base max-sm:mb-4 max-sm:line-clamp-2">
+                {featuredProject.brief}
+              </p>
             </div>
           </div>
 

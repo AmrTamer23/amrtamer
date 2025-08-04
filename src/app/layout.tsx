@@ -3,7 +3,6 @@ import "@/styles/globals.css";
 import { siteConfig } from "@/config/site.config";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/layout/header";
-import { PageTransition } from "@/components/view-transition";
 import { IBM_Plex_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
