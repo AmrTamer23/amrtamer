@@ -92,8 +92,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={cn("font-sans antialiased", IBMPlexSans.variable)}>
         <NuqsAdapter>
-          <main className="flex flex-col items-center justify-center h-full py-8">
-            <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center ">
+          <main className="flex flex-col  h-full py-8 gap-8">
+            <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
               <Header />
             </header>
             <section className=" w-full flex justify-center items-center px-2 sm:px-0 flex-1">
