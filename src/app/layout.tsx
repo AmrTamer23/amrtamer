@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config/site.config";
 import { cn } from "@/lib/utils";
-import Header from "@/components/layout/header";
+import { Header } from "@/components/layout/header";
 import { PageTransition } from "@/components/view-transition";
 import { IBM_Plex_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -90,21 +90,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={cn(
-          "min-h-screen bg-background font-sans antialiased",
-          IBMPlexSans.variable
-        )}
-      >
+      <body className={cn("font-sans antialiased", IBMPlexSans.variable)}>
         <NuqsAdapter>
-          <div className="flex flex-col items-center justify-center min-h-screen w-screen pt-2 sm:pt-0">
-            <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+          <main className="flex flex-col items-center justify-center h-full py-8">
+            <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center ">
               <Header />
             </header>
-            <main className="flex-1 h-full w-full flex justify-center items-center px-2 sm:px-0">
-              <PageTransition>{children}</PageTransition>
-            </main>
-          </div>
+            <section className=" w-full flex justify-center items-center px-2 sm:px-0 flex-1">
+              {children}
+            </section>
+          </main>
         </NuqsAdapter>
       </body>
     </html>
