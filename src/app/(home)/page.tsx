@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <section
       id="main-content"
-      className="flex items-center px-4 sm:px-6 lg:px-8 w-full flex-col max-w-7xl mx-auto"
+      className="flex items-center w-full flex-col flex-1"
       role="main"
       aria-label="Amr Tamer's professional profile"
     >
