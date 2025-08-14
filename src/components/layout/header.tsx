@@ -22,7 +22,7 @@ export function Header() {
   }, [router]);
 
   return (
-    <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-center">
       <div className="flex justify-center items-center order-1 sm:order-2 h-full">
         <Image src={logo} alt="logo" width={60} height={60} />
       </div>
