@@ -25,7 +25,7 @@ export function SelectedProject({
 
   return (
     <div
-      className="flex-1 w-8/12  max-sm:order-1 max-sm:w-full max-sm:min-h-[50vh] "
+      className="flex-1 w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[16/9] h-fit"
       ref={featuredContainer}
     >
       {featuredProject && (

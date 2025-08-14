@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Header } from "@/components/layout/header";
 import { IBM_Plex_Sans } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { ViewTransitions } from "next-view-transitions";
 
 const IBMPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -88,19 +89,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn("font-sans antialiased", IBMPlexSans.variable)}>
-        <NuqsAdapter>
-          <main className="flex flex-col  h-full py-8 gap-8">
-            <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-center">
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <body className={cn("font-sans antialiased", IBMPlexSans.variable)}>
+          <NuqsAdapter>
+            <main className="flex flex-col h-full py-8 gap-4 max-w-7xl mx-auto px-4">
               <Header />
-            </header>
-            <section className=" w-full flex justify-center items-center px-2 sm:px-0 flex-1">
               {children}
-            </section>
-          </main>
-        </NuqsAdapter>
-      </body>
-    </html>
+            </main>
+          </NuqsAdapter>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

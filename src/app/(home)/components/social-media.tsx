@@ -3,7 +3,7 @@
 import { LinkedinIcon, MailIcon, XIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 
 export function SocialMedia({ className }: { className?: string }) {
@@ -42,8 +42,8 @@ export function SocialMedia({ className }: { className?: string }) {
     },
   ];
 
-  const MotionWrapper = prefersReducedMotion ? "div" : motion.div;
-  const MotionItem = prefersReducedMotion ? "div" : motion.div;
+  const MotionWrapper = prefersReducedMotion ? "div" : (motion.div as any);
+  const MotionItem = prefersReducedMotion ? "div" : (motion.div as any);
 
   const containerProps = !prefersReducedMotion
     ? {
@@ -52,7 +52,7 @@ export function SocialMedia({ className }: { className?: string }) {
         transition: {
           duration: 0.8,
           delay: 0.2,
-          ease: [0.25, 0.46, 0.45, 0.94],
+          ease: "easeOut",
         },
       }
     : {};
@@ -78,7 +78,7 @@ export function SocialMedia({ className }: { className?: string }) {
                 transition: {
                   duration: 0.6,
                   delay,
-                  ease: [0.25, 0.46, 0.45, 0.94],
+                  ease: "easeOut",
                 },
                 whileHover: {
                   transition: { duration: 0.2 },

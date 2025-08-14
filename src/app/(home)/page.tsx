@@ -1,5 +1,5 @@
 import { GlowingEffect } from "@/components/ui/card-glowing-effect";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { SocialMedia } from "./components/social-media";
 import avatar from "../../../public/avatar.webp";

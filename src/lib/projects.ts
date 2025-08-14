@@ -22,6 +22,68 @@ export const projects: Project[] = [
   //   favicon:
   //     "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYtjwUYpHYrQbNO8L5ITue9PWGldnAkzjF6JVi",
   // },
+
+  // {
+  //   id: 2,
+  //   slug: "shelley-and-blaine-photography",
+  //   title: "Shelley and Blaine Photography",
+  //   brief:
+  //     "A website for a photography business, optimized for mobile and desktop.",
+  //   descriptionBefore:
+  //     "The mission was to replicate a website that was built in Webflow in Next.js to self host it with much lower cost than Webflow, with maintaining a good performance specially on mobile",
+  //   descriptionAfter:
+  //     "A reliable CMS to add blog posts and photos under each genre and integrate an analytics tool(PostHog), which I proposed to the client.",
+  //   images: [
+  //     shelley.src,
+  //     "/project-3-2.jpg",
+  //     "/project-3-3.jpg",
+  //     "/project-3-4.jpg",
+  //     "/project-3-5.jpg",
+  //   ],
+  //   color: "#989C9D",
+  //   mainImage: shelley,
+  // },
+
+  {
+    id: 4,
+    slug: "fomo-techno",
+    title: "FOMO Techno",
+    brief:
+      "A platform that connects students with highly vetted mentors for guidance across various learning tracks.",
+    overview:
+      "A platform that connects students with highly vetted mentors for guidance across various learning tracks.",
+    problems:
+      "Students in the MENA region face challenges in accessing quality mentorship and guidance for their learning journeys.",
+    myRole:
+      "Contracted to deliver a robust mentorship platform. Built a pixel-perfect, responsive frontend aligned to the design system and UX flows; contributed backend features including the mentorship booking system and automated email workflows; collaborated closely with the client to ensure timely, high-quality delivery across frontend and backend.",
+    techStack: [
+      "TypeScript",
+      "React",
+      "Next.js",
+      "NestJS",
+      "Prisma ORM",
+      "PostgreSQL",
+      "Redis",
+      "TailwindCSS",
+    ],
+    status: "completed",
+    color: "#0072AA",
+    images: [
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYymTzZyasvh3xjqdU7JcZmOtC9LTlPaNHwbge",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYTF38YiOhlSRJ05fu9B1wVzF7avqAUTpYEyne",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYzdlYE1iBE6sL3rby71GN8OYwKIPAujpqdeRg",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYUt7DvQmzTJpgvhi062sRq8nN3wXIEe5PtFYf",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYF8xqudgSazVLWF1Xon4yZKAPmY6eGItlbR9x",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYXTufzN5whBsH7PDXQKF9NR0EtbvgTGA1mCq2",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYuQAchj60l7VT56jE291uoaXt8gqnO0K3LbFZ",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYKVxlxSe1akWGdmUFn9vq8ZxeNPLrDb406pAS",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYeqq0rwYNsHoBZ4rqlUmueOInbYdDGX03Cc1Q",
+    ],
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYqYKrYyvFch3MuIiJbUPayYQCq7kdtZn5WSz1",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhYbwZ7WgzJQeLF6kocmEDwHZG9qd2uRI1Sif",
+  },
   {
     id: 1,
     slug: "better-reads",
@@ -68,26 +130,6 @@ export const projects: Project[] = [
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYNr8FdjziwjVB4xk8o3vzMc2AfDuePhElgmC1",
     link: "https://dash.crclevents.com",
   },
-  // {
-  //   id: 2,
-  //   slug: "shelley-and-blaine-photography",
-  //   title: "Shelley and Blaine Photography",
-  //   brief:
-  //     "A website for a photography business, optimized for mobile and desktop.",
-  //   descriptionBefore:
-  //     "The mission was to replicate a website that was built in Webflow in Next.js to self host it with much lower cost than Webflow, with maintaining a good performance specially on mobile",
-  //   descriptionAfter:
-  //     "A reliable CMS to add blog posts and photos under each genre and integrate an analytics tool(PostHog), which I proposed to the client.",
-  //   images: [
-  //     shelley.src,
-  //     "/project-3-2.jpg",
-  //     "/project-3-3.jpg",
-  //     "/project-3-4.jpg",
-  //     "/project-3-5.jpg",
-  //   ],
-  //   color: "#989C9D",
-  //   mainImage: shelley,
-  // },
   {
     id: 3,
     slug: "salamy",

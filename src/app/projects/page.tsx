@@ -49,18 +49,17 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function ProjectsPage() {
   return (
     <>
-      <Suspense fallback={<ProjectsLoading />}>
-        <div className=" flex flex-col gap-8 ">
-          {/* Hero Section */}
-          <div className="w-full px-6 pt-8 flex items-center justify-center">
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
-              Featured Projects
-            </h1>
-          </div>
-
-          <ProjectsClient projects={projects} />
+      <div className=" flex flex-col gap-4 w-full pt-10">
+        <div className="w-full px-6 flex items-center justify-center">
+          <h1 className="text-5xl  font-bold bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mb-4 leading-tight">
+            Featured Projects
+          </h1>
         </div>
-      </Suspense>
+
+        <Suspense fallback={<ProjectsLoading />}>
+          <ProjectsClient projects={projects} />
+        </Suspense>
+      </div>
       <ServerImagePrefetch projects={projects} />
     </>
   );

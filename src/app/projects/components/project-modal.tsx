@@ -6,7 +6,7 @@ import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { X, ArrowUpRight } from "lucide-react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 interface ProjectModalProps {
   activeProject: Project | null;
