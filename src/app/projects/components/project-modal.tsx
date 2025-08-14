@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { X, ArrowUpRight } from "lucide-react";
 import { Link } from "next-view-transitions";
+import { cn } from "@/lib/utils";
 
 interface ProjectModalProps {
   activeProject: Project | null;
@@ -58,7 +59,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
         {activeProject ? (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
             <motion.div
-              className="bg-card dark:bg-card border border-border flex h-[90vh] w-[95%] max-w-6xl cursor-default flex-col items-start gap-6 overflow-hidden shadow-2xl"
+              className="bg-card dark:bg-card border border-border flex h-[90vh] max-w-7xl w-full cursor-default flex-col items-start gap-6 overflow-hidden shadow-2xl"
               ref={modalRef}
               layoutId={`project-modal-${activeProject.id}`}
               style={{ borderRadius: 16 }}
@@ -68,8 +69,8 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between w-full p-6 border-b border-border">
-                <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between w-full p-4 border-b border-border">
+                <div className="flex items-center gap-2">
                   <div
                     className="w-4 h-4 rounded-full"
                     style={{ backgroundColor: activeProject.color }}
@@ -99,16 +100,14 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
               </div>
 
               {/* Modal Content */}
-              <div className="flex-1 overflow-y-auto p-6 w-full">
+              <div className="flex-1 overflow-y-auto px-6 py-0 w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                  {/* Images Section - Takes up 2 columns */}
                   <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-lg font-semibold text-foreground ">
                       Project Gallery
                     </h3>
 
-                    {/* Main Image - Larger */}
-                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden ">
+                    <div className="relative aspect-video rounded-lg overflow-hidden ">
                       <Image
                         src={
                           activeProject.images &&
@@ -119,8 +118,8 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                         }
                         alt={activeProject.title}
                         fill
-                        className="object-cover transition-opacity duration-300"
-                        sizes="(max-width: 768px) 100vw, 50vw"
+                        className="object-contain bg-black transition-opacity duration-300"
+                        sizes="(max-width: 1024px) 100vw, 66vw"
                         priority={true}
                         placeholder="blur"
                         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
@@ -129,15 +128,23 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
 
                     {activeProject.images &&
                       activeProject.images.length > 0 && (
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        <div
+                          className={cn(
+                            "grid grid-cols-2 sm:grid-cols-3 gap-0.5",
+                            activeProject.slug === "fomo-techno"
+                              ? "md:grid-cols-5"
+                              : "md:grid-cols-4"
+                          )}
+                        >
                           {activeProject.images.map((image, index) => (
                             <div
                               key={index}
-                              className={`relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-2 ${
+                              className={cn(
+                                "relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-1 bg-black",
                                 selectedImageIndex === index + 1
-                                  ? "scale-95 border-opacity-100"
-                                  : "hover:scale-105 opacity-70 hover:opacity-100 border-transparent"
-                              }`}
+                                  ? "border-opacity-100"
+                                  : "opacity-70 hover:opacity-100 border-transparent"
+                              )}
                               style={{
                                 borderColor:
                                   selectedImageIndex === index + 1
@@ -152,7 +159,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                                   index + 1
                                 }`}
                                 fill
-                                className="object-cover"
+                                className="object-contain"
                                 sizes="(max-width: 768px) 25vw, 12vw"
                                 loading="lazy"
                                 placeholder="blur"
@@ -165,7 +172,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                   </div>
 
                   {/* Content Section - Takes up 1 column */}
-                  <div className="lg:col-span-1 space-y-6">
+                  <div className="lg:col-span-1 flex flex-col gap-4">
                     <div>
                       <h3 className="text-lg font-semibold text-foreground mb-3">
                         Overview
@@ -227,14 +234,15 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                       <div className="pt-4">
                         <Link href={activeProject.link} target="_blank">
                           <Button
-                            className="group inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold"
+                            size="lg"
+                            className=" rounded-md font-semibold w-full text-lg hover:opacity-80 transition-all duration-200 ease-in-out"
                             style={{
                               background: `linear-gradient(135deg, ${activeProject.color}, ${activeProject.color}dd)`,
                               color: "white",
                             }}
+                            asChild
                           >
-                            <span>View Live Project</span>
-                            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                            <span>Give it a Look?</span>
                           </Button>
                         </Link>
                       </div>

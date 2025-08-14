@@ -80,9 +80,10 @@ export const projects: Project[] = [
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYeqq0rwYNsHoBZ4rqlUmueOInbYdDGX03Cc1Q",
     ],
     mainImage:
-      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYqYKrYyvFch3MuIiJbUPayYQCq7kdtZn5WSz1",
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYUbC08smzTJpgvhi062sRq8nN3wXIEe5PtFYf",
     favicon:
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYhYbwZ7WgzJQeLF6kocmEDwHZG9qd2uRI1Sif",
+    link: "https://fomotechno.org",
   },
   {
     id: 1,
