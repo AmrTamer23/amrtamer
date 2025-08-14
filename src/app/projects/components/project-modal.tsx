@@ -241,9 +241,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                           }}
                           asChild
                         >
-                          <Link href={activeProject.link} target="_blank">
-                            <span>Give it a Look?</span>
-                          </Link>
+                          <span>Give it a Look?</span>
                         </Button>
                       </div>
                     )}

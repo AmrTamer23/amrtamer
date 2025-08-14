@@ -18,7 +18,7 @@ function RightPanel({
     preload.src = src;
   }, []);
   return (
-    <div className="max-w-xs mx-auto w-full max-sm:w-full max-sm:order-2 max-sm:pb-8">
+    <div className="max-w-xs mx-auto w-full max-sm:w-full max-sm:order-2 max-sm:pb-8 flex flex-col justify-start items-start h-fit">
       <div className="flex flex-col gap-2 max-h-[calc(100%-5rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full">
         {projects.map((project, index) => (
           <div key={project.id} id={`sidebar-${project.id}`}>

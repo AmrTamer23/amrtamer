@@ -1,8 +1,7 @@
-import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
-import { useId } from "react";
+import { getReadableTextColor } from "@/lib/utils";
 
 export function SelectedProject({
   featuredProject,
@@ -30,7 +29,7 @@ export function SelectedProject({
     >
       {featuredProject && (
         <div
-          className={`group relative w-full h-full rounded-3xl overflow-hidden border border-white/20 transition-all duration-500 max-sm:min-h-[50vh] ${
+          className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 transition-all duration-500 max-sm:min-h-[50vh] ${
             featuredProject.status === "completed"
               ? "cursor-pointer"
               : "cursor-default"
@@ -55,22 +54,27 @@ export function SelectedProject({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
           {featuredProject.status === "completed" && (
-            <div className="featured-button absolute top-6 right-6 max-sm:top-4 max-sm:right-4">
+            <div className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4">
               <Button
-                className="group inline-flex items-center gap-3 px-6 py-3 rounded-full font-semibold text-white border-0 shadow-xl transition-all duration-300 max-sm:px-4 max-sm:py-2 max-sm:gap-2"
+                // style={{
+                //   background: `linear-gradient(35deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
+                // }}
+                className="rounded-xl"
                 style={{
-                  background: `linear-gradient(135deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
+                  background: `${featuredProject.color}`,
+                  color: getReadableTextColor(featuredProject.color),
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleViewProject();
                 }}
+                size="lg"
+                variant="primary"
               >
                 <EyeIcon className="w-5 h-5 transition-transform max-sm:w-4 max-sm:h-4" />
                 <span className="text-sm font-medium max-sm:text-xs">
                   View Project
                 </span>
-                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 max-sm:w-3 max-sm:h-3" />
               </Button>
             </div>
           )}
