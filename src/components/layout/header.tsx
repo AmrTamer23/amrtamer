@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useTransitionRouter } from "next-view-transitions";
 import logo from "../../../public/icon-512.png";
 import { Link } from "next-view-transitions";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 
 export function Header() {
   const router = useTransitionRouter();
-
+  const pathname = usePathname();
   const links = [
     { to: "/", label: "Home" },
     { to: "/projects", label: "Projects" },
@@ -30,7 +32,10 @@ export function Header() {
             <Link
               href={to}
               key={to}
-              className="hover:opacity-70 select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 active:bg-white/20 transition-all duration-200"
+              className={cn(
+                "hover:opacity-70 select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 active:bg-white/20 transition-all duration-200",
+                pathname === to && "bg-white/10"
+              )}
             >
               {label}
             </Link>
