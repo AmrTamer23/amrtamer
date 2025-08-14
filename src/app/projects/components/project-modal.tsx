@@ -232,19 +232,19 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                     {/* Project Link */}
                     {activeProject.link && (
                       <div className="pt-4">
-                        <Link href={activeProject.link} target="_blank">
-                          <Button
-                            size="lg"
-                            className=" rounded-md font-semibold w-full text-lg hover:opacity-80 transition-all duration-200 ease-in-out"
-                            style={{
-                              background: `linear-gradient(135deg, ${activeProject.color}, ${activeProject.color}dd)`,
-                              color: "white",
-                            }}
-                            asChild
-                          >
+                        <Button
+                          size="lg"
+                          className=" rounded-md font-semibold w-full text-lg hover:opacity-80 transition-all duration-200 ease-in-out"
+                          style={{
+                            background: `linear-gradient(135deg, ${activeProject.color}, ${activeProject.color}dd)`,
+                            color: "white",
+                          }}
+                          asChild
+                        >
+                          <Link href={activeProject.link} target="_blank">
                             <span>Give it a Look?</span>
-                          </Button>
-                        </Link>
+                          </Link>
+                        </Button>
                       </div>
                     )}
                   </div>
