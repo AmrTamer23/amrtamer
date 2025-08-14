@@ -29,11 +29,7 @@ export function SelectedProject({
     >
       {featuredProject && (
         <div
-          className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 transition-all duration-500 max-sm:min-h-[50vh] ${
-            featuredProject.status === "completed"
-              ? "cursor-pointer"
-              : "cursor-default"
-          }`}
+          className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 transition-all duration-500 max-sm:min-h-[50vh] cursor-default`}
           style={{
             background: `linear-gradient(135deg, ${featuredProject.color}15, ${featuredProject.color}05)`,
           }}
@@ -54,12 +50,9 @@ export function SelectedProject({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
           {featuredProject.status === "completed" && (
-            <div className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4">
+            <div className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4 z-10">
               <Button
-                // style={{
-                //   background: `linear-gradient(35deg, ${featuredProject.color}, ${featuredProject.color}dd)`,
-                // }}
-                className="rounded-xl"
+                className="rounded-xl cursor-pointer hover:opacity-80 transition-all duration-200 items-center"
                 style={{
                   background: `${featuredProject.color}`,
                   color: getReadableTextColor(featuredProject.color),
@@ -71,9 +64,9 @@ export function SelectedProject({
                 size="lg"
                 variant="primary"
               >
-                <EyeIcon className="w-5 h-5 transition-transform max-sm:w-4 max-sm:h-4" />
+                <EyeIcon className="w-6 h-6 transition-transform max-sm:w-4 max-sm:h-4" />
                 <span className="text-sm font-medium max-sm:text-xs">
-                  View Project
+                  View Project's Details
                 </span>
               </Button>
             </div>
@@ -100,7 +93,7 @@ export function SelectedProject({
                 {featuredProject.title}
               </h2>
 
-              <p className="text-white/80 text-xl leading-relaxed line-clamp-3 max-sm:text-base max-sm:line-clamp-2">
+              <p className="text-white/80 text-lg leading-relaxed line-clamp-3 max-sm:text-base max-sm:line-clamp-2">
                 {featuredProject.brief}
               </p>
             </div>

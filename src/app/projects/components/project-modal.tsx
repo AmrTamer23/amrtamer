@@ -59,7 +59,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
         {activeProject ? (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
             <motion.div
-              className="bg-card dark:bg-card border border-border flex h-[90vh] max-w-7xl w-full cursor-default flex-col items-start gap-6 overflow-hidden shadow-2xl"
+              className="bg-card dark:bg-card border border-border flex h-fit max-h-[98svh] max-w-7xl w-full cursor-default flex-col items-start gap-4 overflow-hidden shadow-2xl"
               ref={modalRef}
               layoutId={`project-modal-${activeProject.id}`}
               style={{ borderRadius: 16 }}
@@ -100,7 +100,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
               </div>
 
               {/* Modal Content */}
-              <div className="flex-1 overflow-y-auto px-6 py-0 w-full">
+              <div className="flex-1 overflow-y-auto px-6 pb-4 w-full">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-lg font-semibold text-foreground ">
@@ -174,20 +174,20 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                   {/* Content Section - Takes up 1 column */}
                   <div className="lg:col-span-1 flex flex-col gap-4">
                     <div>
-                      <h3 className="text-lg font-semibold text-foreground mb-3">
+                      <h3 className="text-lg font-semibold text-foreground mb-1">
                         Overview
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-foreground/75 leading-relaxed">
                         {activeProject.overview}
                       </p>
                     </div>
 
                     {activeProject.problems && (
                       <div>
-                        <h3 className="text-lg font-semibold text-foreground mb-3">
+                        <h3 className="text-lg font-semibold text-foreground mb-1">
                           The Challenge
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-foreground/75 leading-relaxed">
                           {activeProject.problems}
                         </p>
                       </div>
@@ -195,10 +195,10 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
 
                     {activeProject.myRole && (
                       <div>
-                        <h3 className="text-lg font-semibold text-foreground mb-3">
+                        <h3 className="text-lg font-semibold text-foreground mb-1">
                           My Role
                         </h3>
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-foreground/75 leading-relaxed">
                           {activeProject.myRole}
                         </p>
                       </div>
@@ -207,8 +207,8 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                     {/* Tech Stack */}
                     {activeProject.techStack &&
                       activeProject.techStack.length > 0 && (
-                        <div>
-                          <h3 className="text-lg font-semibold text-foreground mb-3">
+                        <div className="flex flex-col gap-2">
+                          <h3 className="text-lg font-semibold text-foreground ">
                             Tech Stack
                           </h3>
                           <div className="flex flex-wrap gap-2">
@@ -241,7 +241,9 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                           }}
                           asChild
                         >
-                          <span>Give it a Look?</span>
+                          <Link href={activeProject.link} target="_blank">
+                            <span>Give it a Look?</span>
+                          </Link>
                         </Button>
                       </div>
                     )}

@@ -33,8 +33,8 @@ export function Header() {
               href={to}
               key={to}
               className={cn(
-                "hover:opacity-70 select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 active:bg-white/20 transition-all duration-200",
-                pathname === to && "bg-white/10"
+                " select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 transition-all duration-200",
+                pathname === to && "bg-white/15"
               )}
             >
               {label}
