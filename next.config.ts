@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
         hostname: "*.ufs.sh",
       },
     ],
+    minimumCacheTTL: 60 * 60 * 24,
+    formats: ["image/avif", "image/webp"],
   },
   async rewrites() {
     return [

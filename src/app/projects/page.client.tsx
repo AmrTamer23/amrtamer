@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo, useTransition } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { RightPanel } from "./components/right-panel";
@@ -25,13 +25,16 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
     }
   );
 
-  const featuredProject =
-    projects.find((p) => p.slug === selectedProjectSlug) || projects[0];
+  const featuredProject = useMemo(
+    () => projects.find((p) => p.slug === selectedProjectSlug) || projects[0],
+    [projects, selectedProjectSlug]
+  );
   const [isAnimating, setIsAnimating] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const featuredContainer = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
+  const [isPending, startTransition] = useTransition();
 
   useOnClickOutside(modalRef as React.RefObject<HTMLElement>, () =>
     setActiveProject(null)
@@ -74,7 +77,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       .to(".featured-image", {
         scale: 1.1,
         opacity: 0,
-        duration: 0.4,
+        duration: 0.3,
         ease: "power2.in",
       })
       .to(
@@ -82,7 +85,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           y: 30,
           opacity: 0,
-          duration: 0.3,
+          duration: 0.25,
           ease: "power2.in",
         },
         "-=0.2"
@@ -92,7 +95,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           scale: 0.8,
           opacity: 0,
-          duration: 0.3,
+          duration: 0.25,
           ease: "power2.in",
         },
         "-=0.3"
@@ -102,14 +105,16 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           scale: 0.9,
           opacity: 0,
-          duration: 0.3,
+          duration: 0.25,
           ease: "power2.in",
         },
         "-=0.3"
       )
       // ✅ Update state at the perfect moment - when old content is invisible
       .call(() => {
-        setSelectedProjectSlug(newProject.slug);
+        startTransition(() => {
+          void setSelectedProjectSlug(newProject.slug);
+        });
       })
       // Phase 2: Fade in new content (now with correct project data)
       .fromTo(
@@ -121,7 +126,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           scale: 1,
           opacity: 1,
-          duration: 0.5,
+          duration: 0.35,
           ease: "power2.out",
         }
       )
@@ -134,7 +139,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           y: 0,
           opacity: 1,
-          duration: 0.4,
+          duration: 0.3,
           ease: "power2.out",
         },
         "-=0.3"
@@ -148,7 +153,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           scale: 1,
           opacity: 1,
-          duration: 0.4,
+          duration: 0.3,
           ease: "back.out(1.7)",
         },
         "-=0.4"
@@ -162,7 +167,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         {
           scale: 1,
           opacity: 1,
-          duration: 0.4,
+          duration: 0.3,
           ease: "back.out(1.7)",
         },
         "-=0.3"
@@ -211,7 +216,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
             projects={projects}
             featuredProject={featuredProject}
             handleProjectSelect={handleProjectSelect}
-            isAnimating={isAnimating}
+            isAnimating={isAnimating || isPending}
           />
         </div>
       </div>

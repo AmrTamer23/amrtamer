@@ -1,6 +1,8 @@
+"use client";
 import Image from "next/image";
+import { useCallback, memo } from "react";
 
-export function RightPanel({
+function RightPanel({
   projects,
   featuredProject,
   handleProjectSelect,
@@ -11,6 +13,10 @@ export function RightPanel({
   handleProjectSelect: (project: any) => void;
   isAnimating: boolean;
 }) {
+  const prefetchImage = useCallback((src: string) => {
+    const preload = new window.Image();
+    preload.src = src;
+  }, []);
   return (
     <div className="max-w-xs mx-auto w-full max-sm:w-full max-sm:order-2 max-sm:pb-8">
       <div className="flex flex-col gap-2 max-h-[calc(100%-5rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full">
@@ -18,6 +24,7 @@ export function RightPanel({
           <div key={project.id} id={`sidebar-${project.id}`}>
             <div
               onClick={() => handleProjectSelect(project)}
+              onMouseEnter={() => prefetchImage(project.mainImage)}
               className={`group relative p-4 rounded-xl border transition-all duration-300 cursor-pointer w-full ${
                 featuredProject?.id === project.id
                   ? "border-white/30 bg-white/10  shadow-lg"
@@ -85,3 +92,6 @@ export function RightPanel({
     </div>
   );
 }
+
+export const MemoizedRightPanel = memo(RightPanel);
+export { MemoizedRightPanel as RightPanel };

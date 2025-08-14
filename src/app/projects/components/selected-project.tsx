@@ -43,11 +43,13 @@ export function SelectedProject({
           <Image
             src={featuredProject.mainImage || "/placeholder.svg"}
             alt={featuredProject.title}
-            className="featured-image absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-            width={1000}
-            height={1000}
+            fill
+            className="featured-image absolute inset-0 object-cover transition-transform duration-700"
             sizes="(max-width: 768px) 95vw, 60vw"
-            loading="eager"
+            priority
+            fetchPriority="high"
+            placeholder="blur"
+            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
@@ -88,13 +90,13 @@ export function SelectedProject({
             </div>
           )}
 
-          <div className="featured-content absolute bottom-0 left-0 right-0 p-8 max-sm:p-4">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight max-sm:text-2xl max-sm:mb-2">
+          <div className="featured-content absolute bottom-0 left-0 right-0 px-8 py-4 max-sm:p-4">
+            <div className="max-w-2xl flex flex-col gap-2">
+              <h2 className="text-3xl font-bold text-white leading-tight max-sm:text-2xl">
                 {featuredProject.title}
               </h2>
 
-              <p className="text-white/80 text-lg leading-relaxed mb-6 line-clamp-3 max-sm:text-base max-sm:mb-4 max-sm:line-clamp-2">
+              <p className="text-white/80 text-xl leading-relaxed line-clamp-3 max-sm:text-base max-sm:line-clamp-2">
                 {featuredProject.brief}
               </p>
             </div>
