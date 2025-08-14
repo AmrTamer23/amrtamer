@@ -57,9 +57,9 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
       {/* Project Modal */}
       <AnimatePresence>
         {activeProject ? (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 max-sm:p-2">
             <motion.div
-              className="bg-card dark:bg-card border border-border flex h-fit max-h-[98svh] max-w-7xl w-full cursor-default flex-col items-start gap-4 overflow-hidden shadow-2xl"
+              className="bg-card dark:bg-card border border-border flex h-fit max-h-[98svh] max-w-7xl w-full cursor-default flex-col items-start gap-4 overflow-hidden shadow-2xl max-sm:max-h-[96svh]"
               ref={modalRef}
               layoutId={`project-modal-${activeProject.id}`}
               style={{ borderRadius: 16 }}
@@ -100,14 +100,14 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
               </div>
 
               {/* Modal Content */}
-              <div className="flex-1 overflow-y-auto px-6 pb-4 w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="flex-1 overflow-y-auto px-6 pb-4 w-full max-sm:px-3">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-sm:gap-4">
                   <div className="lg:col-span-2 space-y-4">
-                    <h3 className="text-lg font-semibold text-foreground ">
+                    <h3 className="text-lg font-semibold text-foreground">
                       Project Gallery
                     </h3>
 
-                    <div className="relative aspect-video rounded-lg overflow-hidden ">
+                    <div className="relative aspect-video rounded-lg overflow-hidden">
                       <Image
                         src={
                           activeProject.images &&
@@ -119,7 +119,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                         alt={activeProject.title}
                         fill
                         className="object-contain bg-black transition-opacity duration-300"
-                        sizes="(max-width: 1024px) 100vw, 66vw"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 66vw"
                         priority={true}
                         placeholder="blur"
                         blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
@@ -130,7 +130,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                       activeProject.images.length > 0 && (
                         <div
                           className={cn(
-                            "grid grid-cols-2 sm:grid-cols-3 gap-0.5",
+                            "grid grid-cols-3 gap-0.5 sm:grid-cols-4",
                             activeProject.slug === "fomo-techno"
                               ? "md:grid-cols-5"
                               : "md:grid-cols-4"
@@ -160,7 +160,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                                 }`}
                                 fill
                                 className="object-contain"
-                                sizes="(max-width: 768px) 25vw, 12vw"
+                                sizes="(max-width: 640px) 30vw, (max-width: 768px) 25vw, 12vw"
                                 loading="lazy"
                                 placeholder="blur"
                                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
@@ -177,7 +177,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                       <h3 className="text-lg font-semibold text-foreground mb-1">
                         Overview
                       </h3>
-                      <p className="text-foreground/75 leading-relaxed">
+                      <p className="text-foreground/75 leading-relaxed max-sm:text-sm">
                         {activeProject.overview}
                       </p>
                     </div>
@@ -187,7 +187,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                         <h3 className="text-lg font-semibold text-foreground mb-1">
                           The Challenge
                         </h3>
-                        <p className="text-foreground/75 leading-relaxed">
+                        <p className="text-foreground/75 leading-relaxed max-sm:text-sm">
                           {activeProject.problems}
                         </p>
                       </div>
@@ -198,7 +198,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                         <h3 className="text-lg font-semibold text-foreground mb-1">
                           My Role
                         </h3>
-                        <p className="text-foreground/75 leading-relaxed">
+                        <p className="text-foreground/75 leading-relaxed max-sm:text-sm">
                           {activeProject.myRole}
                         </p>
                       </div>
@@ -215,7 +215,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                             {activeProject.techStack.map((tech, index) => (
                               <span
                                 key={index}
-                                className="px-3 py-1 text-sm rounded-full border"
+                                className="px-3 py-1 text-sm rounded-full border max-sm:text-xs"
                                 style={{
                                   backgroundColor: `${activeProject.color}20`,
                                   borderColor: `${activeProject.color}40`,
@@ -234,7 +234,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                       <div className="pt-4">
                         <Button
                           size="lg"
-                          className=" rounded-md font-semibold w-full text-lg hover:opacity-80 transition-all duration-200 ease-in-out"
+                          className=" rounded-md font-semibold w-full text-lg hover:opacity-80 transition-all duration-200 ease-in-out max-sm:text-base"
                           style={{
                             background: `linear-gradient(135deg, ${activeProject.color}, ${activeProject.color}dd)`,
                             color: "white",

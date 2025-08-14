@@ -24,12 +24,12 @@ export function SelectedProject({
 
   return (
     <div
-      className="flex-1 w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[3/2] h-fit"
+      className="flex-1 lg:w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[3/2] h-fit max-sm:aspect-[4/3] "
       ref={featuredContainer}
     >
       {featuredProject && (
         <div
-          className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 transition-all duration-500 max-sm:min-h-[50vh] cursor-default`}
+          className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 transition-all duration-500 cursor-default max-sm:w-full`}
           style={{
             background: `linear-gradient(135deg, ${featuredProject.color}15, ${featuredProject.color}05)`,
           }}
@@ -47,7 +47,7 @@ export function SelectedProject({
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
           />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent max-sm:via-black/40" />
 
           {featuredProject.status === "completed" && (
             <div className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4 z-10">
@@ -88,12 +88,12 @@ export function SelectedProject({
           )}
 
           <div className="featured-content absolute bottom-0 left-0 right-0 px-8 py-4 max-sm:p-4">
-            <div className="max-w-2xl flex flex-col gap-2">
-              <h2 className="text-3xl font-bold text-white leading-tight max-sm:text-2xl">
+            <div className="max-w-2xl flex flex-col gap-2 max-sm:max-w-none">
+              <h2 className="text-3xl font-bold text-white leading-tight max-sm:text-xl">
                 {featuredProject.title}
               </h2>
 
-              <p className="text-white/80 text-lg leading-relaxed line-clamp-3 max-sm:text-base max-sm:line-clamp-2">
+              <p className="text-white/80 text-lg leading-relaxed line-clamp-3 max-sm:text-sm max-sm:line-clamp-3">
                 {featuredProject.brief}
               </p>
             </div>

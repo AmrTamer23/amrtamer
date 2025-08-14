@@ -18,8 +18,8 @@ function RightPanel({
     preload.src = src;
   }, []);
   return (
-    <div className="max-w-xs mx-auto w-full max-sm:w-full max-sm:order-2 max-sm:pb-8 flex flex-col justify-start items-start h-fit">
-      <div className="flex flex-col gap-2 max-h-[calc(100%-5rem)] overflow-y-auto scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full">
+    <div className="max-w-xs mx-auto w-full max-sm:w-full max-sm:order-2 max-sm:pb-6 max-sm:max-w-none flex flex-col justify-start items-start h-fit max-sm:z-0">
+      <div className="flex flex-col gap-2 overflow-y-auto max-sm:max-h-none max-sm:overflow-visible scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full">
         {projects.map((project, index) => (
           <div key={project.id} id={`sidebar-${project.id}`}>
             <div
@@ -31,9 +31,9 @@ function RightPanel({
                   : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8 "
               } ${isAnimating ? "pointer-events-none opacity-70" : ""}`}
             >
-              <div className="flex gap-3 items-center">
+              <div className="flex gap-3 items-center max-sm:gap-2">
                 {/* Project Thumbnail */}
-                <div className="w-16 aspect-square rounded-lg overflow-hidden flex-shrink-0 relative">
+                <div className="w-16 aspect-square rounded-lg overflow-hidden flex-shrink-0 relative max-sm:w-12">
                   <Image
                     src={project.favicon || "/placeholder.svg"}
                     alt={project.title}
@@ -48,7 +48,7 @@ function RightPanel({
                 {/* Project Info */}
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
                   <div className="flex items-center gap-2 mb-1 w-full">
-                    <h4 className="text-white font-medium text-base truncate flex-1">
+                    <h4 className="text-white font-medium text-base truncate flex-1 max-sm:text-sm">
                       {project.title}
                     </h4>
                   </div>

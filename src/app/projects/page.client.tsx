@@ -204,8 +204,8 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
         ) : null}
       </AnimatePresence>
 
-      <div className="flex-1 w-full flex items-center h-full">
-        <div className="flex gap-4 h-full min-h-[65vh] w-full  mx-auto max-sm:flex-col max-sm:min-h-[80vh] max-sm:gap-4 flex-1 justify-center items-center">
+      <div className="flex-1 w-full flex items-center h-full max-sm:items-stretch max-sm:px-4 max-sm:py-4">
+        <div className="flex gap-4 h-full  mx-auto max-sm:flex-col  max-sm:gap-6 flex-1 justify-center items-center">
           <SelectedProject
             featuredProject={featuredProject}
             featuredContainer={featuredContainer}
