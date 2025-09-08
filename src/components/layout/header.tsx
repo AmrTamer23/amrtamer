@@ -38,7 +38,10 @@ export function Header() {
     <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-center relative z-10 flex-col lg:flex-row gap-8">
       <div className="flex justify-center items-center order-1 sm:order-2 h-full text-2xl font-bold font-xanh-mono">
         <div
-          className={cn("flex items-baseline", breadcrumb ? "gap-2" : "gap-0")}
+          className={cn(
+            "flex items-baseline",
+            breadcrumb ? "gap-2" : "gap-0 lg:gap-2"
+          )}
         >
           <span
             className={cn(
@@ -70,7 +73,7 @@ export function Header() {
               initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: shouldReduceMotion ? 0 : 8 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
               aria-hidden="true"
               role="presentation"
             >

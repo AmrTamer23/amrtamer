@@ -46,7 +46,7 @@ export default function Home() {
             <div className="w-full">
               <h1
                 id="profile-heading"
-                className="text-xl sm:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent text-center self-center"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold  text-white text-center self-center"
               >
                 Amr Tamer
               </h1>
