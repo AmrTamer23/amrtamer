@@ -93,10 +93,21 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={cn("font-sans antialiased", IBMPlexSans.variable)}>
           <NuqsAdapter>
-            <main className="flex flex-col h-full py-8 gap-4 max-w-7xl mx-auto px-4">
-              <Header />
-              {children}
-            </main>
+            <div className="flex flex-col h-full py-8 gap-4 px-4 relative">
+              <div
+                className="absolute inset-0 z-0"
+                style={{
+                  background:
+                    "radial-gradient(140% 140% at 50% 10%, #000000 40%, #072607 100%)",
+                }}
+              />
+              <main className="flex flex-col h-full gap-8 justify-between">
+                <Header />
+                <div className="container mx-auto w-full h-full">
+                  {children}
+                </div>
+              </main>
+            </div>
           </NuqsAdapter>
         </body>
       </html>

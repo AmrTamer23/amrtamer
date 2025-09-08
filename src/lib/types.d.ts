@@ -1,5 +1,4 @@
 type Project = {
-  id: number;
   slug: string;
   title: string;
   brief: string;
@@ -13,6 +12,7 @@ type Project = {
   mainImage: string;
   favicon: string;
   link?: string;
+  order: number;
 };
 
 type OptimizedProject = Project & {

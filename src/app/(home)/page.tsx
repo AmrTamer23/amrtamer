@@ -8,20 +8,20 @@ export default function Home() {
   return (
     <section
       id="main-content"
-      className="flex items-center w-full flex-col flex-1"
+      className="flex items-center w-full flex-col flex-1 h-full"
       role="main"
       aria-label="Amr Tamer's professional profile"
     >
-      <div className="flex-1 flex items-center justify-center w-full">
+      <div className="flex-1 flex items-center justify-center w-full h-full">
         <article className="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-2xl relative border border-white/10 p-4 sm:p-6 lg:p-8 rounded-xl cursor-default backdrop-blur-sm bg-white/5">
           <GlowingEffect
             disabled={false}
             blur={1}
-            proximity={9999}
+            proximity={100}
             spread={100}
             variant="default"
             glow={true}
-            movementDuration={1.5}
+            movementDuration={1}
             borderWidth={2}
             aria-hidden="true"
           />

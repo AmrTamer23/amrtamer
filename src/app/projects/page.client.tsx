@@ -1,13 +1,25 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo, useTransition } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useTransition,
+  Suspense,
+} from "react";
 import { RightPanel } from "./components/right-panel";
 import { SelectedProject } from "./components/selected-project";
 import { AnimatePresence, motion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
-import { ProjectModal } from "./components/project-modal";
+import dynamic from "next/dynamic";
+const ProjectModal = dynamic(
+  () => import("./components/project-modal").then((m) => m.ProjectModal),
+  {
+    ssr: false,
+    loading: () => null,
+  }
+);
 import { useQueryState } from "nuqs";
 
 interface ProjectsClientProps {
@@ -57,127 +69,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
     }
   }, [activeProject]);
 
-  gsap.registerPlugin(useGSAP);
-
-  const { contextSafe } = useGSAP({ scope: featuredContainer });
-
-  // const animateProjectChange = contextSafe((newProject: Project) => {
-  //   if (isAnimating || newProject.id === featuredProject?.id) return;
-
-  //   setIsAnimating(true);
-
-  //   const timeline = gsap.timeline({
-  //     onComplete: () => {
-  //       setIsAnimating(false);
-  //     },
-  //   });
-
-  //   // Phase 1: Fade out old content
-  //   timeline
-  //     .to(".featured-image", {
-  //       scale: 1.1,
-  //       opacity: 0,
-  //       duration: 0.3,
-  //       ease: "power2.in",
-  //     })
-  //     .to(
-  //       ".featured-content",
-  //       {
-  //         y: 30,
-  //         opacity: 0,
-  //         duration: 0.25,
-  //         ease: "power2.in",
-  //       },
-  //       "-=0.2"
-  //     )
-  //     .to(
-  //       ".featured-badge",
-  //       {
-  //         scale: 0.8,
-  //         opacity: 0,
-  //         duration: 0.25,
-  //         ease: "power2.in",
-  //       },
-  //       "-=0.3"
-  //     )
-  //     .to(
-  //       ".featured-button",
-  //       {
-  //         scale: 0.9,
-  //         opacity: 0,
-  //         duration: 0.25,
-  //         ease: "power2.in",
-  //       },
-  //       "-=0.3"
-  //     )
-  //     // ✅ Update state at the perfect moment - when old content is invisible
-  //     .call(() => {
-  //       startTransition(() => {
-  //         void setSelectedProjectSlug(newProject.slug);
-  //       });
-  //     })
-  //     // Phase 2: Fade in new content (now with correct project data)
-  //     .fromTo(
-  //       ".featured-image",
-  //       {
-  //         scale: 0.9,
-  //         opacity: 0,
-  //       },
-  //       {
-  //         scale: 1,
-  //         opacity: 1,
-  //         duration: 0.35,
-  //         ease: "power2.out",
-  //       }
-  //     )
-  //     .fromTo(
-  //       ".featured-content",
-  //       {
-  //         y: 30,
-  //         opacity: 0,
-  //       },
-  //       {
-  //         y: 0,
-  //         opacity: 1,
-  //         duration: 0.3,
-  //         ease: "power2.out",
-  //       },
-  //       "-=0.3"
-  //     )
-  //     .fromTo(
-  //       ".featured-badge",
-  //       {
-  //         scale: 0.8,
-  //         opacity: 0,
-  //       },
-  //       {
-  //         scale: 1,
-  //         opacity: 1,
-  //         duration: 0.3,
-  //         ease: "back.out(1.7)",
-  //       },
-  //       "-=0.4"
-  //     )
-  //     .fromTo(
-  //       ".featured-button",
-  //       {
-  //         scale: 0.9,
-  //         opacity: 0,
-  //       },
-  //       {
-  //         scale: 1,
-  //         opacity: 1,
-  //         duration: 0.3,
-  //         ease: "back.out(1.7)",
-  //       },
-  //       "-=0.3"
-  //     );
-  // });
-
-  // const handleProjectSelect = (project: Project) => {
-  //   animateProjectChange(project);
-  // };
-
   const handleViewProject = (project: Project) => {
     setActiveProject(project);
   };
@@ -186,21 +77,20 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
     <>
       <AnimatePresence>
         {activeProject ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-background/10 dark:bg-background/50 pointer-events-none fixed inset-0 z-10 bg-blend-luminosity backdrop-blur-xl"
-          />
-        ) : null}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {activeProject ? (
-          <ProjectModal
-            activeProject={activeProject}
-            onClose={() => setActiveProject(null)}
-          />
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="bg-background/10 dark:bg-background/50 pointer-events-none fixed inset-0 z-10 bg-blend-luminosity backdrop-blur-xl"
+            />
+            <Suspense fallback={null}>
+              <ProjectModal
+                activeProject={activeProject}
+                onClose={() => setActiveProject(null)}
+              />
+            </Suspense>
+          </>
         ) : null}
       </AnimatePresence>
 

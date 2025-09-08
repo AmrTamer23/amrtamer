@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -17,6 +17,7 @@ interface ProjectModalProps {
 export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   // Close modal when clicking outside
   useOnClickOutside(modalRef as React.RefObject<HTMLElement>, onClose);
@@ -26,12 +27,27 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
     function onKeyDown(event: { key: string }) {
       if (event.key === "Escape") {
         onClose();
+        return;
+      }
+      if (!activeProject) return;
+      const totalImages = activeProject.images?.length ?? 0;
+      if (totalImages === 0) return;
+      if (event.key === "ArrowRight") {
+        setSelectedImageIndex((prev) => {
+          const next = prev + 1;
+          return next > totalImages ? 1 : next;
+        });
+      } else if (event.key === "ArrowLeft") {
+        setSelectedImageIndex((prev) => {
+          const next = prev - 1;
+          return next < 1 ? totalImages : next;
+        });
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [onClose]);
+  }, [onClose, activeProject]);
 
   // Reset to first gallery image when modal opens
   useEffect(() => {
@@ -42,18 +58,6 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
 
   return (
     <>
-      {/* Modal Background Overlay */}
-      <AnimatePresence>
-        {activeProject ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="bg-background/10 dark:bg-background/50 pointer-events-none fixed inset-0 z-10 bg-blend-luminosity backdrop-blur-xl"
-          />
-        ) : null}
-      </AnimatePresence>
-
       {/* Project Modal */}
       <AnimatePresence>
         {activeProject ? (
@@ -61,7 +65,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
             <motion.div
               className="bg-card dark:bg-card border border-border flex h-fit max-h-[98svh] max-w-7xl w-full cursor-default flex-col items-start gap-4 overflow-hidden shadow-2xl max-sm:max-h-[96svh]"
               ref={modalRef}
-              layoutId={`project-modal-${activeProject.id}`}
+              layoutId={`project-modal-${activeProject.slug}`}
               style={{ borderRadius: 16 }}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -107,24 +111,39 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                       Project Gallery
                     </h3>
 
-                    <div className="relative aspect-video rounded-lg overflow-hidden">
-                      <Image
-                        src={
-                          activeProject.images &&
-                          activeProject.images.length > 0
-                            ? activeProject.images[selectedImageIndex - 1] ||
-                              activeProject.mainImage
-                            : activeProject.mainImage
-                        }
-                        alt={activeProject.title}
-                        fill
-                        className="object-contain bg-black transition-opacity duration-300"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 66vw"
-                        priority={true}
-                        placeholder="blur"
-                        blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-                      />
-                    </div>
+                    <motion.div
+                      className="relative aspect-video rounded-lg overflow-hidden"
+                      layoutId={`project-hero-${activeProject.slug}`}
+                    >
+                      <motion.div
+                        key={selectedImageIndex}
+                        className="absolute inset-0"
+                        initial={{
+                          opacity: 0,
+                          scale: shouldReduceMotion ? 1 : 0.99,
+                        }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.2, ease: "easeOut" }}
+                      >
+                        <Image
+                          src={
+                            activeProject.images &&
+                            activeProject.images.length > 0
+                              ? activeProject.images[selectedImageIndex - 1] ||
+                                activeProject.mainImage
+                              : activeProject.mainImage
+                          }
+                          alt={activeProject.title}
+                          fill
+                          className="object-contain bg-black"
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 66vw"
+                          priority={false}
+                          loading="eager"
+                          placeholder="blur"
+                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                        />
+                      </motion.div>
+                    </motion.div>
 
                     {activeProject.images &&
                       activeProject.images.length > 0 && (

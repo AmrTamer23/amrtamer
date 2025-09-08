@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Xanh+Mono&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -6,6 +7,7 @@
 :root {
   --font-nebula: 'IBM Plex Sans', sans-serif;
   --font-palaise: 'Palaise', sans-serif;
+  --font-xanh-mono: 'Xanh Mono', monospace;
 }
 
 /* Mobile-first responsive utilities */
@@ -16,6 +18,8 @@
 .font-palaise {
   font-family: var(--font-palaise);
 }
+
+
 
 /* Mobile-specific optimizations */
 @media (max-width: 640px) {
@@ -61,6 +65,7 @@
 @theme {
 	--font-sans: "IBM Plex Sans", "Geist", ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-xanh-mono: 'Xanh Mono', serif;
 }
 
 html,
@@ -507,3 +512,5 @@ body, html{
 }
 
  /* For More Info: https://github.com/Lazzzer00/Best-CSS-Reset-2024 */
+
+ 

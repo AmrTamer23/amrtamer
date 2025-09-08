@@ -1,6 +1,8 @@
 "use client";
 import Image from "next/image";
 import { useCallback, memo } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { cn } from "@/lib/utils";
 
 function RightPanel({
   projects,
@@ -13,27 +15,71 @@ function RightPanel({
   handleProjectSelect: (project: any) => void;
   isAnimating: boolean;
 }) {
+  const shouldReduceMotion = useReducedMotion();
   const prefetchImage = useCallback((src: string) => {
     const preload = new window.Image();
     preload.src = src;
   }, []);
+  const listVariants = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.06,
+        delayChildren: 0.05,
+      },
+    },
+  } as const;
+  const itemVariants = {
+    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 8 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.25, ease: "easeOut" },
+    },
+  } as const;
   return (
     <div className="max-w-xs mx-auto w-full max-sm:w-full max-sm:order-2 max-sm:pb-6 max-sm:max-w-none flex flex-col justify-start items-start h-fit max-sm:z-0">
-      <div className="flex flex-col gap-2 overflow-y-auto max-sm:max-h-none max-sm:overflow-visible scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full">
+      <motion.div
+        className="flex flex-col gap-2 overflow-y-auto max-sm:max-h-none max-sm:overflow-visible scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full"
+        variants={listVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {projects.map((project, index) => (
-          <div key={project.id} id={`sidebar-${project.id}`}>
-            <div
-              onClick={() => handleProjectSelect(project)}
+          <motion.div
+            key={project.slug ?? project.id}
+            id={`sidebar-${project.slug ?? project.id}`}
+            variants={itemVariants}
+            layout
+          >
+            <motion.div
+              onClick={() => {
+                if (project.status === "completed") {
+                  handleProjectSelect(project);
+                }
+              }}
               onMouseEnter={() => prefetchImage(project.mainImage)}
-              className={`group relative p-4 rounded-xl border transition-all duration-300 cursor-pointer w-full ${
-                featuredProject?.id === project.id
-                  ? "border-white/30 bg-white/10  shadow-lg"
-                  : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8 "
-              } ${isAnimating ? "pointer-events-none opacity-70" : ""}`}
+              className={cn(
+                "group relative p-4 rounded-xl border transition-all duration-300  w-full ",
+                (featuredProject?.slug ?? featuredProject?.id) ===
+                  (project.slug ?? project.id)
+                  ? "border-white/20 bg-white/5 shadow-lg"
+                  : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8 ",
+                project.status === "in-progress" && "cursor-no-drop",
+                project.status === "planning" && "cursor-progress",
+                project.status === "completed" && "cursor-pointer",
+                isAnimating ? "pointer-events-none opacity-70" : ""
+              )}
+              transition={{
+                type: "spring",
+                stiffness: 350,
+                damping: 28,
+                mass: 0.4,
+              }}
+              layout
             >
               <div className="flex gap-3 items-center max-sm:gap-2">
-                {/* Project Thumbnail */}
-                <div className="w-16 aspect-square rounded-lg overflow-hidden flex-shrink-0 relative max-sm:w-12">
+                <div className="w-16 aspect-square rounded-lg overflow-hidden flex-shrink-0 relative max-sm:w-12 border border-white/10">
                   <Image
                     src={project.favicon || "/placeholder.svg"}
                     alt={project.title}
@@ -42,17 +88,17 @@ function RightPanel({
                     height={64}
                     loading={index > 0 ? "lazy" : "eager"}
                     sizes="64px"
+                    placeholder="blur"
+                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                   />
                 </div>
 
-                {/* Project Info */}
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
                   <div className="flex items-center gap-2 mb-1 w-full">
                     <h4 className="text-white font-medium text-base truncate flex-1 max-sm:text-sm">
                       {project.title}
                     </h4>
                   </div>
-                  {/* Status badge below title */}
                   {project.status !== "completed" && (
                     <div className="flex items-center gap-1">
                       {project.status === "in-progress" && (
@@ -69,26 +115,26 @@ function RightPanel({
                   )}
                 </div>
 
-                {/* Selection Indicator */}
                 <div
-                  className={`flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center transition-all duration-300 ${
-                    featuredProject?.id === project.id
-                      ? "border-2 border-white/30"
-                      : ""
+                  className={`flex-shrink-0  rounded-full flex items-center justify-center transition-all duration-300 ${
+                    (featuredProject?.slug ?? featuredProject?.id) ===
+                    (project.slug ?? project.id)
+                      ? "opacity-125"
+                      : "opacity-90"
                   }`}
                 >
                   <div
-                    className="w-3 h-3 rounded-full "
+                    className="size-2.5 rounded-full"
                     style={{
                       backgroundColor: project.color,
                     }}
                   ></div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
