@@ -35,24 +35,27 @@ export function Header() {
   }, [router]);
 
   return (
-    <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-center relative z-10">
+    <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-center relative z-10 flex-col lg:flex-row gap-8">
       <div className="flex justify-center items-center order-1 sm:order-2 h-full text-2xl font-bold font-xanh-mono">
-        <div className="flex items-baseline gap-2">
-          <span className="inline-block w-[10ch] whitespace-nowrap text-4xl tracking-wider">
+        <div
+          className={cn("flex items-baseline", breadcrumb ? "gap-2" : "gap-0")}
+        >
+          <span
+            className={cn(
+              "inline-block w-[10ch] whitespace-nowrap text-4xl tracking-wider"
+            )}
+          >
             Amr Tamer
           </span>
           <AnimatePresence initial={false} mode="wait">
             <motion.span
               key="breadcrumb-sep"
-              className="hidden sm:inline opacity-50"
+              className={cn("opacity-50 lg:w-[1ch]")}
               initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -6 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: shouldReduceMotion ? 0 : 6 }}
               transition={{ duration: 0.15, ease: "easeOut" }}
               aria-hidden="true"
-              style={{
-                width: "1ch",
-              }}
               role="presentation"
             >
               {breadcrumb ? "/" : ""}
@@ -61,16 +64,15 @@ export function Header() {
           <AnimatePresence initial={false} mode="wait">
             <motion.span
               key={breadcrumb}
-              className="hidden sm:inline items-center text-2xl font-normal opacity-90"
+              className={cn(
+                "items-center text-2xl font-normal opacity-90 lg:w-[1ch]"
+              )}
               initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: shouldReduceMotion ? 0 : 8 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
               aria-hidden="true"
               role="presentation"
-              style={{
-                width: "1ch",
-              }}
             >
               {breadcrumb}
             </motion.span>
@@ -84,8 +86,7 @@ export function Header() {
               href={to}
               key={to}
               className={cn(
-                " select-none cursor-pointer px-2 py-1 rounded-md hover:bg-white/10 transition-all duration-200",
-                pathname === to && "bg-white/15"
+                " select-none cursor-pointer px-2 py-1 rounded-md  transition-all duration-200"
               )}
             >
               {label}

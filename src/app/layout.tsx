@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { siteConfig } from "@/config/site.config";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/layout/header";
-import { IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Sans, Xanh_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ViewTransitions } from "next-view-transitions";
 
@@ -11,6 +11,12 @@ const IBMPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
+});
+
+const XanhMono = Xanh_Mono({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-xanh-mono",
 });
 
 export const metadata: Metadata = {
@@ -91,7 +97,13 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
-        <body className={cn("font-sans antialiased", IBMPlexSans.variable)}>
+        <body
+          className={cn(
+            "font-sans antialiased",
+            IBMPlexSans.variable,
+            XanhMono.variable
+          )}
+        >
           <NuqsAdapter>
             <div className="flex flex-col h-full py-8 gap-4 px-4 relative">
               <div
@@ -101,9 +113,9 @@ export default function RootLayout({
                     "radial-gradient(140% 140% at 50% 10%, #000000 40%, #072607 100%)",
                 }}
               />
-              <main className="flex flex-col h-full gap-8 justify-between">
+              <main className="flex flex-col h-full gap-12 lg:justify-between">
                 <Header />
-                <div className="container mx-auto w-full h-full">
+                <div className="container mx-auto w-full h-full flex lg:items-center lg:justify-center items-start justify-start">
                   {children}
                 </div>
               </main>
