@@ -172,4 +172,20 @@ export const projects: Project[] = [
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYCXMAdXFkAF7iZo6letRbr9OnaDwP1fIUgLVY",
     order: 1,
   },
+  {
+    slug: "anha-labs",
+    title: "ANHA Labs",
+    brief: "",
+    overview: "",
+    problems: "",
+    myRole: "",
+    techStack: [],
+    status: "in-progress",
+    color: "#15B8A6",
+    images: [],
+    mainImage: "",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYVAGnNcd8vJgL0BcDdORkefhbmZsyW7NtrTQj",
+    order: 0,
+  },
 ];
