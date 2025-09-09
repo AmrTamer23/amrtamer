@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkedinIcon, MailIcon, XIcon } from "@/lib/icons";
+import { GithubIcon, LinkedinIcon, MailIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
@@ -35,9 +35,9 @@ export function SocialMedia({ className }: { className?: string }) {
       delay: 0.6,
     },
     {
-      href: "https://x.com/AmrT_23",
-      icon: XIcon,
-      label: "Follow Amr Tamer on X (formerly Twitter)",
+      href: "https://github.com/AmrTamer23",
+      icon: GithubIcon,
+      label: "Follow Amr Tamer on GitHub",
       delay: 0.8,
     },
   ];
@@ -96,10 +96,10 @@ export function SocialMedia({ className }: { className?: string }) {
                   href.startsWith("mailto:") ? undefined : "noopener noreferrer"
                 }
                 aria-label={label}
-                className="inline-flex p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent transition-colors hover:bg-white/10"
+                className="inline-flex p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-900 focus:ring-offset-2 focus:ring-offset-transparent transition-colors hover:bg-white/10"
               >
                 <Icon
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-white/80 hover:text-white transition-colors"
+                  className="size-28  [&_path]:fill-white/80 hover:[&_path]:fill-white transition-colors"
                   aria-hidden="true"
                   focusable="false"
                 />
