@@ -75,7 +75,7 @@ export default function Home() {
               <SocialMedia className="flex sm:hidden flex-row gap-6" />
             </div>
             <Link
-              href="https://drive.google.com/file/d/1jGmmXNN0SKI1HR1_cGhh6noji-sUt7a_/view?usp=sharing"
+              href="https://links.amrtamer.dev/cv"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white/90 hover:text-white focus:text-white transition-colors font-bold underline-offset-8 text-sm sm:text-base lg:text-lg underline m-0 p-0 h-fit focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-transparent rounded-sm"
