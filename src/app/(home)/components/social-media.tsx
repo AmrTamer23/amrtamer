@@ -1,12 +1,22 @@
 "use client";
 
+import { useIsMobile } from "@/hooks/use-mobile";
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 
-export function SocialMedia({ className }: { className?: string }) {
+export function SocialMedia({
+  className,
+  hideOnMobile,
+  hideOnDesktop,
+}: {
+  className?: string;
+  hideOnMobile?: boolean;
+  hideOnDesktop?: boolean;
+}) {
+  const isMobile = useIsMobile();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -57,7 +67,7 @@ export function SocialMedia({ className }: { className?: string }) {
       }
     : {};
 
-  return (
+  return hideOnMobile && isMobile ? null : hideOnDesktop && !isMobile ? null : (
     <nav
       aria-label="Social media links"
       role="navigation"
@@ -99,7 +109,7 @@ export function SocialMedia({ className }: { className?: string }) {
                 className="inline-flex p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-900 focus:ring-offset-2 focus:ring-offset-transparent transition-colors hover:bg-white/10"
               >
                 <Icon
-                  className="size-28  [&_path]:fill-white/80 hover:[&_path]:fill-white transition-colors"
+                  className="size-8 lg:size-28  [&_path]:fill-white/80 hover:[&_path]:fill-white transition-colors"
                   aria-hidden="true"
                   focusable="false"
                 />
