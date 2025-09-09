@@ -35,7 +35,7 @@ export default function Home() {
               fetchPriority="high"
             />
           </div>
-          <SocialMedia hideOnMobile />
+          <SocialMedia className="hidden sm:flex" />
         </aside>
 
         <section
@@ -68,8 +68,11 @@ export default function Home() {
           </p>
 
           <footer className="flex w-full justify-between sm:justify-end items-center mt-4">
-            <div className="flex flex-row" aria-label="Social media links">
-              <SocialMedia hideOnDesktop className="flex flex-row gap-6" />
+            <div
+              className="flex sm:hidden flex-row"
+              aria-label="Social media links"
+            >
+              <SocialMedia className="flex sm:hidden flex-row gap-6" />
             </div>
             <Link
               href="https://links.amrtamer.dev/cv"
