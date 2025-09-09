@@ -3,8 +3,10 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import { getReadableTextColor } from "@/lib/utils";
+import { memo, useEffect } from "react";
+import { useImageCache } from "@/hooks/use-image-cache";
 
-export function SelectedProject({
+function SelectedProjectComponent({
   featuredProject,
   featuredContainer,
   onViewProject,
@@ -14,6 +16,8 @@ export function SelectedProject({
   onViewProject?: (project: Project) => void;
 }) {
   const shouldReduceMotion = useReducedMotion();
+  const { preloadImages } = useImageCache();
+
   const handleViewProject = () => {
     if (
       featuredProject &&
@@ -24,15 +28,21 @@ export function SelectedProject({
     }
   };
 
+  useEffect(() => {
+    if (featuredProject?.images?.length) {
+      preloadImages(featuredProject.images);
+    }
+  }, [featuredProject?.slug, preloadImages, featuredProject?.images]);
+
   return (
     <div
       className="flex-1 lg:w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[3/2] h-fit max-sm:aspect-[4/3] "
       ref={featuredContainer}
     >
-      <AnimatePresence mode="popLayout">
+      <AnimatePresence mode="wait">
         {featuredProject && (
           <motion.div
-            key={featuredProject.slug}
+            key={`selected-${featuredProject.slug}`}
             className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 cursor-default max-sm:w-full`}
             style={{
               background: `linear-gradient(135deg, ${featuredProject.color}15, ${featuredProject.color}05)`,
@@ -46,10 +56,10 @@ export function SelectedProject({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -16 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            layout
           >
-            <motion.div layoutId={`project-hero-${featuredProject.slug}`}>
+            <div className="absolute inset-0">
               <Image
+                key={`selected-img-${featuredProject.slug}`}
                 src={featuredProject.mainImage || "/placeholder.svg"}
                 alt={featuredProject.title}
                 fill
@@ -58,8 +68,9 @@ export function SelectedProject({
                 fetchPriority="high"
                 placeholder="blur"
                 blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                unoptimized={false}
               />
-            </motion.div>
+            </div>
 
             <motion.div
               className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent max-sm:via-black/40"
@@ -71,7 +82,7 @@ export function SelectedProject({
 
             {featuredProject.status === "completed" && (
               <motion.div
-                className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4 z-10"
+                className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4 z-[1]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -163,3 +174,5 @@ export function SelectedProject({
     </div>
   );
 }
+
+export const SelectedProject = memo(SelectedProjectComponent);

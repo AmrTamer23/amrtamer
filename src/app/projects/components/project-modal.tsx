@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, memo, useMemo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
 import Image from "next/image";
@@ -8,16 +8,29 @@ import { Button } from "@/components/ui/button";
 import { X, ArrowUpRight } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { cn } from "@/lib/utils";
+import { useImageCache } from "@/hooks/use-image-cache";
 
 interface ProjectModalProps {
   activeProject: Project | null;
   onClose: () => void;
 }
 
-export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
+function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const modalRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const { preloadImages, isLoaded } = useImageCache();
+
+  const currentImageSrc = useMemo(() => {
+    if (!activeProject) return "";
+
+    if (activeProject.images && activeProject.images.length > 0) {
+      return (
+        activeProject.images[selectedImageIndex - 1] || activeProject.mainImage
+      );
+    }
+    return activeProject.mainImage;
+  }, [activeProject, selectedImageIndex]);
 
   // Close modal when clicking outside
   useOnClickOutside(modalRef as React.RefObject<HTMLElement>, onClose);
@@ -49,12 +62,18 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose, activeProject]);
 
-  // Reset to first gallery image when modal opens
+  // Reset to first gallery image when modal opens and preload images
   useEffect(() => {
     if (activeProject) {
-      setSelectedImageIndex(1); // Start with first gallery image
+      setSelectedImageIndex(1);
+
+      if (activeProject.images?.length) {
+        preloadImages([activeProject.mainImage, ...activeProject.images]);
+      } else if (activeProject.mainImage) {
+        preloadImages([activeProject.mainImage]);
+      }
     }
-  }, [activeProject]);
+  }, [activeProject, preloadImages]);
 
   return (
     <>
@@ -70,7 +89,11 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={{
+                duration: 0.3,
+                ease: "easeInOut",
+                layout: { duration: 0.3, ease: "easeInOut" },
+              }}
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between w-full p-4 border-b border-border">
@@ -113,7 +136,9 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
 
                     <motion.div
                       className="relative aspect-video rounded-lg overflow-hidden"
-                      layoutId={`project-hero-${activeProject.slug}`}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
                     >
                       <motion.div
                         key={selectedImageIndex}
@@ -126,13 +151,7 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                       >
                         <Image
-                          src={
-                            activeProject.images &&
-                            activeProject.images.length > 0
-                              ? activeProject.images[selectedImageIndex - 1] ||
-                                activeProject.mainImage
-                              : activeProject.mainImage
-                          }
+                          src={currentImageSrc}
                           alt={activeProject.title}
                           fill
                           className="object-contain bg-black"
@@ -276,3 +295,5 @@ export function ProjectModal({ activeProject, onClose }: ProjectModalProps) {
     </>
   );
 }
+
+export const ProjectModal = memo(ProjectModalComponent);

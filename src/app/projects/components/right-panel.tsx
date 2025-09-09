@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useCallback, memo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useImageCache } from "@/hooks/use-image-cache";
 
 function RightPanel({
   projects,
@@ -16,10 +17,16 @@ function RightPanel({
   isAnimating: boolean;
 }) {
   const shouldReduceMotion = useReducedMotion();
-  const prefetchImage = useCallback((src: string) => {
-    const preload = new window.Image();
-    preload.src = src;
-  }, []);
+  const { preloadImage } = useImageCache();
+
+  const prefetchProjectImage = useCallback(
+    (src: string) => {
+      if (src) {
+        preloadImage(src);
+      }
+    },
+    [preloadImage]
+  );
   const listVariants = {
     hidden: {},
     visible: {
@@ -58,7 +65,7 @@ function RightPanel({
                   handleProjectSelect(project);
                 }
               }}
-              onMouseEnter={() => prefetchImage(project.mainImage)}
+              onMouseEnter={() => prefetchProjectImage(project.mainImage)}
               className={cn(
                 "group relative p-4 rounded-xl border transition-all duration-300  w-full ",
                 (featuredProject?.slug ?? featuredProject?.id) ===

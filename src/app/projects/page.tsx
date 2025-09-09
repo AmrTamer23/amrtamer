@@ -8,14 +8,26 @@ export async function generateMetadata(): Promise<Metadata> {
   const preloadImages: Record<string, string> = {};
 
   projects.slice(0, 3).forEach((project, index) => {
-    preloadImages[`preload-main-${index}`] = project.mainImage;
-    if (project.images.length > 0) {
-      preloadImages[`preload-gallery-${index}-0`] = project.images[0];
+    if (project.mainImage) {
+      preloadImages[`preload-main-${index}`] = project.mainImage;
+    }
+    if (project.images && project.images.length > 0) {
+      project.images.slice(0, 2).forEach((image, imgIndex) => {
+        preloadImages[`preload-gallery-${index}-${imgIndex}`] = image;
+      });
+    }
+    if (project.favicon) {
+      preloadImages[`preload-favicon-${index}`] = project.favicon;
     }
   });
 
   projects.slice(3).forEach((project, index) => {
-    preloadImages[`preload-main-secondary-${index}`] = project.mainImage;
+    if (project.mainImage) {
+      preloadImages[`preload-main-secondary-${index}`] = project.mainImage;
+    }
+    if (project.favicon) {
+      preloadImages[`preload-favicon-secondary-${index}`] = project.favicon;
+    }
   });
 
   return {

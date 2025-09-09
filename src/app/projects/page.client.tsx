@@ -7,6 +7,7 @@ import {
   useMemo,
   useTransition,
   Suspense,
+  useCallback,
 } from "react";
 import { RightPanel } from "./components/right-panel";
 import { SelectedProject } from "./components/selected-project";
@@ -69,25 +70,39 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
     }
   }, [activeProject]);
 
-  const handleViewProject = (project: Project) => {
+  const handleViewProject = useCallback((project: Project) => {
     setActiveProject(project);
-  };
+  }, []);
+
+  const handleProjectSelect = useCallback(
+    (project: Project) => {
+      startTransition(() => {
+        setSelectedProjectSlug(project.slug);
+      });
+    },
+    [setSelectedProjectSlug]
+  );
+
+  const handleCloseModal = useCallback(() => {
+    setActiveProject(null);
+  }, []);
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {activeProject ? (
           <>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               className="bg-background/10 dark:bg-background/50 pointer-events-none fixed inset-0 z-10 bg-blend-luminosity backdrop-blur-xl"
             />
             <Suspense fallback={null}>
               <ProjectModal
                 activeProject={activeProject}
-                onClose={() => setActiveProject(null)}
+                onClose={handleCloseModal}
               />
             </Suspense>
           </>
@@ -105,9 +120,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
           <RightPanel
             projects={projects}
             featuredProject={featuredProject}
-            handleProjectSelect={(project) => {
-              setSelectedProjectSlug(project.slug);
-            }}
+            handleProjectSelect={handleProjectSelect}
             isAnimating={isAnimating || isPending}
           />
         </div>
