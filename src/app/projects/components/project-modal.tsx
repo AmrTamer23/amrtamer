@@ -153,12 +153,14 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                         <Image
                           src={currentImageSrc}
                           alt={activeProject.title}
-                          fill
+                          // fill
                           className="object-contain bg-black"
-                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 66vw"
-                          priority={false}
+                          // sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 66vw"
+                          priority={true}
                           loading="eager"
                           placeholder="blur"
+                          width={1000}
+                          height={1000}
                           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
                         />
                       </motion.div>
