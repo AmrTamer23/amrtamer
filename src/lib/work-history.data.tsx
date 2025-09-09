@@ -14,29 +14,6 @@ export const workExperience: {
   technologies: string[];
 }[] = [
   {
-    company: "Dalla Solutions",
-    title: "Frontend Software Engineer",
-    logo: (
-      <img
-        src={DallaSolutionsLogo.src}
-        alt="Dalla Solutions Logo"
-        className="w-16 sm:w-20 aspect-square rounded-xl"
-      />
-    ),
-    description:
-      "Developing the frontend of Dalla, a MENA-based freelance platform for professionals and companies.",
-    duration: "Dec 2024 - Present",
-    location: "Remote, Saudi Arabia",
-    type: "Contract",
-    technologies: [
-      "React",
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Framer Motion",
-    ],
-  },
-  {
     company: "Digital Brandria",
     title: "Frontend Software Engineer",
     logo: (
