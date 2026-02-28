@@ -7,7 +7,6 @@ import { memo, useEffect, type RefObject } from "react";
 import { useImageCache } from "@/hooks/use-image-cache";
 import { Link } from "next-view-transitions";
 import { NarrativeBlock } from "@/components/ui/narrative-block";
-import { StatusPulse } from "@/components/ui/status-pulse";
 import { normalizeProjectNarrative } from "@/lib/content-normalizers";
 import { panelTransition } from "@/lib/motion-presets";
 
@@ -55,8 +54,8 @@ function SelectedProjectComponent({
     featuredProject.status === "completed"
       ? "Completed"
       : featuredProject.status === "in-progress"
-      ? "In Progress"
-      : "Planning";
+        ? "In Progress"
+        : "Planning";
   const hasHeroImage = Boolean(featuredProject.optimizedMainImage?.src);
   const narrative = normalizeProjectNarrative(featuredProject);
 
@@ -113,12 +112,12 @@ function SelectedProjectComponent({
                 </div>
               )}
 
-              <div className="absolute top-3 left-3 flex items-center gap-2">
+              <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full border border-white/20 bg-black/45 px-2.5 py-1 backdrop-blur-sm">
                 <span
                   className="h-2.5 w-2.5 rounded-full"
                   style={{ backgroundColor: featuredProject.color }}
                 />
-                <span className="text-xs uppercase tracking-[0.14em] text-white/75">
+                <span className="text-xs uppercase tracking-[0.14em] text-white/95">
                   {statusLabel}
                 </span>
               </div>
@@ -193,14 +192,14 @@ function SelectedProjectComponent({
               <NarrativeBlock title="Outcome" items={narrative.impact} />
               <NarrativeBlock title="Lessons" items={narrative.lessons} />
             </div>
-
+            {/* 
             {featuredProject.status !== "completed" ? (
               <StatusPulse
                 status={featuredProject.status}
                 note={narrative.statusNote}
                 lastUpdated={featuredProject.lastUpdated}
               />
-            ) : null}
+            ) : null} */}
 
             <div className="rounded-xl border border-white/10 bg-[var(--surface-2)] p-4 space-y-2">
               <h3 className="text-meta">Tech Stack</h3>

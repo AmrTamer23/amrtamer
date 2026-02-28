@@ -20,8 +20,7 @@ export const revealItem: Variants = {
 };
 
 export const elevateHover = {
-  whileHover: { y: -3, scale: 1.01 },
-  whileTap: { scale: 0.995 },
+  whileHover: {},
   transition: {
     type: "spring",
     stiffness: 320,

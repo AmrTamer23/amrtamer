@@ -130,7 +130,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
       <div className="flex-1 w-full flex items-start h-full max-sm:items-stretch max-sm:px-1 max-sm:py-3">
         <div className="w-full max-w-7xl mx-auto flex flex-col gap-5">
-          <section className="w-full rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md px-5 py-4 max-sm:px-4">
+          {/* <section className="w-full rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md px-5 py-4 max-sm:px-4">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="space-y-1">
                 <p className="text-kicker">
@@ -167,7 +167,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                 ))}
               </div>
             </div>
-          </section>
+          </section> */}
 
           <div className="flex gap-4 h-full mx-auto max-sm:flex-col max-sm:gap-4 flex-1 justify-center items-start w-full">
             <RightPanel
@@ -177,11 +177,11 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
               isAnimating={isPending}
             />
 
-          <SelectedProject
-            featuredProject={featuredProject}
-            featuredContainer={featuredContainer}
-            onViewProject={handleViewProject}
-          />
+            <SelectedProject
+              featuredProject={featuredProject}
+              featuredContainer={featuredContainer}
+              onViewProject={handleViewProject}
+            />
           </div>
         </div>
       </div>
