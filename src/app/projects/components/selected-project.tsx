@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "lucide-react";
 import { getReadableTextColor } from "@/lib/utils";
-import { memo, useEffect } from "react";
+import { memo, useEffect, type RefObject } from "react";
 import { useImageCache } from "@/hooks/use-image-cache";
 
 function SelectedProjectComponent({
@@ -11,9 +11,9 @@ function SelectedProjectComponent({
   featuredContainer,
   onViewProject,
 }: {
-  featuredProject: Project | null;
-  featuredContainer: any;
-  onViewProject?: (project: Project) => void;
+  featuredProject: OptimizedProject | null;
+  featuredContainer: RefObject<HTMLDivElement | null>;
+  onViewProject?: (project: OptimizedProject) => void;
 }) {
   const shouldReduceMotion = useReducedMotion();
   const { preloadImages } = useImageCache();
@@ -60,15 +60,16 @@ function SelectedProjectComponent({
             <div className="absolute inset-0">
               <Image
                 key={`selected-img-${featuredProject.slug}`}
-                src={featuredProject.mainImage || "/placeholder.svg"}
+                src={featuredProject.optimizedMainImage.src}
                 alt={featuredProject.title}
                 fill
                 className="featured-image absolute inset-0 object-cover"
-                priority
-                fetchPriority="high"
+                priority={featuredProject.isPriority}
+                fetchPriority={featuredProject.isPriority ? "high" : "auto"}
                 placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q=="
+                blurDataURL={featuredProject.optimizedMainImage.blurDataURL}
                 unoptimized={false}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
               />
             </div>
 

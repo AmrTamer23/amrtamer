@@ -3,8 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   experimental: {
     viewTransition: true,
-    reactCompiler: true,
   },
+  reactCompiler: true,
+  cacheComponents: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
@@ -34,7 +35,6 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  // This is required to support PostHog trailing slash API requests
   skipTrailingSlashRedirect: true,
 };
 

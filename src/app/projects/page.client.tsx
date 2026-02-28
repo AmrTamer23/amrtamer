@@ -24,7 +24,7 @@ const ProjectModal = dynamic(
 import { useQueryState } from "nuqs";
 
 interface ProjectsClientProps {
-  projects: Project[];
+  projects: OptimizedProject[];
 }
 
 export default function ProjectsClient({ projects }: ProjectsClientProps) {
@@ -43,7 +43,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
     [projects, selectedProjectSlug]
   );
   const [isAnimating, setIsAnimating] = useState(false);
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeProject, setActiveProject] = useState<OptimizedProject | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const featuredContainer = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -70,12 +70,12 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
     }
   }, [activeProject]);
 
-  const handleViewProject = useCallback((project: Project) => {
+  const handleViewProject = useCallback((project: OptimizedProject) => {
     setActiveProject(project);
   }, []);
 
   const handleProjectSelect = useCallback(
-    (project: Project) => {
+    (project: OptimizedProject) => {
       startTransition(() => {
         setSelectedProjectSlug(project.slug);
       });

@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { useImageCache } from "@/hooks/use-image-cache";
 
 interface ProjectModalProps {
-  activeProject: Project | null;
+  activeProject: OptimizedProject | null;
   onClose: () => void;
 }
 
@@ -26,10 +26,26 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
 
     if (activeProject.images && activeProject.images.length > 0) {
       return (
-        activeProject.images[selectedImageIndex - 1] || activeProject.mainImage
+        activeProject.images[selectedImageIndex - 1] || activeProject.optimizedMainImage.src
       );
     }
-    return activeProject.mainImage;
+    return activeProject.optimizedMainImage.src;
+  }, [activeProject, selectedImageIndex]);
+
+  const currentImageBlur = useMemo(() => {
+    if (!activeProject) return undefined;
+
+    // If showing a gallery image and it's a priority project with optimized gallery images
+    if (
+      selectedImageIndex > 0 && 
+      activeProject.optimizedGalleryImages?.length > 0 &&
+      activeProject.optimizedGalleryImages[selectedImageIndex - 1]
+    ) {
+      return activeProject.optimizedGalleryImages[selectedImageIndex - 1].blurDataURL;
+    }
+    
+    // Default to main image blur
+    return activeProject.optimizedMainImage.blurDataURL;
   }, [activeProject, selectedImageIndex]);
 
   // Close modal when clicking outside
@@ -153,15 +169,13 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                         <Image
                           src={currentImageSrc}
                           alt={activeProject.title}
-                          // fill
                           className="object-contain bg-black"
-                          // sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 66vw"
-                          priority={true}
-                          loading="eager"
+                          priority={activeProject.isPriority}
+                          loading={activeProject.isPriority ? "eager" : "lazy"}
                           placeholder="blur"
                           width={1000}
                           height={1000}
-                          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q=="
+                          blurDataURL={currentImageBlur}
                         />
                       </motion.div>
                     </motion.div>
@@ -176,37 +190,40 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                               : "md:grid-cols-4"
                           )}
                         >
-                          {activeProject.images.map((image, index) => (
-                            <div
-                              key={index}
-                              className={cn(
-                                "relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-1 bg-black",
-                                selectedImageIndex === index + 1
-                                  ? "border-opacity-100"
-                                  : "opacity-70 hover:opacity-100 border-transparent"
-                              )}
-                              style={{
-                                borderColor:
+                          {activeProject.images.map((image, index) => {
+                            const optimizedImage = activeProject.optimizedGalleryImages?.[index];
+                            return (
+                              <div
+                                key={index}
+                                className={cn(
+                                  "relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border-1 bg-black",
                                   selectedImageIndex === index + 1
-                                    ? activeProject.color
-                                    : "transparent",
-                              }}
-                              onClick={() => setSelectedImageIndex(index + 1)}
-                            >
-                              <Image
-                                src={image}
-                                alt={`${activeProject.title} - Image ${
-                                  index + 1
-                                }`}
-                                fill
-                                className="object-contain"
-                                sizes="(max-width: 640px) 30vw, (max-width: 768px) 25vw, 12vw"
-                                loading="lazy"
-                                placeholder="blur"
-                                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q=="
-                              />
-                            </div>
-                          ))}
+                                    ? "border-opacity-100"
+                                    : "opacity-70 hover:opacity-100 border-transparent"
+                                )}
+                                style={{
+                                  borderColor:
+                                    selectedImageIndex === index + 1
+                                      ? activeProject.color
+                                      : "transparent",
+                                }}
+                                onClick={() => setSelectedImageIndex(index + 1)}
+                              >
+                                <Image
+                                  src={image}
+                                  alt={`${activeProject.title} - Image ${
+                                    index + 1
+                                  }`}
+                                  fill
+                                  className="object-contain"
+                                  sizes="(max-width: 640px) 30vw, (max-width: 768px) 25vw, 12vw"
+                                  loading="lazy"
+                                  placeholder={optimizedImage?.blurDataURL ? "blur" : "empty"}
+                                  blurDataURL={optimizedImage?.blurDataURL || "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q=="}
+                                />
+                              </div>
+                            );
+                          })}
                         </div>
                       )}
                   </div>

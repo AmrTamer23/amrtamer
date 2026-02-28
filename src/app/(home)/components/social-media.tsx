@@ -4,7 +4,7 @@ import { GithubIcon, LinkedinIcon, MailIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export function SocialMedia({ className }: { className?: string }) {
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
@@ -42,8 +42,8 @@ export function SocialMedia({ className }: { className?: string }) {
     },
   ];
 
-  const MotionWrapper = prefersReducedMotion ? "div" : (motion.div as any);
-  const MotionItem = prefersReducedMotion ? "div" : (motion.div as any);
+  const MotionWrapper: React.ElementType = prefersReducedMotion ? "div" : motion.div;
+  const MotionItem: React.ElementType = prefersReducedMotion ? "div" : motion.div;
 
   const containerProps = !prefersReducedMotion
     ? {

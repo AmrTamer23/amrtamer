@@ -1,21 +1,11 @@
 import { motion } from "motion/react";
-import type { JSX } from "react";
 
 export function WorkCard({
   role,
   setActiveItem,
 }: {
-  role: {
-    company: string;
-    logo: JSX.Element;
-    title: string;
-    description: string;
-    duration: string;
-    location: string;
-    type: string;
-    technologies: string[];
-  };
-  setActiveItem: (item: any) => void;
+  role: WorkExperience;
+  setActiveItem: (item: WorkExperience) => void;
 }) {
   return (
     <div

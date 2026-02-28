@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import type { JSX, RefObject } from "react";
+import type { RefObject } from "react";
 import { X } from "lucide-react";
 
 export function WorkModal({
@@ -7,16 +7,7 @@ export function WorkModal({
   ref,
   onClose,
 }: {
-  activeItem: {
-    company: string;
-    logo: JSX.Element;
-    title: string;
-    description: string;
-    duration: string;
-    location: string;
-    type: string;
-    technologies: string[];
-  };
+  activeItem: WorkExperience;
   ref: RefObject<HTMLDivElement | null>;
   onClose: () => void;
 }) {

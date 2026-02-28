@@ -22,5 +22,28 @@ type OptimizedProject = Project & {
     height: number;
     blurDataURL?: string;
   };
+  optimizedFavicon: {
+    src: string;
+    width: number;
+    height: number;
+    blurDataURL?: string;
+  };
+  optimizedGalleryImages: {
+    src: string;
+    width: number;
+    height: number;
+    blurDataURL?: string;
+  }[];
   isPriority: boolean;
+};
+
+type WorkExperience = {
+  company: string;
+  logo: import("react").JSX.Element;
+  title: string;
+  description: string;
+  duration: string;
+  location: string;
+  type: string;
+  technologies: string[];
 };

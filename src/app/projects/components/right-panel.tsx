@@ -11,9 +11,9 @@ function RightPanel({
   handleProjectSelect,
   isAnimating,
 }: {
-  projects: any[];
-  featuredProject: any;
-  handleProjectSelect: (project: any) => void;
+  projects: OptimizedProject[];
+  featuredProject: OptimizedProject;
+  handleProjectSelect: (project: OptimizedProject) => void;
   isAnimating: boolean;
 }) {
   const shouldReduceMotion = useReducedMotion();
@@ -54,8 +54,8 @@ function RightPanel({
       >
         {projects.map((project, index) => (
           <motion.div
-            key={project.slug ?? project.id}
-            id={`sidebar-${project.slug ?? project.id}`}
+            key={project.slug}
+            id={`sidebar-${project.slug}`}
             variants={itemVariants}
             layout
           >
@@ -68,8 +68,7 @@ function RightPanel({
               onMouseEnter={() => prefetchProjectImage(project.mainImage)}
               className={cn(
                 "group relative p-4 rounded-xl border transition-all duration-300  w-full ",
-                (featuredProject?.slug ?? featuredProject?.id) ===
-                  (project.slug ?? project.id)
+                featuredProject?.slug === project.slug
                   ? "border-white/20 bg-white/5 shadow-lg"
                   : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8 ",
                 project.status === "in-progress" && "cursor-no-drop",
@@ -88,15 +87,15 @@ function RightPanel({
               <div className="flex gap-3 items-center max-sm:gap-2">
                 <div className="w-16 aspect-square rounded-lg overflow-hidden flex-shrink-0 relative max-sm:w-12 border border-white/10">
                   <Image
-                    src={project.favicon || "/placeholder.svg"}
+                    src={project.optimizedFavicon.src}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300"
                     width={64}
                     height={64}
-                    loading={index > 0 ? "lazy" : "eager"}
+                    loading={project.isPriority ? "eager" : "lazy"}
                     sizes="64px"
                     placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q=="
+                    blurDataURL={project.optimizedFavicon.blurDataURL}
                   />
                 </div>
 
@@ -124,8 +123,7 @@ function RightPanel({
 
                 <div
                   className={`flex-shrink-0  rounded-full flex items-center justify-center transition-all duration-300 ${
-                    (featuredProject?.slug ?? featuredProject?.id) ===
-                    (project.slug ?? project.id)
+                    featuredProject?.slug === project.slug
                       ? "opacity-125"
                       : "opacity-90"
                   }`}
