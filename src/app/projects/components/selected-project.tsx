@@ -1,10 +1,15 @@
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
-import { EyeIcon } from "lucide-react";
+import { ArrowUpRight, EyeIcon, Sparkles } from "lucide-react";
 import { getReadableTextColor } from "@/lib/utils";
 import { memo, useEffect, type RefObject } from "react";
 import { useImageCache } from "@/hooks/use-image-cache";
+import { Link } from "next-view-transitions";
+import { NarrativeBlock } from "@/components/ui/narrative-block";
+import { StatusPulse } from "@/components/ui/status-pulse";
+import { normalizeProjectNarrative } from "@/lib/content-normalizers";
+import { panelTransition } from "@/lib/motion-presets";
 
 function SelectedProjectComponent({
   featuredProject,
@@ -15,7 +20,6 @@ function SelectedProjectComponent({
   featuredContainer: RefObject<HTMLDivElement | null>;
   onViewProject?: (project: OptimizedProject) => void;
 }) {
-  const shouldReduceMotion = useReducedMotion();
   const { preloadImages } = useImageCache();
 
   const handleViewProject = () => {
@@ -34,143 +38,194 @@ function SelectedProjectComponent({
     }
   }, [featuredProject?.slug, preloadImages, featuredProject?.images]);
 
+  if (!featuredProject) {
+    return (
+      <div
+        className="flex-1 lg:w-8/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto"
+        ref={featuredContainer}
+      >
+        <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 text-white/70">
+          Select a project to view details.
+        </div>
+      </div>
+    );
+  }
+
+  const statusLabel =
+    featuredProject.status === "completed"
+      ? "Completed"
+      : featuredProject.status === "in-progress"
+      ? "In Progress"
+      : "Planning";
+  const hasHeroImage = Boolean(featuredProject.optimizedMainImage?.src);
+  const narrative = normalizeProjectNarrative(featuredProject);
+
   return (
     <div
-      className="flex-1 lg:w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[3/2] max-sm:aspect-[4/3]"
+      className="flex-1 lg:w-8/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto"
       ref={featuredContainer}
     >
       <AnimatePresence mode="wait">
-        {featuredProject && (
-          <motion.div
-            key={`selected-${featuredProject.slug}`}
-            className={`group relative w-full h-full rounded-xl overflow-hidden border border-white/20 cursor-default max-sm:w-full`}
-            style={{
-              background: `linear-gradient(135deg, ${featuredProject.color}15, ${featuredProject.color}05)`,
-            }}
-            onClick={
-              featuredProject.status === "completed"
-                ? handleViewProject
-                : undefined
-            }
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -16 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-          >
-            <div className="absolute inset-0">
-              <Image
-                key={`selected-img-${featuredProject.slug}`}
-                src={featuredProject.optimizedMainImage.src}
-                alt={featuredProject.title}
-                fill
-                className="featured-image absolute inset-0 object-cover"
-                priority={featuredProject.isPriority}
-                fetchPriority={featuredProject.isPriority ? "high" : "auto"}
-                placeholder="blur"
-                blurDataURL={featuredProject.optimizedMainImage.blurDataURL}
-                unoptimized={false}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 40vw"
-              />
+        <motion.div
+          key={`selected-${featuredProject.slug}`}
+          className="group relative w-full rounded-2xl overflow-hidden border border-white/15 cursor-default max-sm:w-full bg-[var(--surface-1)] backdrop-blur-md"
+          style={{
+            background: `linear-gradient(145deg, ${featuredProject.color}16, rgba(255,255,255,0.02) 60%)`,
+          }}
+          initial={panelTransition.initial}
+          animate={panelTransition.animate}
+          exit={panelTransition.exit}
+          transition={panelTransition.transition}
+        >
+          <div className="p-4 md:p-5 space-y-4">
+            <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/15 bg-black/35">
+              {hasHeroImage ? (
+                <>
+                  <Image
+                    key={`selected-img-${featuredProject.slug}`}
+                    src={featuredProject.optimizedMainImage.src}
+                    alt={featuredProject.title}
+                    fill
+                    className="featured-image absolute inset-0 object-cover"
+                    priority={featuredProject.isPriority}
+                    fetchPriority={featuredProject.isPriority ? "high" : "auto"}
+                    placeholder="blur"
+                    blurDataURL={featuredProject.optimizedMainImage.blurDataURL}
+                    unoptimized={false}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1400px) 65vw, 58vw"
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                </>
+              ) : (
+                <div className="absolute inset-0 grid place-items-center px-6 text-center">
+                  <div className="space-y-2">
+                    <Sparkles className="size-5 mx-auto text-white/70" />
+                    <p className="text-white/70 text-sm">
+                      Visual preview will be added as this project matures.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              <div className="absolute top-3 left-3 flex items-center gap-2">
+                <span
+                  className="h-2.5 w-2.5 rounded-full"
+                  style={{ backgroundColor: featuredProject.color }}
+                />
+                <span className="text-xs uppercase tracking-[0.14em] text-white/75">
+                  {statusLabel}
+                </span>
+              </div>
+
+              {featuredProject.status === "completed" && (
+                <div className="absolute top-3 right-3 z-[1]">
+                  <Button
+                    className="rounded-lg cursor-pointer hover:opacity-85 transition-all duration-200 items-center"
+                    style={{
+                      background: `${featuredProject.color}`,
+                      color: getReadableTextColor(featuredProject.color),
+                    }}
+                    onClick={handleViewProject}
+                    size="md"
+                    variant="primary"
+                  >
+                    <EyeIcon className="w-4 h-4" />
+                    <span className="text-xs font-medium">Gallery & Details</span>
+                  </Button>
+                </div>
+              )}
             </div>
 
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent max-sm:via-black/40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-            />
-
-            {featuredProject.status === "completed" && (
-              <motion.div
-                className="featured-button absolute top-2 right-2 max-sm:top-4 max-sm:right-4 z-[1]"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Button
-                  className="rounded-xl cursor-pointer hover:opacity-80 transition-all duration-200 items-center"
-                  style={{
-                    background: `${featuredProject.color}`,
-                    color: getReadableTextColor(featuredProject.color),
-                  }}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleViewProject();
-                  }}
-                  size="lg"
-                  variant="primary"
-                >
-                  <EyeIcon className="w-6 h-6 transition-transform max-sm:w-4 max-sm:h-4" />
-                  <span className="text-sm font-medium max-sm:text-xs">
-                    View Project's Details
-                  </span>
-                </Button>
-              </motion.div>
-            )}
-
-            {featuredProject.status !== "completed" && (
-              <motion.div
-                className="featured-badge absolute top-6 left-6"
-                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : -6 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -6 }}
-                transition={{ duration: 0.2 }}
-              >
-                {featuredProject.status === "in-progress" && (
-                  <span className="px-3 py-1 text-xs font-medium rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 backdrop-blur-sm">
-                    🚧 Work in Progress
-                  </span>
-                )}
-                {featuredProject.status === "planning" && (
-                  <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30 backdrop-blur-sm">
-                    📋 Planning
-                  </span>
-                )}
-              </motion.div>
-            )}
-
-            <motion.div
-              className="featured-content absolute bottom-0 left-0 right-0 px-8 py-4 max-sm:p-4"
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
-              transition={{ duration: 0.25, ease: "easeOut" }}
-            >
-              <div className="max-w-2xl flex flex-col gap-2 max-sm:max-w-none">
-                <h2 className="text-3xl font-bold text-white leading-tight max-sm:text-xl">
-                  {featuredProject.title}
-                </h2>
-
-                <p className="text-white/80 text-lg leading-relaxed line-clamp-3 max-sm:text-sm max-sm:line-clamp-3">
-                  {featuredProject.brief}
+            <div className="grid gap-4 md:grid-cols-[1fr_auto] items-start">
+              <div className="space-y-2">
+                <p className="text-kicker">Project Case</p>
+                <h2 className="text-section-title">{featuredProject.title}</h2>
+                <p className="text-body">
+                  {featuredProject.brief || narrative.overview}
                 </p>
               </div>
-            </motion.div>
+              {featuredProject.link ? (
+                <Button
+                  className="rounded-md md:self-start"
+                  variant="outline"
+                  size="md"
+                  asChild
+                >
+                  <Link
+                    href={featuredProject.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Live Site</span>
+                    <ArrowUpRight className="size-4" />
+                  </Link>
+                </Button>
+              ) : null}
+            </div>
 
-            <motion.div
-              className="absolute top-0 right-0 w-40 h-40 opacity-20 rounded-full blur-2xl"
-              style={{
-                background: `radial-gradient(circle, ${featuredProject.color}60, transparent)`,
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-            <motion.div
-              className="absolute bottom-0 left-0 w-32 h-32 opacity-15 rounded-full blur-xl"
-              style={{
-                background: `radial-gradient(circle, ${featuredProject.color}40, transparent)`,
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-            />
-          </motion.div>
-        )}
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded-xl border border-white/10 bg-[var(--surface-2)] p-4 space-y-1.5">
+                <h3 className="text-meta">Problem</h3>
+                <p className="text-sm text-[var(--text-strong)]/90 leading-relaxed">
+                  {narrative.problem}
+                </p>
+              </div>
+              <div className="rounded-xl border border-white/10 bg-[var(--surface-2)] p-4 space-y-1.5">
+                <h3 className="text-meta">My Role</h3>
+                <p className="text-sm text-[var(--text-strong)]/90 leading-relaxed">
+                  {narrative.role}
+                </p>
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <NarrativeBlock title="Constraints" items={narrative.constraints} />
+              <NarrativeBlock title="Decisions" items={narrative.decisions} />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2">
+              <NarrativeBlock title="Outcome" items={narrative.impact} />
+              <NarrativeBlock title="Lessons" items={narrative.lessons} />
+            </div>
+
+            {featuredProject.status !== "completed" ? (
+              <StatusPulse
+                status={featuredProject.status}
+                note={narrative.statusNote}
+                lastUpdated={featuredProject.lastUpdated}
+              />
+            ) : null}
+
+            <div className="rounded-xl border border-white/10 bg-[var(--surface-2)] p-4 space-y-2">
+              <h3 className="text-meta">Tech Stack</h3>
+              {featuredProject.techStack.length > 0 ? (
+                <div className="flex flex-wrap gap-2">
+                  {featuredProject.techStack.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="px-2.5 py-1 text-xs rounded-full border"
+                      style={{
+                        backgroundColor: `${featuredProject.color}20`,
+                        borderColor: `${featuredProject.color}50`,
+                        color: featuredProject.color,
+                      }}
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm text-[var(--text-soft)]">Stack details coming soon.</p>
+              )}
+            </div>
+          </div>
+        </motion.div>
       </AnimatePresence>
     </div>
   );

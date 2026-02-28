@@ -47,7 +47,7 @@
 @theme {
 	--font-sans: "IBM Plex Sans", "Geist", ui-sans-serif, system-ui, sans-serif,
 		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-xanh-mono: 'Xanh Mono', serif;
+    --font-display: "Bodoni Moda", "Times New Roman", serif;
 }
 
 html,
@@ -105,6 +105,7 @@ body {
 	--destructive-foreground: oklch(0 0 0);
 	--radius: 0.5rem;
 	--font-sans: "IBM Plex Sans", sans-serif;
+	--font-display: "Bodoni Moda", "Times New Roman", serif;
 	--font-serif: Georgia, serif;
 	--font-mono: Geist Mono, monospace;
 	--shadow-color: hsl(0 0% 0%);
@@ -124,6 +125,17 @@ body {
 	--shadow-xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.18), 0px 8px 10px -1px hsl(0 0% 0% / 0.18);
 	--shadow-2xl: 0px 1px 2px 0px hsl(0 0% 0% / 0.45);
 	--tracking-normal: 0em;
+  --surface-1: rgba(255, 255, 255, 0.04);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --surface-3: rgba(255, 255, 255, 0.1);
+  --text-strong: rgba(255, 255, 255, 0.96);
+  --text-soft: rgba(255, 255, 255, 0.72);
+  --accent-neutral: rgba(255, 255, 255, 0.22);
+  --accent-project: rgba(132, 204, 22, 0.7);
+  --ambient-x: 50%;
+  --ambient-y: 100%;
+  --ambient-size: 160% 140%;
+  --ambient-color: #0f3b10;
 }
 
 @theme inline {
@@ -163,6 +175,7 @@ body {
 	--color-sidebar-border: var(--sidebar-border);
 	--color-sidebar-ring: var(--sidebar-ring);
 	--font-sans: "IBM Plex Sans", sans-serif;
+	--font-display: "Bodoni Moda", "Times New Roman", serif;
 	--font-mono: Geist Mono, monospace;
 	--font-serif: Georgia, serif;
 	--radius: 0.5rem;
@@ -202,6 +215,62 @@ body {
 	html{
 		@apply bg-gradient-to-br from-black via-zinc-900 to-zinc-950;
 	}
+}
+
+@layer components {
+  .ambient-layer {
+    background:
+      radial-gradient(var(--ambient-size) at var(--ambient-x) var(--ambient-y), var(--ambient-color) 0%, #041604 33%, #000000 72%);
+  }
+
+  .text-display {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.04;
+    letter-spacing: 0.005em;
+    font-weight: 700;
+    color: var(--text-strong);
+  }
+
+  .text-section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 3.5vw, 2.2rem);
+    line-height: 1.1;
+    letter-spacing: 0.004em;
+    font-weight: 700;
+    color: var(--text-strong);
+  }
+
+  .text-kicker {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .text-body {
+    font-size: clamp(0.95rem, 1.8vw, 1.07rem);
+    line-height: 1.65;
+    color: var(--text-soft);
+  }
+
+  .text-meta {
+    font-size: 0.76rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+  }
+
+  .surface-1 {
+    background: var(--surface-1);
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    backdrop-filter: blur(12px);
+  }
+
+  .surface-2 {
+    background: var(--surface-2);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+  }
 }
 
 ::view-transition-old(root),

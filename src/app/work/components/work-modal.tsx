@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
 import type { RefObject } from "react";
 import { X } from "lucide-react";
+import { normalizeWorkNarrative } from "@/lib/content-normalizers";
+import { NarrativeBlock } from "@/components/ui/narrative-block";
+import { EvidenceChip } from "@/components/ui/evidence-chip";
 
 export function WorkModal({
   activeItem,
@@ -11,10 +14,12 @@ export function WorkModal({
   ref: RefObject<HTMLDivElement | null>;
   onClose: () => void;
 }) {
+  const narrative = normalizeWorkNarrative(activeItem);
+
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-4">
       <motion.div
-        className="bg-card dark:bg-card border border-border flex  w-[95%] md:w-[90%] max-w-2xl  flex-col items-start gap-4 overflow-hidden p-4 md:p-6 shadow-lg max-h-[90vh]  relative"
+        className="bg-card dark:bg-card border border-border flex w-[95%] md:w-[90%] max-w-4xl flex-col items-start gap-4 overflow-hidden p-4 md:p-6 shadow-lg max-h-[90vh] relative"
         layoutId={`workItem-${activeItem.company}`}
         style={{ borderRadius: 12 }}
         ref={ref}
@@ -50,10 +55,10 @@ export function WorkModal({
               className="text-muted-foreground flex flex-wrap gap-1 sm:gap-2 text-sm md:text-base"
               layoutId={`workItemExtras-${activeItem.company}`}
             >
-              <span>📍 {activeItem.location}</span>
-              <span className="inline">|</span>
+              <span>{activeItem.location}</span>
+              <span className="inline text-white/30">|</span>
               <span>{activeItem.duration}</span>
-              <span className="inline">|</span>
+              <span className="inline text-white/30">|</span>
               <span>{activeItem.type}</span>
             </motion.div>
           </div>
@@ -70,30 +75,25 @@ export function WorkModal({
           {activeItem.description}
         </motion.p>
 
-        {activeItem.technologies.length > 0 && (
-          <motion.div
-            layout
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, delay: 0.1 }}
-            className="w-full"
-          >
-            <h4 className="font-semibold text-foreground mb-2 text-base md:text-lg">
-              Technologies & Tools:
-            </h4>
-            <div className="flex flex-wrap gap-2">
-              {activeItem.technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  className="px-2 py-1 bg-accent/50 text-accent-foreground text-xs md:text-sm rounded-md"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+          <NarrativeBlock title="Scope" items={narrative.scope} />
+          <NarrativeBlock title="Achievements" items={narrative.achievements} />
+        </div>
+        <section className="w-full">
+          <h4 className="text-meta mb-2">What Changed</h4>
+          <p className="text-sm text-[var(--text-strong)]/90 leading-relaxed">
+            {narrative.result}
+          </p>
+        </section>
+
+        <section className="w-full">
+          <h4 className="text-meta mb-2">Stack Highlights</h4>
+          <div className="flex flex-wrap gap-2">
+            {narrative.stackHighlights.map((tech, index) => (
+              <EvidenceChip key={`${tech}-${index}`} value={tech} />
+            ))}
+          </div>
+        </section>
       </motion.div>
     </div>
   );

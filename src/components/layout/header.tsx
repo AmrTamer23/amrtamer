@@ -1,12 +1,11 @@
 "use client";
 import { useEffect, useMemo } from "react";
-import Image from "next/image";
 import { useTransitionRouter } from "next-view-transitions";
-import logo from "../../../public/icon-512.png";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { revealItem } from "@/lib/motion-presets";
 
 export function Header() {
   const router = useTransitionRouter();
@@ -35,8 +34,13 @@ export function Header() {
   }, [router]);
 
   return (
-    <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-center relative z-10 flex-col lg:flex-row gap-8">
-      <div className="flex justify-center items-center order-1 sm:order-2 h-full text-2xl font-bold font-xanh-mono">
+    <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-between relative z-10 flex-col lg:flex-row gap-6">
+      <motion.div
+        variants={revealItem}
+        initial="hidden"
+        animate="visible"
+        className="flex justify-center items-center order-1 h-full"
+      >
         <div
           className={cn(
             "flex items-baseline",
@@ -45,7 +49,7 @@ export function Header() {
         >
           <span
             className={cn(
-              "inline-block w-[10ch] whitespace-nowrap text-4xl tracking-wider"
+              "inline-block font-display! whitespace-nowrap text-3xl lg:text-4xl tracking-wide text-[var(--text-strong)] font-[var(--font-display)]"
             )}
           >
             Amr Tamer
@@ -68,7 +72,7 @@ export function Header() {
             <motion.span
               key={breadcrumb}
               className={cn(
-                "items-center text-2xl font-normal opacity-90 lg:w-[1ch]"
+                "items-center text-xl lg:text-2xl font-normal text-[var(--text-soft)]"
               )}
               initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -8 }}
               animate={{ opacity: 1, x: 0 }}
@@ -81,16 +85,21 @@ export function Header() {
             </motion.span>
           </AnimatePresence>
         </div>
-      </div>
-      <nav className="flex gap-3 sm:gap-4 text-base sm:text-lg items-center justify-center sm:justify-end sm:w-1/3 order-3 ">
+      </motion.div>
+      <nav className="flex gap-2 text-sm sm:text-base items-center justify-center order-3 rounded-full border border-white/10 bg-[var(--surface-1)] px-2 py-1">
         {links.map(({ to, label }) => {
+          const isActive = pathname === to;
           return (
             <Link
               href={to}
               key={to}
               className={cn(
-                " select-none cursor-pointer px-2 py-1 rounded-md  transition-all duration-200"
+                "select-none cursor-pointer px-3 py-1.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30",
+                isActive
+                  ? "bg-white/14 text-[var(--text-strong)]"
+                  : "text-[var(--text-soft)] hover:text-[var(--text-strong)] hover:bg-white/8"
               )}
+              aria-current={isActive ? "page" : undefined}
             >
               {label}
             </Link>

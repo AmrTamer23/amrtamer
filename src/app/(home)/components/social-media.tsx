@@ -2,24 +2,12 @@
 
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { Link } from "next-view-transitions";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 export function SocialMedia({ className }: { className?: string }) {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setPrefersReducedMotion(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setPrefersReducedMotion(e.matches);
-    };
-
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
+  const prefersReducedMotion = useReducedMotion();
 
   const socialLinks = [
     {
@@ -61,11 +49,11 @@ export function SocialMedia({ className }: { className?: string }) {
     <nav
       aria-label="Social media links"
       role="navigation"
-      className="w-full items-center justify-center flex"
+      className="items-center justify-center flex"
     >
       <MotionWrapper
         className={cn(
-          "flex flex-col mt-0 items-center gap-4 sm:gap-6 justify-center sm:justify-center sm:w-1/3 order-2 sm:order-1",
+          "flex flex-row mt-0 items-center gap-1.5 justify-center",
           className
         )}
         {...containerProps}
@@ -96,10 +84,10 @@ export function SocialMedia({ className }: { className?: string }) {
                   href.startsWith("mailto:") ? undefined : "noopener noreferrer"
                 }
                 aria-label={label}
-                className="inline-flex p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-900 focus:ring-offset-2 focus:ring-offset-transparent transition-colors hover:bg-white/10"
+                className="inline-flex p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white/35 focus:ring-offset-2 focus:ring-offset-transparent transition-colors hover:bg-white/10"
               >
                 <Icon
-                  className="size-10 lg:size-28  [&_path]:fill-white/80 hover:[&_path]:fill-white transition-colors"
+                  className="size-6 sm:size-7 [&_path]:fill-white/80 hover:[&_path]:fill-white transition-colors"
                   aria-hidden="true"
                   focusable="false"
                 />

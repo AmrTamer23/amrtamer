@@ -6,6 +6,7 @@ import { workExperience } from "@/lib/work-history.data";
 import { WorkModal } from "./work-modal";
 import { WorkCard } from "./work-card";
 import { useCloseDismiss } from "@/hooks/use-close-dismiss";
+import { revealItem, revealStagger } from "@/lib/motion-presets";
 
 export function WorkHistory() {
   const [activeItem, setActiveItem] = useState<WorkExperience | null>(null);
@@ -38,18 +39,32 @@ export function WorkHistory() {
         ) : null}
       </AnimatePresence>
 
-      <div className="flex w-full max-w-2xl flex-col gap-4 ">
-        <div className="relative">
-          <div className="absolute left-8 md:left-10 top-8 bottom-8 w-0.5 bg-border"></div>
+      <div className="flex w-full max-w-5xl flex-col gap-4">
+        <motion.header
+          variants={revealItem}
+          initial="hidden"
+          animate="visible"
+          className="surface-1 rounded-2xl p-5"
+        >
+          <p className="text-kicker mb-2">Career Evidence</p>
+          <h1 className="text-section-title">Roles where I shipped and scaled product delivery</h1>
+          <p className="text-body mt-2">
+            Each role highlights scope, execution approach, and measurable impact. Open any card for full context.
+          </p>
+        </motion.header>
 
+        <motion.div
+          variants={revealStagger}
+          initial="hidden"
+          animate="visible"
+          className="relative space-y-4"
+        >
           {workExperience.map((role) => (
-            <WorkCard
-              key={role.company}
-              role={role}
-              setActiveItem={setActiveItem}
-            />
+            <motion.div key={role.company} variants={revealItem}>
+              <WorkCard role={role} setActiveItem={setActiveItem} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </>
   );

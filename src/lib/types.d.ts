@@ -12,6 +12,12 @@ type Project = {
   mainImage: string;
   favicon: string;
   link?: string;
+  impact?: string[];
+  constraints?: string[];
+  decisions?: string[];
+  lessons?: string[];
+  statusNote?: string;
+  lastUpdated?: string;
   order: number;
 };
 
@@ -42,8 +48,12 @@ type WorkExperience = {
   logo: import("react").JSX.Element;
   title: string;
   description: string;
+  result?: string;
   duration: string;
   location: string;
   type: string;
   technologies: string[];
+  achievements?: string[];
+  scope?: string[];
+  stackHighlights?: string[];
 };

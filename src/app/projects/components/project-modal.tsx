@@ -9,6 +9,8 @@ import { X } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { cn } from "@/lib/utils";
 import { useImageCache } from "@/hooks/use-image-cache";
+import { normalizeProjectNarrative } from "@/lib/content-normalizers";
+import { NarrativeBlock } from "@/components/ui/narrative-block";
 
 interface ProjectModalProps {
   activeProject: OptimizedProject | null;
@@ -16,7 +18,7 @@ interface ProjectModalProps {
 }
 
 function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(1);
   const modalRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -46,6 +48,10 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
 
     return activeProject.optimizedMainImage.blurDataURL;
   }, [activeProject, selectedImageIndex]);
+  const narrative = useMemo(
+    () => (activeProject ? normalizeProjectNarrative(activeProject) : null),
+    [activeProject]
+  );
 
   // Focus management: move focus into modal on open, restore on close
   useEffect(() => {
@@ -88,11 +94,9 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose, activeProject]);
 
-  // Reset to first gallery image when modal opens and preload images
+  // Preload images when modal opens
   useEffect(() => {
     if (activeProject) {
-      setSelectedImageIndex(1);
-
       if (activeProject.images?.length) {
         preloadImages([activeProject.mainImage, ...activeProject.images]);
       } else if (activeProject.mainImage) {
@@ -137,12 +141,12 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                   </h2>
                   {activeProject.status === "in-progress" && (
                     <span className="px-3 py-1 text-xs font-medium rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                      🚧 Work in Progress
+                      In Progress
                     </span>
                   )}
                   {activeProject.status === "planning" && (
                     <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-500/20 text-blue-400 border border-blue-500/30">
-                      📋 Planning
+                      Planning
                     </span>
                   )}
                 </div>
@@ -250,31 +254,13 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                         Overview
                       </h3>
                       <p className="text-foreground/75 leading-relaxed max-sm:text-sm">
-                        {activeProject.overview}
+                        {narrative?.overview}
                       </p>
                     </div>
-
-                    {activeProject.problems && (
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground mb-1">
-                          The Challenge
-                        </h3>
-                        <p className="text-foreground/75 leading-relaxed max-sm:text-sm">
-                          {activeProject.problems}
-                        </p>
-                      </div>
-                    )}
-
-                    {activeProject.myRole && (
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground mb-1">
-                          My Role
-                        </h3>
-                        <p className="text-foreground/75 leading-relaxed max-sm:text-sm">
-                          {activeProject.myRole}
-                        </p>
-                      </div>
-                    )}
+                    <NarrativeBlock title="Constraints" items={narrative?.constraints || []} />
+                    <NarrativeBlock title="Decisions" items={narrative?.decisions || []} />
+                    <NarrativeBlock title="Outcome" items={narrative?.impact || []} />
+                    <NarrativeBlock title="Lessons" items={narrative?.lessons || []} />
 
                     {activeProject.techStack && activeProject.techStack.length > 0 && (
                       <div className="flex flex-col gap-2">
