@@ -36,7 +36,7 @@ function SelectedProjectComponent({
 
   return (
     <div
-      className="flex-1 lg:w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[3/2] h-fit max-sm:aspect-[4/3] "
+      className="flex-1 lg:w-6/12 max-sm:order-1 max-sm:w-full max-w-5xl mx-auto aspect-[3/2] max-sm:aspect-[4/3]"
       ref={featuredContainer}
     >
       <AnimatePresence mode="wait">

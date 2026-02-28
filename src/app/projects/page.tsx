@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
   const optimizedProjects = await getOptimizedProjects();
   
   return (
-    <div className=" flex flex-col gap-4 w-full justify-center items-center h-full flex-1">
+    <div className="flex flex-col gap-4 w-full justify-center items-center h-full flex-1">
       <Suspense fallback={<ProjectsLoading />}>
         <ProjectsClient projects={optimizedProjects} />
       </Suspense>

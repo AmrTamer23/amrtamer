@@ -59,22 +59,22 @@ function RightPanel({
             variants={itemVariants}
             layout
           >
-            <motion.div
-              onClick={() => {
-                if (project.status === "completed") {
-                  handleProjectSelect(project);
-                }
-              }}
+            <motion.button
+              type="button"
+              disabled={project.status !== "completed" || isAnimating}
+              onClick={() => handleProjectSelect(project)}
               onMouseEnter={() => prefetchProjectImage(project.mainImage)}
+              aria-label={`View ${project.title} project details`}
+              aria-current={featuredProject?.slug === project.slug ? "true" : undefined}
               className={cn(
-                "group relative p-4 rounded-xl border transition-all duration-300  w-full ",
+                "group relative p-4 rounded-xl border transition-all duration-300 w-full text-left",
                 featuredProject?.slug === project.slug
                   ? "border-white/20 bg-white/5 shadow-lg"
-                  : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8 ",
-                project.status === "in-progress" && "cursor-no-drop",
-                project.status === "planning" && "cursor-progress",
+                  : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8",
+                project.status === "in-progress" && "cursor-not-allowed",
+                project.status === "planning" && "cursor-default",
                 project.status === "completed" && "cursor-pointer",
-                isAnimating ? "pointer-events-none opacity-70" : ""
+                (project.status !== "completed" || isAnimating) && "opacity-70"
               )}
               transition={{
                 type: "spring",
@@ -101,7 +101,10 @@ function RightPanel({
 
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
                   <div className="flex items-center gap-2 mb-1 w-full">
-                    <h4 className="text-white font-medium text-base truncate flex-1 max-sm:text-sm">
+                    <h4
+                      title={project.title}
+                      className="text-white font-medium text-base truncate flex-1 max-sm:text-sm"
+                    >
                       {project.title}
                     </h4>
                   </div>
@@ -122,21 +125,20 @@ function RightPanel({
                 </div>
 
                 <div
-                  className={`flex-shrink-0  rounded-full flex items-center justify-center transition-all duration-300 ${
+                  className={`flex-shrink-0 rounded-full flex items-center justify-center transition-all duration-300 ${
                     featuredProject?.slug === project.slug
-                      ? "opacity-125"
+                      ? "opacity-100"
                       : "opacity-90"
                   }`}
                 >
                   <div
                     className="size-2.5 rounded-full"
-                    style={{
-                      backgroundColor: project.color,
-                    }}
-                  ></div>
+                    aria-label={`${project.title} project color`}
+                    style={{ backgroundColor: project.color }}
+                  />
                 </div>
               </div>
-            </motion.div>
+            </motion.button>
           </motion.div>
         ))}
       </motion.div>
