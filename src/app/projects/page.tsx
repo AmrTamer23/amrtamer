@@ -9,13 +9,16 @@ export async function generateMetadata(): Promise<Metadata> {
   return generateProjectsMetadata();
 }
 
-export default async function ProjectsPage() {
+async function ProjectsContent() {
   const optimizedProjects = await getOptimizedProjects();
-  
+  return <ProjectsClient projects={optimizedProjects} />;
+}
+
+export default function ProjectsPage() {
   return (
     <div className="flex flex-col gap-4 w-full justify-center items-center h-full flex-1">
       <Suspense fallback={<ProjectsLoading />}>
-        <ProjectsClient projects={optimizedProjects} />
+        <ProjectsContent />
       </Suspense>
     </div>
   );
