@@ -9,21 +9,10 @@ import avatar from "../../../public/avatar.webp";
 export default function Home() {
   return (
     <section className="w-full max-w-5xl">
-      <article className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-5 w-full relative surface-1 rounded-2xl p-5 sm:p-7 lg:p-9 cursor-default overflow-hidden">
-        <GlowingEffect
-          disabled={false}
-          blur={1}
-          proximity={100}
-          spread={100}
-          variant="default"
-          glow={true}
-          movementDuration={1}
-          borderWidth={2}
-          aria-hidden="true"
-        />
+      <article className="flex  gap-4 w-full relative  rounded-2xl p-5 sm:p-7 lg:p-9 cursor-default overflow-hidden ">
 
         <aside
-          className="flex flex-col gap-4 sm:gap-6 items-center lg:items-start justify-center h-full relative z-20 sm:flex-shrink-0"
+          className="flex flex-col w-[30%] gap-4 sm:gap-6 items-center lg:items-start justify-center h-full relative z-20 sm:flex-shrink-0"
           aria-label="Profile image and social media links"
         >
           <div className="flex-col flex gap-4 items-center lg:items-start justify-center h-full relative z-20 sm:flex-shrink-0">
@@ -38,38 +27,38 @@ export default function Home() {
             />
             <div className="text-center lg:text-left">
               <p className="text-kicker">Current Focus</p>
-              <p className="text-sm text-[var(--text-soft)]">Frontend systems, product UX, and delivery architecture.</p>
+              <p className="text-sm text-[var(--text-soft)]">Fullstack systems, product delivery, and scalable architecture.</p>
             </div>
           </div>
         </aside>
 
         <section
-          className="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start w-full"
+          className="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start w-[70%]"
           aria-labelledby="profile-heading"
         >
           <header className="h-fit flex flex-col gap-2 items-center sm:items-start justify-center text-center sm:text-left">
-            <p className="text-kicker">Editorial Engineer</p>
+            <p className="text-kicker">Product Engineer</p>
             <h1
               id="profile-heading"
-              className="text-display text-center sm:text-left"
+              className="text-display text-center sm:text-left text-4xl"
             >
               Building products where speed and quality are both non-negotiable.
             </h1>
             <p className="text-body max-w-3xl text-center sm:text-left">
-              T-shaped software engineer focused on frontend architecture and product execution. I build interfaces that are fast to ship, measurable in impact, and easy for teams to evolve.
+              Product engineer focused on fullstack architecture and end-to-end delivery. I design APIs, build reliable user experiences, and ship systems that are measurable, maintainable, and ready to scale.
             </p>
           </header>
 
           <div className="flex flex-wrap gap-2 sm:gap-2.5">
-            <EvidenceChip value="Frontend Engineer · 2+ years hands-on delivery" />
+            <EvidenceChip value="Product Engineer · 2+ years shipping end-to-end systems" />
             <EvidenceChip value="AWS Certified Cloud Practitioner" />
-            <EvidenceChip value="TypeScript, Next.js, and product systems" />
+            <EvidenceChip value="TypeScript, Next.js, NestJS, and product platforms" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 w-full">
             <div className="surface-2 rounded-xl p-3">
               <p className="text-meta mb-1">Role Focus</p>
-              <p className="text-sm text-[var(--text-strong)]">Frontend architecture and cross-functional product execution.</p>
+              <p className="text-sm text-[var(--text-strong)]">Fullstack product architecture and cross-functional execution.</p>
             </div>
             <div className="surface-2 rounded-xl p-3">
               <p className="text-meta mb-1">Timeline Snapshot</p>
@@ -77,27 +66,29 @@ export default function Home() {
             </div>
             <div className="surface-2 rounded-xl p-3">
               <p className="text-meta mb-1">Strongest Skills</p>
-              <p className="text-sm text-[var(--text-strong)]">React, Next.js, performance-first UI, delivery workflows.</p>
+              <p className="text-sm text-[var(--text-strong)]">API design, React/Next.js, NestJS services, and delivery workflows.</p>
             </div>
           </div>
 
-          <footer className="flex w-full flex-wrap gap-3 justify-between sm:justify-start items-center mt-1">
-            <Button asChild size="lg" variant="primary" className="rounded-md">
-              <Link href="/projects" aria-label="View projects">
-                View Projects
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-md">
-              <Link
-                href="https://links.amrtamer.dev/cv"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="View Amr Tamer's resume (opens in new tab)"
-              >
-                Resume
-              </Link>
-            </Button>
-            <SocialMedia className="flex flex-row gap-1 !w-auto" />
+          <footer className="flex w-full  gap-2 justify-between items-center mt-1">
+            <SocialMedia className="flex flex-row gap-1 !w-full" />
+            <div className="flex flex-1 w-full justify-end gap-4">
+              <Button asChild size="lg" variant="ghost">
+                <Link href="/projects" aria-label="View projects">
+                  View Projects
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="default">
+                <Link
+                  href="https://links.amrtamer.dev/cv"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View Amr Tamer's resume (opens in new tab)"
+                >
+                  Resumé
+                </Link>
+              </Button>
+            </div>
           </footer>
         </section>
       </article>

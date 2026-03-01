@@ -33,7 +33,7 @@ export default function Error({
           </p>
         </CardContent>
         <CardFooter>
-          <Button onClick={() => reset()} variant="primary">
+          <Button onClick={() => reset()} variant="default">
             Try again
           </Button>
         </CardFooter>

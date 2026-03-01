@@ -14,7 +14,7 @@ export function Header() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/projects", label: "Projects" },
-    { to: "/work", label: "Work" },
+    // { to: "/work", label: "Work"   },
   ];
 
   const breadcrumb = useMemo(() => {

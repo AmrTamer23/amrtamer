@@ -107,7 +107,7 @@ export default function RootLayout({
           )}
         >
           <NuqsAdapter>
-            <div className="flex flex-col h-full py-8 gap-4 px-4 relative">
+            <div className="flex flex-col h-full py-8 gap-4 px-4 relative bg-background min-h-dvh">
               <div className="ambient-layer absolute inset-0 z-0" />
               <main className="flex flex-col h-full gap-12 lg:justify-between">
                 <Header />

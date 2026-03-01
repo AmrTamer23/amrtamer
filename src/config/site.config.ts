@@ -4,9 +4,16 @@ export const siteConfig: SiteConfig = {
   name: "Amr Tamer",
   title: "Amr Tamer",
   description:
-    "A software engineer with a focus on frontend engineering, an AWS Certified Cloud Practitioner, and a Computer Science student.",
+    "A product engineer focused on fullstack architecture, scalable software delivery, and measurable product outcomes.",
   origin: "https://amrtamer.dev",
-  keywords: ["Amr Tamer", "Software Engineer", "Frontend Engineer"],
+  keywords: [
+    "Amr Tamer",
+    "Software Engineer",
+    "Product Engineer",
+    "Fullstack Engineer",
+    "Next.js",
+    "NestJS",
+  ],
   og: "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYaOCSHyrgOH7JGCBaPVNo3WzerSADRqMUtIEY",
   creator: {
     name: "Amr Tamer",

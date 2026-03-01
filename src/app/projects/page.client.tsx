@@ -35,7 +35,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       defaultValue: projects[0]?.slug || "",
       parse: (value) => value || projects[0]?.slug || "",
       serialize: (value) => value,
-      clearOnDefault: true,
+      clearOnDefault: false,
     }
   );
 
@@ -53,24 +53,33 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       null,
     [filteredProjects, projects, selectedProjectSlug]
   );
-  const [activeProject, setActiveProject] = useState<OptimizedProject | null>(null);
+  const [activeProjectSlug, setActiveProjectSlug] = useQueryState("view", {
+    defaultValue: "",
+    clearOnDefault: true,
+  });
+
+  const activeProject = useMemo(
+    () => projects.find((p) => p.slug === activeProjectSlug) ?? null,
+    [projects, activeProjectSlug]
+  );
+
   const featuredContainer = useRef<HTMLDivElement>(null);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     function onKeyDown(event: { key: string }) {
       if (event.key === "Escape") {
-        setActiveProject(null);
+        setActiveProjectSlug(null);
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [setActiveProjectSlug]);
 
   const handleViewProject = useCallback((project: OptimizedProject) => {
-    setActiveProject(project);
-  }, []);
+    setActiveProjectSlug(project.slug);
+  }, [setActiveProjectSlug]);
 
   const handleProjectSelect = useCallback(
     (project: OptimizedProject) => {
@@ -82,8 +91,8 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   );
 
   const handleCloseModal = useCallback(() => {
-    setActiveProject(null);
-  }, []);
+    setActiveProjectSlug(null);
+  }, [setActiveProjectSlug]);
 
   useEffect(() => {
     if (!featuredProject) return;
@@ -177,11 +186,10 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
               isAnimating={isPending}
             />
 
-            <SelectedProject
-              featuredProject={featuredProject}
-              featuredContainer={featuredContainer}
-              onViewProject={handleViewProject}
-            />
+          <SelectedProject
+            featuredProject={featuredProject}
+            featuredContainer={featuredContainer}
+          />
           </div>
         </div>
       </div>

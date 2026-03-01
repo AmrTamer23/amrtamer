@@ -47,7 +47,7 @@ export function WorkHistory() {
           className="surface-1 rounded-2xl p-5"
         >
           <p className="text-kicker mb-2">Career Evidence</p>
-          <h1 className="text-section-title">Roles where I shipped and scaled product delivery</h1>
+          <h1 className="text-section-title">Roles where I architected and shipped fullstack product delivery</h1>
           <p className="text-body mt-2">
             Each role highlights scope, execution approach, and measurable impact. Open any card for full context.
           </p>

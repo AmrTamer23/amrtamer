@@ -72,7 +72,7 @@ export const projects: Project[] = [
     problems:
       "The product needed a single, coherent system for course creation, video delivery, enrollments, progress, certificates, and payments—replacing ad-hoc or scattered tooling.",
     myRole:
-      "Fullstack ownership across frontend and backend: API design and implementation (NestJS), dashboard and learning UI (Next.js/React), shared packages, and alignment with product phases (courses -> video -> enrollment -> payments -> subscriptions).",
+      "Owned end-to-end product delivery: API architecture and implementation (NestJS), learning platform and dashboard interfaces (Next.js/React), shared packages, and phased execution from courses to subscriptions.",
     constraints: [
       "Integrate with Better Auth and existing schema without blocking ongoing feature work.",
       "Ship in phased milestones (foundation -> video -> enrollment -> payments -> subscriptions) so each slice is usable and testable.",
@@ -80,7 +80,7 @@ export const projects: Project[] = [
     ],
     decisions: [
       "Backend: Modular NestJS services (Drizzle + PostgreSQL), prefixed IDs, mock payment provider with a swappable interface for Stripe.",
-      "Frontend: Monorepo (Turborepo) with shared @learnu/ui, @learnu/config, @learnu/i18n; TanStack Query + Zustand; next-intl for i18n.",
+      "Platform architecture: Monorepo (Turborepo) with shared @learnu/ui, @learnu/config, @learnu/i18n; TanStack Query + Zustand; next-intl for i18n.",
       "Video: Cloudflare Stream + R2, signed URLs, and webhooks to keep uploads and encoding off the app server.",
       "Delivery: Phased rollout (course management -> uploads -> enrollment/progress -> payments) so each phase could be validated before the next.",
     ],
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     ],
     lessons: [
       "Phased delivery and a mock-first payment layer make it easier to iterate and demo.",
-      "Shared packages and strict boundaries (API contracts, prefixed IDs) keep frontend and backend in sync as the product grows.",
+      "Shared packages and strict boundaries (API contracts, prefixed IDs) keep product surfaces and services in sync as the platform grows.",
     ],
     statusNote:
       "Phase 5 (subscriptions & business) complete; next: Phase 6 (reviews & analytics), Phase 7 (admin dashboard), Phase 8 (polish & production). Auth integration: moving from manual userId to session/guards and role checks on protected endpoints.",
@@ -120,6 +120,7 @@ export const projects: Project[] = [
     favicon:
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYh0QHSdWgzJQeLF6kocmEDwHZG9qd2uRI1Sif",
     order: 2,
+    link: "https://learnu.online",
   },
   {
     slug: "hydex",
@@ -131,7 +132,7 @@ export const projects: Project[] = [
     problems:
       "The product needed a cohesive dashboard for daily user workflows and a high-performing landing page that clearly communicates value.",
     myRole:
-      "Fullstack engineer owning both dashboard and landing page delivery, from frontend architecture and UI implementation to backend integration and release coordination.",
+      "Owned dashboard and landing page delivery end-to-end, from UI architecture and data flows to backend integration and release coordination.",
     constraints: [
       "Build quickly while requirements continue to evolve across product and operations.",
       "Integrate with existing APIs and data models without introducing regressions.",
@@ -140,7 +141,7 @@ export const projects: Project[] = [
     decisions: [
       "Implemented a modular dashboard structure with clear domain boundaries and reusable UI primitives.",
       "Built the landing page with SEO, performance budgets, and conversion-focused content hierarchy in mind.",
-      "Standardized API contracts and validation patterns to reduce frontend-backend drift.",
+      "Standardized API contracts and validation patterns to reduce product-service drift.",
     ],
     impact: [
       "Shipped iterative dashboard features used by internal stakeholders for workflow visibility and faster execution.",
@@ -169,40 +170,55 @@ export const projects: Project[] = [
     favicon:
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYkHlsQwbeCRj4QuJmLMz7s2bHtFSgd1G5o0cK",
     order: 1,
+    link: "https://hyde-x.com",
   },
   {
     slug: "anha-labs",
-    title: "ANHA Labs",
+    title: "Anha Labs",
     brief:
-      "Research-to-product initiative focused on turning experiments into validated web experiences.",
+      "Internal lab operations platform for PCR and toxicology workflows, focused on reliable batch processing, QC visibility, and faster data entry.",
     overview:
-      "ANHA Labs explores product hypotheses quickly and turns promising directions into scalable interfaces.",
+      "Internal lab operations platform for PCR and toxicology workflows, focused on reliable batch processing, QC visibility, and faster data entry.",
     problems:
-      "The team needed a repeatable way to move from prototypes to production-ready interfaces with less rework.",
+      "PCR and toxicology operations depended on manual spreadsheet handling and fragmented QC review paths, which slowed turnaround and made tracking harder.",
     myRole:
-      "Driving frontend system decisions and prototyping standards to shorten experiment-to-production cycles.",
+      "Designed and implemented the frontend application architecture, including multi-step entry flows, API integrations, state persistence, and QC analytics views.",
     constraints: [
-      "Balance rapid experimentation with long-term maintainability standards.",
-      "Keep UI cohesion across multiple experiments running in parallel.",
+      "Integrate with existing lab APIs (batch submit, history retrieval, QC endpoints, ZIP generation) without changing upstream systems.",
+      "Handle inconsistent Excel input formats and preserve user progress through long, multi-step workflows.",
     ],
     decisions: [
-      "Defined shared UI tokens before feature implementation to prevent style drift.",
-      "Set clear experiment templates with measurable exit criteria.",
+      "Built separate but consistent stepper-based workflows for PCR and toxicology, with clear step boundaries and review-before-submit gates.",
+      "Used TanStack Store + localStorage persistence so in-progress entries survive refreshes and support last-used prefills.",
+      "Standardized server interactions through a shared API service layer and TanStack Query caching for history and QC data.",
     ],
     impact: [
-      "Improved consistency across early experiments by enforcing shared component primitives.",
+      "Delivered one authenticated internal app for PCR entry/history, toxicology entry/history, and processed QC analysis.",
+      "Enabled automated file generation/download on submission and added filtered QC insights (violations, unaddressed items, sample/component breakdowns).",
+      "Improved operator continuity by reducing re-entry work during interruptions.",
     ],
     lessons: [
-      "Standardized templates accelerate iteration without sacrificing quality.",
+      "Operational tooling benefits from resilient import pipelines (header/date normalization) and explicit review checkpoints before irreversible actions.",
+      "Persisted workflow state and reusable defaults materially improve speed in repetitive lab operations.",
     ],
     statusNote:
-      "Milestone: design system baseline complete. Next: ship first public-facing experiment.",
-    lastUpdated: "2026-02-25",
-    techStack: ["TypeScript", "Next.js", "Design Systems"],
-    status: "in-progress",
+      "Milestone: productionized PCR/toxicology entry + processed QC analytics. Next: complete dashboard KPIs and promote the raw toxicology QC drilldown flow in primary navigation.",
+    lastUpdated: "2026-02-20",
+    techStack: [
+      "TypeScript",
+      "React 19",
+      "TanStack Start (Router + Query + Store)",
+      "Tailwind CSS 4",
+      "Supabase Auth",
+      "Framer Motion",
+      "XLSX / JSZip",
+      "Vite",
+    ],
+    status: "completed",
     color: "#15B8A6",
     images: [],
-    mainImage: "",
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYE9j2xTQKoAwUbzteXOFQRyP6pBhJg21NYqVM",
     favicon:
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYVAGnNcd8vJgL0BcDdORkefhbmZsyW7NtrTQj",
     order: 0,

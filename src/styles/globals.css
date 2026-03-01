@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
-
 /* Mobile-specific optimizations */
 @media (max-width: 640px) {
 
@@ -11,34 +9,40 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
   }
-  
+
   /* Optimize scrolling on mobile */
   * {
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Prevent horizontal scroll */
   html, body {
     overflow-x: hidden;
   }
-  
+
   /* Better spacing for mobile cards */
   .mobile-card-spacing {
     padding: 1rem;
     margin: 0.5rem;
   }
-  
+
   /* Enhanced text rendering for mobile */
   h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
+
   /* Prevent text zoom on orientation change */
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+	background-image: url('/background.svg');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	/* Use scroll instead of fixed on mobile for better performance */
+	background-attachment: scroll;
   }
 }
 
@@ -50,27 +54,9 @@
     --font-display: "Bodoni Moda", "Times New Roman", serif;
 }
 
-html,
-body {
-	background-image: url('/background.svg');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	/* Use scroll instead of fixed on mobile for better performance */
-	background-attachment: scroll;
-
-	@media (prefers-color-scheme: dark) {
-		color-scheme: dark;
-	}
-
-  /* Better mobile background handling */
-  @media (min-width: 768px) {
-    background-attachment: fixed;
-  }
-}
 
 :root {
-	--radius: 0.5rem;
+	--radius: 0.75rem;
 	--background: oklch(0 0 0);
 	--foreground: oklch(1 0 0);
 	--card: oklch(0.14 0 0);
@@ -136,6 +122,21 @@ body {
   --ambient-y: 100%;
   --ambient-size: 160% 140%;
   --ambient-color: #0f3b10;
+  --page-grad-start: rgba(3, 12, 4, 0.35);
+  --page-grad-mid: rgba(2, 8, 3, 0.18);
+  --page-grad-end: rgba(0, 0, 0, 0.65);
+  --grid-cell-size: clamp(34px, 3vw, 52px);
+  --grid-line-color: rgba(255, 255, 255, 0.13);
+  --grid-fade-top: black;
+  --grid-fade-bottom: rgba(0, 0, 0, 0.15);
+  --success: var(--color-emerald-500);
+  --success-foreground: var(--color-emerald-900);
+  --info: var(--color-violet-500);
+  --info-foreground: var(--color-violet-900);
+  --warning: var(--color-yellow-500);
+  --warning-foreground: var(--color-yellow-900);
+  --invert: var(--color-zinc-900);
+  --invert-foreground: var(--color-zinc-50);
 }
 
 @theme inline {
@@ -202,25 +203,63 @@ body {
 	--shadow-opacity: var(--shadow-opacity);
 	--color-shadow-color: var(--shadow-color);
 	--color-destructive-foreground: var(--destructive-foreground);
+	--color-invert-foreground: var(--invert-foreground);
+	--color-invert: var(--invert);
+	--color-warning-foreground: var(--warning-foreground);
+	--color-warning: var(--warning);
+	--color-info-foreground: var(--info-foreground);
+	--color-info: var(--info);
+	--color-success-foreground: var(--success-foreground);
+	--color-success: var(--success);
 }
 
-@layer base {
-	* {
-		@apply border-border outline-ring/50;
-	}
-	body {
-		@apply bg-background text-foreground;
-    letter-spacing: var(--tracking-normal);
-	}
-	html{
-		@apply bg-gradient-to-br from-black via-zinc-900 to-zinc-950;
-	}
-}
+
 
 @layer components {
   .ambient-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #020703;
+    background-image:
+      linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+    background-size:
+      var(--grid-cell-size) var(--grid-cell-size),
+      var(--grid-cell-size) var(--grid-cell-size);
+    background-position:
+      -1px -1px,
+      -1px -1px;
+    mask-image: linear-gradient(
+      180deg,
+      var(--grid-fade-top) 0%,
+      rgba(0, 0, 0, 0.65) 55%,
+      var(--grid-fade-bottom) 100%
+    );
+  }
+
+  .ambient-fixed-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
     background:
       radial-gradient(var(--ambient-size) at var(--ambient-x) var(--ambient-y), var(--ambient-color) 0%, #041604 33%, #000000 72%);
+  }
+
+  .page-gradient-layer {
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      var(--page-grad-start) 0%,
+      var(--page-grad-mid) 45%,
+      var(--page-grad-end) 100%
+    );
+  }
+
+  .app-content-layer {
+    isolation: isolate;
   }
 
   .text-display {
@@ -273,6 +312,14 @@ body {
   }
 }
 
+@layer base {
+  html,
+  body {
+    background-color: #020703;
+    color: var(--text-strong);
+  }
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none !important;
@@ -298,7 +345,6 @@ body {
   animation: none !important;
 }
 
-
 html,
 body {
 	scrollbar-width: none; /* Firefox */
@@ -310,14 +356,9 @@ body::-webkit-scrollbar {
 	display: none; /* Chrome, Safari, Opera */
 }
 
-
-
-
 *, *::before, *::after{
     box-sizing: border-box; 
 }
-
-
 
 ul[role='list'], ol[role='list']{
     list-style: none; 
@@ -373,4 +414,14 @@ body, html{
 
  /* For More Info: https://github.com/Lazzzer00/Best-CSS-Reset-2024 */
 
- 
+ .dark {
+  --destructive-foreground: var(--color-red-600);
+  --success: var(--color-emerald-500);
+  --success-foreground: var(--color-emerald-600);
+  --info: var(--color-violet-500);
+  --info-foreground: var(--color-violet-600);
+  --warning: var(--color-yellow-500);
+  --warning-foreground: var(--color-yellow-600);
+  --invert: var(--color-zinc-700);
+  --invert-foreground: var(--color-zinc-50);
+}

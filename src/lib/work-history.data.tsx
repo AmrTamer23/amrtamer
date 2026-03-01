@@ -4,7 +4,7 @@ import DigitalBrandriaLogo from "@/lib/assets/brandria_logo.webp";
 export const workExperience: WorkExperience[] = [
   {
     company: "Digital Brandria",
-    title: "Frontend Software Engineer",
+    title: "Software Engineer",
     logo: (
       <img
         src={DigitalBrandriaLogo.src}
@@ -13,13 +13,13 @@ export const workExperience: WorkExperience[] = [
       />
     ),
     description:
-      "Started and maintained Salamy.Space's frontend, working extensively with Strapi's query builder mechanism while continuously enhancing the website's performance, UI/UX, and SEO. Additionally maintained Salamy.Space's backend and shipped new features to improve functionality. Implemented a new high-performance website for Brandria using TypeScript, React, and Next.js with a strong focus on user experience. Handled the complete deployment phase by setting up a comprehensive CI/CD pipeline using GitHub Actions to build and deploy the website with NGINX, Docker, and bash scripts on DigitalOcean droplets. Led a team of WordPress developers to deliver websites that satisfied customer requirements while managing the development team to implement a new company website that prioritized user experience using TypeScript, Next.js, and WordPress as a headless CMS.",
+      "Owned end-to-end delivery across product surfaces at Salamy.Space and Brandria. Architected frontend experiences with TypeScript, React, and Next.js, contributed backend features and Strapi query workflows, and shipped performance and SEO improvements tied to product goals. Built and maintained CI/CD pipelines using GitHub Actions, Docker, NGINX, and bash scripts on DigitalOcean to standardize releases. Led implementation planning across a mixed team and aligned engineering execution with customer-facing milestones.",
     result:
-      "Improved delivery speed by standardizing frontend patterns and deployment automation across client and internal platforms.",
+      "Improved delivery speed and release reliability by standardizing fullstack implementation patterns and deployment automation.",
     scope: [
-      "Owned frontend architecture and implementation for client-facing platforms.",
-      "Contributed backend features and production release workflows.",
-      "Led technical execution across a mixed stack delivery team.",
+      "Owned architecture and implementation for client-facing platforms across frontend and backend touchpoints.",
+      "Implemented backend-connected product features and production release workflows.",
+      "Led technical execution and delivery planning across a mixed-stack engineering team.",
     ],
     achievements: [
       "Shipped a high-performance brand website with modern Next.js architecture.",
@@ -42,7 +42,7 @@ export const workExperience: WorkExperience[] = [
   },
   {
     company: "Cloudypedia",
-    title: "Frontend Intern",
+    title: "Software Engineer Intern",
     logo: (
       <img
         src={CloudypediaLogo.src}
@@ -51,12 +51,12 @@ export const workExperience: WorkExperience[] = [
       />
     ),
     description:
-      "During my 6-week Cloudypedia Summer Internship, I acquired a diverse skill set and gained valuable hands-on experience across various aspects of technology and development. I was introduced to Google Cloud, gaining foundational knowledge of cloud computing and its practical applications for modern web development. I honed my front-end development skills by working extensively with HTML for creating structured web pages, CSS for styling and visual presentation, JavaScript for adding interactivity and dynamic behavior, and React.js for building responsive user interfaces. Additionally, I leveraged libraries like axios, formik, and yup to streamline data management, form handling, and validation within web applications. I actively participated in the design process, focusing on UI/UX design and gaining proficiency in Figma as a collaborative design tool. This involved creating intuitive and visually appealing interfaces, conducting user research to inform design decisions, developing wireframes and prototypes to iterate on design concepts, and collaborating seamlessly with development teams using Figma's collaborative features.",
+      "Completed a 6-week engineering internship focused on product implementation and delivery fundamentals. Built responsive interfaces with HTML, CSS, JavaScript, and React while integrating form, validation, and data workflows with libraries like axios, formik, and yup. Gained foundational exposure to Google Cloud concepts and collaborated closely with design teams using Figma to translate research and prototypes into shipped product interactions.",
     result:
-      "Built a practical frontend foundation that translated design ideas into functioning product interfaces.",
+      "Built a practical fullstack-ready foundation by connecting UI implementation, data workflows, and product design collaboration.",
     scope: [
-      "Implemented responsive interfaces and form-heavy user flows.",
-      "Collaborated between design and engineering during prototyping iterations.",
+      "Implemented responsive product interfaces and form-heavy user flows.",
+      "Collaborated between design and engineering to deliver testable feature iterations.",
     ],
     achievements: [
       "Delivered interactive UI modules using React and validation tooling.",
