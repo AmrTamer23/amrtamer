@@ -1,0 +1,20 @@
+# Hashed Astro build assets — fingerprinted filenames, safe to cache forever
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Static public assets — no fingerprint, cache for 1 day
+/*.ico
+  Cache-Control: public, max-age=86400
+/*.png
+  Cache-Control: public, max-age=86400
+/*.webp
+  Cache-Control: public, max-age=86400
+/manifest.json
+  Cache-Control: public, max-age=86400
+
+# HTML pages — always revalidate so content updates are instant
+/*
+  Cache-Control: no-cache, must-revalidate
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin

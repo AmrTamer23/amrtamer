@@ -1,4 +1,4 @@
-import { defineConfig, passthroughImageService } from "astro/config";
+import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
@@ -7,7 +7,7 @@ import { siteConfig } from "./src/config/site.config";
 export default defineConfig({
   site: siteConfig.origin,
   output: "static",
-  adapter: cloudflare({ imageService: "passthrough" }),
+  adapter: cloudflare(),
 
   integrations: [react()],
 
@@ -17,7 +17,6 @@ export default defineConfig({
 
   image: {
     domains: ["j1i4xv0jcr.ufs.sh"],
-    service: passthroughImageService(),
   },
 
   prefetch: {

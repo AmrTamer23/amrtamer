@@ -36,6 +36,8 @@ export function ImageWithBlur({
         src={src}
         alt=""
         aria-hidden
+        loading={loading}
+        decoding="async"
         className={cn(
           "absolute inset-0 w-full h-full object-cover transition-opacity duration-300",
           "scale-110 blur-xl",
@@ -48,6 +50,7 @@ export function ImageWithBlur({
         width={width}
         height={height}
         loading={loading}
+        decoding={loading === "eager" ? "sync" : "async"}
         fetchPriority={fetchPriority}
         className={cn("relative z-10 w-full h-full object-cover", className)}
         onLoad={() => setLoaded(true)}

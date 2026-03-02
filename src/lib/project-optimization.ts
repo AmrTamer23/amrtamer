@@ -95,17 +95,5 @@ export function generateImagePreloadHints(): Record<string, string> {
       }
     });
 
-  // Secondary projects - preload only main images and favicons
-  projects
-    .slice(PROJECT_OPTIMIZATION.PRIORITY_COUNT)
-    .forEach((project, index) => {
-      if (project.mainImage) {
-        preloadImages[`preload-main-secondary-${index}`] = project.mainImage;
-      }
-      if (project.favicon) {
-        preloadImages[`preload-favicon-secondary-${index}`] = project.favicon;
-      }
-    });
-
   return preloadImages;
 }
