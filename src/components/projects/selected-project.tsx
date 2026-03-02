@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
+import { ImageWithBlur } from "@/components/ui/image-with-blur";
 import { Sparkles } from "lucide-react";
 import { memo, useEffect, type RefObject } from "react";
 import { useImageCache } from "@/hooks/use-image-cache";
@@ -65,26 +66,13 @@ function SelectedProjectComponent({
             <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/15 bg-black/35">
               {hasHeroImage ? (
                 <>
-                  <img
+                  <ImageWithBlur
                     key={`selected-img-${featuredProject.slug}`}
                     src={featuredProject.optimizedMainImage.src}
                     alt={featuredProject.title}
-                    className="featured-image absolute inset-0 w-full h-full object-cover"
-                    fetchPriority={featuredProject.isPriority ? "high" : "auto"}
                     loading={featuredProject.isPriority ? "eager" : "lazy"}
-                    style={
-                      featuredProject.optimizedMainImage.blurDataURL
-                        ? {
-                            backgroundImage: `url(${featuredProject.optimizedMainImage.blurDataURL})`,
-                            backgroundSize: "cover",
-                          }
-                        : undefined
-                    }
-                    onLoad={(e) => {
-                      if (featuredProject.optimizedMainImage.blurDataURL) {
-                        e.currentTarget.style.backgroundImage = "none";
-                      }
-                    }}
+                    fetchPriority={featuredProject.isPriority ? "high" : "auto"}
+                    className="featured-image"
                   />
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"

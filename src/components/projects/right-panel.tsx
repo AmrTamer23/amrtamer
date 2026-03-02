@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useImageCache } from "@/hooks/use-image-cache";
 import { ArrowUpRight, Hammer, NotebookText } from "lucide-react";
 import { elevateHover, revealStagger } from "@/lib/motion-presets";
+import { ImageWithBlur } from "@/components/ui/image-with-blur";
 
 function RightPanel({
   projects,
@@ -108,26 +109,13 @@ function RightPanel({
             >
               <div className="flex gap-3 items-start max-sm:gap-2">
                 <div className="w-14 aspect-square rounded-xl overflow-hidden flex-shrink-0 relative max-sm:w-12 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15">
-                  <img
+                  <ImageWithBlur
                     src={project.optimizedFavicon.src}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-300"
+                    loading={project.isPriority ? "eager" : "lazy"}
                     width={64}
                     height={64}
-                    loading={project.isPriority ? "eager" : "lazy"}
-                    style={
-                      project.optimizedFavicon.blurDataURL
-                        ? {
-                            backgroundImage: `url(${project.optimizedFavicon.blurDataURL})`,
-                            backgroundSize: "cover",
-                          }
-                        : undefined
-                    }
-                    onLoad={(e) => {
-                      if (project.optimizedFavicon.blurDataURL) {
-                        e.currentTarget.style.backgroundImage = "none";
-                      }
-                    }}
+                    className="transition-transform duration-300"
                   />
                 </div>
 
