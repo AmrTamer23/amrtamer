@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { siteConfig } from "@/config/site.config";

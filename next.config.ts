@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   reactCompiler: true,
-  cacheComponents: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
