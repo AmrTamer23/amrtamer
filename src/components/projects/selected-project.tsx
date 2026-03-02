@@ -72,7 +72,7 @@ function SelectedProjectComponent({
                     alt={featuredProject.title}
                     loading={featuredProject.isPriority ? "eager" : "lazy"}
                     fetchPriority={featuredProject.isPriority ? "high" : "auto"}
-                    className="featured-image"
+                    className="featured-image object-center"
                   />
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"

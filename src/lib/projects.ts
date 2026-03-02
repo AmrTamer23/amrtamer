@@ -63,6 +63,63 @@ export const projects: Project[] = [
   //   order: 2,
   // },
   {
+    slug: "pericare",
+    title: "Pericare",
+    brief:
+      "Maternal and child health platform combining a mobile-facing API and an internal admin dashboard for content, commerce, and operations.",
+    overview:
+      "Maternal and child health platform combining a mobile-facing API and an internal admin dashboard for content, commerce, and operations.",
+    problems:
+      "Product, content, subscriptions, and partner workflows needed to be managed in one reliable system while supporting real user-facing healthcare journeys.",
+    myRole:
+      "Full-stack ownership across backend architecture (NestJS + Prisma) and admin experience implementation (TanStack Start + React), with focus on operational clarity and delivery speed.",
+    constraints: [
+      "Support Firebase-authenticated users and admins with strict route-level access boundaries.",
+      "Keep integrations with Shopify and RevenueCat stable while evolving data models and dashboard workflows.",
+      "Ship changes safely across a growing set of modules (users, learn content, events, products, partners, banners, nursing spaces).",
+    ],
+    decisions: [
+      "Structured the backend as modular domain services (admin/public/webhook separation) with shared pagination and DTO conventions.",
+      "Used Prisma-backed schema evolution with migrations to keep feature rollout incremental and traceable.",
+      "Implemented provider-based media/CDN handling to avoid lock-in and support future storage backends.",
+    ],
+    impact: [
+      "Delivered a unified admin surface for managing users, educational content, products/events, partners/codes, banners, and nursing spaces.",
+      "Established a scalable integration layer for subscriptions and commerce events via RevenueCat and Shopify webhooks.",
+      "Improved operational consistency through shared table/query patterns and cursor pagination across modules.",
+    ],
+    lessons: [
+      "Domain-heavy platforms benefit from clear module boundaries early.",
+      "Webhook-driven systems require explicit contracts and backfill tooling to recover from integration drift.",
+      "Admin tooling quality directly impacts product iteration speed.",
+    ],
+    statusNote:
+      "Milestone: partner attribution and commerce consistency hardening (including Shopify currency handling). Next: expand partner workflow automation and continue reliability improvements across dashboard pagination and data sync paths.",
+    lastUpdated: "2026-03-02",
+    techStack: [
+      "TypeScript",
+      "React",
+      "TanStack Start",
+      "Tailwind CSS",
+      "TanStack Query",
+      "TanStack Table",
+      "NestJS",
+      "Prisma",
+      "PostgreSQL",
+      "Firebase",
+      "Shopify Webhooks",
+      "RevenueCat Webhooks",
+    ],
+    status: "in-progress",
+    color: "#18A999",
+    images: [],
+    mainImage:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYfPytMzN3TGFgXBywKz1NjQEuSPiCDUld5oVn",
+    favicon:
+      "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYLbhei74jrcTQLvebn2xVJCapO75DBwPHXziN",
+    order: 3,
+  },
+  {
     slug: "learnu",
     title: "LearnU",
     brief:
