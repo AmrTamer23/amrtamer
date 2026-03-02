@@ -66,20 +66,16 @@ function SelectedProjectComponent({
             <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/15 bg-black/35">
               {hasHeroImage ? (
                 <>
-                  <ImageWithBlur
+                  <img
                     key={`selected-img-${featuredProject.slug}`}
                     src={featuredProject.optimizedMainImage.src}
                     alt={featuredProject.title}
+                    width={1000}
+                    height={1000}
                     loading={featuredProject.isPriority ? "eager" : "lazy"}
                     fetchPriority={featuredProject.isPriority ? "high" : "auto"}
-                    className="featured-image object-center"
-                  />
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    decoding={featuredProject.isPriority ? "sync" : "async"}
+                    className=" object-cover object-center! h-full w-full"
                   />
                 </>
               ) : (

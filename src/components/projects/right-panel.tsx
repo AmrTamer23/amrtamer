@@ -108,16 +108,18 @@ function RightPanel({
               layout
             >
               <div className="flex gap-3 items-start max-sm:gap-2">
-                <div className="w-14 aspect-square rounded-xl overflow-hidden flex-shrink-0 relative max-sm:w-12 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15">
-                  <ImageWithBlur
-                    src={project.optimizedFavicon.src}
-                    alt={project.title}
-                    loading={project.isPriority ? "eager" : "lazy"}
-                    width={64}
-                    height={64}
-                    className="transition-transform duration-300"
-                  />
-                </div>
+
+                <img
+                  src={project.optimizedFavicon.src}
+                  alt={project.title}
+                  loading={project.isPriority ? "eager" : "lazy"}
+                  width={75}
+                  height={75}
+                  fetchPriority={project.isPriority ? "high" : "auto"}
+                  decoding={project.isPriority ? "sync" : "async"}
+                  className="transition-transform duration-300 object-cover object-center  h-full aspect-square rounded-xl overflow-hidden flex-shrink-0 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15"
+                />
+
 
                 <div className="flex-1 min-w-0 flex flex-col justify-center">
                   <div className="flex items-center gap-2 mb-1 w-full">
