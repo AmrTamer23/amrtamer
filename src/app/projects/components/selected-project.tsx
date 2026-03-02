@@ -191,10 +191,10 @@ function SelectedProjectComponent({
               <NarrativeBlock title="Decisions" items={narrative.decisions} />
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            {/* <div className="grid gap-4 md:grid-cols-2">
               <NarrativeBlock title="Outcome" items={narrative.impact} />
               <NarrativeBlock title="Lessons" items={narrative.lessons} />
-            </div>
+            </div> */}
             {/* 
             {featuredProject.status !== "completed" ? (
               <StatusPulse
