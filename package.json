@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "start": "serve dist",
     "preview": "astro preview",
     "lint": "eslint .",
     "astro": "astro",
@@ -29,6 +30,7 @@
     "radix-ui": "^1.4.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
+    "serve": "^14.2.4",
     "sonner": "^2.0.4",
     "tailwind-merge": "^3.2.0",
     "usehooks-ts": "^3.1.1"
