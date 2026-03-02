@@ -3,10 +3,8 @@
 import { useState, useRef, useEffect, memo, useMemo } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
-import { Link } from "next-view-transitions";
 import { cn } from "@/lib/utils";
 import { useImageCache } from "@/hooks/use-image-cache";
 import { normalizeProjectNarrative } from "@/lib/content-normalizers";
@@ -16,6 +14,9 @@ interface ProjectModalProps {
   activeProject: OptimizedProject | null;
   onClose: () => void;
 }
+
+const DEFAULT_BLUR =
+  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q==";
 
 function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(1);
@@ -48,12 +49,12 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
 
     return activeProject.optimizedMainImage.blurDataURL;
   }, [activeProject, selectedImageIndex]);
+
   const narrative = useMemo(
     () => (activeProject ? normalizeProjectNarrative(activeProject) : null),
     [activeProject]
   );
 
-  // Focus management: move focus into modal on open, restore on close
   useEffect(() => {
     if (activeProject) {
       triggerRef.current = document.activeElement as HTMLElement;
@@ -64,10 +65,8 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
     }
   }, [activeProject]);
 
-  // Close modal when clicking outside
   useOnClickOutside(modalRef as React.RefObject<HTMLElement>, onClose);
 
-  // Close modal on Escape; navigate gallery with arrow keys
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
@@ -94,7 +93,6 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onClose, activeProject]);
 
-  // Preload images when modal opens
   useEffect(() => {
     if (activeProject) {
       if (activeProject.images?.length) {
@@ -185,16 +183,25 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.2, ease: "easeOut" }}
                       >
-                        <Image
+                        <img
                           src={currentImageSrc}
                           alt={`${activeProject.title} — image ${selectedImageIndex}`}
-                          className="object-contain bg-black"
-                          priority={activeProject.isPriority}
+                          className="w-full h-full object-contain bg-black"
                           loading={activeProject.isPriority ? "eager" : "lazy"}
-                          placeholder="blur"
-                          width={1000}
-                          height={1000}
-                          blurDataURL={currentImageBlur}
+                          fetchPriority={activeProject.isPriority ? "high" : "auto"}
+                          style={
+                            currentImageBlur
+                              ? {
+                                  backgroundImage: `url(${currentImageBlur})`,
+                                  backgroundSize: "cover",
+                                }
+                              : undefined
+                          }
+                          onLoad={(e) => {
+                            if (currentImageBlur) {
+                              e.currentTarget.style.backgroundImage = "none";
+                            }
+                          }}
                         />
                       </motion.div>
                     </motion.div>
@@ -230,15 +237,25 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                                     : "transparent",
                               }}
                             >
-                              <Image
+                              <img
                                 src={image}
                                 alt={`${activeProject.title} — image ${index + 1}`}
-                                fill
-                                className="object-contain"
-                                sizes="(max-width: 640px) 30vw, (max-width: 768px) 25vw, 12vw"
+                                className="absolute inset-0 w-full h-full object-contain"
                                 loading="lazy"
-                                placeholder={optimizedImage?.blurDataURL ? "blur" : "empty"}
-                                blurDataURL={optimizedImage?.blurDataURL || "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAUABQDASIAAhEBAxEB/8QAFwABAQEBAAAAAAAAAAAAAAAABAUGB//EACgQAAIBAwMDAwUBAAAAAAAAAAECAwAEEQUSITFBUQYTYSIycYGRsf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFREBAQAAAAAAAAAAAAAAAAAAABH/2gAMAwEAAhEDEQA/AOnWl5HdQiWJgyMMg1JZNrFKNzKN2c7sdPmq2jWf0iWZl3v3Y9zVSaJYZGjjTaijCqOgFB//2Q=="}
+                                style={
+                                  optimizedImage?.blurDataURL
+                                    ? {
+                                        backgroundImage: `url(${optimizedImage.blurDataURL})`,
+                                        backgroundSize: "cover",
+                                      }
+                                    : {
+                                        backgroundImage: `url(${DEFAULT_BLUR})`,
+                                        backgroundSize: "cover",
+                                      }
+                                }
+                                onLoad={(e) => {
+                                  e.currentTarget.style.backgroundImage = "none";
+                                }}
                               />
                             </button>
                           );
@@ -296,9 +313,9 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                           }}
                           asChild
                         >
-                          <Link href={activeProject.link} target="_blank" rel="noopener noreferrer">
+                          <a href={activeProject.link} target="_blank" rel="noopener noreferrer">
                             <span>View Live Project</span>
-                          </Link>
+                          </a>
                         </Button>
                       </div>
                     )}

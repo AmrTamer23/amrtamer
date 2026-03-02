@@ -1,14 +1,11 @@
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Sparkles } from "lucide-react";
 import { memo, useEffect, type RefObject } from "react";
 import { useImageCache } from "@/hooks/use-image-cache";
-import { Link } from "next-view-transitions";
 import { NarrativeBlock } from "@/components/ui/narrative-block";
 import { normalizeProjectNarrative } from "@/lib/content-normalizers";
 import { panelTransition } from "@/lib/motion-presets";
-import { getReadableTextColor } from "@/lib/utils";
 
 function SelectedProjectComponent({
   featuredProject,
@@ -68,18 +65,26 @@ function SelectedProjectComponent({
             <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-white/15 bg-black/35">
               {hasHeroImage ? (
                 <>
-                  <Image
+                  <img
                     key={`selected-img-${featuredProject.slug}`}
                     src={featuredProject.optimizedMainImage.src}
                     alt={featuredProject.title}
-                    fill
-                    className="featured-image absolute inset-0 object-cover"
-                    priority={featuredProject.isPriority}
+                    className="featured-image absolute inset-0 w-full h-full object-cover"
                     fetchPriority={featuredProject.isPriority ? "high" : "auto"}
-                    placeholder="blur"
-                    blurDataURL={featuredProject.optimizedMainImage.blurDataURL}
-                    unoptimized={false}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1400px) 65vw, 58vw"
+                    loading={featuredProject.isPriority ? "eager" : "lazy"}
+                    style={
+                      featuredProject.optimizedMainImage.blurDataURL
+                        ? {
+                            backgroundImage: `url(${featuredProject.optimizedMainImage.blurDataURL})`,
+                            backgroundSize: "cover",
+                          }
+                        : undefined
+                    }
+                    onLoad={(e) => {
+                      if (featuredProject.optimizedMainImage.blurDataURL) {
+                        e.currentTarget.style.backgroundImage = "none";
+                      }
+                    }}
                   />
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent"
@@ -109,24 +114,6 @@ function SelectedProjectComponent({
                   {statusLabel}
                 </span>
               </div>
-
-              {/* {featuredProject.status === "completed" && (
-                <div className="absolute top-3 right-3 z-[1]">
-                  <Button
-                    className="rounded-lg cursor-pointer hover:opacity-85 transition-all duration-200 items-center"
-                    style={{
-                      background: `${featuredProject.color}`,
-                      color: getReadableTextColor(featuredProject.color),
-                    }}
-                    onClick={handleViewProject}
-                    size="md"
-                    variant="primary"
-                  >
-                    <EyeIcon className="w-4 h-4" />
-                    <span className="text-xs font-medium">Gallery & Details</span>
-                  </Button>
-                </div>
-              )} */}
             </div>
 
             <div className="grid gap-4 md:grid-cols-[1fr_auto] items-start">
@@ -149,7 +136,7 @@ function SelectedProjectComponent({
                   size="default"
                   asChild
                 >
-                  <Link
+                  <a
                     href={featuredProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -163,10 +150,7 @@ function SelectedProjectComponent({
                       <path d="M21 9.74999C20.92 9.74999 20.84 9.73999 20.76 9.70999C15.11 7.82999 8.88003 7.82999 3.23003 9.70999C2.83003 9.83999 2.41003 9.62999 2.28003 9.23999C2.16003 8.83999 2.37003 8.41999 2.76003 8.28999C8.72003 6.29999 15.28 6.29999 21.23 8.28999C21.62 8.41999 21.84 8.84999 21.7 9.23999C21.61 9.54999 21.31 9.74999 21 9.74999Z" fill={featuredProject.color} />
                     </svg>
                     <span>Live Site</span>
-
-
-                    {/* <ArrowUpRight className="size-4" /> */}
-                  </Link>
+                  </a>
                 </Button>
               ) : null}
             </div>
@@ -190,19 +174,6 @@ function SelectedProjectComponent({
               <NarrativeBlock title="Constraints" items={narrative.constraints} />
               <NarrativeBlock title="Decisions" items={narrative.decisions} />
             </div>
-
-            {/* <div className="grid gap-4 md:grid-cols-2">
-              <NarrativeBlock title="Outcome" items={narrative.impact} />
-              <NarrativeBlock title="Lessons" items={narrative.lessons} />
-            </div> */}
-            {/* 
-            {featuredProject.status !== "completed" ? (
-              <StatusPulse
-                status={featuredProject.status}
-                note={narrative.statusNote}
-                lastUpdated={featuredProject.lastUpdated}
-              />
-            ) : null} */}
 
             <div className="rounded-xl border border-white/10 bg-[var(--surface-2)] p-4 space-y-2">
               <h3 className="text-meta">Tech Stack</h3>

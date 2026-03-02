@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProjectsClient from "@/components/projects/projects-client";
+import { getOptimizedProjects, generateImagePreloadHints } from "@/lib/project-optimization";
+import { PROJECT_METADATA } from "@/lib/metadata-config";
+
+const optimizedProjects = await getOptimizedProjects();
+const preloadHints = generateImagePreloadHints();
+const preloadUrls = Object.values(preloadHints);
+---
+
+<BaseLayout title={PROJECT_METADATA.title} description={PROJECT_METADATA.description}>
+  <Fragment slot="head">
+    {preloadUrls.map((href) => (
+      <link rel="preload" as="image" href={href} />
+    ))}
+  </Fragment>
+
+  <div class="flex flex-col gap-4 w-full justify-center items-center h-full flex-1">
+    <ProjectsClient projects={optimizedProjects} client:load />
+  </div>
+</BaseLayout>

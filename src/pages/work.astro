@@ -1,0 +1,10 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { WorkHistory } from "@/components/work/work-history";
+---
+
+<BaseLayout title="Work History">
+  <div class="flex flex-col items-center md:justify-start w-full">
+    <WorkHistory client:load />
+  </div>
+</BaseLayout>

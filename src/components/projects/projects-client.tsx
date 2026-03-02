@@ -8,19 +8,16 @@ import {
   useTransition,
   Suspense,
   useCallback,
+  lazy,
 } from "react";
-import { RightPanel } from "./components/right-panel";
-import { SelectedProject } from "./components/selected-project";
+import { RightPanel } from "./right-panel";
+import { SelectedProject } from "./selected-project";
 import { AnimatePresence, motion } from "motion/react";
-import dynamic from "next/dynamic";
-const ProjectModal = dynamic(
-  () => import("./components/project-modal").then((m) => m.ProjectModal),
-  {
-    ssr: false,
-    loading: () => null,
-  }
+import { useQueryParam } from "@/hooks/use-query-params";
+
+const ProjectModal = lazy(
+  () => import("./project-modal").then((m) => ({ default: m.ProjectModal }))
 );
-import { useQueryState } from "nuqs";
 
 interface ProjectsClientProps {
   projects: OptimizedProject[];
@@ -29,7 +26,7 @@ interface ProjectsClientProps {
 type ProjectFilter = "all" | Project["status"];
 
 export default function ProjectsClient({ projects }: ProjectsClientProps) {
-  const [selectedProjectSlug, setSelectedProjectSlug] = useQueryState(
+  const [selectedProjectSlug, setSelectedProjectSlug] = useQueryParam(
     "project",
     {
       defaultValue: projects[0]?.slug || "",
@@ -53,7 +50,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       null,
     [filteredProjects, projects, selectedProjectSlug]
   );
-  const [activeProjectSlug, setActiveProjectSlug] = useQueryState("view", {
+  const [activeProjectSlug, setActiveProjectSlug] = useQueryParam("view", {
     defaultValue: "",
     clearOnDefault: true,
   });

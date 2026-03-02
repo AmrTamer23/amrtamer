@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import { useCallback, memo } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
@@ -106,20 +106,28 @@ function RightPanel({
               whileHover={shouldReduceMotion ? undefined : elevateHover.whileHover}
               layout
             >
-              {/* <div className="absolute inset-x-0 top-0 h-0.5 rounded-t-xl opacity-60" style={{ backgroundColor: project.color }} /> */}
-
               <div className="flex gap-3 items-start max-sm:gap-2">
-                <div className={`w-14 aspect-square rounded-xl overflow-hidden flex-shrink-0 relative max-sm:w-12 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15`}>
-                  <Image
+                <div className="w-14 aspect-square rounded-xl overflow-hidden flex-shrink-0 relative max-sm:w-12 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15">
+                  <img
                     src={project.optimizedFavicon.src}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300"
                     width={64}
                     height={64}
                     loading={project.isPriority ? "eager" : "lazy"}
-                    sizes="64px"
-                    placeholder="blur"
-                    blurDataURL={project.optimizedFavicon.blurDataURL}
+                    style={
+                      project.optimizedFavicon.blurDataURL
+                        ? {
+                            backgroundImage: `url(${project.optimizedFavicon.blurDataURL})`,
+                            backgroundSize: "cover",
+                          }
+                        : undefined
+                    }
+                    onLoad={(e) => {
+                      if (project.optimizedFavicon.blurDataURL) {
+                        e.currentTarget.style.backgroundImage = "none";
+                      }
+                    }}
                   />
                 </div>
 
