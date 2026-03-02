@@ -6,7 +6,7 @@ import { siteConfig } from "./src/config/site.config";
 
 export default defineConfig({
   site: siteConfig.origin,
-  output: "static",
+  output: "hybrid",
   adapter: cloudflare(),
 
   integrations: [react()],

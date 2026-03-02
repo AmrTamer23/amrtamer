@@ -1,17 +1,29 @@
 ---
-export const prerender = true;
+export const prerender = false;
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProjectsClient from "@/components/projects/projects-client";
 import { getOptimizedProjects, generateImagePreloadHints } from "@/lib/project-optimization";
 import { PROJECT_METADATA } from "@/lib/metadata-config";
+import { projects } from "@/lib/projects";
+import { siteConfig } from "@/config/site.config";
+
+const projectSlug = Astro.url.searchParams.get("project");
+const project = projectSlug
+  ? projects.find((p: Project) => p.slug === projectSlug) ?? null
+  : null;
+
+const pageTitle = project ? project.title : PROJECT_METADATA.title;
+const pageDescription = project ? project.brief : PROJECT_METADATA.description;
+const ogImage = project ? project.mainImage : siteConfig.og;
+const imageAlt = project ? project.title : undefined;
 
 const optimizedProjects = await getOptimizedProjects();
 const preloadHints = generateImagePreloadHints();
 const preloadUrls = Object.values(preloadHints);
 ---
 
-<BaseLayout title={PROJECT_METADATA.title} description={PROJECT_METADATA.description}>
+<BaseLayout title={pageTitle} description={pageDescription} ogImage={ogImage} imageAlt={imageAlt}>
   <Fragment slot="head">
     {preloadUrls.map((href) => (
       <link rel="preload" as="image" href={href} />
