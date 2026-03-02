@@ -110,8 +110,8 @@ export const projects: Project[] = [
       "Shopify Webhooks",
       "RevenueCat Webhooks",
     ],
-    status: "in-progress",
-    color: "#18A999",
+    status: "completed",
+    color: "#D81E61",
     images: [],
     mainImage:
       "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYfPytMzN3TGFgXBywKz1NjQEuSPiCDUld5oVn",
