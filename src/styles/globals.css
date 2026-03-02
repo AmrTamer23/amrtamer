@@ -121,9 +121,9 @@
   --ambient-x: 50%;
   --ambient-y: 100%;
   --ambient-size: 160% 140%;
-  --ambient-color: #0f3b10;
-  --page-grad-start: rgba(3, 12, 4, 0.35);
-  --page-grad-mid: rgba(2, 8, 3, 0.18);
+  --ambient-color: transparent;
+  --page-grad-start: rgba(0, 0, 0, 0.35);
+  --page-grad-mid: rgba(0, 0, 0, 0.18);
   --page-grad-end: rgba(0, 0, 0, 0.65);
   --grid-cell-size: clamp(34px, 3vw, 52px);
   --grid-line-color: rgba(255, 255, 255, 0.13);
@@ -221,7 +221,7 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-color: #020703;
+    background-color: #020202;
     background-image:
       linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
       linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
@@ -245,7 +245,7 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(var(--ambient-size) at var(--ambient-x) var(--ambient-y), var(--ambient-color) 0%, #041604 33%, #000000 72%);
+      radial-gradient(var(--ambient-size) at var(--ambient-x) var(--ambient-y), var(--ambient-color) 0%, #000000 33%, #000000 72%);
   }
 
   .page-gradient-layer {
@@ -315,7 +315,7 @@
 @layer base {
   html,
   body {
-    background-color: #020703;
+    background-color: #020202;
     color: var(--text-strong);
   }
 }
