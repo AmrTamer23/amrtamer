@@ -9,6 +9,7 @@
     "start": "serve dist",
     "preview": "astro preview",
     "lint": "eslint .",
+    "sync": "astro sync",
     "astro": "astro",
     "pages:preview": "wrangler pages dev ./dist",
     "pages:deploy": "wrangler pages deploy ./dist"
