@@ -113,8 +113,8 @@ function RightPanel({
                   src={project.optimizedFavicon.src}
                   alt={project.title}
                   loading={project.isPriority ? "eager" : "lazy"}
-                  width={75}
-                  height={75}
+                  width={64}
+                  height={64}
                   fetchPriority={project.isPriority ? "high" : "auto"}
                   decoding={project.isPriority ? "sync" : "async"}
                   className="transition-transform duration-300 object-cover object-center  h-full aspect-square rounded-xl overflow-hidden flex-shrink-0 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15"
