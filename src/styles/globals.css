@@ -1,6 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Fontsource - self-hosted fonts (replaces next/font/google) */
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css";
+@import "@fontsource/ibm-plex-sans/600.css";
+@import "@fontsource/ibm-plex-sans/700.css";
+@import "@fontsource/bodoni-moda/700.css";
+
 /* Mobile-specific optimizations */
 @media (max-width: 640px) {
 

@@ -1,14 +1,11 @@
 "use client";
-import { useEffect, useMemo } from "react";
-import { useTransitionRouter } from "next-view-transitions";
-import { Link } from "next-view-transitions";
-import { usePathname } from "next/navigation";
+import { useMemo } from "react";
+import { usePathname } from "@/hooks/use-pathname";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { revealItem } from "@/lib/motion-presets";
 
 export function Header() {
-  const router = useTransitionRouter();
   const pathname = usePathname();
   const shouldReduceMotion = useReducedMotion();
   const links = [
@@ -27,11 +24,6 @@ export function Header() {
       .join(" ");
     return pretty || "";
   }, [pathname]);
-
-  useEffect(() => {
-    router.prefetch("/projects");
-    router.prefetch("/work");
-  }, [router]);
 
   return (
     <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-between relative z-10 flex-col lg:flex-row gap-6">
@@ -90,7 +82,7 @@ export function Header() {
         {links.map(({ to, label }) => {
           const isActive = pathname === to;
           return (
-            <Link
+            <a
               href={to}
               key={to}
               className={cn(
@@ -102,7 +94,7 @@ export function Header() {
               aria-current={isActive ? "page" : undefined}
             >
               {label}
-            </Link>
+            </a>
           );
         })}
       </nav>

@@ -3,7 +3,6 @@
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
 import { motion, useReducedMotion } from "motion/react";
-import { Link } from "next-view-transitions";
 import React from "react";
 
 export function SocialMedia({ className }: { className?: string }) {
@@ -77,7 +76,7 @@ export function SocialMedia({ className }: { className?: string }) {
 
           return (
             <MotionItem key={href} {...itemProps}>
-              <Link
+              <a
                 href={href}
                 target={href.startsWith("mailto:") ? "_self" : "_blank"}
                 rel={
@@ -91,7 +90,7 @@ export function SocialMedia({ className }: { className?: string }) {
                   aria-hidden="true"
                   focusable="false"
                 />
-              </Link>
+              </a>
             </MotionItem>
           );
         })}
