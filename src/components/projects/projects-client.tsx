@@ -14,6 +14,7 @@ import { RightPanel } from "./right-panel";
 import { SelectedProject } from "./selected-project";
 import { AnimatePresence, motion } from "motion/react";
 import { useQueryParam } from "@/hooks/use-query-params";
+import { X } from "lucide-react";
 
 const ProjectModal = lazy(
   () => import("./project-modal").then((m) => ({ default: m.ProjectModal }))
@@ -62,29 +63,59 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
 
   const featuredContainer = useRef<HTMLDivElement>(null);
   const [isPending, startTransition] = useTransition();
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 640px)");
+    const updateMobileState = () => setIsMobile(mediaQuery.matches);
+    updateMobileState();
+
+    mediaQuery.addEventListener("change", updateMobileState);
+    return () => mediaQuery.removeEventListener("change", updateMobileState);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setIsMobileDrawerOpen(false);
+    }
+  }, [isMobile]);
+
+  useEffect(() => {
+    if (!isMobile || !isMobileDrawerOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobile, isMobileDrawerOpen]);
 
   useEffect(() => {
     function onKeyDown(event: { key: string }) {
       if (event.key === "Escape") {
+        if (isMobileDrawerOpen) {
+          setIsMobileDrawerOpen(false);
+          return;
+        }
         setActiveProjectSlug(null);
       }
     }
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [setActiveProjectSlug]);
-
-  const handleViewProject = useCallback((project: OptimizedProject) => {
-    setActiveProjectSlug(project.slug);
-  }, [setActiveProjectSlug]);
+  }, [isMobileDrawerOpen, setActiveProjectSlug]);
 
   const handleProjectSelect = useCallback(
     (project: OptimizedProject) => {
       startTransition(() => {
         setSelectedProjectSlug(project.slug);
       });
+      if (isMobile) {
+        setIsMobileDrawerOpen(true);
+      }
     },
-    [setSelectedProjectSlug]
+    [isMobile, setSelectedProjectSlug]
   );
 
   const handleCloseModal = useCallback(() => {
@@ -99,17 +130,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       });
     }
   }, [featuredProject, filteredProjects, selectedProjectSlug, setSelectedProjectSlug]);
-
-  const statusCounts = useMemo(
-    () => ({
-      all: projects.length,
-      completed: projects.filter((project) => project.status === "completed").length,
-      "in-progress": projects.filter((project) => project.status === "in-progress")
-        .length,
-      planning: projects.filter((project) => project.status === "planning").length,
-    }),
-    [projects]
-  );
 
   return (
     <>
@@ -130,6 +150,51 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                 onClose={handleCloseModal}
               />
             </Suspense>
+          </>
+        ) : null}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isMobile && isMobileDrawerOpen && featuredProject ? (
+          <>
+            <motion.button
+              type="button"
+              aria-label="Close project details drawer"
+              className="fixed inset-0 z-30 bg-black/55 sm:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsMobileDrawerOpen(false)}
+            />
+            <motion.section
+              className="fixed inset-x-0 bottom-0 z-40 sm:hidden max-h-[88svh] rounded-t-2xl border border-white/10 bg-background/95 shadow-2xl backdrop-blur-xl"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              aria-label={`${featuredProject.title} details`}
+            >
+              <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+                <p className="text-sm font-medium text-[var(--text-strong)] truncate">
+                  {featuredProject.title}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setIsMobileDrawerOpen(false)}
+                  aria-label="Close drawer"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 mobile-tap-target"
+                >
+                  <X className="size-5" />
+                </button>
+              </div>
+              <div className="max-h-[calc(88svh-4.25rem)] overflow-y-auto px-3 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
+                <SelectedProject
+                  featuredProject={featuredProject}
+                  featuredContainer={featuredContainer}
+                />
+              </div>
+            </motion.section>
           </>
         ) : null}
       </AnimatePresence>
@@ -182,11 +247,12 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
               handleProjectSelect={handleProjectSelect}
               isAnimating={isPending}
             />
-
-          <SelectedProject
-            featuredProject={featuredProject}
-            featuredContainer={featuredContainer}
-          />
+            <div className="hidden sm:contents">
+              <SelectedProject
+                featuredProject={featuredProject}
+                featuredContainer={featuredContainer}
+              />
+            </div>
           </div>
         </div>
       </div>
