@@ -3,14 +3,17 @@ export const prerender = true;
 
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProjectsClient from "@/components/projects/projects-client";
-import { getOptimizedProjects, generateImagePreloadHints } from "@/lib/project-optimization";
+import {
+  getOptimizedProjects,
+  generateImagePreloadHints,
+} from "@/lib/project-optimization";
 import { PROJECT_METADATA } from "@/lib/metadata-config";
 import { projects } from "@/lib/projects";
 import { siteConfig } from "@/config/site.config";
 
 const projectSlug = Astro.url.searchParams.get("project");
 const project = projectSlug
-  ? projects.find((p: Project) => p.slug === projectSlug) ?? null
+  ? (projects.find((p: Project) => p.slug === projectSlug) ?? null)
   : null;
 
 const pageTitle = project ? project.title : PROJECT_METADATA.title;
@@ -23,14 +26,19 @@ const preloadHints = generateImagePreloadHints();
 const preloadUrls = Object.values(preloadHints);
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogImage={ogImage} imageAlt={imageAlt}>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage={ogImage}
+  imageAlt={imageAlt}
+>
   <Fragment slot="head">
-    {preloadUrls.map((href) => (
-      <link rel="preload" as="image" href={href} />
-    ))}
+    {preloadUrls.map((href) => <link rel="preload" as="image" href={href} />)}
   </Fragment>
 
-  <div class="flex flex-col gap-4 w-full justify-center items-center h-full flex-1">
+  <div
+    class="flex flex-col gap-4 w-full justify-center items-center h-full flex-1 max-sm:mt-8"
+  >
     <ProjectsClient projects={optimizedProjects} client:load />
   </div>
 </BaseLayout>

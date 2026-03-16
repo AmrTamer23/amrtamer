@@ -78,7 +78,7 @@ export function Header() {
           </AnimatePresence>
         </div>
       </motion.div>
-      <nav className="flex gap-2 text-sm sm:text-base items-center justify-center order-3 rounded-full border border-white/10 bg-[var(--surface-1)] px-2 py-1 max-sm:w-full max-sm:flex-wrap max-sm:justify-center max-sm:rounded-2xl max-sm:px-2.5 max-sm:py-2">
+      <nav className="flex gap-2 text-sm sm:text-base items-center justify-center order-3 rounded-full border border-white/10 bg-[var(--surface-1)] px-2 py-1 max-sm:w-full max-sm:flex-wrap max-sm:justify-center max-sm:px-2.5 max-sm:py-2">
         {links.map(({ to, label }) => {
           const isActive = pathname === to;
           return (
@@ -86,7 +86,7 @@ export function Header() {
               href={to}
               key={to}
               className={cn(
-                "select-none cursor-pointer px-3 py-1.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 max-sm:min-h-11 max-sm:px-4 mobile-tap-target",
+                "select-none flex text-center items-center justify-center cursor-pointer px-3 py-1.5 rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 max-sm:min-h-11 max-sm:px-4 mobile-tap-target",
                 isActive
                   ? "bg-white/14 text-[var(--text-strong)]"
                   : "text-[var(--text-soft)] hover:text-[var(--text-strong)] hover:bg-white/8"

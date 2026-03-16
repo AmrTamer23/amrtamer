@@ -25,14 +25,18 @@ const canonicalUrl = Astro.url.href;
 const resolvedOgImage = ogImage ?? siteConfig.og;
 const resolvedImageAlt = imageAlt ?? siteConfig.name;
 
-const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.name}`;
+const pageTitle =
+  title === siteConfig.title ? title : `${title} | ${siteConfig.name}`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={siteConfig.keywords.join(", ")} />
@@ -76,9 +80,27 @@ const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <link rel="preconnect" href="https://us.i.posthog.com" />
 
     <!-- Preload critical fonts -->
-    <link rel="preload" href={ibmPlexSans400Url} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={ibmPlexSans500Url} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={bodoniModa700Url} as="font" type="font/woff2" crossorigin />
+    <link
+      rel="preload"
+      href={ibmPlexSans400Url}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={ibmPlexSans500Url}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={bodoniModa700Url}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <ClientRouter />
 
@@ -97,11 +119,15 @@ const pageTitle = title === siteConfig.title ? title : `${title} | ${siteConfig.
     <slot name="head" />
   </head>
   <body class="font-sans antialiased">
-    <div class="flex flex-col h-full py-8 gap-4 px-4 relative bg-background min-h-dvh mobile-safe-inline mobile-safe-block">
+    <div
+      class="flex flex-col h-full py-8 gap-4 px-4 relative bg-background min-h-dvh mobile-safe-inline mobile-safe-block"
+    >
       <div class="ambient-layer absolute inset-0 z-0"></div>
       <main class="flex flex-col h-full gap-12 lg:justify-between">
         <Header client:idle />
-        <div class="container mx-auto w-full h-full flex lg:items-center lg:justify-center items-start justify-start">
+        <div
+          class="container mx-auto w-full h-full flex lg:items-center lg:justify-center items-start justify-start"
+        >
           <slot />
         </div>
       </main>
