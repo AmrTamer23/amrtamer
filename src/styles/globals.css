@@ -10,11 +10,22 @@
 
 /* Mobile-specific optimizations */
 @media (max-width: 640px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    overflow-x: clip;
+    background-image: url('/background.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* Use scroll instead of fixed on mobile for better performance */
+    background-attachment: scroll;
+  }
 
-  /* Better text legibility on mobile */
   body {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
+    overflow-x: clip;
   }
 
   /* Optimize scrolling on mobile */
@@ -22,9 +33,24 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* Prevent horizontal scroll */
-  html, body {
-    overflow-x: hidden;
+  main,
+  section,
+  article,
+  aside,
+  header,
+  footer,
+  nav {
+    min-width: 0;
+  }
+
+  .mobile-safe-inline {
+    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+  }
+
+  .mobile-safe-block {
+    padding-top: max(1rem, env(safe-area-inset-top)) !important;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom)) !important;
   }
 
   /* Better spacing for mobile cards */
@@ -33,23 +59,15 @@
     margin: 0.5rem;
   }
 
+  .mobile-tap-target {
+    min-height: 44px;
+  }
+
   /* Enhanced text rendering for mobile */
   h1, h2, h3, h4, h5, h6 {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* Prevent text zoom on orientation change */
-  html {
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-	background-image: url('/background.svg');
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	/* Use scroll instead of fixed on mobile for better performance */
-	background-attachment: scroll;
   }
 }
 

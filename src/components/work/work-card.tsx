@@ -16,7 +16,7 @@ export function WorkCard({
   return (
     <motion.article
       layoutId={`workItem-${role.company}`}
-      className="group border-white/10 bg-[var(--surface-1)] hover:bg-[var(--surface-2)] flex w-full cursor-pointer flex-col items-start gap-3 md:gap-4 border p-4 shadow-sm transition-colors rounded-xl"
+      className="group border-white/10 bg-[var(--surface-1)] hover:bg-[var(--surface-2)] flex w-full cursor-pointer flex-col items-start gap-3 md:gap-4 border p-4 max-sm:p-3.5 shadow-sm transition-colors rounded-xl mobile-tap-target"
       onClick={() => setActiveItem(role)}
       {...elevateHover}
     >

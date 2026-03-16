@@ -11,10 +11,10 @@ import { HomeActions } from "@/components/home/home-actions";
 <BaseLayout>
   <section class="w-full max-w-5xl">
     <article
-      class="flex gap-4 w-full relative rounded-2xl p-5 sm:p-7 lg:p-9 cursor-default overflow-hidden"
+      class="flex flex-col sm:flex-row gap-5 sm:gap-4 w-full relative rounded-2xl p-5 sm:p-7 lg:p-9 cursor-default overflow-hidden"
     >
       <aside
-        class="flex flex-col w-[30%] gap-4 sm:gap-6 items-center lg:items-start justify-center h-full relative z-20 sm:flex-shrink-0"
+        class="flex flex-col w-full sm:w-[30%] gap-4 sm:gap-6 items-center lg:items-start justify-center h-full relative z-20 sm:flex-shrink-0"
         aria-label="Profile image and social media links"
       >
         <div
@@ -39,7 +39,7 @@ import { HomeActions } from "@/components/home/home-actions";
       </aside>
 
       <section
-        class="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start w-[70%]"
+        class="flex flex-col gap-4 sm:gap-6 relative z-20 justify-center items-center sm:items-start w-full sm:w-[70%]"
         aria-labelledby="profile-heading"
       >
         <header
@@ -48,7 +48,7 @@ import { HomeActions } from "@/components/home/home-actions";
           <p class="text-kicker">Product Engineer</p>
           <h1
             id="profile-heading"
-            class="text-display text-center sm:text-left text-4xl"
+            class="text-display text-center sm:text-left text-3xl sm:text-4xl"
           >
             Building products where speed and quality are both non-negotiable.
           </h1>
@@ -91,8 +91,8 @@ import { HomeActions } from "@/components/home/home-actions";
           </div>
         </div>
 
-        <footer class="flex w-full gap-2 justify-between items-center mt-1">
-          <SocialMedia className="flex flex-row gap-1 !w-full" client:load />
+        <footer class="flex w-full gap-3 justify-between items-center mt-1 max-sm:flex-col max-sm:items-stretch">
+          <SocialMedia className="flex flex-row gap-1 !w-full max-sm:justify-center" client:load />
           <HomeActions />
         </footer>
       </section>

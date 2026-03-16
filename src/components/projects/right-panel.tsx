@@ -57,7 +57,7 @@ function RightPanel({
   };
 
   return (
-    <div className="w-full max-w-sm mx-auto max-sm:w-full max-sm:order-2 max-sm:max-w-none flex flex-col justify-start items-start h-fit max-sm:z-0 lg:sticky lg:top-6">
+    <div className="w-full max-w-sm mx-auto max-sm:w-full max-sm:order-2 max-sm:max-w-none flex flex-col justify-start items-start h-fit max-sm:z-0 max-sm:pb-[max(env(safe-area-inset-bottom),0.75rem)] lg:sticky lg:top-6">
       <motion.div
         className="flex flex-col gap-2 overflow-y-auto max-sm:max-h-none max-sm:overflow-visible scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full"
         variants={listVariants}
@@ -91,7 +91,7 @@ function RightPanel({
               aria-label={`View ${project.title} project details`}
               aria-current={featuredProject?.slug === project.slug ? "true" : undefined}
               className={cn(
-                "group relative p-4 rounded-xl border transition-all duration-300 w-full text-left backdrop-blur-sm",
+                "group relative p-4 rounded-xl border transition-all duration-300 w-full text-left backdrop-blur-sm max-sm:min-h-24 mobile-tap-target",
                 featuredProject?.slug === project.slug
                   ? "border-white/30 bg-white/12 shadow-lg"
                   : "border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/8",
@@ -117,7 +117,7 @@ function RightPanel({
                   height={64}
                   fetchPriority={project.isPriority ? "high" : "auto"}
                   decoding={project.isPriority ? "sync" : "async"}
-                  className="transition-transform duration-300 object-cover object-center  h-full aspect-square rounded-xl overflow-hidden flex-shrink-0 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15"
+                  className="transition-transform duration-300 object-cover object-center size-14 max-sm:size-12 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 bg-black/35 ring-2 ring-inset ring-white/15"
                 />
 
 

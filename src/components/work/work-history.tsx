@@ -39,12 +39,12 @@ export function WorkHistory() {
         ) : null}
       </AnimatePresence>
 
-      <div className="flex w-full max-w-5xl flex-col gap-4">
+      <div className="flex w-full max-w-5xl flex-col gap-4 max-sm:gap-3">
         <motion.header
           variants={revealItem}
           initial="hidden"
           animate="visible"
-          className="surface-1 rounded-2xl p-5"
+          className="surface-1 rounded-2xl p-5 max-sm:p-4"
         >
           <p className="text-kicker mb-2">Career Evidence</p>
           <h1 className="text-section-title">Roles where I architected and shipped fullstack product delivery</h1>

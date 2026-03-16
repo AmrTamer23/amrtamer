@@ -17,9 +17,9 @@ export function WorkModal({
   const narrative = normalizeWorkNarrative(activeItem);
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-4">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-4 max-sm:p-2 max-sm:pb-[max(env(safe-area-inset-bottom),0.5rem)]">
       <motion.div
-        className="bg-card dark:bg-card border border-border flex w-[95%] md:w-[90%] max-w-4xl flex-col items-start gap-4 overflow-hidden p-4 md:p-6 shadow-lg max-h-[90vh] relative"
+        className="bg-card dark:bg-card border border-border flex w-[95%] md:w-[90%] max-w-4xl flex-col items-start gap-4 overflow-hidden p-4 md:p-6 max-sm:p-3.5 shadow-lg max-h-[90vh] max-sm:max-h-[95svh] max-sm:overflow-y-auto relative"
         layoutId={`workItem-${activeItem.company}`}
         style={{ borderRadius: 12 }}
         ref={ref}
@@ -27,7 +27,7 @@ export function WorkModal({
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 md:top-6 md:right-5  rounded-full  transition-colors z-10 cursor-pointer"
+          className="absolute top-4 right-4 md:top-6 md:right-5 rounded-full transition-colors z-10 cursor-pointer h-10 w-10 flex items-center justify-center mobile-tap-target"
           aria-label="Close modal"
         >
           <X className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
@@ -56,9 +56,9 @@ export function WorkModal({
               layoutId={`workItemExtras-${activeItem.company}`}
             >
               <span>{activeItem.location}</span>
-              <span className="inline text-white/30">|</span>
+              <span className="hidden sm:inline text-white/30">|</span>
               <span>{activeItem.duration}</span>
-              <span className="inline text-white/30">|</span>
+              <span className="hidden sm:inline text-white/30">|</span>
               <span>{activeItem.type}</span>
             </motion.div>
           </div>

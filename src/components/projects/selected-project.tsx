@@ -94,7 +94,7 @@ function SelectedProjectComponent({
                   className="h-2.5 w-2.5 rounded-full"
                   style={{ backgroundColor: featuredProject.color }}
                 />
-                <span className="text-xs uppercase tracking-[0.14em] text-white/95">
+                <span className="text-xs uppercase tracking-[0.14em] max-sm:tracking-[0.1em] max-sm:text-[11px] text-white/95">
                   {statusLabel}
                 </span>
               </div>
@@ -103,14 +103,14 @@ function SelectedProjectComponent({
             <div className="grid gap-4 md:grid-cols-[1fr_auto] items-start">
               <div className="space-y-2">
                 <p className="text-kicker">Project Case</p>
-                <h2 className="text-section-title">{featuredProject.title}</h2>
+                <h2 className="text-section-title max-sm:text-[clamp(1.25rem,6vw,1.55rem)]">{featuredProject.title}</h2>
                 <p className="text-body">
                   {featuredProject.brief || narrative.overview}
                 </p>
               </div>
               {featuredProject.link ? (
                 <Button
-                  className="rounded-lg md:self-start hover:opacity-90 transition-opacity duration-200"
+                  className="rounded-lg md:self-start hover:opacity-90 transition-opacity duration-200 max-sm:w-full max-sm:justify-center mobile-tap-target"
                   style={{
                     background: `${featuredProject.color}40`,
                     color: `${featuredProject.color}`,
@@ -124,7 +124,7 @@ function SelectedProjectComponent({
                     href={featuredProject.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-baseline gap-1!"
+                    className="flex items-baseline gap-1! max-sm:justify-center"
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12C1.25 6.07 6.07 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 17.93 17.93 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z" fill={featuredProject.color} />

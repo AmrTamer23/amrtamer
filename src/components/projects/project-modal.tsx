@@ -107,14 +107,14 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
     <>
       <AnimatePresence>
         {activeProject ? (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 max-sm:p-2">
+          <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 max-sm:p-2 max-sm:pb-[max(env(safe-area-inset-bottom),0.5rem)]">
             <motion.div
               ref={modalRef}
               tabIndex={-1}
               role="dialog"
               aria-modal="true"
               aria-label={`${activeProject.title} project details`}
-              className="bg-card border border-border flex h-fit max-h-[98svh] max-w-7xl w-full cursor-default flex-col items-start gap-4 overflow-hidden shadow-2xl max-sm:max-h-[96svh] outline-none"
+              className="bg-card border border-border flex h-fit max-h-[98svh] max-w-7xl w-full cursor-default flex-col items-start gap-4 overflow-hidden shadow-2xl max-sm:max-h-[96svh] max-sm:rounded-xl outline-none"
               layoutId={`project-modal-${activeProject.slug}`}
               style={{ borderRadius: 16 }}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -127,14 +127,14 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
               }}
             >
               {/* Modal Header */}
-              <div className="flex items-center justify-between w-full p-4 border-b border-border">
-                <div className="flex items-center gap-2">
+              <div className="flex items-center justify-between w-full p-4 border-b border-border max-sm:flex-wrap max-sm:items-start max-sm:gap-2 max-sm:p-3">
+                <div className="flex items-center gap-2 max-sm:flex-wrap max-sm:pr-11">
                   <div
                     className="w-4 h-4 rounded-full"
                     aria-hidden="true"
                     style={{ backgroundColor: activeProject.color }}
                   />
-                  <h2 className="text-2xl font-bold text-foreground">
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground">
                     {activeProject.title}
                   </h2>
                   {activeProject.status === "in-progress" && (
@@ -153,14 +153,14 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                   size="icon"
                   onClick={onClose}
                   aria-label="Close project details"
-                  className="rounded-full"
+                  className="rounded-full h-11 w-11 mobile-tap-target"
                 >
                   <X className="w-5 h-5" />
                 </Button>
               </div>
 
               {/* Modal Content */}
-              <div className="flex-1 overflow-y-auto px-6 pb-4 w-full max-sm:px-3">
+              <div className="flex-1 overflow-y-auto px-6 pb-4 w-full max-sm:px-3 max-sm:pb-3">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-sm:gap-4">
                   <div className="lg:col-span-2 space-y-4">
                     <h3 className="text-lg font-semibold text-foreground">
@@ -225,7 +225,7 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                               aria-label={`View ${activeProject.title} image ${index + 1}`}
                               aria-pressed={selectedImageIndex === index + 1}
                               className={cn(
-                                "relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border bg-black",
+                                "relative aspect-video rounded-lg overflow-hidden cursor-pointer transition-all duration-200 border bg-black mobile-tap-target",
                                 selectedImageIndex === index + 1
                                   ? "border-opacity-100"
                                   : "opacity-70 hover:opacity-100 border-transparent"
