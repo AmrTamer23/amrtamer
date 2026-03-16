@@ -154,10 +154,10 @@ function SelectedProjectComponent({
               </div>
             </div>
 
-            <div className="grid gap-4 md:grid-cols-2">
+            {/* <div className="grid gap-4 md:grid-cols-2">
               <NarrativeBlock title="Constraints" items={narrative.constraints} />
               <NarrativeBlock title="Decisions" items={narrative.decisions} />
-            </div>
+            </div> */}
 
             <div className="rounded-xl border border-white/10 bg-[var(--surface-2)] p-4 space-y-2">
               <h3 className="text-meta">Tech Stack</h3>
