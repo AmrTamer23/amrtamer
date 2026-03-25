@@ -107,13 +107,10 @@ const pageTitle =
     <!-- PostHog analytics -->
     <script>
       import posthog from "posthog-js";
-      posthog.init(import.meta.env.PUBLIC_POSTHOG_KEY ?? "", {
-        api_host: "https://us.i.posthog.com",
-        capture_pageview: "history_change",
-        capture_pageleave: true,
-        capture_exceptions: true,
-        debug: import.meta.env.DEV,
-        person_profiles: "identified_only",
+
+      posthog.init("phc_SSnD5HnekdLEy0F1vt8A2DBeqP70kTV4bydu0GaJu8Q", {
+        api_host: "https://t.amrtamer.dev",
+        defaults: "2026-01-30",
       });
     </script>
     <slot name="head" />

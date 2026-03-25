@@ -27,7 +27,7 @@
     "lucide-react": "^0.539.0",
     "motion": "^12.23.12",
     "plaiceholder": "^3.0.0",
-    "posthog-js": "^1.255.1",
+    "posthog-js": "^1.363.5",
     "radix-ui": "^1.4.3",
     "react": "19.2.0",
     "react-dom": "19.2.0",
