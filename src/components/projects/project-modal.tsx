@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, memo, useMemo } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, m, useReducedMotion } from "motion/react";
 import { useOnClickOutside } from "usehooks-ts";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
@@ -108,7 +108,7 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
       <AnimatePresence>
         {activeProject ? (
           <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 max-sm:p-2 max-sm:pb-[max(env(safe-area-inset-bottom),0.5rem)]">
-            <motion.div
+            <m.div
               ref={modalRef}
               tabIndex={-1}
               role="dialog"
@@ -130,7 +130,7 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
               <div className="flex items-center justify-between w-full p-4 border-b border-border max-sm:flex-wrap max-sm:items-start max-sm:gap-2 max-sm:p-3">
                 <div className="flex items-center gap-2 max-sm:flex-wrap max-sm:pr-11">
                   <div
-                    className="w-4 h-4 rounded-full"
+                    className="size-4 rounded-full"
                     aria-hidden="true"
                     style={{ backgroundColor: activeProject.color }}
                   />
@@ -153,9 +153,9 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                   size="icon"
                   onClick={onClose}
                   aria-label="Close project details"
-                  className="rounded-full h-11 w-11 mobile-tap-target"
+                  className="rounded-full size-11 mobile-tap-target"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="size-5" />
                 </Button>
               </div>
 
@@ -167,13 +167,13 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                       Project Gallery
                     </h3>
 
-                    <motion.div
+                    <m.div
                       className="relative aspect-video rounded-lg overflow-hidden"
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ duration: 0.3, ease: "easeOut" }}
                     >
-                      <motion.div
+                      <m.div
                         key={selectedImageIndex}
                         className="absolute inset-0"
                         initial={{
@@ -203,8 +203,8 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                             }
                           }}
                         />
-                      </motion.div>
-                    </motion.div>
+                      </m.div>
+                    </m.div>
 
                     {activeProject.images && activeProject.images.length > 0 && (
                       <div
@@ -322,7 +322,7 @@ function ProjectModalComponent({ activeProject, onClose }: ProjectModalProps) {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         ) : null}
       </AnimatePresence>

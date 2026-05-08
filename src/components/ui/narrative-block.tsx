@@ -18,8 +18,8 @@ export function NarrativeBlock({
     >
       <h3 className="text-meta mb-2 text-[var(--text-soft)]">{title}</h3>
       <ul className="space-y-2">
-        {items.map((item, idx) => (
-          <li key={`${title}-${idx}`} className="text-sm text-[var(--text-strong)]/90">
+        {items.map((item) => (
+          <li key={item} className="text-sm text-[var(--text-strong)]/90">
             {item}
           </li>
         ))}

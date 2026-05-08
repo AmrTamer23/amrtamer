@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { ImageWithBlur } from "@/components/ui/image-with-blur";
 import { Sparkles } from "lucide-react";
@@ -51,7 +51,7 @@ function SelectedProjectComponent({
       ref={featuredContainer}
     >
       <AnimatePresence mode="wait">
-        <motion.div
+        <m.div
           key={`selected-${featuredProject.slug}`}
           className="group relative w-full rounded-2xl overflow-hidden border border-white/15 cursor-default max-sm:w-full bg-[var(--surface-1)] backdrop-blur-md"
           style={{
@@ -91,7 +91,7 @@ function SelectedProjectComponent({
 
               <div className="absolute top-3 left-3 flex items-center gap-2 rounded-full border border-white/20 bg-black/45 px-2.5 py-1 backdrop-blur-sm">
                 <span
-                  className="h-2.5 w-2.5 rounded-full"
+                  className="size-2.5 rounded-full"
                   style={{ backgroundColor: featuredProject.color }}
                 />
                 <span className="text-xs uppercase tracking-[0.14em] max-sm:tracking-[0.1em] max-sm:text-[11px] text-white/95">
@@ -128,10 +128,10 @@ function SelectedProjectComponent({
                   >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M12 22.75C6.07 22.75 1.25 17.93 1.25 12C1.25 6.07 6.07 1.25 12 1.25C17.93 1.25 22.75 6.07 22.75 12C22.75 17.93 17.93 22.75 12 22.75ZM12 2.75C6.9 2.75 2.75 6.9 2.75 12C2.75 17.1 6.9 21.25 12 21.25C17.1 21.25 21.25 17.1 21.25 12C21.25 6.9 17.1 2.75 12 2.75Z" fill={featuredProject.color} />
-                      <path d="M8.99999 21.75H7.99999C7.58999 21.75 7.24999 21.41 7.24999 21C7.24999 20.59 7.56999 20.26 7.97999 20.25C6.40999 14.89 6.40999 9.11 7.97999 3.75C7.56999 3.74 7.24999 3.41 7.24999 3C7.24999 2.59 7.58999 2.25 7.99999 2.25H8.99999C9.23999 2.25 9.46999 2.37 9.60999 2.56C9.74999 2.76 9.78999 3.01 9.70999 3.24C7.82999 8.89 7.82999 15.11 9.70999 20.77C9.78999 21 9.74999 21.25 9.60999 21.45C9.46999 21.63 9.23999 21.75 8.99999 21.75Z" fill={featuredProject.color} />
-                      <path d="M15 21.7501C14.92 21.7501 14.84 21.7401 14.76 21.7101C14.37 21.5801 14.15 21.1501 14.29 20.7601C16.17 15.1101 16.17 8.89006 14.29 3.23006C14.16 2.84006 14.37 2.41006 14.76 2.28006C15.16 2.15006 15.58 2.36006 15.71 2.75006C17.7 8.71006 17.7 15.2701 15.71 21.2201C15.61 21.5501 15.31 21.7501 15 21.7501Z" fill={featuredProject.color} />
+                      <path d="M9 21.75H8C7.59 21.75 7.25 21.41 7.25 21C7.25 20.59 7.57 20.26 7.98 20.25C6.41 14.89 6.41 9.11 7.98 3.75C7.57 3.74 7.25 3.41 7.25 3C7.25 2.59 7.59 2.25 8 2.25H9C9.24 2.25 9.47 2.37 9.61 2.56C9.75 2.76 9.79 3.01 9.71 3.24C7.83 8.89 7.83 15.11 9.71 20.77C9.79 21 9.75 21.25 9.61 21.45C9.47 21.63 9.24 21.75 9 21.75Z" fill={featuredProject.color} />
+                      <path d="M15 21.75C14.92 21.75 14.84 21.74 14.76 21.71C14.37 21.58 14.15 21.15 14.29 20.76C16.17 15.11 16.17 8.89 14.29 3.23C14.16 2.84 14.37 2.41 14.76 2.28C15.16 2.15 15.58 2.36 15.71 2.75C17.7 8.71 17.7 15.27 15.71 21.22C15.61 21.55 15.31 21.75 15 21.75Z" fill={featuredProject.color} />
                       <path d="M12 17.2C9.21 17.2 6.43 16.81 3.75 16.02C3.74 16.42 3.41 16.75 3 16.75C2.59 16.75 2.25 16.41 2.25 16V15C2.25 14.76 2.37 14.53 2.56 14.39C2.76 14.25 3.01 14.21 3.24 14.29C8.89 16.17 15.12 16.17 20.77 14.29C21 14.21 21.25 14.25 21.45 14.39C21.65 14.53 21.76 14.76 21.76 15V16C21.76 16.41 21.42 16.75 21.01 16.75C20.6 16.75 20.27 16.43 20.26 16.02C17.57 16.81 14.79 17.2 12 17.2Z" fill={featuredProject.color} />
-                      <path d="M21 9.74999C20.92 9.74999 20.84 9.73999 20.76 9.70999C15.11 7.82999 8.88003 7.82999 3.23003 9.70999C2.83003 9.83999 2.41003 9.62999 2.28003 9.23999C2.16003 8.83999 2.37003 8.41999 2.76003 8.28999C8.72003 6.29999 15.28 6.29999 21.23 8.28999C21.62 8.41999 21.84 8.84999 21.7 9.23999C21.61 9.54999 21.31 9.74999 21 9.74999Z" fill={featuredProject.color} />
+                      <path d="M21 9.75C20.92 9.75 20.84 9.74 20.76 9.71C15.11 7.83 8.88 7.83 3.23 9.71C2.83 9.84 2.41 9.63 2.28 9.24C2.16 8.84 2.37 8.42 2.76 8.29C8.72 6.3 15.28 6.3 21.23 8.29C21.62 8.42 21.84 8.85 21.7 9.24C21.61 9.55 21.31 9.75 21 9.75Z" fill={featuredProject.color} />
                     </svg>
                     <span>Live Site</span>
                   </a>
@@ -163,9 +163,9 @@ function SelectedProjectComponent({
               <h3 className="text-meta">Tech Stack</h3>
               {featuredProject.techStack.length > 0 ? (
                 <div className="flex flex-wrap gap-2">
-                  {featuredProject.techStack.map((tech, index) => (
+                  {featuredProject.techStack.map((tech) => (
                     <span
-                      key={index}
+                      key={tech}
                       className="px-2.5 py-1 text-xs rounded-full border"
                       style={{
                         backgroundColor: `${featuredProject.color}20`,
@@ -182,7 +182,7 @@ function SelectedProjectComponent({
               )}
             </div>
           </div>
-        </motion.div>
+        </m.div>
       </AnimatePresence>
     </div>
   );

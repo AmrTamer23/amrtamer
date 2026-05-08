@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { m } from "motion/react";
 import { BriefcaseBusiness, MapPin, Timer } from "lucide-react";
 import { normalizeWorkNarrative } from "@/lib/content-normalizers";
 import { EvidenceChip } from "@/components/ui/evidence-chip";
@@ -14,7 +14,7 @@ export function WorkCard({
   const narrative = normalizeWorkNarrative(role);
 
   return (
-    <motion.article
+    <m.article
       layoutId={`workItem-${role.company}`}
       className="group border-white/10 bg-[var(--surface-1)] hover:bg-[var(--surface-2)] flex w-full cursor-pointer flex-col items-start gap-3 md:gap-4 border p-4 max-sm:p-3.5 shadow-sm transition-colors rounded-xl mobile-tap-target"
       onClick={() => setActiveItem(role)}
@@ -26,19 +26,19 @@ export function WorkCard({
         </div>
 
         <div className="flex flex-col gap-1 flex-1 min-w-0">
-          <motion.div
+          <m.div
             className="text-[var(--text-strong)] font-semibold text-lg line-clamp-1"
             layoutId={`workItemCompany-${role.company}`}
           >
             {role.company}
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             className="text-[var(--text-soft)] text-sm md:text-base line-clamp-2"
             layoutId={`workItemTitle-${role.company}`}
           >
             {role.title}
-          </motion.div>
-          <motion.div
+          </m.div>
+          <m.div
             className="text-[var(--text-soft)] flex flex-wrap gap-3 text-xs md:text-sm mt-1"
             layoutId={`workItemExtras-${role.company}`}
           >
@@ -54,7 +54,7 @@ export function WorkCard({
               <BriefcaseBusiness className="size-3.5" />
               {role.type}
             </span>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
@@ -74,10 +74,10 @@ export function WorkCard({
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {narrative.achievements.slice(0, 2).map((achievement, index) => (
-          <EvidenceChip key={`${role.company}-achievement-${index}`} value={achievement} />
+        {narrative.achievements.slice(0, 2).map((achievement) => (
+          <EvidenceChip key={achievement} value={achievement} />
         ))}
       </div>
-    </motion.article>
+    </m.article>
   );
 }

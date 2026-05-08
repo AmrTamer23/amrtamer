@@ -2,7 +2,7 @@
 import { useMemo } from "react";
 import { usePathname } from "@/hooks/use-pathname";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import { revealItem } from "@/lib/motion-presets";
 
 export function Header() {
@@ -26,8 +26,9 @@ export function Header() {
   }, [pathname]);
 
   return (
+    <LazyMotion features={domAnimation}>
     <header className="w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between lg:justify-between relative z-10 flex-col lg:flex-row gap-6 max-sm:gap-4 max-sm:px-1">
-      <motion.div
+      <m.div
         variants={revealItem}
         initial="hidden"
         animate="visible"
@@ -47,7 +48,7 @@ export function Header() {
             Amr Tamer
           </span>
           <AnimatePresence initial={false} mode="wait">
-            <motion.span
+            <m.span
               key="breadcrumb-sep"
               className={cn("opacity-50 lg:w-[1ch]")}
               initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -6 }}
@@ -58,10 +59,10 @@ export function Header() {
               role="presentation"
             >
               {breadcrumb ? "/" : ""}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
           <AnimatePresence initial={false} mode="wait">
-            <motion.span
+            <m.span
               key={breadcrumb}
               className={cn(
                 "items-center text-base sm:text-xl lg:text-2xl font-normal text-[var(--text-soft)]"
@@ -74,10 +75,10 @@ export function Header() {
               role="presentation"
             >
               {breadcrumb}
-            </motion.span>
+            </m.span>
           </AnimatePresence>
         </div>
-      </motion.div>
+      </m.div>
       <nav className="flex gap-2 text-sm sm:text-base items-center justify-center order-3 rounded-full border border-white/10 bg-[var(--surface-1)] px-2 py-1 max-sm:w-full max-sm:flex-wrap max-sm:justify-center max-sm:px-2.5 max-sm:py-2">
         {links.map(({ to, label }) => {
           const isActive = pathname === to;
@@ -99,5 +100,6 @@ export function Header() {
         })}
       </nav>
     </header>
+    </LazyMotion>
   );
 }

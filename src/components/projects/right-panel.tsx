@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, memo } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useImageCache } from "@/hooks/use-image-cache";
 import { ArrowUpRight, Hammer, NotebookText } from "lucide-react";
@@ -58,7 +58,7 @@ function RightPanel({
 
   return (
     <div className="w-full max-w-sm mx-auto max-sm:w-full max-sm:order-2 max-sm:max-w-none flex flex-col justify-start items-start h-fit max-sm:z-0 max-sm:pb-[max(env(safe-area-inset-bottom),0.75rem)] lg:sticky lg:top-6">
-      <motion.div
+      <m.div
         className="flex flex-col gap-2 overflow-y-auto max-sm:max-h-none max-sm:overflow-visible scrollbar-thin scrollbar-thumb-white/20 scrollbar-track-transparent w-full"
         variants={listVariants}
         initial="hidden"
@@ -77,13 +77,13 @@ function RightPanel({
         ) : null}
 
         {projects.map((project) => (
-          <motion.div
+          <m.div
             key={project.slug}
             id={`sidebar-${project.slug}`}
             variants={itemVariants}
             layout
           >
-            <motion.button
+            <m.button
               type="button"
               disabled={isAnimating}
               onClick={() => handleProjectSelect(project)}
@@ -191,13 +191,13 @@ function RightPanel({
                     : "No stack yet"}
                 </span>
               </div>
-            </motion.button>
-          </motion.div>
+            </m.button>
+          </m.div>
         ))}
-      </motion.div>
+      </m.div>
     </div>
   );
 }
 
-export const MemoizedRightPanel = memo(RightPanel);
+const MemoizedRightPanel = memo(RightPanel);
 export { MemoizedRightPanel as RightPanel };

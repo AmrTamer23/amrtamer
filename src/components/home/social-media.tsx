@@ -2,7 +2,7 @@
 
 import { GithubIcon, LinkedinIcon, MailIcon } from "@/lib/icons";
 import { cn } from "@/lib/utils";
-import { motion, useReducedMotion } from "motion/react";
+import { LazyMotion, domAnimation, m, useReducedMotion } from "motion/react";
 import React from "react";
 
 export function SocialMedia({ className }: { className?: string }) {
@@ -29,8 +29,8 @@ export function SocialMedia({ className }: { className?: string }) {
     },
   ];
 
-  const MotionWrapper: React.ElementType = prefersReducedMotion ? "div" : motion.div;
-  const MotionItem: React.ElementType = prefersReducedMotion ? "div" : motion.div;
+  const MotionWrapper: React.ElementType = prefersReducedMotion ? "div" : m.div;
+  const MotionItem: React.ElementType = prefersReducedMotion ? "div" : m.div;
 
   const containerProps = !prefersReducedMotion
     ? {
@@ -45,9 +45,9 @@ export function SocialMedia({ className }: { className?: string }) {
     : {};
 
   return (
+    <LazyMotion features={domAnimation}>
     <nav
       aria-label="Social media links"
-      role="navigation"
       className="items-center justify-center flex"
     >
       <MotionWrapper
@@ -96,5 +96,6 @@ export function SocialMedia({ className }: { className?: string }) {
         })}
       </MotionWrapper>
     </nav>
+    </LazyMotion>
   );
 }

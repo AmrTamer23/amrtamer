@@ -12,7 +12,7 @@ import {
 } from "react";
 import { RightPanel } from "./right-panel";
 import { SelectedProject } from "./selected-project";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import { useQueryParam } from "@/hooks/use-query-params";
 import { X } from "lucide-react";
 
@@ -132,11 +132,11 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
   }, [featuredProject, filteredProjects, selectedProjectSlug, setSelectedProjectSlug]);
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <AnimatePresence mode="wait">
         {activeProject ? (
           <>
-            <motion.div
+            <m.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -157,7 +157,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
       <AnimatePresence>
         {isMobile && isMobileDrawerOpen && featuredProject ? (
           <>
-            <motion.button
+            <m.button
               type="button"
               aria-label="Close project details drawer"
               className="fixed inset-0 z-30 bg-black/55 sm:hidden"
@@ -167,7 +167,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
               transition={{ duration: 0.2 }}
               onClick={() => setIsMobileDrawerOpen(false)}
             />
-            <motion.section
+            <m.section
               className="fixed inset-x-0 bottom-0 z-40 sm:hidden max-h-[88svh] rounded-t-2xl border border-white/10 bg-background/95 shadow-2xl backdrop-blur-xl"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
@@ -183,7 +183,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                   type="button"
                   onClick={() => setIsMobileDrawerOpen(false)}
                   aria-label="Close drawer"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 mobile-tap-target"
+                  className="inline-flex size-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/85 mobile-tap-target"
                 >
                   <X className="size-5" />
                 </button>
@@ -194,7 +194,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                   featuredContainer={featuredContainer}
                 />
               </div>
-            </motion.section>
+            </m.section>
           </>
         ) : null}
       </AnimatePresence>
@@ -256,6 +256,6 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
           </div>
         </div>
       </div>
-    </>
+    </LazyMotion>
   );
 }

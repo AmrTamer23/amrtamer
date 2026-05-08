@@ -50,11 +50,9 @@ class ImageCache {
       sources.map((src) => this.preloadImage(src))
     ).then(
       (results) =>
-        results
-          .map((result) =>
-            result.status === "fulfilled" ? result.value : undefined
-          )
-          .filter(Boolean) as void[]
+        results.flatMap((result) =>
+          result.status === "fulfilled" ? [result.value] : []
+        )
     );
   }
 

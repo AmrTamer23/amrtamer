@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "motion/react";
 import { workExperience } from "@/lib/work-history.data";
 import { WorkModal } from "./work-modal";
 import { WorkCard } from "./work-card";
@@ -17,10 +17,10 @@ export function WorkHistory() {
   );
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <AnimatePresence>
         {activeItem ? (
-          <motion.div
+          <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -40,7 +40,7 @@ export function WorkHistory() {
       </AnimatePresence>
 
       <div className="flex w-full max-w-5xl flex-col gap-4 max-sm:gap-3">
-        <motion.header
+        <m.header
           variants={revealItem}
           initial="hidden"
           animate="visible"
@@ -51,21 +51,21 @@ export function WorkHistory() {
           <p className="text-body mt-2">
             Each role highlights scope, execution approach, and measurable impact. Open any card for full context.
           </p>
-        </motion.header>
+        </m.header>
 
-        <motion.div
+        <m.div
           variants={revealStagger}
           initial="hidden"
           animate="visible"
           className="relative space-y-4"
         >
           {workExperience.map((role) => (
-            <motion.div key={role.company} variants={revealItem}>
+            <m.div key={role.company} variants={revealItem}>
               <WorkCard role={role} setActiveItem={setActiveItem} />
-            </motion.div>
+            </m.div>
           ))}
-        </motion.div>
+        </m.div>
       </div>
-    </>
+    </LazyMotion>
   );
 }

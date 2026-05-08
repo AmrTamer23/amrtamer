@@ -26,7 +26,10 @@ function normalizeList(
   value: string[] | undefined,
   fallback: readonly string[]
 ): string[] {
-  const clean = (value ?? []).map((item) => item.trim()).filter(Boolean);
+  const clean = (value ?? []).flatMap((item) => {
+    const trimmed = item.trim();
+    return trimmed ? [trimmed] : [];
+  });
   return clean.length > 0 ? clean : [...fallback];
 }
 
