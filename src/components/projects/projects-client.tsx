@@ -208,7 +208,7 @@ export default function ProjectsClient({ projects }: ProjectsClientProps) {
                   Selected Work
                 </p>
                 <h1 className="text-section-title">
-                  Product work with decisions, constraints, and outcomes
+                  Software work with decisions, constraints, and outcomes
                 </h1>
               </div>
               <div className="flex flex-wrap gap-2">
