@@ -35,6 +35,11 @@ function smoothScroll() {
         event.preventDefault();
         lenis.scrollTo(target, { duration: 1.4 });
         history.replaceState(null, "", hash === "#top" ? location.pathname : hash);
+        // preventDefault skips the browser's focus move; restore it (skip link, keyboard nav).
+        if (target instanceof HTMLElement) {
+          if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+          target.focus({ preventScroll: true });
+        }
       },
       { signal: listeners.signal },
     );
@@ -227,6 +232,9 @@ function magnetic() {
 }
 
 async function init() {
+  // The head fallback only guards against this bundle failing to load. Claim
+  // readiness now so a slow font load can't reveal, then re-hide, the page.
+  window.__motionReady = true;
   await document.fonts.ready;
 
   const mm = gsap.matchMedia();
@@ -255,8 +263,6 @@ async function init() {
       return stopScroll;
     },
   );
-
-  window.__motionReady = true;
 }
 
 init();
