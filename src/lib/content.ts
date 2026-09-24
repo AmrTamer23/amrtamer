@@ -6,8 +6,8 @@ import hydex from "@/assets/logos/hydex.png";
 import brandria from "@/assets/logos/brandria.png";
 
 export const links = {
-  email: "mailto:amrtamer2324@gmail.com",
-  emailLabel: "amrtamer2324@gmail.com",
+  email: "mailto:inquiries@amrtamer.dev",
+  emailLabel: "inquiries@amrtamer.dev",
   resume: "https://links.amrtamer.dev/cv",
   github: "https://github.com/amrtamer23",
   linkedin: "https://www.linkedin.com/in/amrtamer23/",
