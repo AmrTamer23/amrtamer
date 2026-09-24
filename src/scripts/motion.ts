@@ -58,22 +58,34 @@ function heroIntro() {
   const lines = $$("[data-hero-title] > span");
 
   gsap.set("[data-hero-title]", { opacity: 1 });
-  const split = SplitText.create(lines, { type: "lines", mask: "lines" });
+  // autoSplit re-measures if Faculty Glyphic lands after the capped font wait;
+  // returning the tween lets SplitText rebuild the reveal on the new lines.
+  SplitText.create(lines, {
+    type: "lines",
+    mask: "lines",
+    autoSplit: true,
+    onSplit: (self) =>
+      gsap.from(self.lines, {
+        yPercent: 115,
+        duration: 1.4,
+        stagger: 0.14,
+        delay: 0.1,
+        ease: EASE,
+        onComplete: () => self.revert(),
+      }),
+  });
 
   tl.fromTo(
     "[data-hero-header]",
     { autoAlpha: 0, yPercent: -40 },
     { autoAlpha: 1, yPercent: 0, duration: 1 },
     0,
-  )
-    .from(split.lines, { yPercent: 115, duration: 1.4, stagger: 0.14 }, 0.1)
-    .fromTo(
-      "[data-hero-fade]",
-      { autoAlpha: 0, y: 28 },
-      { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.09 },
-      0.6,
-    )
-    .add(() => split.revert());
+  ).fromTo(
+    "[data-hero-fade]",
+    { autoAlpha: 0, y: 28 },
+    { autoAlpha: 1, y: 0, duration: 1.1, stagger: 0.09 },
+    0.6,
+  );
 }
 
 function splitHeadings() {
