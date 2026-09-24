@@ -1,0 +1,240 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/site/Header.astro";
+import { cases, caseHref, type CaseStudy } from "@/lib/cases";
+import { links } from "@/lib/content";
+
+export function getStaticPaths() {
+  return cases.map((study, i) => ({
+    params: { slug: study.slug },
+    props: { study, index: i, next: cases[(i + 1) % cases.length] },
+  }));
+}
+
+interface Props {
+  study: CaseStudy;
+  index: number;
+  next: CaseStudy;
+}
+
+const { study, index, next } = Astro.props;
+const total = String(cases.length).padStart(2, "0");
+const caseNo = String(index + 1).padStart(2, "0");
+const nextNo = String(((index + 1) % cases.length) + 1).padStart(2, "0");
+const roman = ["I", "II", "III", "IV", "V"];
+const perColumn = Math.ceil(study.stack.length / 3);
+const stackColumns = [0, 1, 2].map((c) => study.stack.slice(c * perColumn, (c + 1) * perColumn));
+const year = new Date().getFullYear();
+---
+
+<BaseLayout title={study.name} description={study.overview}>
+  <div id="top">
+    <Header inner />
+
+    <main id="main">
+      <section class="shell pt-12 pb-12 md:pt-[72px] md:pb-14" aria-labelledby="case-title">
+        <p class="label pb-5" data-hero-fade>
+          (Case {caseNo} / {total}) — {study.category}
+        </p>
+        <h1 id="case-title" class="display md:text-[13.75rem]! md:leading-[0.86]!" data-hero-title>
+          <span class="block">{study.name}</span>
+        </h1>
+
+        <div class="grid gap-10 pt-10 md:grid-cols-[minmax(0,620px)_minmax(0,420px)] md:items-end md:justify-between md:pt-14">
+          <p class="text-lg leading-[1.5] text-body md:text-[22px] md:leading-[1.45]" data-hero-fade>
+            {study.overview}
+          </p>
+          <dl class="border-b border-rule text-[15px] md:text-base" data-hero-fade>
+            {
+              study.meta.map((row) => (
+                <div class="grid grid-cols-[120px_1fr] border-t border-rule py-3.5">
+                  <dt class="label pt-0.5">{row.label}</dt>
+                  <dd>{row.value}</dd>
+                </div>
+              ))
+            }
+            <div class="grid grid-cols-[120px_1fr] border-t border-rule py-3.5">
+              <dt class="label pt-0.5">Status</dt>
+              <dd class="flex items-center gap-2 text-patina">
+                <span class="size-2 rounded-full bg-patina" aria-hidden="true"></span>{study.status}
+              </dd>
+            </div>
+            {
+              study.live && (
+                <div class="grid grid-cols-[120px_1fr] border-t border-rule py-3.5">
+                  <dt class="label pt-0.5">Live</dt>
+                  <dd>
+                    <a href={study.live.href} target="_blank" rel="noopener" class="link-underline text-sand">
+                      {study.live.label} ↗
+                    </a>
+                  </dd>
+                </div>
+              )
+            }
+          </dl>
+        </div>
+      </section>
+
+      <div class="shell">
+        <div class="overflow-hidden rounded-md bg-stoa-2" data-media>
+          <Image
+            src={study.image}
+            alt={study.alt}
+            width={1749}
+            height={1080}
+            widths={[640, 1024, 1360, 1749]}
+            sizes="(min-width: 1440px) 1360px, calc(100vw - 2.5rem)"
+            class="h-auto w-full will-change-transform"
+            loading="eager"
+            data-media-img
+          />
+        </div>
+      </div>
+
+      <section class="shell grid gap-8 py-20 md:grid-cols-[200px_minmax(0,1fr)] md:gap-10 md:py-[120px]" aria-labelledby="brief-title">
+        <p class="label" data-fade>(i) — The brief</p>
+        <div class="flex flex-col gap-12 md:gap-14">
+          <h2 id="brief-title" class="font-display text-[34px] leading-[1.08] tracking-[-0.02em] md:text-[60px] md:leading-[1.04]" data-split>
+            {study.headline.lead} <span class="text-sand">{study.headline.accent}</span>
+          </h2>
+          <div class="grid gap-10 md:grid-cols-2" data-stagger>
+            <div class="flex flex-col gap-3.5">
+              <h3 class="label text-sand!">The problem</h3>
+              <p class="text-base leading-[1.6] text-body md:text-lg">{study.problem}</p>
+            </div>
+            <div class="flex flex-col gap-3.5">
+              <h3 class="label text-sand!">My role</h3>
+              <p class="text-base leading-[1.6] text-body md:text-lg">{study.role}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-stoa py-20 md:py-[110px]" aria-labelledby="built-title">
+        <div class="shell flex flex-col gap-12">
+          <div class="flex flex-col gap-5">
+            <p class="label" data-fade>(ii) — How it was built</p>
+            <h2 id="built-title" class="section-title" data-split>Constraints in, decisions out.</h2>
+          </div>
+          <div class="grid gap-12 lg:grid-cols-2">
+            {
+              [
+                { title: "Constraints", items: study.constraints, accent: "text-patina" },
+                { title: "Decisions", items: study.decisions, accent: "text-sand" },
+              ].map((group) => (
+                <div>
+                  <h3 class:list={["pb-3 font-display text-[30px] md:text-[40px]", group.accent]}>{group.title}</h3>
+                  <ol data-stagger>
+                    {group.items.map((item, i) => (
+                      <li class="grid grid-cols-[32px_1fr] gap-4 border-t border-rule py-5 md:gap-5">
+                        <span class:list={["label pt-1", `${group.accent}!`]}>{String(i + 1).padStart(2, "0")}</span>
+                        <p class="text-[15px] leading-[1.55] text-body md:text-[17px]">{item}</p>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="shell flex flex-col gap-12 py-20 md:py-[120px]" aria-labelledby="impact-title">
+        <div class="flex flex-col gap-5">
+          <p class="label" data-fade>(iii) — Impact</p>
+          <h2 id="impact-title" class="section-title" data-split>What it changed.</h2>
+        </div>
+        <ol>
+          {
+            study.impact.map((item, i) => (
+              <li class="relative grid grid-cols-[56px_1fr] items-baseline gap-4 py-6 md:grid-cols-[120px_minmax(0,900px)] md:gap-10 md:py-7">
+                <span class="absolute inset-x-0 top-0 h-px bg-rule" data-rule aria-hidden="true" />
+                <span class="font-display text-[34px] leading-none text-sand md:text-[56px]" aria-hidden="true">{roman[i]}</span>
+                <p class="font-display text-[22px] leading-[1.25] md:text-[34px] md:leading-[1.2]" data-fade>{item}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="bg-stoa py-20 md:py-[110px]" aria-labelledby="stack-title">
+        <div class="shell grid gap-10 lg:grid-cols-[320px_minmax(0,1fr)]">
+          <div class="flex flex-col gap-4">
+            <p class="label" data-fade>(iv) — Stack</p>
+            <p id="stack-title" class="font-display text-[88px] leading-[0.9] tracking-[-0.03em] md:text-[120px]">
+              <span data-count={study.stack.length}>{study.stack.length}</span>
+            </p>
+            <p class="text-base text-body" data-fade>{study.stackNote}</p>
+          </div>
+          <div class="grid gap-x-6 sm:grid-cols-3">
+            {
+              stackColumns.map((column, c) => (
+                <ul data-stagger>
+                  {column.map((tech, i) => (
+                    <li class="grid grid-cols-[24px_1fr] gap-3.5 border-t border-rule py-4">
+                      <span class="label pt-0.5">{String(c * perColumn + i + 1).padStart(2, "0")}</span>
+                      <span class="text-base md:text-[17px]">{tech}</span>
+                    </li>
+                  ))}
+                </ul>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="shell flex flex-col gap-8 py-20 md:gap-10 md:py-[120px]" aria-label="Lessons">
+        <p class="label" data-fade>(v) — Lessons</p>
+        {
+          study.lessons.map((lesson, i) => (
+            <blockquote
+              class:list={[
+                "max-w-[1150px] font-display text-[28px] leading-[1.15] tracking-[-0.015em] md:text-[52px] md:leading-[1.12]",
+                i > 0 && "text-body",
+              ]}
+              data-split
+            >
+              “{lesson}”
+            </blockquote>
+          ))
+        }
+      </section>
+    </main>
+
+    <footer class="bg-sand text-ink">
+      <a
+        href={caseHref(next.slug)}
+        class="shell group flex flex-col gap-8 py-14 md:flex-row md:items-end md:justify-between md:py-16"
+        aria-label={`Next case: ${next.name}`}
+      >
+        <div class="flex flex-col gap-3.5" data-fade>
+          <p class="label text-ink!">Next case — {nextNo} / {total}</p>
+          <p class="font-display text-[64px] leading-[0.9] tracking-[-0.03em] md:text-[160px]">
+            {next.name} <span class="inline-block transition-transform duration-500 group-hover:translate-x-3">→</span>
+          </p>
+          <p class="max-w-[560px] text-base md:text-[17px]">{next.overview}</p>
+        </div>
+        <div class="overflow-hidden rounded-md md:w-[440px]" data-media>
+          <Image
+            src={next.image}
+            alt=""
+            width={1749}
+            height={1080}
+            widths={[480, 880]}
+            sizes="(min-width: 768px) 440px, calc(100vw - 2.5rem)"
+            class="h-auto w-full will-change-transform"
+            data-media-img
+          />
+        </div>
+      </a>
+      <div class="shell">
+        <div class="label flex flex-col gap-2 border-t border-ink/25 py-6 text-ink! sm:flex-row sm:justify-between">
+          <p>© {year} Amr Tamer</p>
+          <a href={links.email} class="link-underline w-fit">{links.emailLabel}</a>
+          <a href="#top" class="link-underline w-fit">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</BaseLayout>

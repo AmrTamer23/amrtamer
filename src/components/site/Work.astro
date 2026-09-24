@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { featuredProject as f, projects } from "@/lib/content";
+import { caseHref } from "@/lib/cases";
 ---
 
 <section
@@ -28,7 +29,7 @@ import { featuredProject as f, projects } from "@/lib/content";
           class="font-display text-5xl leading-none tracking-[-0.03em] md:text-7xl"
           data-split
         >
-          {f.name}
+          <a href={caseHref(f.slug)} class="transition-colors hover:text-sand">{f.name}</a>
         </h3>
       </div>
       <div class="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-body md:pb-2.5 lg:gap-11" data-fade>
@@ -37,13 +38,14 @@ import { featuredProject as f, projects } from "@/lib/content";
         <span class="flex items-center gap-2">
           <span class="size-2 rounded-full bg-patina" aria-hidden="true"></span>{f.status}
         </span>
-        <a href={f.href} target="_blank" rel="noopener" class="link-underline text-[15px] font-medium text-sand">
-          learnu.online ↗
+        <a href={f.href} target="_blank" rel="noopener" class="link-underline text-muted">learnu.online ↗</a>
+        <a href={caseHref(f.slug)} class="link-underline text-[15px] font-medium text-sand">
+          Read case study →
         </a>
       </div>
     </div>
 
-    <div class="overflow-hidden rounded-md bg-stoa-2" data-media>
+    <a href={caseHref(f.slug)} class="block overflow-hidden rounded-md bg-stoa-2" data-media tabindex="-1" aria-hidden="true">
       <Image
         src={f.image}
         alt={f.alt}
@@ -54,7 +56,7 @@ import { featuredProject as f, projects } from "@/lib/content";
         class="h-auto w-full will-change-transform"
         data-media-img
       />
-    </div>
+    </a>
 
     <dl class="grid gap-5 pt-2 md:grid-cols-[100px_minmax(0,1fr)_100px_minmax(0,1fr)] md:gap-x-5" data-stagger>
       <dt class="label">Outcome</dt>
@@ -71,7 +73,7 @@ import { featuredProject as f, projects } from "@/lib/content";
           class:list={["flex flex-col gap-5", i === 1 && "md:pt-[120px]"]}
           aria-labelledby={`project-${p.index}`}
         >
-          <div class="overflow-hidden rounded-md bg-stoa-2" data-media>
+          <a href={caseHref(p.slug)} class="block overflow-hidden rounded-md bg-stoa-2" data-media tabindex="-1" aria-hidden="true">
             <Image
               src={p.image}
               alt={p.alt}
@@ -82,12 +84,12 @@ import { featuredProject as f, projects } from "@/lib/content";
               class="h-auto w-full will-change-transform"
               data-media-img
             />
-          </div>
+          </a>
           <div class="relative flex items-end justify-between pb-4">
             <div class="flex items-end gap-4 md:gap-6">
               <span class="label pb-2">{p.index}</span>
               <h3 id={`project-${p.index}`} class="font-display text-4xl leading-none tracking-[-0.02em] md:text-5xl">
-                {p.name}
+                <a href={caseHref(p.slug)} class="transition-colors hover:text-sand">{p.name}</a>
               </h3>
             </div>
             <span class="flex items-center gap-2 pb-1.5 text-sm text-body">
@@ -97,7 +99,10 @@ import { featuredProject as f, projects } from "@/lib/content";
             <span class="absolute inset-x-0 bottom-0 h-px bg-rule" data-rule aria-hidden="true" />
           </div>
           <p class="text-[15px] leading-[1.55] text-body md:text-base">{p.summary}</p>
-          <p class="label">{p.category} · {p.stack}</p>
+          <div class="flex items-center justify-between gap-4">
+            <p class="label">{p.category} · {p.stack}</p>
+            <a href={caseHref(p.slug)} class="link-underline shrink-0 text-[15px] font-medium text-sand">Read case study →</a>
+          </div>
         </article>
       ))
     }

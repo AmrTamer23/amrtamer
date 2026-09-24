@@ -92,6 +92,7 @@ export const previousRoles: Role[] = [
 const UFS = "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CY";
 
 export type Project = {
+  slug: string;
   index: string;
   name: string;
   category: string;
@@ -104,6 +105,7 @@ export type Project = {
 };
 
 export const featuredProject = {
+  slug: "learnu",
   index: "01",
   name: "LearnU",
   category: "Education platform",
@@ -119,6 +121,7 @@ export const featuredProject = {
 
 export const projects: Project[] = [
   {
+    slug: "pericare",
     index: "02",
     name: "Pericare",
     category: "Healthcare",
@@ -130,6 +133,7 @@ export const projects: Project[] = [
       "Maternal and child health: a mobile-facing API plus an admin dashboard, with Shopify running headless commerce through webhooks.",
   },
   {
+    slug: "anha-labs",
     index: "03",
     name: "Anha Labs",
     category: "Lab operations",
