@@ -21,11 +21,18 @@ export type CaseStudy = {
   stackNote: string;
 };
 
-const [pericare, anha] = projects;
+const projectBySlug = (slug: string) => {
+  const project = projects.find((p) => p.slug === slug);
+  if (!project) throw new Error(`Unknown project slug: ${slug}`);
+  return project;
+};
+
+const pericare = projectBySlug("pericare");
+const anha = projectBySlug("anha-labs");
 
 export const cases: CaseStudy[] = [
   {
-    slug: "learnu",
+    slug: featuredProject.slug,
     name: featuredProject.name,
     category: featuredProject.category,
     status: featuredProject.status,
@@ -81,7 +88,7 @@ export const cases: CaseStudy[] = [
     stackNote: "technologies, one TypeScript codebase.",
   },
   {
-    slug: "pericare",
+    slug: pericare.slug,
     name: pericare.name,
     category: pericare.category,
     status: pericare.status,
@@ -134,7 +141,7 @@ export const cases: CaseStudy[] = [
     stackNote: "technologies across API and admin.",
   },
   {
-    slug: "anha-labs",
+    slug: anha.slug,
     name: anha.name,
     category: anha.category,
     status: anha.status,

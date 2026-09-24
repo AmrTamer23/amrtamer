@@ -12,6 +12,7 @@ declare global {
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const EASE = "expo.out";
+const FONT_WAIT_MS = 2500;
 const root = document.documentElement;
 const $$ = <T extends HTMLElement = HTMLElement>(selector: string, scope: ParentNode = document) =>
   Array.from(scope.querySelectorAll<T>(selector));
@@ -233,9 +234,14 @@ function magnetic() {
 
 async function init() {
   // The head fallback only guards against this bundle failing to load. Claim
-  // readiness now so a slow font load can't reveal, then re-hide, the page.
+  // readiness now so a slow font load can't reveal, then re-hide, the page —
+  // and cap the font wait so hidden pre-states never outlive a slow network.
+  // Headings re-split once the real fonts arrive (SplitText autoSplit).
   window.__motionReady = true;
-  await document.fonts.ready;
+  await Promise.race([
+    document.fonts.ready,
+    new Promise((resolve) => setTimeout(resolve, FONT_WAIT_MS)),
+  ]);
 
   const mm = gsap.matchMedia();
   mm.add(
