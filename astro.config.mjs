@@ -1,18 +1,25 @@
 import { defineConfig } from "astro/config";
-import react from "@astrojs/react";
-import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
 import { siteConfig } from "./src/config/site.config";
 
 export default defineConfig({
   site: siteConfig.origin,
   output: "static",
-  adapter: cloudflare(),
-
-  integrations: [react()],
 
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      // Quick `cloudflared tunnel --url` hostnames are random per run; a
+      // leading dot allows every trycloudflare.com subdomain.
+      allowedHosts: [".trycloudflare.com"],
+    },
+  },
+
+  // /projects and /work were folded into the homepage. Cloudflare serves
+  // real 301s from public/_redirects; these meta-refresh pages are the fallback.
+  redirects: {
+    "/projects": "/#work",
+    "/work": "/#experience",
   },
 
   image: {

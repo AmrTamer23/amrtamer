@@ -1,0 +1,29 @@
+---
+import { links } from "@/lib/content";
+---
+
+<header class="shell" data-hero-header>
+  <div
+    class="flex items-center justify-between gap-6 border-b border-rule py-5 md:py-6"
+  >
+    <a href="#top" class="font-display text-[22px] leading-none md:text-2xl">
+      Amr Tamer
+    </a>
+    <nav aria-label="Primary" class="text-sm text-body">
+      <ul class="flex items-center gap-5 md:gap-7">
+        <li><a href="#work" class="link-underline">Work</a></li>
+        <li class="max-sm:hidden">
+          <a href="#experience" class="link-underline">Experience</a>
+        </li>
+        <li class="max-sm:hidden">
+          <a href={links.resume} target="_blank" rel="noopener" class="link-underline"
+            >Résumé ↗</a
+          >
+        </li>
+        <li>
+          <a href={links.email} class="link-underline text-sand">Email me</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

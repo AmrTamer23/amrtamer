@@ -1,0 +1,42 @@
+---
+import { links } from "@/lib/content";
+
+const year = new Date().getFullYear();
+---
+
+<footer
+  id="contact"
+  class="bg-sand pt-20 pb-6 text-ink md:pt-[110px] md:pb-8"
+  aria-labelledby="contact-title"
+>
+  <div class="shell flex flex-col gap-14 md:gap-20">
+    <div class="flex flex-col gap-7 md:gap-8">
+      <p class="label text-ink!" data-fade>(05) — Start a conversation</p>
+      <h2 id="contact-title" class="display" data-split>
+        Have something to ship?
+      </h2>
+    </div>
+
+    <div class="relative flex flex-col gap-6 pt-6 md:flex-row md:items-end md:justify-between md:pt-7">
+      <span class="absolute inset-x-0 top-0 h-px bg-ink" data-rule aria-hidden="true"></span>
+      <a
+        href={links.email}
+        class="link-underline w-fit font-display text-2xl tracking-[-0.01em] md:text-[44px]"
+        data-fade
+      >
+        {links.emailLabel}
+      </a>
+      <ul class="flex gap-6 text-[15px] font-semibold md:gap-9 md:text-base" data-stagger>
+        <li><a href={links.linkedin} target="_blank" rel="noopener" class="link-underline">LinkedIn ↗</a></li>
+        <li><a href={links.github} target="_blank" rel="noopener" class="link-underline">GitHub ↗</a></li>
+        <li><a href={links.resume} target="_blank" rel="noopener" class="link-underline">Résumé ↗</a></li>
+      </ul>
+    </div>
+
+    <div class="label flex flex-col gap-2 text-ink! sm:flex-row sm:justify-between">
+      <p>© {year} Amr Tamer</p>
+      <p class="max-sm:hidden">Set in Faculty Glyphic &amp; Valley Sans</p>
+      <a href="#top" class="link-underline w-fit">Back to top ↑</a>
+    </div>
+  </div>
+</footer>

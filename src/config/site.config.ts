@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: "Amr Tamer",
   title: "Amr Tamer",
   description:
-    "A software engineer focused on fullstack architecture, scalable software delivery, and measurable engineering outcomes.",
+    "Full-stack software engineer. Fast to ship, built to last—APIs, interfaces, and the releases that ship them.",
   origin: "https://amrtamer.dev",
   keywords: [
     "Amr Tamer",
@@ -13,7 +13,7 @@ export const siteConfig: SiteConfig = {
     "Next.js",
     "NestJS",
   ],
-  og: "https://j1i4xv0jcr.ufs.sh/f/d4e8EKT5K8CYaOCSHyrgOH7JGCBaPVNo3WzerSADRqMUtIEY",
+  og: "https://amrtamer.dev/og.png",
   creator: {
     name: "Amr Tamer",
     url: "https://amrtamer.dev",
