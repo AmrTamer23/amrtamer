@@ -1,14 +1,12 @@
-import { featuredProject, projects } from "@/lib/content";
+import { projects } from "@/lib/content";
 
 export type CaseStudy = {
   slug: string;
   name: string;
   category: string;
-  status: string;
   image: string;
   alt: string;
   overview: string;
-  headline: { lead: string; accent: string };
   problem: string;
   role: string;
   meta: { label: string; value: string }[];
@@ -18,7 +16,6 @@ export type CaseStudy = {
   impact: string[];
   lessons: string[];
   stack: string[];
-  stackNote: string;
 };
 
 const projectBySlug = (slug: string) => {
@@ -27,20 +24,19 @@ const projectBySlug = (slug: string) => {
   return project;
 };
 
+const learnu = projectBySlug("learnu");
 const pericare = projectBySlug("pericare");
 const anha = projectBySlug("anha-labs");
 
 export const cases: CaseStudy[] = [
   {
-    slug: featuredProject.slug,
-    name: featuredProject.name,
-    category: featuredProject.category,
-    status: featuredProject.status,
-    image: featuredProject.image,
-    alt: featuredProject.alt,
+    slug: learnu.slug,
+    name: learnu.name,
+    category: learnu.category,
+    image: learnu.image,
+    alt: learnu.alt,
     overview:
       "Educational platform for course discovery, video learning, progress tracking, and payments—supporting students, tutors, and business teams.",
-    headline: { lead: "One system for courses, video, progress,", accent: "and payments." },
     problem:
       "The product needed a single, coherent system for course creation, video delivery, enrollments, progress, certificates, and payments—replacing ad-hoc or scattered tooling.",
     role: "Owned end-to-end product delivery: API architecture and implementation (NestJS), learning platform and dashboard interfaces (Next.js / React), shared packages, and phased execution from courses to subscriptions.",
@@ -85,18 +81,15 @@ export const cases: CaseStudy[] = [
       "Zustand",
       "Framer Motion",
     ],
-    stackNote: "technologies, one TypeScript codebase.",
   },
   {
     slug: pericare.slug,
     name: pericare.name,
     category: pericare.category,
-    status: pericare.status,
     image: pericare.image,
     alt: pericare.alt,
     overview:
       "Maternal and child health platform combining a mobile-facing API and an internal admin dashboard for content, commerce, and operations.",
-    headline: { lead: "Content, commerce, and care,", accent: "in one reliable system." },
     problem:
       "Product, content, subscriptions, and partner workflows needed to be managed in one reliable system while supporting real user-facing healthcare journeys.",
     role: "Full-stack ownership across backend architecture (NestJS + Prisma) and the admin experience (TanStack Start + React), with a focus on operational clarity and delivery speed.",
@@ -138,18 +131,15 @@ export const cases: CaseStudy[] = [
       "Shopify Webhooks",
       "RevenueCat Webhooks",
     ],
-    stackNote: "technologies across API and admin.",
   },
   {
     slug: anha.slug,
     name: anha.name,
     category: anha.category,
-    status: anha.status,
     image: anha.image,
     alt: anha.alt,
     overview:
       "Internal lab operations platform for PCR and toxicology workflows, focused on reliable batch processing, QC visibility, and faster data entry.",
-    headline: { lead: "From spreadsheets to a lab workflow", accent: "that survives interruptions." },
     problem:
       "PCR and toxicology operations depended on manual spreadsheet handling and fragmented QC review paths, which slowed turnaround and made tracking harder.",
     role: "Designed and implemented the frontend application architecture, including multi-step entry flows, API integrations, state persistence, and QC analytics views.",
@@ -186,7 +176,6 @@ export const cases: CaseStudy[] = [
       "XLSX / JSZip",
       "Vite",
     ],
-    stackNote: "technologies in one frontend.",
   },
 ];
 

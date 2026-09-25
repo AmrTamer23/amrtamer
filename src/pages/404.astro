@@ -4,20 +4,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Page Not Found">
-  <main
-    id="main"
-    class="shell flex min-h-dvh flex-col items-start justify-center gap-6"
-  >
-    <p class="label">(404) — Lost in the ruins</p>
-    <h1 class="display">
-      <span class="block">This page</span>
-      <span class="block text-sand">didn’t last.</span>
+  <main id="main" class="shell flex min-h-dvh flex-col items-start justify-center gap-5">
+    <p class="label">404</p>
+    <h1 class="font-display text-[52px] leading-[0.95] tracking-[-0.03em] md:text-[112px]">
+      Page not found
     </h1>
-    <a
-      href="/"
-      class="mt-4 rounded-full bg-sand px-6 py-4 text-[15px] font-semibold text-night transition-colors hover:bg-marble"
-    >
-      Back home →
-    </a>
+    <a href="/" class="link-underline text-base text-sand md:text-lg">Back to the homepage →</a>
   </main>
 </BaseLayout>

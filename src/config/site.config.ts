@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: "Amr Tamer",
   title: "Amr Tamer",
   description:
-    "Full-stack software engineer. Fast to ship, built to last—APIs, interfaces, and the releases that ship them.",
+    "Frontend Software Engineer at Cloudypedia. I build APIs and interfaces with TypeScript, React, and NestJS.",
   origin: "https://amrtamer.dev",
   keywords: [
     "Amr Tamer",

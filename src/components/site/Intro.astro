@@ -1,0 +1,34 @@
+---
+import { Image } from "astro:assets";
+import avatar from "../../../public/avatar.webp";
+import { links } from "@/lib/content";
+---
+
+<section class="shell grid pt-12 pb-2 md:grid-cols-[280px_minmax(0,1040px)] md:gap-10 md:pt-[104px] md:pb-6" aria-labelledby="intro-title">
+  <div class="max-md:hidden" aria-hidden="true"></div>
+  <div class="flex flex-col gap-5 md:gap-7">
+    <div class="flex items-center gap-4 md:gap-7" data-hero-fade>
+      <Image
+        src={avatar}
+        alt="Portrait of Amr Tamer"
+        width={208}
+        height={277}
+        class="size-16 shrink-0 rounded-[10px] object-cover object-top md:size-[104px] md:rounded-xl"
+        loading="eager"
+      />
+      <h1 id="intro-title" class="font-display text-[44px] leading-[0.95] tracking-[-0.03em] whitespace-nowrap min-[400px]:text-[52px] md:text-[112px]">
+        Amr Tamer
+      </h1>
+    </div>
+    <p class="max-w-[780px] text-lg leading-[1.5] text-body md:text-2xl md:leading-[1.45]" data-hero-fade>
+      Frontend Software Engineer at <span class="text-marble">Cloudypedia</span>. I build APIs
+      and interfaces with TypeScript, React, and NestJS.
+    </p>
+    <ul class="flex flex-wrap gap-x-7 gap-y-2 text-[15px] md:text-base" data-hero-fade>
+      <li><a href={links.resume} target="_blank" rel="noopener" class="border-b border-rule pb-0.5 text-marble transition-colors hover:border-marble">Résumé ↗</a></li>
+      <li><a href={links.email} class="border-b border-rule pb-0.5 text-sand transition-colors hover:border-sand"><span class="sm:hidden">Email</span><span class="max-sm:hidden">{links.emailLabel}</span></a></li>
+      <li><a href={links.github} target="_blank" rel="noopener" class="border-b border-rule pb-0.5 text-body transition-colors hover:border-body">GitHub ↗</a></li>
+      <li class="max-sm:hidden"><a href={links.linkedin} target="_blank" rel="noopener" class="border-b border-rule pb-0.5 text-body transition-colors hover:border-body">LinkedIn ↗</a></li>
+    </ul>
+  </div>
+</section>

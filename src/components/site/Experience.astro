@@ -1,106 +1,38 @@
 ---
 import { Image } from "astro:assets";
-import { currentRole, previousRoles } from "@/lib/content";
+import Section from "@/components/site/Section.astro";
+import { roles } from "@/lib/content";
 ---
 
-<section
-  id="experience"
-  class="scroll-mt-6 bg-stoa py-20 md:py-[110px]"
-  aria-labelledby="experience-title"
->
-  <div class="shell flex flex-col gap-10">
-    <div class="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-      <div class="flex flex-col gap-5">
-        <p class="label" data-fade>(01) — Experience</p>
-        <h2 id="experience-title" class="section-title" data-split>
-          Where I’ve shipped.
-        </h2>
-      </div>
-      <p class="label text-body!" data-fade>5 teams · 04/2024 → now</p>
-    </div>
-
-    <article
-      class="flex flex-col gap-6 rounded-[18px] border border-ochre bg-stoa-2 p-5 md:flex-row md:items-center md:gap-10 md:p-7"
-      data-fade
-    >
-      <div
-        class="flex h-[110px] w-full shrink-0 items-center justify-center overflow-hidden rounded-xl bg-tile md:h-[136px] md:w-[320px]"
-      >
-        <Image
-          src={currentRole.logo}
-          alt={currentRole.company}
-          width={640}
-          class="h-auto w-[280px] md:w-[320px]"
-        />
-      </div>
-      <div class="flex flex-col gap-3 md:max-w-[620px]">
-        <p class="label flex items-center gap-2 text-patina!">
-          <span class="size-2.5 rounded-full bg-patina" aria-hidden="true"></span>
-          Current role
-        </p>
-        <h3 class="font-display text-[30px] leading-[1.05] md:text-[46px] md:leading-none md:tracking-[-0.02em]">
-          {currentRole.role}
-        </h3>
-        <p class="text-sm leading-[1.55] text-body md:text-[17px]">
-          {currentRole.summary}
-        </p>
-      </div>
-      <div class="flex flex-row justify-between gap-1.5 md:ml-auto md:flex-col md:items-end">
-        <p class="label text-sand!">{currentRole.dates}</p>
-        <p class="text-sm text-muted">{currentRole.meta}</p>
-      </div>
-    </article>
-
-    <ul aria-label="Previous roles">
-      {
-        previousRoles.map((role) => (
-          <li class="role relative py-5 md:py-7">
-            <span class="absolute inset-x-0 top-0 h-px bg-rule" data-rule aria-hidden="true" />
-            <p class="role-date label pt-1">{role.dates}</p>
-            <div class="role-logo size-12 overflow-hidden rounded-xl bg-tile md:size-14">
-              <Image src={role.logo} alt="" width={112} height={112} class="size-full object-cover" />
+<Section title="Experience" id="experience">
+  <ul data-stagger>
+    {
+      roles.map((role) => (
+        <li class="grid grid-cols-[40px_minmax(0,1fr)] items-center gap-x-3 gap-y-2.5 border-t border-rule py-5 md:grid-cols-[44px_minmax(0,1fr)_240px] md:items-start md:gap-x-5 md:py-[22px]">
+          <div class="size-10 overflow-hidden rounded-[10px] bg-tile md:size-11">
+            <Image src={role.logo} alt="" width={88} height={88} class="size-full object-cover" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-2.5 md:gap-3">
+              <h3 class="font-display text-[22px] leading-[1.1] md:text-[26px]">{role.company}</h3>
+              {role.current && (
+                <span class="flex items-center gap-1.5 rounded-full border border-patina px-2.5 py-0.5 text-xs text-patina">
+                  <span class="size-1.5 rounded-full bg-patina" aria-hidden="true" />
+                  Now
+                </span>
+              )}
             </div>
-            <div class="role-head flex flex-col gap-1.5">
-              <h3 class="font-display text-[28px] leading-none tracking-[-0.02em] md:text-4xl">
-                {role.company}
-              </h3>
-              <p class="text-[13px] text-muted md:text-[15px]">{role.role}</p>
-            </div>
-            <p class="role-sum text-sm leading-[1.55] text-body md:text-base">{role.summary}</p>
-            <p class="role-meta pt-1 text-xs text-muted md:text-right md:text-sm">{role.meta}</p>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</section>
-
-<style>
-  .role {
-    display: grid;
-    grid-template-columns: 48px minmax(0, 1fr);
-    grid-template-areas:
-      "logo head"
-      "sum  sum"
-      "foot foot";
-    column-gap: 14px;
-    row-gap: 12px;
-    align-items: center;
-  }
-  .role-date { grid-area: foot; justify-self: start; }
-  .role-logo { grid-area: logo; }
-  .role-head { grid-area: head; }
-  .role-sum { grid-area: sum; }
-  .role-meta { grid-area: foot; justify-self: end; }
-
-  @media (min-width: 1024px) {
-    .role {
-      grid-template-columns: 180px 56px minmax(0, 380px) minmax(0, 1fr) 120px;
-      grid-template-areas: "date logo head sum meta";
-      column-gap: 20px;
-      align-items: start;
+            <p class="text-[13px] text-muted md:text-[15px]">{role.role}</p>
+            <p class="pt-1 text-base leading-[1.5] text-body max-md:hidden">{role.summary}</p>
+          </div>
+          <p class="col-span-2 text-sm leading-[1.5] text-body md:hidden">{role.summary}</p>
+          <p class="col-span-2 text-[13px] text-muted md:col-span-1 md:flex md:flex-col md:items-end md:gap-1 md:text-right">
+            <span class="md:text-[15px] md:text-body">{role.dates}</span>
+            <span class="md:hidden"> · </span>
+            <span class="md:text-sm">{role.meta}</span>
+          </p>
+        </li>
+      ))
     }
-    .role-date { grid-area: date; }
-    .role-meta { grid-area: meta; }
-  }
-</style>
+  </ul>
+</Section>

@@ -1,110 +1,45 @@
 ---
 import { Image } from "astro:assets";
-import { featuredProject as f, projects } from "@/lib/content";
+import Section from "@/components/site/Section.astro";
+import { projects } from "@/lib/content";
 import { caseHref } from "@/lib/cases";
 ---
 
-<section
-  id="work"
-  class="shell scroll-mt-6 flex flex-col gap-12 py-20 md:gap-14 md:py-[110px]"
-  aria-labelledby="work-title"
->
-  <div class="relative flex flex-col gap-5 pb-6 md:flex-row md:items-end md:justify-between md:pb-7">
-    <div class="flex flex-col gap-5">
-      <p class="label" data-fade>(02) — Selected work</p>
-      <h2 id="work-title" class="section-title" data-split>
-        Systems I built end to end.
-      </h2>
-    </div>
-    <p class="label text-body!" data-fade>Index 01 — 03</p>
-    <span class="absolute inset-x-0 bottom-0 h-px bg-rule" data-rule aria-hidden="true"></span>
-  </div>
-
-  <article class="flex flex-col gap-6" aria-labelledby="project-learnu">
-    <div class="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div class="flex items-end gap-5 md:gap-8">
-        <span class="label pb-2 md:pb-3">{f.index}</span>
-        <h3
-          id="project-learnu"
-          class="font-display text-5xl leading-none tracking-[-0.03em] md:text-7xl"
-          data-split
-        >
-          <a href={caseHref(f.slug)} class="transition-colors hover:text-sand">{f.name}</a>
-        </h3>
-      </div>
-      <div class="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-body md:pb-2.5 lg:gap-11" data-fade>
-        <span class="text-muted">{f.category}</span>
-        <span class="label text-body!">{f.stack}</span>
-        <span class="flex items-center gap-2">
-          <span class="size-2 rounded-full bg-patina" aria-hidden="true"></span>{f.status}
-        </span>
-        <a href={f.href} target="_blank" rel="noopener" class="link-underline text-muted">learnu.online ↗</a>
-        <a href={caseHref(f.slug)} class="link-underline text-[15px] font-medium text-sand">
-          Read case study →
-        </a>
-      </div>
-    </div>
-
-    <a href={caseHref(f.slug)} class="block overflow-hidden rounded-md bg-stoa-2" data-media tabindex="-1" aria-hidden="true">
-      <Image
-        src={f.image}
-        alt={f.alt}
-        width={1749}
-        height={1080}
-        widths={[640, 1024, 1360, 1749]}
-        sizes="(min-width: 1440px) 1360px, calc(100vw - 2.5rem)"
-        class="h-auto w-full will-change-transform"
-        data-media-img
-      />
-    </a>
-
-    <dl class="grid gap-5 pt-2 md:grid-cols-[100px_minmax(0,1fr)_100px_minmax(0,1fr)] md:gap-x-5" data-stagger>
-      <dt class="label">Outcome</dt>
-      <dd class="text-base leading-[1.5] text-body md:text-lg">{f.outcome}</dd>
-      <dt class="label">My role</dt>
-      <dd class="text-base leading-[1.5] text-body md:text-lg">{f.role}</dd>
-    </dl>
-  </article>
-
-  <div class="grid gap-14 pt-6 md:grid-cols-2 md:gap-6 md:pt-10">
+<Section title="Work" id="work">
+  <ul>
     {
-      projects.map((p, i) => (
-        <article
-          class:list={["flex flex-col gap-5", i === 1 && "md:pt-[120px]"]}
-          aria-labelledby={`project-${p.index}`}
-        >
-          <a href={caseHref(p.slug)} class="block overflow-hidden rounded-md bg-stoa-2" data-media tabindex="-1" aria-hidden="true">
+      projects.map((project) => (
+        <li class="grid gap-4 border-t border-rule py-5 md:grid-cols-[360px_minmax(0,640px)] md:items-center md:gap-10 md:py-7">
+          <a
+            href={caseHref(project.slug)}
+            class="block overflow-hidden rounded-md bg-stoa-2"
+            tabindex="-1"
+            aria-hidden="true"
+            data-media
+          >
             <Image
-              src={p.image}
-              alt={p.alt}
+              src={project.image}
+              alt=""
               width={1749}
               height={1080}
-              widths={[480, 768, 1100, 1400]}
-              sizes="(min-width: 1440px) 668px, (min-width: 768px) 50vw, calc(100vw - 2.5rem)"
+              widths={[400, 720, 1080]}
+              sizes="(min-width: 768px) 360px, calc(100vw - 2.5rem)"
               class="h-auto w-full will-change-transform"
               data-media-img
             />
           </a>
-          <div class="relative flex items-end justify-between pb-4">
-            <div class="flex items-end gap-4 md:gap-6">
-              <span class="label pb-2">{p.index}</span>
-              <h3 id={`project-${p.index}`} class="font-display text-4xl leading-none tracking-[-0.02em] md:text-5xl">
-                <a href={caseHref(p.slug)} class="transition-colors hover:text-sand">{p.name}</a>
-              </h3>
-            </div>
-            <span class="flex items-center gap-2 pb-1.5 text-sm text-body">
-              <span class="size-2 rounded-full bg-patina" aria-hidden="true" />
-              {p.status}
-            </span>
-            <span class="absolute inset-x-0 bottom-0 h-px bg-rule" data-rule aria-hidden="true" />
+          <div class="flex flex-col gap-2 md:gap-2.5" data-fade>
+            <h3 class="pt-1 font-display text-[28px] leading-none md:text-4xl">
+              <a href={caseHref(project.slug)} class="transition-colors hover:text-sand">{project.name}</a>
+            </h3>
+            <p class="text-[13px] text-muted md:text-sm">{project.category} · {project.stack}</p>
+            <p class="text-[15px] leading-[1.5] text-body md:text-[17px]">{project.summary}</p>
+            <a href={caseHref(project.slug)} class="link-underline w-fit pt-1 text-sm text-sand md:pt-1.5 md:text-[15px]">
+              Read case study →
+            </a>
           </div>
-          <p class="text-[15px] leading-[1.55] text-body md:text-base">{p.summary}</p>
-          <div class="flex items-center justify-between gap-4">
-            <p class="label">{p.category} · {p.stack}</p>
-            <a href={caseHref(p.slug)} class="link-underline shrink-0 text-[15px] font-medium text-sand">Read case study →</a>
-          </div>
-        </article>
+        </li>
       ))
     }
-  </div>
-</section>
+  </ul>
+</Section>
