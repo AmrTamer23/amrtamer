@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import Section from "@/components/site/Section.astro";
+import { projects } from "@/lib/content";
+import { caseHref } from "@/lib/cases";
+---
+
+<Section title="Work" id="work">
+  <ul>
+    {
+      projects.map((project) => (
+        <li class="grid gap-4 border-t border-rule py-5 md:grid-cols-[360px_minmax(0,640px)] md:items-center md:gap-10 md:py-7">
+          <a
+            href={caseHref(project.slug)}
+            class="block overflow-hidden rounded-md bg-stoa-2"
+            tabindex="-1"
+            aria-hidden="true"
+            data-media
+          >
+            <Image
+              src={project.image}
+              alt=""
+              width={1749}
+              height={1080}
+              widths={[400, 720, 1080]}
+              sizes="(min-width: 768px) 360px, calc(100vw - 2.5rem)"
+              class="h-auto w-full will-change-transform"
+              data-media-img
+            />
+          </a>
+          <div class="flex flex-col gap-2 md:gap-2.5" data-fade>
+            <h3 class="pt-1 font-display text-[28px] leading-none md:text-4xl">
+              <a href={caseHref(project.slug)} class="transition-colors hover:text-sand">{project.name}</a>
+            </h3>
+            <p class="text-[13px] text-muted md:text-sm">{project.category} · {project.stack}</p>
+            <p class="text-[15px] leading-[1.5] text-body md:text-[17px]">{project.summary}</p>
+            <a href={caseHref(project.slug)} class="link-underline w-fit pt-1 text-sm text-sand md:pt-1.5 md:text-[15px]">
+              Read case study →
+            </a>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

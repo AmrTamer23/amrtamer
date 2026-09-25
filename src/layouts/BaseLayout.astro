@@ -1,11 +1,9 @@
 ---
-import { ClientRouter } from "astro:transitions";
-import { Header } from "@/components/layout/header";
 import { siteConfig } from "@/config/site.config";
 import "@/styles/globals.css";
-import ibmPlexSans400Url from "@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url";
-import ibmPlexSans500Url from "@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2?url";
-import bodoniModa700Url from "@fontsource/bodoni-moda/files/bodoni-moda-latin-700-normal.woff2?url";
+import facultyGlyphicUrl from "@fontsource/faculty-glyphic/files/faculty-glyphic-latin-400-normal.woff2?url";
+import valleySans400Url from "@fontsource/valley-sans/files/valley-sans-latin-400-normal.woff2?url";
+import valleySans500Url from "@fontsource/valley-sans/files/valley-sans-latin-500-normal.woff2?url";
 
 interface Props {
   title?: string;
@@ -21,9 +19,12 @@ const {
   imageAlt,
 } = Astro.props;
 
-const canonicalUrl = Astro.url.href;
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.origin).href;
 const resolvedOgImage = ogImage ?? siteConfig.og;
-const resolvedImageAlt = imageAlt ?? siteConfig.name;
+const resolvedImageAlt =
+  imageAlt ?? `${siteConfig.name} — Frontend Software Engineer at Cloudypedia`;
+
+const xHandle = `@${siteConfig.socials.x.split("/").pop()}`;
 
 const pageTitle =
   title === siteConfig.title ? title : `${title} | ${siteConfig.name}`;
@@ -41,17 +42,15 @@ const pageTitle =
     <meta name="description" content={description} />
     <meta name="keywords" content={siteConfig.keywords.join(", ")} />
     <meta name="creator" content={siteConfig.name} />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0e1716" />
+    <meta name="color-scheme" content="dark" />
 
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/favicon.ico" sizes="16x16 32x32 48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
 
-    <!-- Canonical -->
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
@@ -60,51 +59,42 @@ const pageTitle =
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content={siteConfig.name} />
     <meta property="og:image" content={resolvedOgImage} />
-    <meta property="og:image:width" content="2880" />
-    <meta property="og:image:height" content="1800" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={resolvedImageAlt} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content={siteConfig.socials.x} />
+    <meta name="twitter:site" content={xHandle} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={resolvedOgImage} />
-    <meta name="twitter:image:width" content="2880" />
-    <meta name="twitter:image:height" content="1800" />
     <meta name="twitter:image:alt" content={resolvedImageAlt} />
 
-    <!-- Preconnect to third-party origins -->
     <link rel="preconnect" href="https://us.i.posthog.com" />
 
-    <!-- Preload critical fonts -->
-    <link
-      rel="preload"
-      href={ibmPlexSans400Url}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href={ibmPlexSans500Url}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href={bodoniModa700Url}
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    <link rel="preload" href={facultyGlyphicUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={valleySans400Url} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={valleySans500Url} as="font" type="font/woff2" crossorigin />
 
-    <ClientRouter />
+    <!--
+      Opt into motion pre-states before first paint. If the animation bundle
+      never reports ready, drop the class so content can't stay hidden.
+    -->
+    <script is:inline>
+      (function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var root = document.documentElement;
+        root.classList.add("motion");
+        setTimeout(function () {
+          if (!window.__motionReady) root.classList.remove("motion");
+        }, 4000);
+      })();
+    </script>
 
-    <!-- PostHog analytics -->
     <script>
       import posthog from "posthog-js";
 
@@ -115,19 +105,16 @@ const pageTitle =
     </script>
     <slot name="head" />
   </head>
-  <body class="font-sans antialiased">
-    <div
-      class="flex flex-col h-full py-8 gap-4 px-4 relative bg-background min-h-dvh mobile-safe-inline mobile-safe-block"
+  <body class="bg-night text-marble">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-sand focus:px-4 focus:py-2 focus:text-night"
     >
-      <div class="ambient-layer absolute inset-0 z-0"></div>
-      <main class="flex flex-col h-full gap-12 lg:justify-between">
-        <Header client:idle />
-        <div
-          class="container mx-auto w-full h-full flex lg:items-center lg:justify-center items-start justify-start"
-        >
-          <slot />
-        </div>
-      </main>
-    </div>
+      Skip to content
+    </a>
+    <slot />
+    <script>
+      import "@/scripts/motion";
+    </script>
   </body>
 </html>

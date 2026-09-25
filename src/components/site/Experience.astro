@@ -1,0 +1,38 @@
+---
+import { Image } from "astro:assets";
+import Section from "@/components/site/Section.astro";
+import { roles } from "@/lib/content";
+---
+
+<Section title="Experience" id="experience">
+  <ul data-stagger>
+    {
+      roles.map((role) => (
+        <li class="grid grid-cols-[40px_minmax(0,1fr)] items-center gap-x-3 gap-y-2.5 border-t border-rule py-5 md:grid-cols-[44px_minmax(0,1fr)_240px] md:items-start md:gap-x-5 md:py-[22px]">
+          <div class="size-10 overflow-hidden rounded-[10px] bg-tile md:size-11">
+            <Image src={role.logo} alt="" width={88} height={88} class="size-full object-cover" />
+          </div>
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center gap-2.5 md:gap-3">
+              <h3 class="font-display text-[22px] leading-[1.1] md:text-[26px]">{role.company}</h3>
+              {role.current && (
+                <span class="flex items-center gap-1.5 rounded-full border border-patina px-2.5 py-0.5 text-xs text-patina">
+                  <span class="size-1.5 rounded-full bg-patina" aria-hidden="true" />
+                  Now
+                </span>
+              )}
+            </div>
+            <p class="text-[13px] text-muted md:text-[15px]">{role.role}</p>
+            <p class="pt-1 text-base leading-[1.5] text-body max-md:hidden">{role.summary}</p>
+          </div>
+          <p class="col-span-2 text-sm leading-[1.5] text-body md:hidden">{role.summary}</p>
+          <p class="col-span-2 text-[13px] text-muted md:col-span-1 md:flex md:flex-col md:items-end md:gap-1 md:text-right">
+            <span class="md:text-[15px] md:text-body">{role.dates}</span>
+            <span class="md:hidden"> · </span>
+            <span class="md:text-sm">{role.meta}</span>
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+</Section>

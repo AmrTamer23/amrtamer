@@ -1,0 +1,16 @@
+---
+import { links } from "@/lib/content";
+
+interface Props {
+  showEmail?: boolean;
+}
+
+const { showEmail = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="shell label flex justify-between gap-4 pt-14 pb-6 md:pt-24 md:pb-8">
+  <p>© {year} Amr Tamer</p>
+  {showEmail && <a href={links.email} class="link-underline max-sm:hidden">{links.emailLabel}</a>}
+  <a href="#top" class="link-underline">Back to top ↑</a>
+</footer>

@@ -1,0 +1,46 @@
+---
+import { links } from "@/lib/content";
+
+interface Props {
+  /** On inner pages, section links point back to the homepage. */
+  inner?: boolean;
+}
+
+const { inner = false } = Astro.props;
+const home = inner ? "/" : "";
+---
+
+<header class="shell" data-hero-header>
+  <div
+    class="flex items-center justify-between gap-6 border-b border-rule py-5 md:py-6"
+  >
+    <div class="flex items-center gap-6 md:gap-9">
+      <a href={inner ? "/" : "#top"} class="font-display text-[22px] leading-none md:text-2xl">
+        Amr Tamer
+      </a>
+      {
+        inner && (
+          <a href="/#work" class="link-underline text-sm text-body max-sm:hidden">
+            ← All work
+          </a>
+        )
+      }
+    </div>
+    <nav aria-label="Primary" class="text-sm text-body">
+      <ul class="flex items-center gap-5 md:gap-7">
+        <li><a href={`${home}#work`} class="link-underline">Work</a></li>
+        <li class="max-sm:hidden">
+          <a href={`${home}#experience`} class="link-underline">Experience</a>
+        </li>
+        <li class="max-sm:hidden">
+          <a href={links.resume} target="_blank" rel="noopener" class="link-underline"
+            >Résumé ↗</a
+          >
+        </li>
+        <li>
+          <a href={links.email} class="link-underline text-sand">Email</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

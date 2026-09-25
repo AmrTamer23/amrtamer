@@ -1,0 +1,160 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/site/Header.astro";
+import Section from "@/components/site/Section.astro";
+import Footer from "@/components/site/Footer.astro";
+import { cases, caseHref, type CaseStudy } from "@/lib/cases";
+import { projects } from "@/lib/content";
+
+export function getStaticPaths() {
+  return cases.map((study, i) => ({
+    params: { slug: study.slug },
+    props: { study, next: cases[(i + 1) % cases.length] },
+  }));
+}
+
+interface Props {
+  study: CaseStudy;
+  next: CaseStudy;
+}
+
+const { study, next } = Astro.props;
+const nextStack = projects.find((p) => p.slug === next.slug)?.stack;
+const lists = [
+  { title: "Constraints", items: study.constraints },
+  { title: "Decisions", items: study.decisions },
+  { title: "Impact", items: study.impact },
+];
+---
+
+<BaseLayout title={study.name} description={study.overview}>
+  <div id="top">
+    <Header inner />
+
+    <main id="main">
+      <section class="shell grid gap-3 pt-12 pb-10 md:grid-cols-[280px_minmax(0,1040px)] md:gap-10 md:pt-[104px] md:pb-14" aria-labelledby="case-title">
+        <p class="text-sm text-muted md:pt-5" data-hero-fade>Case study · {study.category}</p>
+        <div class="flex flex-col gap-5 md:gap-7">
+          <h1 id="case-title" class="font-display text-[56px] leading-[0.95] tracking-[-0.03em] md:text-[112px]" data-hero-fade>
+            {study.name}
+          </h1>
+          <p class="max-w-[800px] text-lg leading-[1.5] text-body md:text-[22px]" data-hero-fade>{study.overview}</p>
+          <dl class="grid grid-cols-2 gap-x-6 gap-y-5 border-t border-rule pt-[18px] md:grid-cols-4" data-hero-fade>
+            {
+              study.meta.map((row) => (
+                <div class="flex flex-col gap-1.5">
+                  <dt class="label">{row.label}</dt>
+                  <dd class="text-[15px] md:text-base">{row.value}</dd>
+                </div>
+              ))
+            }
+            {
+              study.live && (
+                <div class="flex flex-col gap-1.5">
+                  <dt class="label">Live</dt>
+                  <dd class="text-[15px] md:text-base">
+                    <a href={study.live.href} target="_blank" rel="noopener" class="link-underline text-sand">
+                      {study.live.label} ↗
+                    </a>
+                  </dd>
+                </div>
+              )
+            }
+          </dl>
+        </div>
+      </section>
+
+      <div class="shell">
+        <div class="overflow-hidden rounded-md bg-stoa-2" data-media>
+          <Image
+            src={study.image}
+            alt={study.alt}
+            width={1749}
+            height={1080}
+            widths={[640, 1024, 1360, 1749]}
+            sizes="(min-width: 1440px) 1360px, calc(100vw - 2.5rem)"
+            class="h-auto w-full will-change-transform"
+            loading="eager"
+            data-media-img
+          />
+        </div>
+      </div>
+
+      <Section title="Overview">
+        <div class="flex flex-col gap-7" data-stagger>
+          <div class="flex flex-col gap-2.5">
+            <h3 class="label text-sand!">The problem</h3>
+            <p class="text-base leading-[1.6] text-body md:text-lg">{study.problem}</p>
+          </div>
+          <div class="flex flex-col gap-2.5">
+            <h3 class="label text-sand!">My role</h3>
+            <p class="text-base leading-[1.6] text-body md:text-lg">{study.role}</p>
+          </div>
+        </div>
+      </Section>
+
+      {
+        lists.map((list) => (
+          <Section title={list.title}>
+            <ol data-stagger>
+              {list.items.map((item, i) => (
+                <li class="grid grid-cols-[28px_minmax(0,1fr)] gap-4 border-t border-rule py-4">
+                  <span class="label pt-1">{String(i + 1).padStart(2, "0")}</span>
+                  <p class="text-[15px] leading-[1.55] text-body md:text-[17px]">{item}</p>
+                </li>
+              ))}
+            </ol>
+          </Section>
+        ))
+      }
+
+      <Section title="Stack">
+        <ul class="flex flex-wrap gap-2 border-t border-rule pt-[18px]" data-stagger>
+          {study.stack.map((tech) => (
+            <li class="rounded-full border border-rule px-3 py-1.5 text-sm text-body">{tech}</li>
+          ))}
+        </ul>
+      </Section>
+
+      <Section title="Lessons">
+        <ol data-stagger>
+          {
+            study.lessons.map((lesson, i) => (
+              <li class="grid grid-cols-[28px_minmax(0,1fr)] gap-4 border-t border-rule py-4">
+                <span class="label pt-1">{String(i + 1).padStart(2, "0")}</span>
+                <p class="text-[15px] leading-[1.55] text-body md:text-[17px]">{lesson}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </Section>
+
+      <Section title="Next">
+        <a
+          href={caseHref(next.slug)}
+          class="group flex items-center justify-between gap-6 border-y border-rule py-5 md:py-[22px]"
+          data-fade
+        >
+          <div class="flex flex-col gap-1.5">
+            <p class="font-display text-[32px] leading-none md:text-[44px]">
+              {next.name} <span class="inline-block transition-transform duration-300 group-hover:translate-x-2">→</span>
+            </p>
+            <p class="text-[13px] text-muted md:text-[15px]">{next.category} · {nextStack}</p>
+          </div>
+          <Image
+            src={next.image}
+            alt=""
+            width={1749}
+            height={1080}
+            widths={[240, 480]}
+            sizes="240px"
+            class="h-auto w-[120px] rounded-md md:w-[240px]"
+          />
+        </a>
+      </Section>
+    </main>
+
+    <Footer showEmail />
+  </div>
+</BaseLayout>

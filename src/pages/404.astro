@@ -1,18 +1,14 @@
 ---
-// Built as 404.html. Ensure the host serves this route with HTTP 404 for unknown paths
-// (e.g. Railway/serve: 404.html is used for missing routes; verify in deployment config).
+// Built as 404.html. Ensure the host serves this route with HTTP 404 for unknown paths.
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Page Not Found">
-  <div class="flex min-h-svh flex-col items-center justify-center gap-4 text-center">
-    <p class="font-mono text-muted-foreground text-sm">404</p>
-    <h1 class="text-2xl font-bold text-foreground">Page not found</h1>
-    <a
-      href="/"
-      class="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
-    >
-      Go home
-    </a>
-  </div>
+  <main id="main" class="shell flex min-h-dvh flex-col items-start justify-center gap-5">
+    <p class="label">404</p>
+    <h1 class="font-display text-[52px] leading-[0.95] tracking-[-0.03em] md:text-[112px]">
+      Page not found
+    </h1>
+    <a href="/" class="link-underline text-base text-sand md:text-lg">Back to the homepage →</a>
+  </main>
 </BaseLayout>
