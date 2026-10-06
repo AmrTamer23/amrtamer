@@ -4,6 +4,7 @@ import learnu from "@/assets/logos/learnu.png";
 import pericare from "@/assets/logos/pericare.png";
 import hydex from "@/assets/logos/hydex.png";
 import brandria from "@/assets/logos/brandria.png";
+import kingBellFireCover from "@/assets/projects/king-bell-fire.png";
 
 export const links = {
   email: "mailto:inquiries@amrtamer.dev",
@@ -75,12 +76,23 @@ export type Project = {
   name: string;
   category: string;
   stack: string;
-  image: string;
+  /** A remote URL on the image CDN, or a local asset Astro optimizes. */
+  image: string | ImageMetadata;
   alt: string;
   summary: string;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "king-bell-fire",
+    name: "King Bell Fire",
+    category: "Sales & operations",
+    stack: "Next.js, NestJS, PostgreSQL",
+    image: kingBellFireCover,
+    alt: "King Bell Fire CRM showing an approved quotation with line items, VAT and grand total, and actions to send it to the client or download the PDF",
+    summary:
+      "The CRM King Bell Fire runs its sales on: quoting with tiered approvals, warehouse-confirmed orders, and field attendance, in production.",
+  },
   {
     slug: "learnu",
     name: "LearnU",

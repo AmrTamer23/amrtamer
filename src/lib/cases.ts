@@ -1,10 +1,11 @@
+import type { ImageMetadata } from "astro";
 import { projects } from "@/lib/content";
 
 export type CaseStudy = {
   slug: string;
   name: string;
   category: string;
-  image: string;
+  image: string | ImageMetadata;
   alt: string;
   overview: string;
   problem: string;
@@ -24,11 +25,67 @@ const projectBySlug = (slug: string) => {
   return project;
 };
 
+const kbf = projectBySlug("king-bell-fire");
 const learnu = projectBySlug("learnu");
 const pericare = projectBySlug("pericare");
 const anha = projectBySlug("anha-labs");
 
 export const cases: CaseStudy[] = [
+  {
+    slug: kbf.slug,
+    name: kbf.name,
+    category: kbf.category,
+    image: kbf.image,
+    alt: kbf.alt,
+    overview:
+      "The bilingual sales and operations system King Bell Fire, a fire-safety equipment supplier, runs on: leads, quotations with tiered price approvals, warehouse-confirmed sales orders, field attendance, and verifiable documents. Built with the owner and in daily use since August 2026. Screens here use sample data; the interactive demo is a white-labelled copy anyone can try.",
+    problem:
+      "Quotes lived in spreadsheets, price approvals happened over WhatsApp, and the warehouse learned about orders from paper invoices. Nobody could see which quotes were waiting, who had discounted what, or whether stock had actually left.",
+    role: "Sole engineer from discovery to production: domain modelling and the PostgreSQL schema, the NestJS API, the Arabic-first Next.js app, document generation, and deployment, working directly with the owner and the sales, warehouse, and field teams.",
+    meta: [
+      { label: "Role", value: "Full-Stack Software Engineer" },
+      { label: "Timeline", value: "06/2026 — 08/2026" },
+      { label: "Outcome", value: "800+ quotations in its first five weeks live" },
+    ],
+    live: { href: "https://fieldline.amrtamer.dev/en", label: "Interactive demo" },
+    constraints: [
+      "Arabic-first with full English parity: every screen, PDF, and notification works right-to-left and left-to-right.",
+      "Pricing authority is real money: discounts route to the right approver, and nothing below list price leaves without the owner’s sign-off.",
+      "Stock, revenue, and the won deal change exactly once, when the warehouse confirms, even if two people press Confirm at the same moment.",
+    ],
+    decisions: [
+      "One shared package holds the quotation state machine, pricing math, and approval tiers; the API enforces them and the UI imports the same functions.",
+      "Permission-based access with role presets and branch scope, applied in the queries themselves, so a rep never receives another rep’s records.",
+      "Row locks on warehouse confirmation, proven with deterministic concurrency tests, plus an append-only audit log of every change.",
+      "Quotations render server-side on each company’s letterhead, with a QR code that checks the printed totals against the record.",
+    ],
+    impact: [
+      "800+ quotations created by 11 people in the first five weeks live, replacing spreadsheets and WhatsApp threads.",
+      "57% of quotations approve themselves on submit; the rest are reviewed in a median 34 minutes, and 98% of those are approved.",
+      "The warehouse confirms orders in a median 1.1 hours, and a quote becomes a sales order in a median 41 hours.",
+      "876 field check-ins from 34 people, 36% of them outside the office, each recorded with location and reason.",
+    ],
+    lessons: [
+      "Encoding the business’s rules once, in a shared package, kept the API, the UI, and the documents from drifting as the rules evolved.",
+      "In an operations tool the edge cases are the product: returns, late check-ins, re-reviews after an accepted quote is edited.",
+    ],
+    stack: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "NestJS",
+      "Drizzle",
+      "PostgreSQL",
+      "Better Auth",
+      "Socket.IO",
+      "Headless Chromium PDFs",
+      "Leaflet",
+      "next-intl · Arabic RTL + English",
+      "Turborepo",
+    ],
+  },
   {
     slug: learnu.slug,
     name: learnu.name,
